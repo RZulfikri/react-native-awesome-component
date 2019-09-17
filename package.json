@@ -1,0 +1,23 @@
+{
+  "name": "react-native-awesome-component",
+  "version": "0.0.1",
+  "description": "React Native Awesome Component",
+  "main": "index.js",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/RZulfikri/react-native-awesome-component.git"
+  },
+  "keywords": [
+      "react-native"
+  ],
+  "author": "Rahmat Zulfikri",
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "rn-placeholder": "^3.0.0",
+    "styled-components": "^4.3.2"
+  },
+  "devDependencies": {
+    "babel-plugin-root-import": "^6.4.1"
+  },
+  "license": "Apache License 2.0"
+}
