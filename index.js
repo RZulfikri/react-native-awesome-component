@@ -1,3 +1,13 @@
-import index from './src/index'
+import {
+  PlaceholderImage,
+  PlaceholderText,
+  
+  Styled
+} from './src/index'
 
-export default index
+export {
+  PlaceholderImage,
+  PlaceholderText,
+
+  Styled
+}

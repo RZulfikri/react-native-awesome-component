@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Image, ImagePropsBase, ImageStyle, ImageBackground, View } from 'react-native'
 import PropTypes from 'prop-types'
-import { StyledImage } from '../Components/styled/share.styled'
+import { StyledImage } from '../styled/share.styled'
 import {
   Placeholder,
   PlaceholderMedia,

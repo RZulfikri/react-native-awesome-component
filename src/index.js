@@ -9,14 +9,15 @@ import {
   H4,
   H5,
   H6,
+  H7,
 } from './styled/share.styled'
 
-import method from '../src/method'
+import methodIndex from '../src/method'
 
 import PlaceholderImage from './placeholder-image'
 import PlaceholderText from './placeholder-text'
 
-const styled = {
+const Styled = {
   Container,
   FlexContainer,
   SafeContainer,
@@ -27,20 +28,12 @@ const styled = {
   H4,
   H5,
   H6,
-}
-
-const method = {
-  ...method
-}
-
-const constant = {
-  
+  H7,
 }
 
 export {
-  styled,
-  method,
-
   PlaceholderImage,
   PlaceholderText,
+
+  Styled,
 }
