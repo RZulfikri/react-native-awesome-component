@@ -86,7 +86,7 @@ class PlaceholderImage extends Component {
           onError={this.onError}
           isCard={isCard}
         />
-        {loading && (
+        {loading || (uri === undefined || uri === '') && (
           <View style={{marginTop: -height}}>
             <Placeholder
               Animation={ShineOverlay}

@@ -8,6 +8,7 @@ import {
 } from 'rn-placeholder'
 import globalConst from '../global-const'
 import Scale from '../method/scale'
+import Math from '../method/math'
 
 class PlaceholderText extends Component {
   static propTypes = {
@@ -56,6 +57,7 @@ class PlaceholderText extends Component {
           height={height}
           noMargin
           style={{ marginTop: Scale(height / 10), marginBottom: Scale(height / 12) }}
+          width={`${Math.getRandomInt(80, 100)}%`}
         />)
     }
     return (

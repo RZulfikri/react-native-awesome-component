@@ -103,6 +103,10 @@ export const H6 = styled.Text`
   font-size: ${fontSize.h6}
 `
 
+export const H7 = styled.Text`
+  font-size: ${fontSize.h7}
+`
+
 export {
   SafeContainer,
   Container,
