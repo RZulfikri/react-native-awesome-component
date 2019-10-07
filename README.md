@@ -7,7 +7,7 @@ npm install https://github.com/RZulfikri/react-native-awesome-component.git
 or
 yarn add https://github.com/RZulfikri/react-native-awesome-component.git
 ```
-## PlaceholdetImage
+## PlaceholderImage
 Read more [here](./doc/placeholder-image.md)
 
 ## PlaceholderText
