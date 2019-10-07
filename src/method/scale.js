@@ -7,8 +7,6 @@ export function setDesignWidth(designWidth) {
   DESIGN_WIDTH = designWidth
 }
 
-function Scale(scaleWidth) {
+export function scale(scaleWidth) {
   return (scaleWidth * width) / DESIGN_WIDTH
 }
-
-export default Scale

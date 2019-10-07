@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "React Native Awesome Component",
   "main": "index.js",
+  "typings": "./index.d.ts",
   "repository": {
       "type": "git",
       "url": "https://github.com/RZulfikri/react-native-awesome-component.git"

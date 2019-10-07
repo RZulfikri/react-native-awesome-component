@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import globalConst from '../global-const';
+import { getValue } from '../global-const'
 import PropTypes from 'prop-types';
 import metrics from '../metrics'
 
@@ -48,7 +48,7 @@ export function checkIsCard(isCard) {
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
-  background-color: ${globalConst.SAFE_AREA_BACKGROUND_COLOR}
+  background-color: ${getValue().SAFE_AREA_BACKGROUND_COLOR}
   padding-left: ${props => getPadding(props.padded, props.padding, paddingType.HORIZONTAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
   padding-right: ${props => getPadding(props.padded, props.padding, paddingType.HORIZONTAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
   padding-top: ${props => getPadding(props.padded, props.padding, paddingType.VERTICAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
@@ -56,13 +56,22 @@ const SafeContainer = styled.SafeAreaView`
 `;
 
 const Container = styled.View`
-  background-color: ${globalConst.BACKGROUND_COLOR}
+  background-color: ${getValue().BACKGROUND_COLOR}
   padding-left: ${props => getPadding(props.padded, props.padding, paddingType.HORIZONTAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
   padding-right: ${props => getPadding(props.padded, props.padding, paddingType.HORIZONTAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
   padding-top: ${props => getPadding(props.padded, props.padding, paddingType.VERTICAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
   padding-bottom: ${props => getPadding(props.padded, props.padding, paddingType.VERTICAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
   box-shadow: ${props => checkIsCard(props.isCard)}
 `;
+
+const TouchableContainer = styled.TouchableOpacity`
+  background-color: ${getValue().BACKGROUND_COLOR}
+  padding-left: ${props => getPadding(props.padded, props.padding, paddingType.HORIZONTAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
+  padding-right: ${props => getPadding(props.padded, props.padding, paddingType.HORIZONTAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
+  padding-top: ${props => getPadding(props.padded, props.padding, paddingType.VERTICAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
+  padding-bottom: ${props => getPadding(props.padded, props.padding, paddingType.VERTICAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
+  box-shadow: ${props => checkIsCard(props.isCard)}
+`
 
 Container.propTypes = {
   isCard: PropTypes.bool
@@ -71,7 +80,7 @@ Container.propTypes = {
 Container.defaultProps = {
   isCard: false,
   padded: false,
-  padding: globalConst.PADDING,
+  padding: getValue().PADDING,
   disableVerticalPadding: false,
   disableHorizontalPadding: false
 }
@@ -111,5 +120,6 @@ export {
   SafeContainer,
   Container,
   FlexContainer,
+  TouchableContainer,
   StyledImage
 }
