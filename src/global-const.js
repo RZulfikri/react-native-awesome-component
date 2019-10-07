@@ -1,7 +1,7 @@
 import metrics from "./metrics";
 import Colors from "./colors";
 import { scale } from "./method/scale";
-import Object from './method/object'
+import * as Object from './method/object'
 
 const DEFAULT_GLOBAL_CONST = {
   PADDING: metrics.padding,

@@ -6,9 +6,9 @@ import {
   PlaceholderLine,
   ShineOverlay,
 } from 'rn-placeholder'
-import { getValue } from '../global-const'
-import { scale } from '../method/scale'
-import Math from '../method/math'
+import * as GlobalConst from '../global-const'
+import * as Scale from '../method/scale'
+import * as Math from '../method/math'
 
 class PlaceholderText extends Component {
   static propTypes = {
@@ -45,7 +45,7 @@ class PlaceholderText extends Component {
 
   renderLinePlaceHolder() {
     const { numberOfLines, style } = this.props
-    let height = getValue().FONT_SIZE
+    let height = GlobalConst.getValue().FONT_SIZE
     if (style && style.fontSize) {
       height = style.fontSize
     }
@@ -56,7 +56,7 @@ class PlaceholderText extends Component {
           key={i}
           height={height}
           noMargin
-          style={{ marginTop: scale(height / 10), marginBottom: scale(height / 12) }}
+          style={{ marginTop: Scale.scale(height / 10), marginBottom: Scale.scale(height / 12) }}
           width={`${Math.getRandomInt(80, 100)}%`}
         />)
     }
@@ -73,7 +73,7 @@ class PlaceholderText extends Component {
     const { numberOfLines, children, style } = this.props
     const childrenStringValue = this.getValueOfTextChildren(children)
     let textStyle = {
-      fontSize: getValue().fontSize,
+      fontSize: GlobalConst.getValue().fontSize,
       textAlignVertical: 'center',
     }
     console.log({ children })

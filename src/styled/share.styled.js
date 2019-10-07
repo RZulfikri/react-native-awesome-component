@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { getValue } from '../global-const'
+import * as GlobalConst from '../global-const'
 import PropTypes from 'prop-types';
 import metrics from '../metrics'
 
@@ -48,7 +48,7 @@ export function checkIsCard(isCard) {
 
 const SafeContainer = styled.SafeAreaView`
   flex: 1;
-  background-color: ${getValue().SAFE_AREA_BACKGROUND_COLOR}
+  background-color: ${GlobalConst.getValue().SAFE_AREA_BACKGROUND_COLOR}
   padding-left: ${props => getPadding(props.padded, props.padding, paddingType.HORIZONTAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
   padding-right: ${props => getPadding(props.padded, props.padding, paddingType.HORIZONTAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
   padding-top: ${props => getPadding(props.padded, props.padding, paddingType.VERTICAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
@@ -56,7 +56,7 @@ const SafeContainer = styled.SafeAreaView`
 `;
 
 const Container = styled.View`
-  background-color: ${getValue().BACKGROUND_COLOR}
+  background-color: ${GlobalConst.getValue().BACKGROUND_COLOR}
   padding-left: ${props => getPadding(props.padded, props.padding, paddingType.HORIZONTAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
   padding-right: ${props => getPadding(props.padded, props.padding, paddingType.HORIZONTAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
   padding-top: ${props => getPadding(props.padded, props.padding, paddingType.VERTICAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
@@ -65,7 +65,7 @@ const Container = styled.View`
 `;
 
 const TouchableContainer = styled.TouchableOpacity`
-  background-color: ${getValue().BACKGROUND_COLOR}
+  background-color: ${GlobalConst.getValue().BACKGROUND_COLOR}
   padding-left: ${props => getPadding(props.padded, props.padding, paddingType.HORIZONTAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
   padding-right: ${props => getPadding(props.padded, props.padding, paddingType.HORIZONTAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
   padding-top: ${props => getPadding(props.padded, props.padding, paddingType.VERTICAL, props.disableVerticalPadding, props.disableHorizontalPadding)};
@@ -80,7 +80,7 @@ Container.propTypes = {
 Container.defaultProps = {
   isCard: false,
   padded: false,
-  padding: getValue().PADDING,
+  padding: GlobalConst.getValue().PADDING,
   disableVerticalPadding: false,
   disableHorizontalPadding: false
 }

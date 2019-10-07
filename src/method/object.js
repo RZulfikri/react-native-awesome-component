@@ -1,4 +1,4 @@
-const appendObject = (currentObject, key, value) => {
+export function appendObject(currentObject, key, value) {
   if (value) {
     return {
       ...currentObject,
@@ -9,6 +9,3 @@ const appendObject = (currentObject, key, value) => {
   }
 }
 
-export default {
-  appendObject
-}

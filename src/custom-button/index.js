@@ -2,26 +2,26 @@ import React from 'react'
 import { ActivityIndicator, View, Text, TouchableOpacity, StyleSheet, ViewStyle, TextStyle } from 'react-native'
 import PropTypes from 'prop-types'
 import { Container, TouchableContainer } from '../styled/share.styled'
-import { getValue } from '../global-const'
-import Object from '../method/object'
+import * as GlobalConst from '../global-const'
+import * as Object from '../method/object'
 
 const Button = (props) => {
   const styles = {
     buttonContainer: {
-      backgroundColor: getValue().ACTIVE_BUTTON_COLOR,
+      backgroundColor: GlobalConst.getValue().ACTIVE_BUTTON_COLOR,
       justifyContent: 'center',
       alignItems: 'center',
-      height: getValue().BUTTON_HEIGHT_SIZE,
+      height: GlobalConst.getValue().BUTTON_HEIGHT_SIZE,
     },
     disableButtonStyle: {
-      backgroundColor: getValue().DISABLE_BUTTON_COLOR,
+      backgroundColor: GlobalConst.getValue().DISABLE_BUTTON_COLOR,
     },
     activeTitleStyle: {
-      color: getValue().ACTIVE_BUTTON_TITLE_COLOR,
-      fontSize: getValue().BUTTON_TITLE_SIZE,
+      color: GlobalConst.getValue().ACTIVE_BUTTON_TITLE_COLOR,
+      fontSize: GlobalConst.getValue().BUTTON_TITLE_SIZE,
     },
     disableTitleStyle: {
-      color: getValue().DISABLE_BUTTON_TITLE_COLOR,
+      color: GlobalConst.getValue().DISABLE_BUTTON_TITLE_COLOR,
     }
   }
 
@@ -65,7 +65,7 @@ const Button = (props) => {
           isCard={isCard}
           style={[styles.buttonContainer, styles.disableButtonStyle, customContainerStyle]}
         >
-          <ActivityIndicator size='small' color={loadingColor ? loadingColor : getValue().BUTTON_LOADING_COLOR} />
+          <ActivityIndicator size='small' color={loadingColor ? loadingColor : GlobalConst.getValue().BUTTON_LOADING_COLOR} />
         </Container>
       )
     } else {

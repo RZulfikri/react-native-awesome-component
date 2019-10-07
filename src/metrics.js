@@ -1,5 +1,3 @@
-import { moduleIsAvailable } from 'react-native-awesome-component/src/method';
-
 const size = {
   h1: 12,
   h2: 14,

@@ -12,7 +12,9 @@ import {
   H6,
   H7,
 } from './src/styled/share.styled'
-import Method from './src/method'
+import * as Obj from './src/method/object'
+import * as Scale from './src/method/scale'
+import * as Math from './src/method/math'
 import PlaceholderImage from './src/placeholder-image'
 import PlaceholderText from './src/placeholder-text'
 import CustomButton from './src/custom-button'
@@ -31,6 +33,12 @@ const Styled = {
   H5,
   H6,
   H7,
+}
+
+const Method = {
+  Scale,
+  Math,
+  Object: Obj,
 }
 
 export {

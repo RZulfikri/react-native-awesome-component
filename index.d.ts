@@ -97,7 +97,7 @@ interface IScale {
 }
 
 interface IObject {
-  appendObject: (currentObject: object, key: 'string', value: any) => void;
+  appendObject: (currentObject: object, key: string, value: any) => void;
 }
 
 interface IMethod {
