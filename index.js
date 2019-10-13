@@ -22,6 +22,7 @@ import PlaceholderImage from './src/placeholder-image'
 import PlaceholderText from './src/placeholder-text'
 import CustomButton from './src/custom-button'
 import CustomHeader from './src/custom-header'
+import ConnectionHandler from './src/connection-handler'
 
 const Styled = {
   Container,
@@ -52,6 +53,7 @@ export {
   CustomButton,
   CustomHeader,
   TouchableContainer,
+  ConnectionHandler,
 
   Styled,
   Method,
