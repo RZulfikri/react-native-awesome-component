@@ -79,5 +79,5 @@ setGlobalHeaderRightIconSize | function to change global header right icon size 
 setGlobalHeaderRightIconColor | function to change global header right icon color | (value: string) | - 
 setGlobalHeaderRightActionTitleSize | function to change global header right action title size | (value: number) | - 
 setGlobalHeaderRightActionTitleColor | function to change global header right action title color | (value: string) | - 
-setGlobalHeaderIconType | function to change global header icon type `'ant-design' | 'entypo' | 'evil-icons' | 'feather' | 'font-awesome' | 'font-awesome5' | 'fontisto' | 'foundation' | 'ionicons' | 'material-community' | 'material-icons' | 'octicons'` | (value: string) | - 
+setGlobalHeaderIconType | function to change global header icon type `(ant-design, entypo, evil-icons, feather, font-awesome, font-awesome5, fontisto, foundation, ionicons, material-community, material-icons, octicons)` | (value: string) | - 
 

@@ -38,7 +38,7 @@ Props | Description | Default
   backgroundColor: string | props to set header background color | `#FFFFFF` 
   iphoneXPadding: boolean | props to set padding top in iphone-x series | `true` 
   isCard: boolean | props to set header shadow | `true `
-  title: string | props to set header title | '' / navigation screen routeName (if exist)
+  title: string | props to set header title | `''` or navigation screen routeName (if exist)
   iconLeft: string | props to set icon left name | `arrow-left` 
   titleLeftt: string | props to set action title left | - 
   renderLeft: () => void | props to set custom left action | - 
@@ -47,4 +47,4 @@ Props | Description | Default
   titleRight: string | props to set action title right | -
   renderRight: () => void | props to set custom right action | - 
   onPressRight: () => void | props to set onpress right action | - 
-  iconType: HeaderIconType | props to set icon type that used in header `'ant-design' | 'entypo' | 'evil-icons' | 'feather' | 'font-awesome' | 'font-awesome5' | 'fontisto' | 'foundation' | 'ionicons' | 'material-community' | 'material-icons' | 'octicons'` | `font-awesome5`
+  iconType: HeaderIconType | props to set icon type that used in header `(ant-design, entypo, evil-icons, feather, font-awesome, font-awesome5, fontisto, foundation, ionicons, material-community, material-icons, octicons)` | `font-awesome5`
