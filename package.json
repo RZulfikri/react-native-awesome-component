@@ -5,14 +5,14 @@
   "main": "index.js",
   "typings": "./index.d.ts",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/RZulfikri/react-native-awesome-component.git"
+    "type": "git",
+    "url": "git+https://github.com/RZulfikri/react-native-awesome-component.git"
   },
   "keywords": [
-      "react-native"
+    "react-native"
   ],
   "scripts": {
-    "postinstall" : "react-native link react-native-vector-icons"
+    "postinstall": "react-native link react-native-vector-icons"
   },
   "author": "Rahmat Zulfikri",
   "dependencies": {
@@ -25,6 +25,15 @@
   "devDependencies": {
     "babel-plugin-root-import": "^6.4.1"
   },
-  "license": "Apache License 2.0",
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "bugs": {
+    "url": "https://github.com/RZulfikri/react-native-awesome-component/issues"
+  },
+  "homepage": "https://github.com/RZulfikri/react-native-awesome-component#readme",
+  "directories": {
+    "doc": "doc"
+  }
 }
