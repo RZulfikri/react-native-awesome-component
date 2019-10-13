@@ -9,10 +9,13 @@
     "url": "git+https://github.com/RZulfikri/react-native-awesome-component.git"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "image placholder",
+    "text placeholder",
+    "custom button",
+    "custom header"
   ],
   "scripts": {
-    "postinstall": "react-native link react-native-vector-icons"
   },
   "author": "Rahmat Zulfikri",
   "dependencies": {
@@ -26,9 +29,6 @@
     "babel-plugin-root-import": "^6.4.1"
   },
   "license": "Apache-2.0",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/RZulfikri"
-  },
   "bugs": {
     "url": "https://github.com/RZulfikri/react-native-awesome-component/issues"
   },

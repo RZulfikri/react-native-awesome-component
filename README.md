@@ -3,10 +3,19 @@ This is repo for combined custom component.
 
 **How to Install**
 ```
+// Manual from git
 npm install https://github.com/RZulfikri/react-native-awesome-component.git
 or
 yarn add https://github.com/RZulfikri/react-native-awesome-component.git
+
+// Using npm
+npm install react-native-awesome-component
+or
+yarn add react-native-awesome-component
 ```
+
+make sure you install `"react-native-vector-icons": "^6.6.0"` ank `link`
+
 ## PlaceholderImage
 Read more [here](./doc/placeholder-image.md)
 
