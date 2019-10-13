@@ -42,6 +42,12 @@ const DEFAULT_GLOBAL_CONST = {
   HEADER_RIGHT_ACTION_TITLE_SIZE: 17,
   HEADER_RIGHT_ACTION_TITLE_COLOR: Colors.black,
   HEADER_ICON_TYPE: 'font-awesome5',
+
+  // CONNECTION HANDLER
+  CONNECTION_SUCCESS_TITLE: 'Connected',
+  CONNECTION_SUCCESS_MESSAGE: 'Connected to the internet',
+  CONNECTION_ERROR_TITLE: 'Disconected',
+  CONNECTION_ERROR_MESSAGE: 'No internet connection',
 }
 
 let globalConst = {
@@ -152,6 +158,20 @@ export function setGlobalHeaderRightActionTitleColor(value) {
 }
 export function setGlobalHeaderIconType(value) {
   globalConst = Object.appendObject(globalConst, 'HEADER_ICON_TYPE', value)
+}
+
+// CONNECTION HANDLER
+export function setGlobalConnectionHandlerSuccessTitle(value) {
+  globalConst = Object.appendObject(globalConst, 'CONNECTION_SUCCESS_TITLE', value)
+}
+export function setGlobalConnectionHandlerSuccessMessage(value) {
+  globalConst = Object.appendObject(globalConst, 'CONNECTION_SUCCESS_MESSAGE', value)
+}
+export function setGlobalConnectionHandlerErrorTitle(value) {
+  globalConst = Object.appendObject(globalConst, 'CONNECTION_ERROR_TITLE', value)
+}
+export function setGlobalConnectionHandlerErrorMessage(value) {
+  globalConst = Object.appendObject(globalConst, 'CONNECTION_ERROR_MESSAGE', value)
 }
 
 // FUNCTION GET DEFAULT/VALUE

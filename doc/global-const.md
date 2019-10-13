@@ -41,6 +41,12 @@ This is method to custom global constant/value that used in this component.
     HEADER_RIGHT_ACTION_TITLE_SIZE: 17,
     HEADER_RIGHT_ACTION_TITLE_COLOR: Colors.black,
     HEADER_ICON_TYPE: 'font-awesome5',
+
+    // CONNECTION HANDLER
+    CONNECTION_SUCCESS_TITLE: 'Connected',
+    CONNECTION_SUCCESS_MESSAGE: 'Connected to the internet',
+    CONNECTION_ERROR_TITLE: 'Disconected',
+    CONNECTION_ERROR_MESSAGE: 'No internet connection',
   }
 ```
 
@@ -80,4 +86,8 @@ setGlobalHeaderRightIconColor | function to change global header right icon colo
 setGlobalHeaderRightActionTitleSize | function to change global header right action title size | (value: number) | - 
 setGlobalHeaderRightActionTitleColor | function to change global header right action title color | (value: string) | - 
 setGlobalHeaderIconType | function to change global header icon type `(ant-design, entypo, evil-icons, feather, font-awesome, font-awesome5, fontisto, foundation, ionicons, material-community, material-icons, octicons)` | (value: string) | - 
+setGlobalConnectionHandlerSuccessTitle: (value: string) => void | function to change global connected title | (value: string) | - 
+setGlobalConnectionHandlerSuccessMessage: (value: string) => void | function to change global connected message | (value: string) | -
+setGlobalConnectionHandlerErrorTitle: (value: string) => void | function to change global disconected title | (value: string) | - 
+setGlobalConnectionHandlerErrorMessage: (value: string) => void | function to change global disconected message | (value: string) | -
 

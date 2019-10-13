@@ -50,7 +50,6 @@ interface ICustomButtonProps {
   isCard: boolean
 }
 
-
 interface ICustomHeaderProps {
   navigation: any;
   height: number;
@@ -69,10 +68,15 @@ interface ICustomHeaderProps {
   iconType: HeaderIconType;
 }
 
+interface IConnectionHandler {
+  onChangeState: (isConnected: boolean) => void
+}
+
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
 export class PlaceholderText extends React.Component<TextProps> { }
 export class CustomButton extends React.Component<ICustomButtonProps> { }
 export class CustomHeader extends React.Component<ICustomHeaderProps> { }
+export class ConnectionHandler extends React.Component<ICustomHeaderProps> { }
 
 
 /**
@@ -190,6 +194,12 @@ interface IGlobalConstValue {
   HEADER_RIGHT_ACTION_TITLE_SIZE: number;
   HEADER_RIGHT_ACTION_TITLE_COLOR: string;
   HEADER_ICON_TYPE: string;
+
+  // CONNECTION HANDLER
+  CONNECTION_SUCCESS_TITLE: string;
+  CONNECTION_SUCCESS_MESSAGE: string;
+  CONNECTION_ERROR_TITLE: string;
+  CONNECTION_ERROR_MESSAGE: string;
 }
 
 interface IGlobalConst {
@@ -221,6 +231,10 @@ interface IGlobalConst {
   setGlobalHeaderRightActionTitleSize: (value: number) => void;
   setGlobalHeaderRightActionTitleColor: (value: string) => void;
   setGlobalHeaderIconType: (value: HeaderIconType) => void;
+  setGlobalConnectionHandlerSuccessTitle: (value: string) => void;
+  setGlobalConnectionHandlerSuccessMessage: (value: string) => void;
+  setGlobalConnectionHandlerErrorTitle: (value: string) => void;
+  setGlobalConnectionHandlerErrorMessage: (value: string) => void;
 }
 
 export const GlobalConst: IGlobalConst

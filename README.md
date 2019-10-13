@@ -28,6 +28,9 @@ Read more [here](./doc/custom-button.md)
 ## CustomHeader
 Read more [here](./doc/custom-header.md)
 
+## ConnectionHandler
+Read more [here](./doc/connection-handler.md)
+
 ## Styled
 Read more [here](./doc/styled.md)
 
