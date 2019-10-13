@@ -10,7 +10,7 @@ import {
 
 class PlaceholderImage extends Component {
   static propTypes = {
-    uri: PropTypes.string.isRequired,
+    uri: PropTypes.string,
     width: PropTypes.number,
     height: PropTypes.number,
     radius: PropTypes.number,
@@ -70,24 +70,36 @@ class PlaceholderImage extends Component {
 
     return (
       <View>
-        <StyledImage
-          source={{ uri }}
-          resizeMethod={resizeMethod}
-          resizeMode={resizeMode}
-          style={{
-            width,
-            height,
-            borderWidth,
-            borderColor,
-            borderRadius: radius,
-          }}
-          defaultSource={defaultSource}
-          onLoad={this.onLoad}
-          onError={this.onError}
-          isCard={isCard}
-        />
+        {!loading || (uri !== undefined || uri !== '') ? (
+          <StyledImage
+            source={{ uri }}
+            resizeMethod={resizeMethod}
+            resizeMode={resizeMode}
+            style={{
+              width,
+              height,
+              borderWidth,
+              borderColor,
+              borderRadius: radius,
+            }}
+            defaultSource={defaultSource}
+            onLoad={this.onLoad}
+            onError={this.onError}
+            isCard={isCard}
+          />
+        ) : (
+            <View
+              style={{
+                width,
+                height,
+                borderWidth,
+                borderColor,
+                borderRadius: radius,
+              }}
+            />
+          )}
         {loading || (uri === undefined || uri === '') && (
-          <View style={{marginTop: -height}}>
+          <View style={{ marginTop: -height }}>
             <Placeholder
               Animation={ShineOverlay}
             >

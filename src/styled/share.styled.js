@@ -3,8 +3,6 @@ import * as GlobalConst from '../global-const'
 import PropTypes from 'prop-types';
 import metrics from '../metrics'
 
-const fontSize = metrics.font
-
 const paddingType = {
   VERTICAL: 'vertical',
   HORIZONTAL: 'horizontal'
@@ -94,26 +92,25 @@ const StyledImage = styled.Image`
 `
 
 export const H1 = styled.Text`
-  font-size: ${fontSize.h1}
+  font-size: ${GlobalConst.getValue().H1}
 `
 export const H2 = styled.Text`
-  font-size: ${fontSize.h2}
+  font-size: ${GlobalConst.getValue().H2}
 `
 export const H3 = styled.Text`
-  font-size: ${fontSize.h3}
+  font-size: ${GlobalConst.getValue().H3}
 `
 export const H4 = styled.Text`
-  font-size: ${fontSize.h4}
+  font-size: ${GlobalConst.getValue().H4}
 `
 export const H5 = styled.Text`
-  font-size: ${fontSize.h5}
+  font-size: ${GlobalConst.getValue().H5}
 `
 export const H6 = styled.Text`
-  font-size: ${fontSize.h6}
+  font-size: ${GlobalConst.getValue().H6}
 `
-
 export const H7 = styled.Text`
-  font-size: ${fontSize.h7}
+  font-size: ${GlobalConst.getValue().H7}
 `
 
 export {

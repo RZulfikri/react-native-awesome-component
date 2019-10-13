@@ -11,11 +11,16 @@
   "keywords": [
       "react-native"
   ],
+  "scripts": {
+    "postinstall" : "react-native link react-native-vector-icons"
+  },
   "author": "Rahmat Zulfikri",
   "dependencies": {
     "prop-types": "^15.7.2",
     "rn-placeholder": "^3.0.0",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "react-native-iphone-x-helper": "^1.2.1",
+    "react-native-vector-icons": "^6.6.0"
   },
   "devDependencies": {
     "babel-plugin-root-import": "^6.4.1"

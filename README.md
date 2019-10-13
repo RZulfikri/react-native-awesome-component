@@ -16,6 +16,9 @@ Read more [here](./doc/placeholder-text.md)
 ## CustomButton
 Read more [here](./doc/custom-button.md)
 
+## CustomHeader
+Read more [here](./doc/custom-header.md)
+
 ## Styled
 Read more [here](./doc/styled.md)
 

@@ -11,6 +11,7 @@ const size = {
 const metrics = {
   padding: 10,
   title: 24,
+  headerHeight: 55,
   font: size
 }
 

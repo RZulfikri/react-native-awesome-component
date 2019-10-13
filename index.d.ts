@@ -7,6 +7,7 @@ import { TextProps, StyleProp, ViewStyle, TextStyle } from 'react-native'
 
 type ResizeMethodType = "auto" | "resize" | "scale"
 type ResizeModeType = "cover" | "contain" | "stretch" | "repeat" | "center"
+type HeaderIconType = 'ant-design' | 'entypo' | 'evil-icons' | 'feather' | 'font-awesome' | 'font-awesome5' | 'fontisto' | 'foundation' | 'ionicons' | 'material-community' | 'material-icons' | 'octicons'
 
 interface IPlaceholderImageProps {
   uri?: string;
@@ -49,9 +50,30 @@ interface ICustomButtonProps {
   isCard: boolean
 }
 
+
+interface ICustomHeaderProps {
+  navigation: any;
+  height: number;
+  backgroundColor: string;
+  iphoneXPadding: boolean;
+  isCard: boolean;
+  title: string;
+  iconLeft: string;
+  titleLeftt: string;
+  renderLeft: () => void;
+  onPressLeft: () => void;
+  iconRight: string;
+  titleRight: string;
+  renderRight: () => void;
+  onPressRight: () => void;
+  iconType: HeaderIconType;
+}
+
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
 export class PlaceholderText extends React.Component<TextProps> { }
 export class CustomButton extends React.Component<ICustomButtonProps> { }
+export class CustomHeader extends React.Component<ICustomHeaderProps> { }
+
 
 /**
  * STYLED COMPONENT
@@ -93,17 +115,34 @@ interface IMath {
 
 interface IScale {
   scale: (value: number) => number;
+  scaleHeight: (value: number) => number;
   setDesignWidth: (designWidth: number) => void;
+  setDesignHeight: (designHeight: number) => void;
 }
 
 interface IObject {
   appendObject: (currentObject: object, key: string, value: any) => void;
 }
 
+
+type mergeOrder = "asc" | "desc"
+
+interface IArray {
+  mergeAndReplace: (oldArray: array = [], newArray: array = [], key: string = 'id', sortId?: string, sortOrder?: mergeOrder, isDate: boolean = false) => array
+  compareValues: (key: string, order: mergeOrder = 'asc', isDate: boolean = false) => array
+}
+
+interface IHelper {
+  getFileNameFromPath: (path: string) => void;
+  getFileNameFromURL: (url: string) => void;
+}
+
 interface IMethod {
   Math: IMath;
   Scale: IScale;
   Object: IObject;
+  Array: IArray;
+  Helper: IHelper;
 }
 
 export const Method: IMethod
@@ -112,7 +151,7 @@ export const Method: IMethod
  * GLOBAL CONST
  */
 
-interface IGlobalVonstValue {
+interface IGlobalConstValue {
   PADDING: number;
   SAFE_AREA_BACKGROUND_COLOR: string;
   BACKGROUND_COLOR: string;
@@ -127,12 +166,35 @@ interface IGlobalVonstValue {
   BUTTON_LOADING_COLOR: string;
 
   // FONT STYLE
-  FONT_SIZE: number
+  FONT_SIZE: number;
+  H1: number;
+  H2: number;
+  H3: number;
+  H4: number;
+  H5: number;
+  H6: number;
+  H7: number;
+
+  // HEADER STYLE
+  HEADER_HEIGHT: number;
+  HEADER_BACKGROUND: string;
+  HEADER_TITLE_SIZE: number;
+  HEADER_TITLE_COLOR: string;
+  HEADER_LEFT_ICON_NAME: string;
+  HEADER_LEFT_ICON_SIZE: number;
+  HEADER_LEFT_ICON_COLOR: string;
+  HEADER_LEFT_ACTION_TITLE_SIZE: number;
+  HEADER_LEFT_ACTION_TITLE_COLOR: string;
+  HEADER_RIGHT_ICON_SIZE: number;
+  HEADER_RIGHT_ICON_COLOR: string;
+  HEADER_RIGHT_ACTION_TITLE_SIZE: number;
+  HEADER_RIGHT_ACTION_TITLE_COLOR: string;
+  HEADER_ICON_TYPE: string;
 }
 
 interface IGlobalConst {
-  getValue: () => IGlobalVonstValue;
-  getDefaultValue: () => IGlobalVonstValue;
+  getValue: () => IGlobalConstValue;
+  getDefaultValue: () => IGlobalConstValue;
   setGlobalActiveButtonColor: (color: string) => void;
   setGlobalActiveButtonTitleColor: (color: string) => void;
   setGlobalDisableButtonColor: (color: string) => void;
@@ -144,6 +206,21 @@ interface IGlobalConst {
   setGlobalSafeAreaBackgroundColor: (color: string) => void;
   setGlobalBackgroundColor: (color: string) => void;
   setGlobalFontSize: (size: number) => void;
+  setGlobalTypography: (H1?: number, H2?: number, H3?: number, H4?: number, H5?: number, H6?: number, H7?: number) => void;
+  setGlobalHeaderHeightSize: (value: number) => void;
+  setGlobalHeaderBackgroundColor: (value: string) => void;
+  setGlobalHeaderTitleSize: (value: number) => void;
+  setGlobalHeaderTitleColor: (value: string) => void;
+  setGlobalHeaderLeftIconName: (value: string) => void;
+  setGlobalHeaderLeftIconSize: (value: number) => void;
+  setGlobalHeaderLeftIconColor: (value: string) => void;
+  setGlobalHeaderLeftActionTitleSize: (value: number) => void;
+  setGlobalHeaderLeftActionTitleColor: (value: string) => void;
+  setGlobalHeaderRightIconSize: (value: number) => void;
+  setGlobalHeaderRightIconColor: (value: string) => void;
+  setGlobalHeaderRightActionTitleSize: (value: number) => void;
+  setGlobalHeaderRightActionTitleColor: (value: string) => void;
+  setGlobalHeaderIconType: (value: HeaderIconType) => void;
 }
 
 export const GlobalConst: IGlobalConst
