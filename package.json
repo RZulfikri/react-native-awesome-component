@@ -25,5 +25,6 @@
   "devDependencies": {
     "babel-plugin-root-import": "^6.4.1"
   },
-  "license": "Apache License 2.0"
+  "license": "Apache License 2.0",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
 }
