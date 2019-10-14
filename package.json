@@ -1,6 +1,6 @@
 {
   "name": "react-native-awesome-component",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React Native Awesome Component",
   "main": "index.js",
   "typings": "./index.d.ts",
@@ -10,10 +10,13 @@
   },
   "keywords": [
     "react-native",
-    "image placholder",
-    "text placeholder",
+    "placehoder image",
+    "placeholder text",
     "custom button",
-    "custom header"
+    "custom header",
+    "custom alert",
+    "connection handler",
+    "useful method"
   ],
   "scripts": {
   },
