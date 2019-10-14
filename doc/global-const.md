@@ -1,7 +1,7 @@
 ## GlobalConst
 This is method to custom global constant/value that used in this component.
 
-```
+```javascript
   DEFAULT_GLOBAL_CONST: {
     PADDING: metrics.padding, // 10
     SAFE_AREA_BACKGROUND_COLOR: Colors.white, // #FFFFFF
@@ -51,7 +51,7 @@ This is method to custom global constant/value that used in this component.
 ```
 
 **How to use**
-```
+```javascript
 import {GlobalConst} from 'react-native-awesome-component'
 GlobalConst.setGlobalActiveButtonColor('blue')
 ```

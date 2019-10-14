@@ -3,7 +3,7 @@ This is Custom header component.
 
 **How to use**
 
-```
+```javascript
 import {CustomHeader} from 'react-native-awesome-component
 
 const PrimaryNav = createStackNavigator({

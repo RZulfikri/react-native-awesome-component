@@ -14,7 +14,11 @@ or
 yarn add react-native-awesome-component
 ```
 
-make sure you install `"react-native-vector-icons": "^6.6.0"` ank `link`
+after you install this package you need to make sure to install / link this :
+```
+1. "react-native-vector-icons": "^6.6.0",
+2. "@react-native-community/netinfo": "^4.4.0",
+```
 
 ## PlaceholderImage
 Read more [here](./doc/placeholder-image.md)
@@ -30,6 +34,9 @@ Read more [here](./doc/custom-header.md)
 
 ## ConnectionHandler
 Read more [here](./doc/connection-handler.md)
+
+## CustomAlert
+Read more [here](./doc/custom-alert.md)
 
 ## Styled
 Read more [here](./doc/styled.md)

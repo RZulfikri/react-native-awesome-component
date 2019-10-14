@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextProps, StyleProp, ViewStyle, TextStyle } from 'react-native'
+import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle } from 'react-native'
 
 /**
  * CLASS COMPONENT
@@ -8,6 +8,8 @@ import { TextProps, StyleProp, ViewStyle, TextStyle } from 'react-native'
 type ResizeMethodType = "auto" | "resize" | "scale"
 type ResizeModeType = "cover" | "contain" | "stretch" | "repeat" | "center"
 type HeaderIconType = 'ant-design' | 'entypo' | 'evil-icons' | 'feather' | 'font-awesome' | 'font-awesome5' | 'fontisto' | 'foundation' | 'ionicons' | 'material-community' | 'material-icons' | 'octicons'
+type AlertType = 'success' | 'error' | 'info'
+
 
 interface IPlaceholderImageProps {
   uri?: string;
@@ -72,11 +74,62 @@ interface IConnectionHandler {
   onChangeState: (isConnected: boolean) => void
 }
 
+interface ICustomAlertMultiButtonAction {
+  title: string,
+  callback: () => void,
+}
+
+interface ICustomAlertMultiButtonStyle {
+  confirm: StyleProp<ViewStyle> | TextProps;
+  cancel: StyleProp<ViewStyle> | TextProps;
+}
+
+interface ICustomAlertConfiguration {
+  enableDismiss: boolean;
+  type: AlertType;
+  imgError: any;
+  imgSuccess: any;
+  imgInfo: any;
+  successColor: string;
+  errorColor: string;
+  infoColor: string;
+  title: string;
+  message: string;
+  confirm: ICustomAlertMultiButtonAction;
+  cancel: ICustomAlertMultiButtonAction;
+}
+
+interface ICustomAlert {
+  enableDismiss: boolean;
+  containerStyle: StyleProp<ViewStyle>;
+  titleStyle: TextProps;
+  messageStyle: TextProps;
+  imageStyle: ImageStyle;
+  singleButtonContainerStyle: StyleProp<ViewStyle>;
+  singleButtonTitleStyle: TextProps;
+  multiButtonContainerStyle: ICustomAlertMultiButtonStyle;
+  multiButtonTitleStyle: ICustomAlertMultiButtonStyle;
+  customConfiguration: ICustomAlertConfiguration;
+}
+
+interface ICustomAlertStyleConfiguration {
+  containerStyle: StyleProp<ViewStyle>;
+  titleStyle: TextProps;
+  messageStyle: TextProps;
+  imageStyle: ImageStyle;
+  singleButtonContainerStyle: StyleProp<ViewStyle>;
+  singleButtonTitleStyle: TextProps;
+  multiButtonContainerStyle: ICustomAlertMultiButtonStyle;
+  multiButtonTitleStyle: ICustomAlertMultiButtonStyle;
+  customConfiguration: ICustomAlertConfiguration;
+}
+
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
 export class PlaceholderText extends React.Component<TextProps> { }
 export class CustomButton extends React.Component<ICustomButtonProps> { }
 export class CustomHeader extends React.Component<ICustomHeaderProps> { }
 export class ConnectionHandler extends React.Component<ICustomHeaderProps> { }
+export class CutomAlert extends React.Component<ICustomAlert> { }
 
 
 /**
@@ -132,13 +185,19 @@ interface IObject {
 type mergeOrder = "asc" | "desc"
 
 interface IArray {
-  mergeAndReplace: (oldArray: array = [], newArray: array = [], key: string = 'id', sortId?: string, sortOrder?: mergeOrder, isDate: boolean = false) => array
-  compareValues: (key: string, order: mergeOrder = 'asc', isDate: boolean = false) => array
+  mergeAndReplace: (oldArray: any[], newArray: any[], key: string, sortId?: string, sortOrder?: mergeOrder, isDate?: boolean) => any[]
+  compareValues: (key: string, order: mergeOrder, isDate: boolean) => any[]
 }
 
 interface IHelper {
   getFileNameFromPath: (path: string) => void;
   getFileNameFromURL: (url: string) => void;
+}
+
+interface IAlertHandler {
+  // setAlertInstance: (alert: any) => void;
+  showAlert: (options: ICustomAlertConfiguration, style?: ICustomAlertStyleConfiguration) => void;
+  hideAlert: () => void;
 }
 
 interface IMethod {
@@ -147,6 +206,7 @@ interface IMethod {
   Object: IObject;
   Array: IArray;
   Helper: IHelper;
+  AlertHandler: IAlertHandler;
 }
 
 export const Method: IMethod

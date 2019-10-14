@@ -5,7 +5,7 @@ This is Button with default style and condition.
 
 **How to use**
 
-```
+```javascript
 import {CustomButton} from 'react-native-awesome-component
 
 return(

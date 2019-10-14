@@ -23,6 +23,8 @@ import PlaceholderText from './src/placeholder-text'
 import CustomButton from './src/custom-button'
 import CustomHeader from './src/custom-header'
 import ConnectionHandler from './src/connection-handler'
+import CustomAlert from './src/custom-alert'
+import * as AlertHandler from './src/custom-alert/alert-handler'
 
 const Styled = {
   Container,
@@ -44,7 +46,8 @@ const Method = {
   Math,
   Object: Obj,
   Array: Arr,
-  Helper: Helper
+  Helper: Helper,
+  AlertHandler,
 }
 
 export {
@@ -54,6 +57,7 @@ export {
   CustomHeader,
   TouchableContainer,
   ConnectionHandler,
+  CustomAlert,
 
   Styled,
   Method,

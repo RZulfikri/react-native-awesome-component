@@ -104,9 +104,9 @@ Button.propTypes = {
   radius: PropTypes.number,
   borderWidth: PropTypes.number,
   borderColor: PropTypes.string,
-  containerStyle: ViewStyle,
-  activeTitleStyle: TextStyle,
-  disableTitleStyle: TextStyle,
+  containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  activeTitleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  disableTitleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   loadingColor: PropTypes.string,
   isCard: PropTypes.bool,
 }
@@ -117,6 +117,9 @@ Button.defaultProps = {
   titlr: 'Button Title',
   onPress: () => null,
   isCard: false,
+  containerStyle: {},
+  disableTitleStyle: {},
+  activeTitleStyle: {},
 }
 
 export default Button

@@ -1,6 +1,10 @@
 ## CustomHeader
 This is Connection Handler component, to inform user that internet connected or disconnected.
 
+Connected | Disconnected   
+--- | --- 
+<img src="./images/disconnect.png" width="400px" > | <img src="./images/connected.png" width="400px" > 
+
 **How to use**
 
 ```

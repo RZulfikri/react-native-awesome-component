@@ -7,8 +7,8 @@ This is Text component with placeholder. This component have 2 state (`with valu
 
 
 **How to use**
-```
-import {PlaceholderText} from 'react-native-awesome-component`
+```javascript
+import {PlaceholderText} from 'react-native-awesome-component'
 
 return(
   <PlaceholderText>{this.state.text}</PlaceholderText> // show text
