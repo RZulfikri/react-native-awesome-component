@@ -7,8 +7,8 @@ Connected | Disconnected
 
 **How to use**
 
-```
-import {ConnectionHandler} from 'react-native-awesome-component
+```javascript
+import {ConnectionHandler} from 'react-native-awesome-component'
 
 render() {
     return (
