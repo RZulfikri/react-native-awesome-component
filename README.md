@@ -14,7 +14,11 @@ or
 yarn add react-native-awesome-component
 ```
 
-after you install this package you need to make sure to install / link this :
+### react-native >= 0.60.0
+No need to install / link. It already use Autolinking.
+
+### react-native < 0.60.0
+After you install this package you need to make sure you install / link this package:
 ```
 1. "react-native-vector-icons": "^6.6.0",
 2. "@react-native-community/netinfo": "^4.4.0",
