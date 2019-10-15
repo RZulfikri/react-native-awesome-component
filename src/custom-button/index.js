@@ -34,6 +34,10 @@ const Button = (props) => {
     activeTitleStyle,
     disableTitleStyle,
 
+    renderActiveTitle,
+    renderDisableTitle,
+    renderLoading,
+
     activeColor,
     disabledColor,
     width,
@@ -65,7 +69,7 @@ const Button = (props) => {
           isCard={isCard}
           style={[styles.buttonContainer, styles.disableButtonStyle, customContainerStyle]}
         >
-          <ActivityIndicator size='small' color={loadingColor ? loadingColor : GlobalConst.getValue().BUTTON_LOADING_COLOR} />
+          {renderLoading ? renderLoading() : <ActivityIndicator size='small' color={loadingColor ? loadingColor : GlobalConst.getValue().BUTTON_LOADING_COLOR} />}
         </Container>
       )
     } else {
@@ -74,7 +78,7 @@ const Button = (props) => {
           isCard={isCard}
           style={[styles.buttonContainer, styles.disableButtonStyle, customContainerStyle]}
         >
-          <Text style={[styles.disableTitleStyle, disableTitleStyle]} >{title}</Text>
+          {renderDisableTitle ? renderDisableTitle() : <Text style={[styles.disableTitleStyle, disableTitleStyle]} >{title}</Text>}
         </Container>
       )
     }
@@ -86,7 +90,7 @@ const Button = (props) => {
         onPress={onPress}
         style={[styles.buttonContainer, customContainerStyle]}
       >
-        <Text style={[styles.activeTitleStyle, activeTitleStyle]}>{title}</Text>
+        {renderActiveTitle ? renderActiveTitle() : <Text style={[styles.activeTitleStyle, activeTitleStyle]}>{title}</Text>}
       </TouchableContainer>
     )
   }
@@ -97,6 +101,10 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   title: PropTypes.string,
   onPress: PropTypes.func,
+  renderActiveTitle: PropTypes.func,
+  renderDisableTitle: PropTypes.func,
+  renderLoading: PropTypes.func,
+
   activeColor: PropTypes.string,
   disabledColor: PropTypes.string,
   width: PropTypes.number,

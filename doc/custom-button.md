@@ -25,6 +25,9 @@ title: string | props to set button title | `'Button Title'`
 onPress: () => void | props to handle onPress button | `() => null` 
 activeColor: string | props to set active button color | `#1abc9c`
 disabledColor: string | props to set disable button color | `#EBEBE4`
+renderActiveTitle: () => void | props to render custom active title | -
+renderDisableTitle: () => void | props to render custom disable title | - 
+renderLoading: () => void | props to render custom loading | -
 width: number | props to set button width | -
 height: number | props to set button height | `50`
 radius: number | props to set button radius | -

@@ -38,6 +38,9 @@ interface ICustomButtonProps {
   disabled: boolean;
   title: string;
   onPress: () => void;
+  renderActiveTitle: () => void;
+  renderDisableTitle: () => void;
+  renderLoading: () => void;
   activeColor: string;
   disabledColor: string;
   width: number;

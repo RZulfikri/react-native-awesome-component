@@ -3,9 +3,9 @@ This is Image component with placholder. This component have 3 state (`loading`,
 
 <img src="./images/placeholder-image.PNG" width="400px" >
 
-**Hot to use**
+**How to use**
 ```javascript
-import {PlaceholderImage} from 'react-native-awesome-component`
+import {PlaceholderImage} from 'react-native-awesome-component'
 return(
   <PlaceholderImage uri={''} /> // loading
   <PlaceholderImage uri={'http://rahmatzulfikri.xyz/images/avatar.jpg'} /> // success
