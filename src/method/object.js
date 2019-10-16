@@ -9,3 +9,28 @@ export function appendObject(currentObject, key, value) {
   }
 }
 
+export function appendChildToView(view, child) {
+  if (view.props.children) {
+    return {
+      ...view,
+      props: {
+        ...view.props,
+        children: [
+          ...view.props.children,
+          child,
+        ]
+      }
+    }
+  } else {
+    return {
+      ...view,
+      props: {
+        ...view.props,
+        children: [
+          child,
+        ]
+      }
+    }
+  }
+}
+

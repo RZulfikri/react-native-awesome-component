@@ -127,12 +127,22 @@ interface ICustomAlertStyleConfiguration {
   customConfiguration: ICustomAlertConfiguration;
 }
 
+interface ICustomStepBar {
+  maxStep: number;
+  currentStep: number;
+  roundCorner: boolean;
+  separator: boolean;
+  activeColor: string;
+  inactiveColor: string;
+}
+
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
 export class PlaceholderText extends React.Component<TextProps> { }
 export class CustomButton extends React.Component<ICustomButtonProps> { }
 export class CustomHeader extends React.Component<ICustomHeaderProps> { }
 export class ConnectionHandler extends React.Component<ICustomHeaderProps> { }
 export class CutomAlert extends React.Component<ICustomAlert> { }
+export class CustomStepBar extends React.Component<ICustomStepBar> { }
 
 
 /**
@@ -182,6 +192,7 @@ interface IScale {
 
 interface IObject {
   appendObject: (currentObject: object, key: string, value: any) => void;
+  appendChildToView: (currentView: any, childView: any) => any;
 }
 
 
@@ -263,11 +274,19 @@ interface IGlobalConstValue {
   CONNECTION_SUCCESS_MESSAGE: string;
   CONNECTION_ERROR_TITLE: string;
   CONNECTION_ERROR_MESSAGE: string;
+
+  // CUSTOM STEP BAR
+  CUSTOM_STEP_BAR_HEIGHT: number;
+  CUSTOM_STEP_BAR_ACTIVE_COLOR: string;
+  CUSTOM_STEP_BAR_INACTIVE_COLOR: string;
+  CUSTOM_STEP_BAR_SEPARATOR: boolean;
+  CUSTOM_STEP_BAR_ROUND_CORNER: boolean;
 }
 
 interface IGlobalConst {
   getValue: () => IGlobalConstValue;
   getDefaultValue: () => IGlobalConstValue;
+  // CUSTOM BUTTON
   setGlobalActiveButtonColor: (color: string) => void;
   setGlobalActiveButtonTitleColor: (color: string) => void;
   setGlobalDisableButtonColor: (color: string) => void;
@@ -275,11 +294,13 @@ interface IGlobalConst {
   setGlobalButtonTitleSize: (size: number) => void;
   setGlobalButtonHeightSize: (size: number) => void;
   setGlobalButtonLoadingColor: (color: string) => void;
+  // GLOBAL STYLE
   setGlobalPaddingSize: (size: number) => void;
   setGlobalSafeAreaBackgroundColor: (color: string) => void;
   setGlobalBackgroundColor: (color: string) => void;
   setGlobalFontSize: (size: number) => void;
   setGlobalTypography: (H1?: number, H2?: number, H3?: number, H4?: number, H5?: number, H6?: number, H7?: number) => void;
+  // CUSTOM HEADER
   setGlobalHeaderHeightSize: (value: number) => void;
   setGlobalHeaderBackgroundColor: (value: string) => void;
   setGlobalHeaderTitleSize: (value: number) => void;
@@ -294,10 +315,17 @@ interface IGlobalConst {
   setGlobalHeaderRightActionTitleSize: (value: number) => void;
   setGlobalHeaderRightActionTitleColor: (value: string) => void;
   setGlobalHeaderIconType: (value: HeaderIconType) => void;
+  // CONNECTION HANDLER
   setGlobalConnectionHandlerSuccessTitle: (value: string) => void;
   setGlobalConnectionHandlerSuccessMessage: (value: string) => void;
   setGlobalConnectionHandlerErrorTitle: (value: string) => void;
   setGlobalConnectionHandlerErrorMessage: (value: string) => void;
+  // CUSTOM STEP BAR
+  setGlobalCustomStepBarHeight: (value: number) => void;
+  setGlobalCustomStepBarActiveColor: (value: string) => void;
+  setGlobalCustomStepBarInactiveColor: (value: string) => void;
+  setGlobalCustomStepBarSeparator: (value: boolean) => void;
+  setGlobalCustomStepBarRoundCorner: (value: booleab) => void;
 }
 
 export const GlobalConst: IGlobalConst

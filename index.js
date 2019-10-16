@@ -24,6 +24,7 @@ import CustomButton from './src/custom-button'
 import CustomHeader from './src/custom-header'
 import ConnectionHandler from './src/connection-handler'
 import CustomAlert from './src/custom-alert'
+import CustomStepBar from './src/custom-step-bar'
 import * as AlertHandler from './src/custom-alert/alert-handler'
 
 const Styled = {
@@ -58,6 +59,7 @@ export {
   TouchableContainer,
   ConnectionHandler,
   CustomAlert,
+  CustomStepBar,
 
   Styled,
   Method,
