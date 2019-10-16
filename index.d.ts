@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle } from 'react-native'
+import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle, FlatListProps } from 'react-native'
 
 /**
  * CLASS COMPONENT
@@ -136,6 +136,10 @@ interface ICustomStepBar {
   inactiveColor: string;
 }
 
+interface ICustomFlatList extends FlatListProps {
+
+}
+
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
 export class PlaceholderText extends React.Component<TextProps> { }
 export class CustomButton extends React.Component<ICustomButtonProps> { }
@@ -143,6 +147,7 @@ export class CustomHeader extends React.Component<ICustomHeaderProps> { }
 export class ConnectionHandler extends React.Component<ICustomHeaderProps> { }
 export class CutomAlert extends React.Component<ICustomAlert> { }
 export class CustomStepBar extends React.Component<ICustomStepBar> { }
+export class CustomFlatList extends React.Component<ICustomFlatList> { }
 
 
 /**

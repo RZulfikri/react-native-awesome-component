@@ -25,6 +25,7 @@ import CustomHeader from './src/custom-header'
 import ConnectionHandler from './src/connection-handler'
 import CustomAlert from './src/custom-alert'
 import CustomStepBar from './src/custom-step-bar'
+import CustomFlatList from './src/custom-flatlist'
 import * as AlertHandler from './src/custom-alert/alert-handler'
 
 const Styled = {
@@ -60,6 +61,7 @@ export {
   ConnectionHandler,
   CustomAlert,
   CustomStepBar,
+  CustomFlatList,
 
   Styled,
   Method,

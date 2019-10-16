@@ -23,7 +23,7 @@ class PlaceholderImage extends Component {
   }
 
   static defaultProps = {
-    uri: '',
+    // uri: '',
     resizeMethod: 'resize',
     resizeMode: 'cover',
     width: 100,
@@ -67,10 +67,9 @@ class PlaceholderImage extends Component {
     } = this.props
 
     const { loading } = this.state
-
     return (
       <View>
-        {!loading || (uri !== undefined || uri !== '') ? (
+        {(!loading || uri !== undefined || uri !== '') ? (
           <StyledImage
             source={{ uri }}
             resizeMethod={resizeMethod}
@@ -98,7 +97,7 @@ class PlaceholderImage extends Component {
               }}
             />
           )}
-        {loading || (uri === undefined || uri === '') && (
+        {(loading || uri === undefined || uri === '') && (
           <View style={{ marginTop: -height }}>
             <Placeholder
               Animation={ShineOverlay}

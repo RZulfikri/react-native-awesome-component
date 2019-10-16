@@ -7,6 +7,12 @@ import * as GlobalConst from '../global-const'
 import Icons from 'react-native-vector-icons/Feather'
 import Colors from 'react-native-awesome-component/src/colors'
 
+let connection_status = false
+
+export function getConnectionStatus() {
+  return connection_status
+}
+
 class ConnectionHandler extends PureComponent {
   constructor(props) {
     super(props)
@@ -38,6 +44,7 @@ class ConnectionHandler extends PureComponent {
         this.dropDownAlertRef.alertWithType('error', GlobalConst.getValue().CONNECTION_ERROR_TITLE, GlobalConst.getValue().CONNECTION_ERROR_MESSAGE);
       }
       this.setState({ isConnected: state.isConnected }, () => {
+        connection_status = state.isConnected
         this.props.onStateChange(state.isConnected)
       })
     });

@@ -71,19 +71,21 @@ class PlaceholderText extends Component {
 
   render() {
     const { numberOfLines, children, style } = this.props
-    const childrenStringValue = this.getValueOfTextChildren(children)
+    let childrenStringValue
+    if (children !== undefined) {
+      childrenStringValue = this.getValueOfTextChildren(children)
+    }
     let textStyle = {
       fontSize: GlobalConst.getValue().fontSize,
       textAlignVertical: 'center',
     }
-    console.log({ children })
     if (style) {
       textStyle = {
         textStyle,
         ...style
       }
     }
-    if (childrenStringValue) {
+    if (childrenStringValue !== undefined) {
       return (
         <Text
           ellipsizeMode={'tail'}
@@ -94,6 +96,7 @@ class PlaceholderText extends Component {
         </Text>
       )
     } else {
+      console.tron.error('LINE PLACEHOLDER')
       delete textStyle.fontSize
       delete textStyle.textAlignVertical
       delete textStyle.color
