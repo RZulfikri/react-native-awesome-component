@@ -42,12 +42,15 @@ Read more [here](./doc/connection-handler.md)
 ## CustomAlert
 Read more [here](./doc/custom-alert.md)
 
+## CustomStepbar
+Read more [here](./doc/custom-step-bar.md)
+
 ## Styled
 Read more [here](./doc/styled.md)
 
 ## GlobalConst
 Read more [here](./doc/global-const.md)
 
-## Method:
+## Method
 Read more [here](./doc/method.md)
 

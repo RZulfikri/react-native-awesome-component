@@ -48,6 +48,13 @@ const DEFAULT_GLOBAL_CONST = {
   CONNECTION_SUCCESS_MESSAGE: 'Connected to the internet',
   CONNECTION_ERROR_TITLE: 'Disconected',
   CONNECTION_ERROR_MESSAGE: 'No internet connection',
+
+  // CUSTOM STEP BAR
+  CUSTOM_STEP_BAR_HEIGHT: 8,
+  CUSTOM_STEP_BAR_ACTIVE_COLOR: Colors.kermit_green,
+  CUSTOM_STEP_BAR_INACTIVE_COLOR: Colors.very_light_pink_two,
+  CUSTOM_STEP_BAR_SEPARATOR: true,
+  CUSTOM_STEP_BAR_ROUND_CORNER: true
 }
 
 let globalConst = {
@@ -172,6 +179,23 @@ export function setGlobalConnectionHandlerErrorTitle(value) {
 }
 export function setGlobalConnectionHandlerErrorMessage(value) {
   globalConst = Object.appendObject(globalConst, 'CONNECTION_ERROR_MESSAGE', value)
+}
+
+// CUSTOM STEP BAR
+export function setGlobalCustomStepBarHeight(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_STEP_BAR_HEIGHT', value)
+}
+export function setGlobalCustomStepBarActiveColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_STEP_BAR_ACTIVE_COLOR', value)
+}
+export function setGlobalCustomStepBarInactiveColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_STEP_BAR_INACTIVE_COLOR', value)
+}
+export function setGlobalCustomStepBarSeparator(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_STEP_BAR_SEPARATOR', value)
+}
+export function setGlobalCustomStepBarRoundCorner(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_STEP_BAR_ROUND_CORNER', value)
 }
 
 // FUNCTION GET DEFAULT/VALUE

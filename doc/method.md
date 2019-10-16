@@ -24,6 +24,7 @@ scaleHeight | function to get scale value from DESIGN_HEIGHT to SCREEN_HEIGHT | 
 Name | Description | Params | Return 
 --- | --- | --- | --- 
 appendObject | function to append value to an object | (currentObject: object, key: string, value: any) | object 
+appendChildToView | function to append child to view | (currentView: any, childView: any) | view
 
 ### #Math
 Name | Description | Params | Return 

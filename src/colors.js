@@ -8,6 +8,8 @@ const Colors = {
   light_navy: '#16558f',
   very_light_pink: '#dddddd',
   dark_slate_blue: '#224a71',
+  very_light_pink_two: '#eaeaea',
+  kermit_green: '#67c100',
 
   alertSuccess: '#32A54A',
   alertError: '#cc3232',

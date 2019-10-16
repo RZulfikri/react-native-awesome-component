@@ -47,6 +47,13 @@ This is method to custom global constant/value that used in this component.
     CONNECTION_SUCCESS_MESSAGE: 'Connected to the internet',
     CONNECTION_ERROR_TITLE: 'Disconected',
     CONNECTION_ERROR_MESSAGE: 'No internet connection',
+
+    // CUSTOM STEP BAR
+    CUSTOM_STEP_BAR_HEIGHT: 2;
+    CUSTOM_STEP_BAR_ACTIVE_COLOR: '#67c100';
+    CUSTOM_STEP_BAR_INACTIVE_COLOR: '#eaeaea';
+    CUSTOM_STEP_BAR_SEPARATOR: true;
+    CUSTOM_STEP_BAR_ROUND_CORNER: true;
   }
 ```
 
@@ -55,11 +62,15 @@ This is method to custom global constant/value that used in this component.
 import {GlobalConst} from 'react-native-awesome-component'
 GlobalConst.setGlobalActiveButtonColor('blue')
 ```
-
+### GlobalStyle value
 Name | Description | Params | Return 
 --- | --- | --- | --- 
 getValue | function to get latest value of global const | - | global const object
 getDefaultValue | function get get default value of global const | - | global const default object
+
+### CustomButton
+Name | Description | Params | Return 
+--- | --- | --- | --- 
 setGlobalActiveButtonColor | function to change global active button color | (color: string) | - 
 setGlobalActiveButtonTitleColor | function to change global active button title color | (color: string) | -
 setGlobalDisableButtonColor | function to change global disable button color | (color: string) | - 
@@ -67,11 +78,19 @@ setGlobalDisableButtonTitleColor | function to change global disable button titl
 setGlobalButtonTitleSize | function to change global button title size | (size: number) | - 
 setGlobalButtonHeightSize | function to change global button height | (size: number) | -
 setGlobalButtonLoadingColor | function to change global button loading color | (color: string) | -
+
+### Styled
+Name | Description | Params | Return 
+--- | --- | --- | --- 
 setGlobalPaddingSize | function to change global padding size that used in styled.Component | (size: number) | -
 setGlobalSafeAreaBackgroundColor | function to change global backgroundColor that used in styled.SafeComponent | (color: string) | - 
 setGlobalBackgroundColor | function to change global backgroundColor that used in styled.Component | (color: string) | -
 setGlobalFontSize | function to change global fontsize that used in PlaceholderText | (size: number) | - 
 setGlobalTypography | function to change global typography size| (H1?: number, H2?: number, H3?: number, H4?: number, H5?: number, H6?: number, H7?: number) | - 
+
+### CustomHeader
+Name | Description | Params | Return 
+--- | --- | --- | --- 
 setGlobalHeaderHeightSize | function to change global header height size | (value: number) | - 
 setGlobalHeaderBackgroundColor | function to change global header background color | (value: string) | - 
 setGlobalHeaderTitleSize | function to change global header title size | (value: number) | - 
@@ -86,8 +105,20 @@ setGlobalHeaderRightIconColor | function to change global header right icon colo
 setGlobalHeaderRightActionTitleSize | function to change global header right action title size | (value: number) | - 
 setGlobalHeaderRightActionTitleColor | function to change global header right action title color | (value: string) | - 
 setGlobalHeaderIconType | function to change global header icon type `(ant-design, entypo, evil-icons, feather, font-awesome, font-awesome5, fontisto, foundation, ionicons, material-community, material-icons, octicons)` | (value: string) | - 
-setGlobalConnectionHandlerSuccessTitle: (value: string) => void | function to change global connected title | (value: string) | - 
-setGlobalConnectionHandlerSuccessMessage: (value: string) => void | function to change global connected message | (value: string) | -
-setGlobalConnectionHandlerErrorTitle: (value: string) => void | function to change global disconected title | (value: string) | - 
-setGlobalConnectionHandlerErrorMessage: (value: string) => void | function to change global disconected message | (value: string) | -
 
+### ConnectionHandler
+Name | Description | Params | Return 
+--- | --- | --- | --- 
+setGlobalConnectionHandlerSuccessTitle | function to change global connected title | (value: string) | - 
+setGlobalConnectionHandlerSuccessMessage | function to change global connected message | (value: string) | -
+setGlobalConnectionHandlerErrorTitle | function to change global disconected title | (value: string) | - 
+setGlobalConnectionHandlerErrorMessage | function to change global disconected message | (value: string) | -
+
+### CustomStepBar
+Name | Description | Params | Return 
+--- | --- | --- | --- 
+setGlobalCustomStepBarHeight  | function to change global custom step bar height | (value: number) | -
+setGlobalCustomStepBarActiveColor  | function to change global custom step bar active color | (value: string) | -
+setGlobalCustomStepBarInactiveColor | function to change global custom step bar inactive color | (value: string) | -
+setGlobalCustomStepBarSeparator | function to change global step bar separator flag | (value: boolean) | -
+setGlobalCustomStepBarRoundCorner | function to change global step bar round corder flag | (value: booleab) | -
