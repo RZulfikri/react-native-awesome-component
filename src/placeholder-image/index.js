@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 import { Image, ImagePropsBase, ImageStyle, ImageBackground, View } from 'react-native'
 import PropTypes from 'prop-types'
 import { StyledImage } from '../styled/share.styled'
-import {
-  Placeholder,
-  PlaceholderMedia,
-  ShineOverlay,
-} from 'rn-placeholder'
+import Placeholder, { Media } from 'rn-placeholder'
 
 class PlaceholderImage extends Component {
   static propTypes = {
@@ -100,9 +96,9 @@ class PlaceholderImage extends Component {
         {(loading || uri === undefined || uri === '') && (
           <View style={{ marginTop: -height }}>
             <Placeholder
-              Animation={ShineOverlay}
+              animation={'shine'}
             >
-              <PlaceholderMedia
+              <Media
                 style={{
                   width,
                   height,

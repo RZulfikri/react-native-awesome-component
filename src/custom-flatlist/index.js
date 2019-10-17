@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { FlatList, FlatListProps, View } from 'react-native'
+import { FlatList, FlatListProps, View, ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 // import { CustomFlatListStyle } from '../Components/styled/custom-flatlist.styled'
 import { getConnectionStatus } from '../connection-handler'
 import { getBottomSpace } from 'react-native-iphone-x-helper';
+import { PlaceholderText } from 'react-native-awesome-component';
+
+const loadingData = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 }]
 
 class CustomFlatList extends Component {
   static propTypes = {
@@ -27,12 +30,26 @@ class CustomFlatList extends Component {
 
   constructor(props) {
     super(props)
-
+    this.state = {
+      flatListData: []
+    }
     this.onRefresh = this.onRefresh.bind(this)
   }
 
   componentDidMount() {
-    this.onRefresh()
+    this.setState({ flatListData: loadingData },
+      () => this.onRefresh())
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { data, loading } = nextProps
+    let { flatListData } = this.state
+
+    if (!loading) {
+      flatListData = data.concat(loadingData)
+    }
+
+    this.setState({ flatListData })
   }
 
   onRefresh() {
@@ -41,12 +58,11 @@ class CustomFlatList extends Component {
   }
 
   render() {
-    const { data, renderItem, loading } = this.props
-    const loadingData = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 }]
-    const flatlistData = loading ? data.concat(loadingData) : data
+    const { renderItem, loading } = this.props
+    const { flatListData } = this.state
     return (
       <FlatList
-        data={flatlistData}
+        data={flatListData}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={[{ paddingBottom: getBottomSpace() }]}
