@@ -24,6 +24,9 @@ After you install this package you need to make sure you install / link this pac
 2. "@react-native-community/netinfo": "^4.4.0",
 ```
 
+## Example
+For example of this component, check this repo [here](https://github.com/RZulfikri/VsIgnite/tree/example/awesome-component)
+
 ## PlaceholderImage
 Read more [here](./doc/placeholder-image.md)
 
