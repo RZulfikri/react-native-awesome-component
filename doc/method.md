@@ -25,6 +25,7 @@ Name | Description | Params | Return
 --- | --- | --- | --- 
 appendObject | function to append value to an object | (currentObject: object, key: string, value: any) | object 
 appendChildToView | function to append child to view | (currentView: any, childView: any) | view
+appendPropsToView | function to append props to view | (currentView: any, key: string, value: any) | view
 
 ### #Math
 Name | Description | Params | Return 

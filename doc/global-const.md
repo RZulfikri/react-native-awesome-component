@@ -54,6 +54,38 @@ This is method to custom global constant/value that used in this component.
     CUSTOM_STEP_BAR_INACTIVE_COLOR: '#eaeaea';
     CUSTOM_STEP_BAR_SEPARATOR: true;
     CUSTOM_STEP_BAR_ROUND_CORNER: true;
+
+    // EMPTY CONTAINER
+    EMPTY_CONTAINER_TITLE: string;
+    EMPTY_CONTAINER_MESSAGE: string;
+    EMPTY_CONTAINER_IMAGE: any;
+    EMPTY_CONTAINER_TITLE_STYLE: object;
+    EMPTY_CONTAINER_MESSAGE_STYLE: object;
+    EMPTY_CONTAINER_IMAGE_STYLE: object;
+    EMPTY_CONTAINER_BUTTON: any; // value must be view instance such as <CustomButton />
+
+    // ERROR CONTAINER
+    ERROR_CONTAINER_TITLE: string;
+    ERROR_CONTAINER_MESSAGE: string;
+    ERROR_CONTAINER_IMAGE: any;
+    ERROR_CONTAINER_TITLE_STYLE: object;
+    ERROR_CONTAINER_MESSAGE_STYLE: object;
+    ERROR_CONTAINER_IMAGE_STYLE: object;
+    ERROR_CONTAINER_BUTTON: any; // value must be view instance such as <CustomButton />
+
+    // NO CONNECTION CONTAINER
+    NO_CONNECTION_CONTAINER_TITLE: string;
+    NO_CONNECTION_CONTAINER_MESSAGE: string;
+    NO_CONNECTION_CONTAINER_IMAGE: any;
+    NO_CONNECTION_CONTAINER_TITLE_STYLE: object;
+    NO_CONNECTION_CONTAINER_MESSAGE_STYLE: object;
+    NO_CONNECTION_CONTAINER_IMAGE_STYLE: object;
+    NO_CONNECTION_CONTAINER_BUTTON: any; // value must be view instance such as <CustomButton />
+
+    // CUSTOM FLAT LIST
+    FLATLIST_EMPTY_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
+    FLATLIST_ERROR_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
+    FLATLIST_NO_CONNECTION_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
   }
 ```
 
@@ -122,3 +154,43 @@ setGlobalCustomStepBarActiveColor  | function to change global custom step bar a
 setGlobalCustomStepBarInactiveColor | function to change global custom step bar inactive color | (value: string) | -
 setGlobalCustomStepBarSeparator | function to change global step bar separator flag | (value: boolean) | -
 setGlobalCustomStepBarRoundCorner | function to change global step bar round corder flag | (value: booleab) | -
+
+### EmptyContainer
+Name | Description | Params | Return 
+--- | --- | --- | --- 
+setGlobalEmptyContainerTitle | function to change global empty container title | (value: string) | -
+setGlobalEmptyContainerMessage | function to change global empty container message | (value: string) | -
+setGlobalEmptyContainerImage | function to change global empty container image | (value: any) | -
+setGlobalEmptyContainerButton | function to change global empty container button | (value: any) | -
+setGlobalEmptyContainerTitleStyle | function to change global empty container title style | (value: object) | -
+setGlobalEmptyContainerMessageStyle | function to change global empty container message style | (value: object) | -
+setGlobalEmptyContainerImageStyle | function to change global empty container image style | (value: object) | -
+
+### ErrorContainer
+Name | Description | Params | Return 
+--- | --- | --- | --- 
+setGlobalErrorContainerTitle | function to change global error container title | (value: string) | -
+setGlobalErrorContainerMessage | function to change global error container message | (value: string) | -
+setGlobalErrorContainerImage | function to change global error container image | (value: any) | -
+setGlobalErrorContainerButton | function to change global error container button | (value: any) | -
+setGlobalErrorContainerTitleStyle | function to change global error container title style | (value: object) | -
+setGlobalErrorContainerMessageStyle | function to change global error container message style | (value: object) | -
+setGlobalErrorContainerImageStyle | function to change global error container image style | (value: object) | -
+
+### NoConnectionContainer
+Name | Description | Params | Return 
+--- | --- | --- | --- 
+setGlobalNoConnectionContainerTitle | function to change global no connection container title | (value: string) | -
+setGlobalNoConnectionContainerMessage | function to change global no connection container message | (value: string) | -
+setGlobalNoConnectionContainerImage | function to change global no connection container image | (value: any) | -
+setGlobalNoConnectionContainerButton | function to change global no connection container button | (value: any) | -
+setGlobalNoConnectionContainerTitleStyle | function to change global no connection container title style | (value: object) | -
+setGlobalNoConnectionContainerMessageStyle | function to change global no connection container message style | (value: object) | -
+setGlobalNoConnectionContainerImageStyle | function to change global no connection container image style | (value: object) | -
+
+### CustomFlatlist
+Name | Description | Params | Return 
+--- | --- | --- | --- 
+setGlobalFlatlistEmptyContainer | function to set default empty container component | (value: any) | `<EmptyContainer />`
+setGlobalFlatlistErrorContainer | function to set default error container component | (value: any) | `<ErrorContainer />`
+setGlobalFlatlistNoConnectionContainer | function to set default no connection container component | (value: any) | `<NoConnectionContainer />`

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle, FlatListProps } from 'react-native'
+import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle, FlatListProps, } from 'react-native'
 
 /**
  * CLASS COMPONENT
@@ -136,8 +136,34 @@ interface ICustomStepBar {
   inactiveColor: string;
 }
 
-interface ICustomFlatList extends FlatListProps {
+interface ICustomContainerView {
+  image: string;
+  imageStyle: StyleProp<ImageStyle>;
+  title: string;
+  titleStyle: StyleProp<TextStyle>;
+  message: string;
+  messageStyle: StyleProp<TextStyle>;
+  customButton: () => void;
+  hideImage: boolean;
+  hideButton: boolean;
+  hideTitle: boolean;
+  hideMessage: boolean;
+  onRefresh: () => void;
+}
 
+interface IMetaPage {
+  current_page: number;
+  next_page: number;
+}
+
+interface ICustomFlatList {
+  data: any[];
+  fetchFunction: () => void;
+  renderItem: () => void;
+  renderEmpty: () => any;
+  renderNoConnection: () => any;
+  renderError: () => any;
+  meta: IMetaPage;
 }
 
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
@@ -147,8 +173,10 @@ export class CustomHeader extends React.Component<ICustomHeaderProps> { }
 export class ConnectionHandler extends React.Component<ICustomHeaderProps> { }
 export class CutomAlert extends React.Component<ICustomAlert> { }
 export class CustomStepBar extends React.Component<ICustomStepBar> { }
+export class EmptyContainer extends React.Component<ICustomContainerView> { }
+export class ErrorContainer extends React.Component<ICustomContainerView> { }
+export class NoConnectionContainer extends React.Component<ICustomContainerView> { }
 export class CustomFlatList extends React.Component<ICustomFlatList> { }
-
 
 /**
  * STYLED COMPONENT
@@ -198,6 +226,7 @@ interface IScale {
 interface IObject {
   appendObject: (currentObject: object, key: string, value: any) => void;
   appendChildToView: (currentView: any, childView: any) => any;
+  appendPropsToView: (currentView: any, key: string, value: any) => any;
 }
 
 
@@ -286,6 +315,38 @@ interface IGlobalConstValue {
   CUSTOM_STEP_BAR_INACTIVE_COLOR: string;
   CUSTOM_STEP_BAR_SEPARATOR: boolean;
   CUSTOM_STEP_BAR_ROUND_CORNER: boolean;
+
+  // EMPTY CONTAINER
+  EMPTY_CONTAINER_TITLE: string;
+  EMPTY_CONTAINER_MESSAGE: string;
+  EMPTY_CONTAINER_IMAGE: any;
+  EMPTY_CONTAINER_TITLE_STYLE: object;
+  EMPTY_CONTAINER_MESSAGE_STYLE: object;
+  EMPTY_CONTAINER_IMAGE_STYLE: object;
+  EMPTY_CONTAINER_BUTTON: any; // value must be view instance such as <CustomButton />
+
+  // ERROR CONTAINER
+  ERROR_CONTAINER_TITLE: string;
+  ERROR_CONTAINER_MESSAGE: string;
+  ERROR_CONTAINER_IMAGE: any;
+  ERROR_CONTAINER_TITLE_STYLE: object;
+  ERROR_CONTAINER_MESSAGE_STYLE: object;
+  ERROR_CONTAINER_IMAGE_STYLE: object;
+  ERROR_CONTAINER_BUTTON: any; // value must be view instance such as <CustomButton />
+
+  // NO CONNECTION CONTAINER
+  NO_CONNECTION_CONTAINER_TITLE: string;
+  NO_CONNECTION_CONTAINER_MESSAGE: string;
+  NO_CONNECTION_CONTAINER_IMAGE: any;
+  NO_CONNECTION_CONTAINER_TITLE_STYLE: object;
+  NO_CONNECTION_CONTAINER_MESSAGE_STYLE: object;
+  NO_CONNECTION_CONTAINER_IMAGE_STYLE: object;
+  NO_CONNECTION_CONTAINER_BUTTON: any; // value must be view instance such as <CustomButton />
+
+  // CUSTOM FLAT LIST
+  FLATLIST_EMPTY_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
+  FLATLIST_ERROR_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
+  FLATLIST_NO_CONNECTION_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
 }
 
 interface IGlobalConst {
@@ -330,7 +391,35 @@ interface IGlobalConst {
   setGlobalCustomStepBarActiveColor: (value: string) => void;
   setGlobalCustomStepBarInactiveColor: (value: string) => void;
   setGlobalCustomStepBarSeparator: (value: boolean) => void;
-  setGlobalCustomStepBarRoundCorner: (value: booleab) => void;
+  setGlobalCustomStepBarRoundCorner: (value: boolean) => void;
+  // EMPTY CONTAINER
+  setGlobalEmptyContainerTitle: (value: string) => void;
+  setGlobalEmptyContainerMessage: (value: string) => void;
+  setGlobalEmptyContainerImage: (value: any) => void;
+  setGlobalEmptyContainerButton: (value: any) => void;
+  setGlobalEmptyContainerTitleStyle: (value: object) => void;
+  setGlobalEmptyContainerMessageStyle: (value: object) => void;
+  setGlobalEmptyContainerImageStyle: (value: object) => void;
+  // ERROR CONTAINER
+  setGlobalErrorContainerTitle: (value: string) => void;
+  setGlobalErrorContainerMessage: (value: string) => void;
+  setGlobalErrorContainerImage: (value: any) => void;
+  setGlobalErrorContainerButton: (value: any) => void;
+  setGlobalErrorContainerTitleStyle: (value: object) => void;
+  setGlobalErrorContainerMessageStyle: (value: object) => void;
+  setGlobalErrorContainerImageStyle: (value: object) => void;
+  // NO CONNECTION CONTAINER
+  setGlobalNoConnectionContainerTitle: (value: string) => void;
+  setGlobalNoConnectionContainerMessage: (value: string) => void;
+  setGlobalNoConnectionContainerImage: (value: any) => void;
+  setGlobalNoConnectionContainerButton: (value: any) => void;
+  setGlobalNoConnectionContainerTitleStyle: (value: object) => void;
+  setGlobalNoConnectionContainerMessageStyle: (value: object) => void;
+  setGlobalNoConnectionContainerImageStyle: (value: object) => void;
+  // CUSTOM FLAT LIST
+  setGlobalFlatlistEmptyContainer: (value: any) => void;
+  setGlobalFlatlistErrorContainer: (value: any) => void;
+  setGlobalFlatlistNoConnectionContainer: (value: any) => void;
 }
 
 export const GlobalConst: IGlobalConst
