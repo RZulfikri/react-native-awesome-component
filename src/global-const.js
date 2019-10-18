@@ -1,7 +1,14 @@
+import React from 'react'
+import { View } from 'react-native'
 import metrics from "./metrics";
 import Colors from "./colors";
 import { scale } from "./method/scale";
 import * as Object from './method/object'
+
+import EmptyContainer from './custom-flatlist/empty-container'
+import ErrorContainer from './custom-flatlist/error-container'
+import NoConnectionContainer from './custom-flatlist/no-connection-container'
+import CustomButton from './custom-button';
 
 const DEFAULT_GLOBAL_CONST = {
   PADDING: metrics.padding,
@@ -54,7 +61,39 @@ const DEFAULT_GLOBAL_CONST = {
   CUSTOM_STEP_BAR_ACTIVE_COLOR: Colors.kermit_green,
   CUSTOM_STEP_BAR_INACTIVE_COLOR: Colors.very_light_pink_two,
   CUSTOM_STEP_BAR_SEPARATOR: true,
-  CUSTOM_STEP_BAR_ROUND_CORNER: true
+  CUSTOM_STEP_BAR_ROUND_CORNER: true,
+
+  // EMPTY CONTAINER
+  EMPTY_CONTAINER_TITLE: 'No Item Found',
+  EMPTY_CONTAINER_MESSAGE: `We apologize, we don't have any item that you request for.`,
+  EMPTY_CONTAINER_IMAGE: undefined,
+  EMPTY_CONTAINER_TITLE_STYLE: {},
+  EMPTY_CONTAINER_MESSAGE_STYLE: {},
+  EMPTY_CONTAINER_IMAGE_STYLE: {},
+  EMPTY_CONTAINER_BUTTON: undefined, // value must be view instance such as <CustomButton />
+
+  // ERROR CONTAINER
+  ERROR_CONTAINER_TITLE: 'Sorry something went wrong',
+  ERROR_CONTAINER_MESSAGE: 'We apologize for the inconvenience, please try again later.',
+  ERROR_CONTAINER_IMAGE: undefined,
+  ERROR_CONTAINER_TITLE_STYLE: {},
+  ERROR_CONTAINER_MESSAGE_STYLE: {},
+  ERROR_CONTAINER_IMAGE_STYLE: {},
+  ERROR_CONTAINER_BUTTON: undefined, // value must be view instance such as <CustomButton />
+
+  // NO CONNECTION CONTAINER
+  NO_CONNECTION_CONTAINER_TITLE: 'No Internet Connection',
+  NO_CONNECTION_CONTAINER_MESSAGE: 'You are not connected to the internet. Make sure your mobile data or Wi-Fi is on.',
+  NO_CONNECTION_CONTAINER_IMAGE: undefined,
+  NO_CONNECTION_CONTAINER_TITLE_STYLE: {},
+  NO_CONNECTION_CONTAINER_MESSAGE_STYLE: {},
+  NO_CONNECTION_CONTAINER_IMAGE_STYLE: {},
+  NO_CONNECTION_CONTAINER_BUTTON: undefined, // value must be view instance such as <CustomButton />
+
+  // CUSTOM FLAT LIST
+  FLATLIST_EMPTY_CONTAINER: <EmptyContainer />, // make sure you have onRefresh props to pass refresh function
+  FLATLIST_ERROR_CONTAINER: <ErrorContainer />, // make sure you have onRefresh props to pass refresh function
+  FLATLIST_NO_CONNECTION_CONTAINER: <NoConnectionContainer />, // make sure you have onRefresh props to pass refresh function
 }
 
 let globalConst = {
@@ -196,6 +235,86 @@ export function setGlobalCustomStepBarSeparator(value) {
 }
 export function setGlobalCustomStepBarRoundCorner(value) {
   globalConst = Object.appendObject(globalConst, 'CUSTOM_STEP_BAR_ROUND_CORNER', value)
+}
+
+// EMPTY CONTAINER
+export function setGlobalEmptyContainerTitle(value) {
+  globalConst = Object.appendObject(globalConst, 'EMPTY_CONTAINER_TITLE', value)
+}
+export function setGlobalEmptyContainerMessage(value) {
+  globalConst = Object.appendObject(globalConst, 'EMPTY_CONTAINER_MESSAGE', value)
+}
+export function setGlobalEmptyContainerImage(value) {
+  globalConst = Object.appendObject(globalConst, 'EMPTY_CONTAINER_IMAGE', value)
+}
+export function setGlobalEmptyContainerButton(value) {
+  globalConst = Object.appendObject(globalConst, 'EMPTY_CONTAINER_BUTTON', value)
+}
+export function setGlobalEmptyContainerTitleStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'EMPTY_CONTAINER_TITLE_STYLE', value)
+}
+export function setGlobalEmptyContainerMessageStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'EMPTY_CONTAINER_MESSAGE_STYLE', value)
+}
+export function setGlobalEmptyContainerImageStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'EMPTY_CONTAINER_IMAGE_STYLE', value)
+}
+
+// ERROR CONTAINER
+export function setGlobalErrorContainerTitle(value) {
+  globalConst = Object.appendObject(globalConst, 'ERROR_CONTAINER_TITLE', value)
+}
+export function setGlobalErrorContainerMessage(value) {
+  globalConst = Object.appendObject(globalConst, 'ERROR_CONTAINER_MESSAGE', value)
+}
+export function setGlobalErrorContainerImage(value) {
+  globalConst = Object.appendObject(globalConst, 'ERROR_CONTAINER_IMAGE', value)
+}
+export function setGlobalErrorContainerButton(value) {
+  globalConst = Object.appendObject(globalConst, 'ERROR_CONTAINER_BUTTON', value)
+}
+export function setGlobalErrorContainerTitleStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'ERROR_CONTAINER_TITLE_STYLE', value)
+}
+export function setGlobalErrorContainerMessageStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'ERROR_CONTAINER_MESSAGE_STYLE', value)
+}
+export function setGlobalErrorContainerImageStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'ERROR_CONTAINER_IMAGE_STYLE', value)
+}
+
+// NO CONNECTION CONTAINER
+export function setGlobalNoConnectionContainerTitle(value) {
+  globalConst = Object.appendObject(globalConst, 'NO_CONNECTION_CONTAINER_TITLE', value)
+}
+export function setGlobalNoConnectionContainerMessage(value) {
+  globalConst = Object.appendObject(globalConst, 'NO_CONNECTION_CONTAINER_MESSAGE', value)
+}
+export function setGlobalNoConnectionContainerImage(value) {
+  globalConst = Object.appendObject(globalConst, 'NO_CONNECTION_CONTAINER_IMAGE', value)
+}
+export function setGlobalNoConnectionContainerButton(value) {
+  globalConst = Object.appendObject(globalConst, 'NO_CONNECTION_CONTAINER_BUTTON', value)
+}
+export function setGlobalNoConnectionContainerTitleStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'NO_CONNECTION_CONTAINER_TITLE_STYLE', value)
+}
+export function setGlobalNoConnectionContainerMessageStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'NO_CONNECTION_CONTAINER_MESSAGE_STYLE', value)
+}
+export function setGlobalNoConnectionContainerImageStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'NO_CONNECTION_CONTAINER_IMAGE_STYLE', value)
+}
+
+// CUSTOM FLAT LIST
+export function setGlobalFlatlistEmptyContainer(value) {
+  globalConst = Object.appendObject(globalConst, 'FLATLIST_EMPTY_CONTAINER', value)
+}
+export function setGlobalFlatlistErrorContainer(value) {
+  globalConst = Object.appendObject(globalConst, 'FLATLIST_ERROR_CONTAINER', value)
+}
+export function setGlobalFlatlistNoConnectionContainer(value) {
+  globalConst = Object.appendObject(globalConst, 'FLATLIST_NO_CONNECTION_CONTAINER', value)
 }
 
 // FUNCTION GET DEFAULT/VALUE

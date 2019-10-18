@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native'
 
 let DESIGN_WIDTH = 375;
-let DESIGN_HEIGHT = 180;
+let DESIGN_HEIGHT = 640;
 const { width, height } = Dimensions.get('screen')
 
 export function setDesignWidth(designWidth) {

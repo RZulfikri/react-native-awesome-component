@@ -34,3 +34,13 @@ export function appendChildToView(view, child) {
   }
 }
 
+export function appendPropsToView (view, key, value) {
+  return {
+    ...view,
+    props: {
+      ...view.props,
+      [key]: value,
+    }
+  }
+}
+

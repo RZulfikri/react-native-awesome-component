@@ -1,4 +1,4 @@
-## CustomHeader
+## ConnectionHandler
 This is Connection Handler component, to inform user that internet connected or disconnected.
 
 Connected | Disconnected   
