@@ -30,6 +30,7 @@ import ErrorContainer from './src/custom-flatlist/error-container'
 import NoConnectionContainer from './src/custom-flatlist/no-connection-container'
 import CustomFlatList from './src/custom-flatlist'
 import * as AlertHandler from './src/custom-alert/alert-handler'
+import CustomInput from './src/custom-input'
 
 const Styled = {
   Container,
@@ -68,6 +69,7 @@ export {
   ErrorContainer,
   NoConnectionContainer,
   CustomFlatList,
+  CustomInput,
 
   Styled,
   Method,

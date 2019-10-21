@@ -18,11 +18,10 @@
     "connection handler",
     "useful method"
   ],
-  "scripts": {
-    "postinstall": "cd ../../ios && pod install"
-  },
+  "scripts": {},
   "author": "Rahmat Zulfikri",
   "dependencies": {
+    "formik": "^1.1.1",
     "prop-types": "^15.7.2",
     "rn-placeholder": "2.0.0",
     "styled-components": "^4.3.2",
@@ -30,7 +29,8 @@
     "react-native-vector-icons": "^6.6.0",
     "@react-native-community/netinfo": "^4.4.0",
     "react-native-dropdownalert": "^4.2.0",
-    "react-native-modal": "^11.4.0"
+    "react-native-modal": "^11.4.0",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
   },

@@ -86,6 +86,23 @@ This is method to custom global constant/value that used in this component.
     FLATLIST_EMPTY_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
     FLATLIST_ERROR_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
     FLATLIST_NO_CONNECTION_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
+
+    // CUSTOM INPUT
+    CUSTOM_INPUT_LABEL_TYPE: string; // 'top-label' | 'default' | 'left-label' | 'right-label'
+    CUSTOM_INPUT_LABEL_STYLE: TextStyle; // {}
+    CUSTOM_INPUT_TEXT_INPUT_STYLE: TextStyle; // {}
+    CUSTOM_INPUT_ERROR_LABEL_STYLE: TextStyle; // {}
+    CUSTOM_INPUT_UNDERLINE_WIDTH: number; // 1
+    CUSTOM_INPUT_UNDERLINE_COLOR: string;
+    CUSTOM_INPUT_FOCUS_COLOR: string;
+    CUSTOM_INPUT_ERROR_COLOR: string;
+    CUSTOM_INPUT_VALIDATE_ON_CHANGE: boolean; // true
+    CUSTOM_INPUT_PASSWORD_REGEX: any; // new RegExp('^(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
+    CUSTOM_INPUT_ERROR_MESSAGE_EMAIL: string; // 'Invalid email address',
+    CUSTOM_INPUT_ERROR_MESSAGE_PASSWORD: string; // 'Password must contain letters and number.',
+    CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED: (label: string) => string | string; // (label) => label ? `${label} is required` : 'This field is required',
+    CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM: (label: string, min: number) => string | string; // (label, min) => label ? `${label} must have at least ${min} characters` : `This field must have at least ${min} characters`,
+    CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM: (label: string, min: number) => string | string; // (label, max) => label ? `${label} must have at least ${max} characters` : `This field maximum have ${max} characters`,
   }
 ```
 
@@ -191,6 +208,25 @@ setGlobalNoConnectionContainerImageStyle | function to change global no connecti
 ### CustomFlatlist
 Name | Description | Params | Return 
 --- | --- | --- | --- 
-setGlobalFlatlistEmptyContainer | function to set default empty container component | (value: any) | `<EmptyContainer />`
-setGlobalFlatlistErrorContainer | function to set default error container component | (value: any) | `<ErrorContainer />`
-setGlobalFlatlistNoConnectionContainer | function to set default no connection container component | (value: any) | `<NoConnectionContainer />`
+setGlobalFlatlistEmptyContainer | function to set default empty container component | (value: any) | -
+setGlobalFlatlistErrorContainer | function to set default error container component | (value: any) | -
+setGlobalFlatlistNoConnectionContainer | function to set default no connection container component | (value: any) | -
+
+### CustomInput
+Name | Description | Params | Return 
+--- | --- | --- | --- 
+setGlobalCustomInputLabelType | function to set global custom input label type | (value: CustomInputLabelType) | -
+setGlobalCustomInputLabelStyle | function to set global custom input label style | (value: TextStyle) | -
+setGlobalCustomInputTextInputStyle | function to set global custom textInput style | (value: TextStyle) | - 
+setGlobalCustomInputErrorLabelStyle | function to set global custom error label style | (value: TextStyle) | -
+setGlobalCustomInputUnderlineWidth | function to set global custom input underline width | (value: number) | -
+setGlobalCustomInputUnderlineColor | function to set global custom input unserline color |  (value: string) | -
+setGlobalCustomInputFocusColor | function to set global custom input focus color | (value: string) | -
+setGlobalCustomInpuErrorColor | function to set global custom input error color | (value: string) | -
+setGlobalCustomInputValidateOnChange | function to set global custom input validation process | (value: boolean) | -
+setGlobalCustomInputPasswordRegex | function to set global custom input password validation | (value: any) | -
+setGlobalCustomInputErrorMessageEmail | function to set global custom input error email message | (value: string) | -
+setGlobalCustomInputErrorMessagePassword | function to set global custom input error password message | (value: string) | -
+setGlobalCustomInputErrorMessageRequired | function to set global custom input error required message | (value: any) | -
+setGlobalCustomInputErrorMessageMinimum | function to set global custom input error minimum length message | (value: any) | -
+setGlobalCustomInputErrorMessageMaximum | function to set global custom input error maximum length message | (value: any) | -

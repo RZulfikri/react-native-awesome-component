@@ -6,7 +6,7 @@ This is Button with default style and condition.
 **How to use**
 
 ```javascript
-import {CustomButton} from 'react-native-awesome-component
+import {CustomButton} from 'react-native-awesome-component'
 
 return(
   <CustomButton
@@ -15,6 +15,11 @@ return(
   />
 )
 ```
+
+**Global Setup**
+
+Global const used to set global value. it used to set the style for all of this component. for more detail check [here](./global-const.md#custombutton)
+
 **Props**
 
 Props | Description | Default  

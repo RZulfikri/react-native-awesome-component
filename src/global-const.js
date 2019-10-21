@@ -94,6 +94,23 @@ const DEFAULT_GLOBAL_CONST = {
   FLATLIST_EMPTY_CONTAINER: <EmptyContainer />, // make sure you have onRefresh props to pass refresh function
   FLATLIST_ERROR_CONTAINER: <ErrorContainer />, // make sure you have onRefresh props to pass refresh function
   FLATLIST_NO_CONNECTION_CONTAINER: <NoConnectionContainer />, // make sure you have onRefresh props to pass refresh function
+
+  // CUSTOM INPUT
+  CUSTOM_INPUT_LABEL_TYPE: 'default',
+  CUSTOM_INPUT_LABEL_STYLE: {},
+  CUSTOM_INPUT_TEXT_INPUT_STYLE: {},
+  CUSTOM_INPUT_ERROR_LABEL_STYLE: {},
+  CUSTOM_INPUT_UNDERLINE_WIDTH: 1,
+  CUSTOM_INPUT_UNDERLINE_COLOR: Colors.very_light_pink_five,
+  CUSTOM_INPUT_FOCUS_COLOR: Colors.alertSuccess,
+  CUSTOM_INPUT_ERROR_COLOR: Colors.alertError,
+  CUSTOM_INPUT_VALIDATE_ON_CHANGE: true,
+  CUSTOM_INPUT_PASSWORD_REGEX: new RegExp('^(?=.*?[a-z])(?=.*?[0-9]).{8,}$'),
+  CUSTOM_INPUT_ERROR_MESSAGE_EMAIL: 'Invalid email address',
+  CUSTOM_INPUT_ERROR_MESSAGE_PASSWORD: 'Password must contain letters and number.',
+  CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED: (label) => label ? `${label} is required` : 'This field is required',
+  CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM: (label, min) => label ? `${label} must have at least ${min} characters` : `This field must have at least ${min} characters`,
+  CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM: (label, max) => label ? `${label} must have at least ${max} characters` : `This field maximum have ${max} characters`,
 }
 
 let globalConst = {
@@ -315,6 +332,53 @@ export function setGlobalFlatlistErrorContainer(value) {
 }
 export function setGlobalFlatlistNoConnectionContainer(value) {
   globalConst = Object.appendObject(globalConst, 'FLATLIST_NO_CONNECTION_CONTAINER', value)
+}
+
+// CUSTOM INPUT
+export function setGlobalCustomInputLabelType(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_LABEL_TYPE', value)
+}
+export function setGlobalCustomInputLabelStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_LABEL_STYLE', value)
+}
+export function setGlobalCustomInputTextInputStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_TEXT_INPUT_STYLE', value)
+}
+export function setGlobalCustomInputErrorLabelStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_LABEL_STYLE', value)
+}
+export function setGlobalCustomInputUnderlineWidth(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_UNDERLINE_WIDTH', value)
+}
+export function setGlobalCustomInputUnderlineColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_UNDERLINE_COLOR', value)
+}
+export function setGlobalCustomInputFocusColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_FOCUS_COLOR', value)
+}
+export function setGlobalCustomInpuErrorColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_COLOR', value)
+}
+export function setGlobalCustomInputValidateOnChange(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_VALIDATE_ON_CHANGE', value)
+}
+export function setGlobalCustomInputPasswordRegex(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_PASSWORD_REGEX', value)
+}
+export function setGlobalCustomInputErrorMessageEmail(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_MESSAGE_EMAIL', value)
+}
+export function setGlobalCustomInputErrorMessagePassword(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_MESSAGE_PASSWORD', value)
+}
+export function setGlobalCustomInputErrorMessageRequired(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED', value)
+}
+export function setGlobalCustomInputErrorMessageMinimum(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM', value)
+}
+export function setGlobalCustomInputErrorMessageMaximum(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM', value)
 }
 
 // FUNCTION GET DEFAULT/VALUE
