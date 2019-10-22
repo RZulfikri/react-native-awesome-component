@@ -20,8 +20,14 @@ export const ErrorLabel = styled.Text`
 `
 
 export const StyledTextInput = styled.TextInput`
+  flex: 1;
   font-size: 14px;
   color: ${Colors.slate_grey};
   height: 40px;
   text-align-vertical: center;
+`
+
+export const StyledTextInputContainer = styled.View`
+  flexDirection: row;
+  align-items: center;
 `

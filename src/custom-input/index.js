@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { View, KeyboardAvoidingView, Keyboard, UIManager, findNodeHandle, Dimensions } from 'react-native'
-import { TopContainer, RowContainer, Label, StyledTextInput, ErrorLabel } from './custom-input.styled'
+import { TopContainer, RowContainer, Label, StyledTextInput, ErrorLabel, StyledTextInputContainer } from './custom-input.styled'
 import { Formik } from 'formik';
 import Colors from '../colors'
 import * as Obj from '../method/object'
@@ -49,6 +49,10 @@ class CustomInput extends PureComponent {
     errorRequired: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     errorMinimum: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     errorMaximum: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+
+    // ACTION BUTTON
+    renderLeftAction: PropTypes.func,
+    renderRightAction: PropTypes.func,
   }
 
   static defaultProps = {
@@ -262,7 +266,7 @@ class CustomInput extends PureComponent {
 
   renderInput(formikProps) {
     const { errors, touched } = formikProps
-    const { label, labelType, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage } = this.props
+    const { label, labelType, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction } = this.props
 
     let activeProps = { ...this.props }
 
@@ -358,7 +362,6 @@ class CustomInput extends PureComponent {
     // REMOVE UNUSED PROPS
     delete activeProps.ref
     delete activeProps.underlineColorAndroid
-    delete activeProps.secureTextEntry
     delete activeProps.style
     delete activeProps.defaultValue
     delete activeProps.onChangeText
@@ -373,20 +376,24 @@ class CustomInput extends PureComponent {
         <Container style={[containerTyle]}>
           {labelType === LABEL_TYPE.top && label && this.renderLabel(labelStyle)}
           {labelType === LABEL_TYPE.left && label && this.renderLabel(labelStyle)}
-          <StyledTextInput
-            ref={currentRef => this.setRef(currentRef)}
-            {...activeProps}
-            underlineColorAndroid={'transparent'}
-            secureTextEntry={inputType === INPUT_TYPE.password}
-            style={textInputStyle}
-            defaultValue={formikProps.initialValues.value}
-            onChangeText={formikProps.handleChange('value')}
-            value={formikProps.values.value}
-            onSubmitEditing={formikProps.handleSubmit}
-            onFocus={() => formikProps.setFieldTouched('value')}
-            onBlur={() => formikProps.setFieldTouched('value', false)}
-            keyboardType={this.getKeyboardType(inputType)}
-          />
+          <StyledTextInputContainer>
+            {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
+            <StyledTextInput
+              ref={currentRef => this.setRef(currentRef)}
+              secureTextEntry={inputType === INPUT_TYPE.password}
+              {...activeProps}
+              underlineColorAndroid={'transparent'}
+              style={textInputStyle}
+              defaultValue={formikProps.initialValues.value}
+              onChangeText={formikProps.handleChange('value')}
+              value={formikProps.values.value}
+              onSubmitEditing={formikProps.handleSubmit}
+              onFocus={() => formikProps.setFieldTouched('value')}
+              onBlur={() => formikProps.setFieldTouched('value', false)}
+              keyboardType={this.getKeyboardType(inputType)}
+            />
+            {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
+          </StyledTextInputContainer>
           {labelType === LABEL_TYPE.right && label && this.renderLabel(labelStyle)}
         </Container>
         {errorLabel}
