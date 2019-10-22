@@ -65,6 +65,10 @@ This code how to use CustomFlatlist
     )
   }
 ```
+**Global Setup**
+
+Global const used to set global value. it used to set the style for all of this component. for more detail check [here](./global-const.md#customflatlist)
+
 **Props**
 
 Props | Description | Default  
