@@ -189,6 +189,10 @@ interface ICustomInput extends TextInputProps {
   errorRequired: (label: string) => string | string;
   errorMinimum: (label: string, min: number) => string | string;
   errorMaximum: (label: string, max: number) => string | string;
+
+  // ACTION BUTTON
+  renderLeftAction: () => any,
+  renderRightAction: () => any,
 }
 
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
