@@ -29,6 +29,12 @@ const PrimaryNav = createStackNavigator({
   initialRouteName: 'LaunchScreen',
 })
 ```
+
+**Global Setup**
+
+Global const used to set global value. it used to set the style for all of this component. for more detail check [here](./global-const.md#customheader)
+
+
 **Props**
 
 Props | Description | Default  

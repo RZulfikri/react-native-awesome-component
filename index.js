@@ -32,6 +32,7 @@ import CustomFlatList from './src/custom-flatlist'
 import CustomSelect from './src/custom-select'
 import CustomDatepicker from './src/custom-datepicker'
 import * as AlertHandler from './src/custom-alert/alert-handler'
+import CustomInput from './src/custom-input'
 
 const Styled = {
   Container,
@@ -72,6 +73,8 @@ export {
   CustomSelect,
   CustomDatepicker,
   CustomFlatList,
+  CustomInput,
+
   Styled,
   Method,
   GlobalConst,

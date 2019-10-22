@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle, FlatListProps, } from 'react-native'
+import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle, FlatListProps, TextInputProps } from 'react-native'
 
 /**
  * CLASS COMPONENT
@@ -11,6 +11,8 @@ type HeaderIconType = 'ant-design' | 'entypo' | 'evil-icons' | 'feather' | 'font
 type AlertType = 'success' | 'error' | 'info'
 type DatepickerType = 'time' | 'date' | 'datetime'
 
+type CustomInputLabelType = 'top-label' | 'default' | 'left-label' | 'right-label'
+type CustomInputType = 'email' | 'password' | 'phone' | 'number' | 'text' | 'text-area'
 
 interface IPlaceholderImageProps {
   uri?: string;
@@ -200,6 +202,29 @@ interface ICustomDatepicker {
   minimumDate?: Date;
   style: StyleProp<ViewStyle>;
 }
+interface ICustomInput extends TextInputProps {
+  minLength: number;
+  labelType: CustomInputLabelType,
+  label: string;
+  inputType: CustomInputType;
+  labelStyle: StyleProp<TextStyle>;
+  errorLabelStyle: StyleProp<TextStyle>;
+  underlineWidth: number;
+  underlineColor: string;
+  isRequired: boolean;
+  focusColor: string;
+  errorColor: string;
+  validateOnChange: boolean;
+
+  // ERROR MESSAGE
+  passwordRegex: any;
+  forceErrorMessage: string;
+  errorEmail: string;
+  errorPassword: string;
+  errorRequired: (label: string) => string | string;
+  errorMinimum: (label: string, min: number) => string | string;
+  errorMaximum: (label: string, max: number) => string | string;
+}
 
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
 export class PlaceholderText extends React.Component<TextProps> { }
@@ -214,6 +239,7 @@ export class NoConnectionContainer extends React.Component<ICustomContainerView>
 export class CustomFlatList extends React.Component<ICustomFlatList> { }
 export class CustomSelect extends React.Component<ICustomSelect> { }
 export class CustomDatepicker extends React.Component<ICustomDatepicker> { }
+export class CustomInput extends React.Component<ICustomInput> { }
 
 /**
  * STYLED COMPONENT
@@ -357,33 +383,50 @@ interface IGlobalConstValue {
   EMPTY_CONTAINER_TITLE: string;
   EMPTY_CONTAINER_MESSAGE: string;
   EMPTY_CONTAINER_IMAGE: any;
-  EMPTY_CONTAINER_TITLE_STYLE: object;
-  EMPTY_CONTAINER_MESSAGE_STYLE: object;
-  EMPTY_CONTAINER_IMAGE_STYLE: object;
+  EMPTY_CONTAINER_TITLE_STYLE: StyleProp<TextStyle>;
+  EMPTY_CONTAINER_MESSAGE_STYLE: StyleProp<TextStyle>;
+  EMPTY_CONTAINER_IMAGE_STYLE: StyleProp<ImageStyle>;
   EMPTY_CONTAINER_BUTTON: any; // value must be view instance such as <CustomButton />
 
   // ERROR CONTAINER
   ERROR_CONTAINER_TITLE: string;
   ERROR_CONTAINER_MESSAGE: string;
   ERROR_CONTAINER_IMAGE: any;
-  ERROR_CONTAINER_TITLE_STYLE: object;
-  ERROR_CONTAINER_MESSAGE_STYLE: object;
-  ERROR_CONTAINER_IMAGE_STYLE: object;
+  ERROR_CONTAINER_TITLE_STYLE: StyleProp<TextStyle>;
+  ERROR_CONTAINER_MESSAGE_STYLE: StyleProp<TextStyle>;
+  ERROR_CONTAINER_IMAGE_STYLE: StyleProp<ImageStyle>;
   ERROR_CONTAINER_BUTTON: any; // value must be view instance such as <CustomButton />
 
   // NO CONNECTION CONTAINER
   NO_CONNECTION_CONTAINER_TITLE: string;
   NO_CONNECTION_CONTAINER_MESSAGE: string;
   NO_CONNECTION_CONTAINER_IMAGE: any;
-  NO_CONNECTION_CONTAINER_TITLE_STYLE: object;
-  NO_CONNECTION_CONTAINER_MESSAGE_STYLE: object;
-  NO_CONNECTION_CONTAINER_IMAGE_STYLE: object;
+  NO_CONNECTION_CONTAINER_TITLE_STYLE: StyleProp<TextStyle>;
+  NO_CONNECTION_CONTAINER_MESSAGE_STYLE: StyleProp<TextStyle>;
+  NO_CONNECTION_CONTAINER_IMAGE_STYLE: StyleProp<ImageStyle>;
   NO_CONNECTION_CONTAINER_BUTTON: any; // value must be view instance such as <CustomButton />
 
   // CUSTOM FLAT LIST
   FLATLIST_EMPTY_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
   FLATLIST_ERROR_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
   FLATLIST_NO_CONNECTION_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
+
+  // CUSTOM INPUT
+  CUSTOM_INPUT_LABEL_TYPE: string;
+  CUSTOM_INPUT_LABEL_STYLE: StyleProp<TextStyle>;
+  CUSTOM_INPUT_TEXT_INPUT_STYLE: StyleProp<TextStyle>;
+  CUSTOM_INPUT_ERROR_LABEL_STYLE: StyleProp<TextStyle>;
+  CUSTOM_INPUT_UNDERLINE_WIDTH: number;
+  CUSTOM_INPUT_UNDERLINE_COLOR: string;
+  CUSTOM_INPUT_FOCUS_COLOR: string;
+  CUSTOM_INPUT_ERROR_COLOR: string;
+  CUSTOM_INPUT_VALIDATE_ON_CHANGE: boolean;
+  CUSTOM_INPUT_PASSWORD_REGEX: any;
+  CUSTOM_INPUT_ERROR_MESSAGE_EMAIL: string;
+  CUSTOM_INPUT_ERROR_MESSAGE_PASSWORD: string;
+  CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED: (label: string) => string | string;
+  CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM: (label: string, min: number) => string | string;
+  CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM: (label: string, min: number) => string | string;
 }
 
 interface IGlobalConst {
@@ -457,6 +500,22 @@ interface IGlobalConst {
   setGlobalFlatlistEmptyContainer: (value: any) => void;
   setGlobalFlatlistErrorContainer: (value: any) => void;
   setGlobalFlatlistNoConnectionContainer: (value: any) => void;
+  // CUSTOM INPUT
+  setGlobalCustomInputLabelType: (value: CustomInputLabelType) => void;
+  setGlobalCustomInputLabelStyle: (value: StyleProp<TextStyle>) => void;
+  setGlobalCustomInputTextInputStyle: (value: StyleProp<TextStyle>) => void;
+  setGlobalCustomInputErrorLabelStyle: (value: StyleProp<TextStyle>) => void;
+  setGlobalCustomInputUnderlineWidth: (value: number) => void;
+  setGlobalCustomInputUnderlineColor: (value: string) => void;
+  setGlobalCustomInputFocusColor: (value: string) => void;
+  setGlobalCustomInpuErrorColor: (value: string) => void;
+  setGlobalCustomInputValidateOnChange: (value: boolean) => void;
+  setGlobalCustomInputPasswordRegex: (value: any) => void;
+  setGlobalCustomInputErrorMessageEmail: (value: string) => void;
+  setGlobalCustomInputErrorMessagePassword: (value: string) => void;
+  setGlobalCustomInputErrorMessageRequired: (value: any) => void;
+  setGlobalCustomInputErrorMessageMinimum: (value: any) => void;
+  setGlobalCustomInputErrorMessageMaximum: (value: any) => void;
 }
 
 export const GlobalConst: IGlobalConst

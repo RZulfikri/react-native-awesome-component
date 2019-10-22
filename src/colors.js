@@ -11,6 +11,7 @@ const Colors = {
   very_light_pink_two: '#eaeaea',
   very_light_pink_three: '#f2f2f2',
   very_light_pink_four: '#c5c5c5',
+  very_light_pink_five: '#bbbbbb',
   kermit_green: '#67c100',
   pastel_red: '#ea5f54',
 

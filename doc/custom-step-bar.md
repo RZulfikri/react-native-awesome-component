@@ -37,6 +37,10 @@ render() {
 
 ```
 
+**Global Setup**
+
+Global const used to set global value. it used to set the style for all of this component. for more detail check [here](./global-const.md#customstepbar)
+
 ### Props
 Props | Description | Default  
 --- | --- | --- 
