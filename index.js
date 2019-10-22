@@ -29,6 +29,8 @@ import EmptyContainer from './src/custom-flatlist/empty-container'
 import ErrorContainer from './src/custom-flatlist/error-container'
 import NoConnectionContainer from './src/custom-flatlist/no-connection-container'
 import CustomFlatList from './src/custom-flatlist'
+import CustomSelect from './src/custom-select'
+import CustomDatepicker from './src/custom-datepicker'
 import * as AlertHandler from './src/custom-alert/alert-handler'
 
 const Styled = {
@@ -67,8 +69,9 @@ export {
   EmptyContainer,
   ErrorContainer,
   NoConnectionContainer,
+  CustomSelect,
+  CustomDatepicker,
   CustomFlatList,
-
   Styled,
   Method,
   GlobalConst,

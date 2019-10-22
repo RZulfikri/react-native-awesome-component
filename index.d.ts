@@ -9,6 +9,7 @@ type ResizeMethodType = "auto" | "resize" | "scale"
 type ResizeModeType = "cover" | "contain" | "stretch" | "repeat" | "center"
 type HeaderIconType = 'ant-design' | 'entypo' | 'evil-icons' | 'feather' | 'font-awesome' | 'font-awesome5' | 'fontisto' | 'foundation' | 'ionicons' | 'material-community' | 'material-icons' | 'octicons'
 type AlertType = 'success' | 'error' | 'info'
+type DatepickerType = 'time' | 'date' | 'datetime'
 
 
 interface IPlaceholderImageProps {
@@ -166,6 +167,40 @@ interface ICustomFlatList {
   meta: IMetaPage;
 }
 
+interface ICustomSelect {
+  placeholder: string;
+  value: string;
+  data: any[];
+  onChangeValue: (value: string) => void;
+  textStyle: StyleProp<TextStyle>;
+  style: StyleProp<ViewStyle>;
+  label: string;
+  isRequired?: boolean;
+  error?: any; 
+  rightIcon?: string;
+  keyValue?: string;
+  keyDescription?: string;
+  multiSelect?: boolean;
+  multiSeparator?: string; 
+}
+
+interface ICustomDatepicker {
+  placeholder: string;
+  value: string | Date;
+  onDateChange: (date: Date) => void;
+  textStyle: StyleProp<TextStyle>;
+  label: string;
+  isRequired?: boolean;
+  error?: any;
+  dateFormat?: string;
+  locale?: string;
+  mode?: DatepickerType;
+  initialDate?: Date;
+  maximumDate?: Date;
+  minimumDate?: Date;
+  style: StyleProp<ViewStyle>;
+}
+
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
 export class PlaceholderText extends React.Component<TextProps> { }
 export class CustomButton extends React.Component<ICustomButtonProps> { }
@@ -177,6 +212,8 @@ export class EmptyContainer extends React.Component<ICustomContainerView> { }
 export class ErrorContainer extends React.Component<ICustomContainerView> { }
 export class NoConnectionContainer extends React.Component<ICustomContainerView> { }
 export class CustomFlatList extends React.Component<ICustomFlatList> { }
+export class CustomSelect extends React.Component<ICustomSelect> { }
+export class CustomDatepicker extends React.Component<ICustomDatepicker> { }
 
 /**
  * STYLED COMPONENT

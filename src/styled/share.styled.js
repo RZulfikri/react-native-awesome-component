@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import * as GlobalConst from '../global-const'
 import PropTypes from 'prop-types';
-import metrics from '../metrics'
+import Colors from '../colors';
 
 const paddingType = {
   VERTICAL: 'vertical',
@@ -113,10 +113,41 @@ export const H7 = styled.Text`
   font-size: ${GlobalConst.getValue().H7}
 `
 
+const InputContainer = styled.View`
+  flex-direction: column;
+  width: 100%;
+  padding: 0px 16px;
+`;
+
+const LabelContainer = styled.View`
+  flex-direction: row;
+`;
+
+const LabelText = styled.Text`
+  color: ${Colors.slate_grey};
+  font-size: ${GlobalConst.getValue().FONT_SMALL_SIZE};
+`;
+
+const RequiredMark = styled.Text`
+  color: ${Colors.alertError};
+  font-size: ${GlobalConst.getValue().FONT_SMALL_SIZE};
+`;
+
+const ValueText = styled.Text`
+  color: ${props => (props.isEmpty ? Colors.warm_grey : '#303030')};
+  font-size: ${GlobalConst.getValue().FONT_SIZE};
+  flex: 1;
+`;
+
 export {
   SafeContainer,
   Container,
   FlexContainer,
   TouchableContainer,
-  StyledImage
+  StyledImage,
+  InputContainer,
+  LabelContainer,
+  LabelText,
+  RequiredMark,
+  ValueText,
 }

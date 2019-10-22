@@ -7,3 +7,10 @@ export function getFileNameFromURL(url) {
   const { pathname } = urlParse
   return getFileNameFromPath(pathname)
 }
+
+export function isEmptyOrSpaces(str) {
+  if (str) {
+    return str.match(/^ *$/) !== null;
+  }
+  return true;
+}

@@ -26,6 +26,7 @@ const DEFAULT_GLOBAL_CONST = {
 
   // FONT STYLE
   FONT_SIZE: scale(14),
+  FONT_SMALL_SIZE: scale(12),
   H1: metrics.font.h1,
   H2: metrics.font.h2,
   H3: metrics.font.h3,
