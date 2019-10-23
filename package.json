@@ -32,8 +32,7 @@
     "react-native-modal": "^11.4.0",
     "yup": "^0.27.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/RZulfikri/react-native-awesome-component/issues"

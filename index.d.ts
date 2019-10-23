@@ -9,6 +9,8 @@ type ResizeMethodType = "auto" | "resize" | "scale"
 type ResizeModeType = "cover" | "contain" | "stretch" | "repeat" | "center"
 type HeaderIconType = 'ant-design' | 'entypo' | 'evil-icons' | 'feather' | 'font-awesome' | 'font-awesome5' | 'fontisto' | 'foundation' | 'ionicons' | 'material-community' | 'material-icons' | 'octicons'
 type AlertType = 'success' | 'error' | 'info'
+type DatepickerType = 'time' | 'date' | 'datetime'
+
 type CustomInputLabelType = 'top-label' | 'default' | 'left-label' | 'right-label'
 type CustomInputType = 'email' | 'password' | 'phone' | 'number' | 'text' | 'text-area'
 
@@ -167,6 +169,43 @@ interface ICustomFlatList {
   meta: IMetaPage;
 }
 
+interface ICustomSelect {
+  placeholder: string;
+  value: string;
+  data: any[];
+  onChangeValue: (value: string) => void;
+  textStyle: StyleProp<TextStyle>;
+  style: StyleProp<ViewStyle>;
+  label: string;
+  isRequired?: boolean;
+  error?: any; 
+  rightIcon?: string;
+  keyValue?: string;
+  keyDescription?: string;
+  multiSelect?: boolean;
+  multiSeparator?: string; 
+  labelType?: CustomInputLabelType;
+  selectedPickerColor?: string;
+  unSelectedPickerColor?: string;
+}
+
+interface ICustomDatepicker {
+  placeholder: string;
+  value: string | Date;
+  onDateChange: (date: Date) => void;
+  textStyle: StyleProp<TextStyle>;
+  label: string;
+  isRequired?: boolean;
+  error?: any;
+  dateFormat?: string;
+  locale?: string;
+  mode?: DatepickerType;
+  initialDate?: Date;
+  maximumDate?: Date;
+  minimumDate?: Date;
+  style: StyleProp<ViewStyle>;
+  labelType?: CustomInputLabelType;
+}
 interface ICustomInput extends TextInputProps {
   minLength: number;
   labelType: CustomInputLabelType,
@@ -180,6 +219,7 @@ interface ICustomInput extends TextInputProps {
   focusColor: string;
   errorColor: string;
   validateOnChange: boolean;
+  onPress?: () => void;
 
   // ERROR MESSAGE
   passwordRegex: any;
@@ -206,6 +246,8 @@ export class EmptyContainer extends React.Component<ICustomContainerView> { }
 export class ErrorContainer extends React.Component<ICustomContainerView> { }
 export class NoConnectionContainer extends React.Component<ICustomContainerView> { }
 export class CustomFlatList extends React.Component<ICustomFlatList> { }
+export class CustomSelect extends React.Component<ICustomSelect> { }
+export class CustomDatepicker extends React.Component<ICustomDatepicker> { }
 export class CustomInput extends React.Component<ICustomInput> { }
 
 /**
@@ -345,6 +387,12 @@ interface IGlobalConstValue {
   CUSTOM_STEP_BAR_INACTIVE_COLOR: string;
   CUSTOM_STEP_BAR_SEPARATOR: boolean;
   CUSTOM_STEP_BAR_ROUND_CORNER: boolean;
+
+  // CUSTOM SELECT
+  CUSTOM_SELECT_SELECTED_COLOR: string;
+  CUSTOM_SELECT_UNSELECTED_COLOR: string;
+  CUSTOM_SELECT_HEADER_BACKGROUND_COLOR: string;
+  CUSTOM_SELECT_HEADER_COLOR: string;
 
   // EMPTY CONTAINER
   EMPTY_CONTAINER_TITLE: string;

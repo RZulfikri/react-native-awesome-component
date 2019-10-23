@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, KeyboardAvoidingView, Keyboard, UIManager, findNodeHandle, Dimensions } from 'react-native'
+import { View, KeyboardAvoidingView, Keyboard, UIManager, findNodeHandle, Dimensions, TouchableOpacity } from 'react-native'
 import { TopContainer, RowContainer, Label, StyledTextInput, ErrorLabel, StyledTextInputContainer } from './custom-input.styled'
 import { Formik } from 'formik';
 import Colors from '../colors'
@@ -26,7 +26,7 @@ const INPUT_TYPE = {
 
 const { width, height } = Dimensions.get('window')
 
-class CustomInput extends PureComponent {
+class CustomInput extends Component {
   static propTypes = {
     minLength: PropTypes.number,
     labelType: PropTypes.oneOf([LABEL_TYPE.top, LABEL_TYPE.default, LABEL_TYPE.left, LABEL_TYPE.right]),
@@ -40,6 +40,7 @@ class CustomInput extends PureComponent {
     focusColor: PropTypes.string,
     errorColor: PropTypes.string,
     validateOnChange: PropTypes.bool,
+    onPress: PropTypes.func,
 
     // ERROR MESSAGE
     passwordRegex: PropTypes.any,
@@ -266,7 +267,7 @@ class CustomInput extends PureComponent {
 
   renderInput(formikProps) {
     const { errors, touched } = formikProps
-    const { label, labelType, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction } = this.props
+    const { label, labelType, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress } = this.props
 
     let activeProps = { ...this.props }
 
@@ -376,24 +377,47 @@ class CustomInput extends PureComponent {
         <Container style={[containerTyle]}>
           {labelType === LABEL_TYPE.top && label && this.renderLabel(labelStyle)}
           {labelType === LABEL_TYPE.left && label && this.renderLabel(labelStyle)}
-          <StyledTextInputContainer>
-            {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
-            <StyledTextInput
-              ref={currentRef => this.setRef(currentRef)}
-              secureTextEntry={inputType === INPUT_TYPE.password}
-              {...activeProps}
-              underlineColorAndroid={'transparent'}
-              style={textInputStyle}
-              defaultValue={formikProps.initialValues.value}
-              onChangeText={formikProps.handleChange('value')}
-              value={formikProps.values.value}
-              onSubmitEditing={formikProps.handleSubmit}
-              onFocus={() => formikProps.setFieldTouched('value')}
-              onBlur={() => formikProps.setFieldTouched('value', false)}
-              keyboardType={this.getKeyboardType(inputType)}
-            />
-            {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
-          </StyledTextInputContainer>
+          {onPress ?
+            <TouchableOpacity onPress={onPress}>
+              <StyledTextInputContainer>
+                {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
+                <StyledTextInput
+                  ref={currentRef => this.setRef(currentRef)}
+                  pointerEvents="none"
+                  secureTextEntry={inputType === INPUT_TYPE.password}
+                  {...activeProps}
+                  underlineColorAndroid={'transparent'}
+                  style={textInputStyle}
+                  defaultValue={formikProps.initialValues.value}
+                  onChangeText={formikProps.handleChange('value')}
+                  value={formikProps.values.value}
+                  onSubmitEditing={formikProps.handleSubmit}
+                  onFocus={() => formikProps.setFieldTouched('value')}
+                  onBlur={() => formikProps.setFieldTouched('value', false)}
+                  keyboardType={this.getKeyboardType(inputType)}
+                />
+                {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
+              </StyledTextInputContainer>
+            </TouchableOpacity> : 
+            <StyledTextInputContainer>
+              {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
+              <StyledTextInput
+                ref={currentRef => this.setRef(currentRef)}
+                secureTextEntry={inputType === INPUT_TYPE.password}
+                {...activeProps}
+                underlineColorAndroid={'transparent'}
+                style={textInputStyle}
+                defaultValue={formikProps.initialValues.value}
+                onChangeText={formikProps.handleChange('value')}
+                value={formikProps.values.value}
+                onSubmitEditing={formikProps.handleSubmit}
+                onFocus={() => formikProps.setFieldTouched('value')}
+                onBlur={() => formikProps.setFieldTouched('value', false)}
+                keyboardType={this.getKeyboardType(inputType)}
+              />
+              {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
+            </StyledTextInputContainer>
+          }
           {labelType === LABEL_TYPE.right && label && this.renderLabel(labelStyle)}
         </Container>
         {errorLabel}
@@ -402,7 +426,7 @@ class CustomInput extends PureComponent {
   }
 
   render() {
-    const { inputType, defaultValue, onSubmitEditing, validateOnChange } = this.props
+    const { inputType, defaultValue, onSubmitEditing, validateOnChange, onPress } = this.props
     let validationSchema = this.getValidationSchema(inputType)
     const initialValues = defaultValue ? { value: defaultValue } : { value: '' }
     const lValidateOnChange = validateOnChange ? validateOnChange : GlobalConst.getValue().CUSTOM_INPUT_VALIDATE_ON_CHANGE
@@ -415,6 +439,7 @@ class CustomInput extends PureComponent {
           validateOnChange={lValidateOnChange}
           validateOnBlur={true}
           onSubmit={lOnSubmit}
+          enableReinitialize={!!onPress}
         >
           {props => this.renderInput(props)}
         </Formik>
