@@ -5,12 +5,11 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {
   ViewPropTypes,
-  StyleSheet,
   View,
 } from 'react-native';
 import ModalList from './Modal';
-import metrics from '../metrics';
 import CustomInput from '../custom-input';
+import { GlobalConst } from '../..';
 
 const CustomSelect = props => {
   const {
@@ -28,6 +27,8 @@ const CustomSelect = props => {
     multiSelect,
     keyValue,
     keyDescription,
+    selectedPickerColor,
+    unSelectedPickerColor,
     multiSeparator,
   } = props;
 
@@ -71,6 +72,8 @@ const CustomSelect = props => {
         onSubmit={selectValue => {
           onChangeValue(selectValue);
         }}
+        selectedPickerColor={selectedPickerColor}
+        unSelectedPickerColor={unSelectedPickerColor}
         closeModal={() => setModalVisible(false)}
         label={label}
       />
@@ -93,6 +96,8 @@ CustomSelect.propTypes = {
   keyDescription: PropTypes.string,
   multiSelect: PropTypes.bool,
   multiSeparator: PropTypes.string,
+  selectedPickerColor: PropTypes.string,
+  unSelectedPickerColor: PropTypes.string,
   labelType: PropTypes.oneOf(['top-label', 'default', 'left-label', 'right-label'])
 };
 
@@ -109,16 +114,9 @@ CustomSelect.defaultProps = {
   keyDescription: null,
   multiSelect: false,
   multiSeparator: ', ',
-  labelType: 'top-label'
+  labelType: 'top-label',
+  unSelectedPickerColor: GlobalConst.getValue().CUSTOM_SELECT_SELECTED_COLOR,
+  selectedPickerColor: GlobalConst.getValue().CUSTOM_SELECT_UNSELECTED_COLOR,
 };
-
-const styles = StyleSheet.create({
-  valueContainer: {
-    paddingVertical: metrics.padding,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    borderBottomWidth: 1,
-  }
-})
 
 export default CustomSelect;

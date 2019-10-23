@@ -124,13 +124,4 @@ CustomDatePicker.defaultProps = {
   labelType: 'top-label',
 };
 
-const styles = StyleSheet.create({
-  valueContainer: {
-    paddingVertical: metrics.padding,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    borderBottomWidth: 1,
-  }
-})
-
 export default CustomDatePicker;

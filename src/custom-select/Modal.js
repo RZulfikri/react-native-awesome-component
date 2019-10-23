@@ -20,6 +20,8 @@ const ModalList = props => {
     keyValue,
     keyDescription,
     multiSelect,
+    selectedPickerColor,
+    unSelectedPickerColor,
   } = props;
 
   const [value, setValue] = useState(initialValue);
@@ -47,6 +49,8 @@ const ModalList = props => {
               item={item}
               multiSelect={multiSelect}
               keyValue={keyValue}
+              selectedPickerColor={selectedPickerColor}
+              unSelectedPickerColor={unSelectedPickerColor}
               isSelected={
                 multiSelect
                   ? value.findIndex(
@@ -94,6 +98,8 @@ ModalList.propTypes = {
   keyValue: PropTypes.string,
   keyDescription: PropTypes.string,
   multiSelect: PropTypes.bool.isRequired,
+  selectedPickerColor: PropTypes.string.isRequired,
+  unSelectedPickerColor: PropTypes.string.isRequired,
 };
 
 ModalList.defaultProps = {

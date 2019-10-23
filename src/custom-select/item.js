@@ -16,6 +16,8 @@ const Item = props => {
     multiSelect,
     isSelected,
     onPressItem,
+    selectedPickerColor,
+    unSelectedPickerColor,
   } = props;
   const checkedIcon = multiSelect ? 'check-box' : 'radio-button-checked';
   const uncheckedIcon = multiSelect
@@ -42,7 +44,7 @@ const Item = props => {
       <Icon
         name={isSelected ? checkedIcon : uncheckedIcon}
         size={20}
-        color={Colors.warm_grey}
+        color={isSelected ? selectedPickerColor : unSelectedPickerColor}
       />
     </TouchableOpacity>
   );

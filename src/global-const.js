@@ -96,6 +96,12 @@ const DEFAULT_GLOBAL_CONST = {
   FLATLIST_ERROR_CONTAINER: <ErrorContainer />, // make sure you have onRefresh props to pass refresh function
   FLATLIST_NO_CONNECTION_CONTAINER: <NoConnectionContainer />, // make sure you have onRefresh props to pass refresh function
 
+  // CUSTOM SELECT
+  CUSTOM_SELECT_SELECTED_COLOR: Colors.warm_grey,
+  CUSTOM_SELECT_UNSELECTED_COLOR: Colors.warm_grey,
+  CUSTOM_SELECT_HEADER_BACKGROUND_COLOR: Colors.white,
+  CUSTOM_SELECT_HEADER_COLOR: Colors.warm_grey,
+
   // CUSTOM INPUT
   CUSTOM_INPUT_LABEL_TYPE: 'default',
   CUSTOM_INPUT_LABEL_STYLE: {},

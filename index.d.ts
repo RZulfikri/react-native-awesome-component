@@ -185,6 +185,8 @@ interface ICustomSelect {
   multiSelect?: boolean;
   multiSeparator?: string; 
   labelType?: CustomInputLabelType;
+  selectedPickerColor?: string;
+  unSelectedPickerColor?: string;
 }
 
 interface ICustomDatepicker {
@@ -381,6 +383,12 @@ interface IGlobalConstValue {
   CUSTOM_STEP_BAR_INACTIVE_COLOR: string;
   CUSTOM_STEP_BAR_SEPARATOR: boolean;
   CUSTOM_STEP_BAR_ROUND_CORNER: boolean;
+
+  // CUSTOM SELECT
+  CUSTOM_SELECT_SELECTED_COLOR: string;
+  CUSTOM_SELECT_UNSELECTED_COLOR: string;
+  CUSTOM_SELECT_HEADER_BACKGROUND_COLOR: string;
+  CUSTOM_SELECT_HEADER_COLOR: string;
 
   // EMPTY CONTAINER
   EMPTY_CONTAINER_TITLE: string;
