@@ -1,20 +1,12 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {TouchableOpacity, ViewPropTypes, StyleSheet} from 'react-native';
+import {TouchableOpacity, ViewPropTypes, StyleSheet, View} from 'react-native';
 import Modal from 'react-native-modal';
 import DatePicker from 'react-native-date-picker';
 import moment from 'moment-timezone';
-import Colors from '../colors';
-import {isEmptyOrSpaces} from '../method/helper';
-import {
-  LabelContainer,
-  LabelText,
-  RequiredMark,
-  ValueText,
-  InputContainer,
-} from '../styled/share.styled';
 import metrics from '../metrics';
+import { CustomInput } from '../..';
 
 const CustomDatePicker = props => {
   const {
@@ -31,6 +23,7 @@ const CustomDatePicker = props => {
     initialDate,
     minimumDate,
     maximumDate,
+    labelType,
     style,
   } = props;
 
@@ -44,23 +37,17 @@ const CustomDatePicker = props => {
   };
 
   return (
-    <InputContainer style={style}>
-      {!isEmptyOrSpaces(label) && (
-        <LabelContainer>
-          <LabelText>{label}</LabelText>
-          {isRequired && <RequiredMark>*</RequiredMark>}
-        </LabelContainer>
-      )}
-      <TouchableOpacity
-        style={[
-          styles.valueContainer,
-          { borderBottomColor: error ? Colors.alertError : Colors.slate_grey },
-        ]}
-        onPress={() => setModalVisible(true)}>
-        <ValueText isEmpty={isEmptyOrSpaces(value)} style={textStyle}>
-          {isEmptyOrSpaces(value) ? placeholder : value}
-        </ValueText>
-      </TouchableOpacity>
+    <View>
+      <CustomInput
+        placeholder={placeholder}
+        label={label}
+        labelType={labelType}
+        underlineWidth={1}
+        onPress={() => setModalVisible(true)}
+        isRequired={isRequired}
+        defaultValue={value}
+        style={style}
+      />
       <Modal
         isVisible={modalVisible}
         onBackButtonPress={() => setModalVisible(false)}
@@ -98,7 +85,7 @@ const CustomDatePicker = props => {
           timeZoneOffsetInMinutes={0}
         />
       </Modal>
-    </InputContainer>
+    </View>
   );
 };
 
@@ -117,6 +104,7 @@ CustomDatePicker.propTypes = {
   maximumDate: PropTypes.instanceOf(Date),
   minimumDate: PropTypes.instanceOf(Date),
   style: ViewPropTypes.style,
+  labelType: PropTypes.oneOf(['top-label', 'default', 'left-label', 'right-label'])
 };
 
 CustomDatePicker.defaultProps = {
@@ -133,6 +121,7 @@ CustomDatePicker.defaultProps = {
   maximumDate: undefined,
   minimumDate: undefined,
   style: undefined,
+  labelType: 'top-label',
 };
 
 const styles = StyleSheet.create({

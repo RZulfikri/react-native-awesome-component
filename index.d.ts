@@ -184,6 +184,7 @@ interface ICustomSelect {
   keyDescription?: string;
   multiSelect?: boolean;
   multiSeparator?: string; 
+  labelType?: CustomInputLabelType;
 }
 
 interface ICustomDatepicker {
@@ -201,6 +202,7 @@ interface ICustomDatepicker {
   maximumDate?: Date;
   minimumDate?: Date;
   style: StyleProp<ViewStyle>;
+  labelType?: CustomInputLabelType;
 }
 interface ICustomInput extends TextInputProps {
   minLength: number;
@@ -215,6 +217,7 @@ interface ICustomInput extends TextInputProps {
   focusColor: string;
   errorColor: string;
   validateOnChange: boolean;
+  onPress?: () => void;
 
   // ERROR MESSAGE
   passwordRegex: any;

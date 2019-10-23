@@ -3,23 +3,14 @@
 /* eslint-disable react/forbid-prop-types */
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
   ViewPropTypes,
-  TouchableOpacity,
   StyleSheet,
+  View,
 } from 'react-native';
-import {
-  ValueText,
-  InputContainer,
-  LabelContainer,
-  LabelText,
-  RequiredMark,
-} from '../styled/share.styled';
-import Colors from '../colors';
 import ModalList from './Modal';
-import {isEmptyOrSpaces} from '../method/helper';
 import metrics from '../metrics';
+import CustomInput from '../custom-input';
 
 const CustomSelect = props => {
   const {
@@ -33,6 +24,7 @@ const CustomSelect = props => {
     style,
     textStyle,
     rightIcon,
+    labelType,
     multiSelect,
     keyValue,
     keyDescription,
@@ -59,24 +51,16 @@ const CustomSelect = props => {
   }
 
   return (
-    <InputContainer style={style}>
-      {!isEmptyOrSpaces(label) && (
-        <LabelContainer>
-          <LabelText>{label}</LabelText>
-          {isRequired && <RequiredMark>*</RequiredMark>}
-        </LabelContainer>
-      )}
-      <TouchableOpacity
-        style={[
-          styles.valueContainer,
-          {borderBottomColor: error ? Colors.alertError : Colors.slate_grey},
-        ]}
-        onPress={() => setModalVisible(true)}>
-        <ValueText isEmpty={isEmptyOrSpaces(valueText)}>
-          {isEmptyOrSpaces(valueText) ? placeholder : valueText}
-        </ValueText>
-        <Icon name="chevron-right" size={16} color={Colors.warm_grey} />
-      </TouchableOpacity>
+    <View>
+      <CustomInput
+        placeholder={placeholder}
+        label={label}
+        labelType={labelType}
+        underlineWidth={1}
+        onPress={() => setModalVisible(true)}
+        isRequired={isRequired}
+        defaultValue={valueText}
+      />
       <ModalList
         data={data}
         multiSelect={multiSelect}
@@ -84,11 +68,13 @@ const CustomSelect = props => {
         keyValue={keyValue}
         initialValue={multiSelect && !value ? [] : value}
         modalVisible={modalVisible}
-        onSubmit={selectValue => onChangeValue(selectValue)}
+        onSubmit={selectValue => {
+          onChangeValue(selectValue);
+        }}
         closeModal={() => setModalVisible(false)}
         label={label}
       />
-    </InputContainer>
+    </View>
   );
 };
 
@@ -107,6 +93,7 @@ CustomSelect.propTypes = {
   keyDescription: PropTypes.string,
   multiSelect: PropTypes.bool,
   multiSeparator: PropTypes.string,
+  labelType: PropTypes.oneOf(['top-label', 'default', 'left-label', 'right-label'])
 };
 
 CustomSelect.defaultProps = {
@@ -122,6 +109,7 @@ CustomSelect.defaultProps = {
   keyDescription: null,
   multiSelect: false,
   multiSeparator: ', ',
+  labelType: 'top-label'
 };
 
 const styles = StyleSheet.create({

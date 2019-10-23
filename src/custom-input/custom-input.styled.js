@@ -25,3 +25,10 @@ export const StyledTextInput = styled.TextInput`
   height: 40px;
   text-align-vertical: center;
 `
+
+export const StyledTouchableInput = styled.TouchableOpacity`
+  font-size: 14px;
+  color: ${Colors.slate_grey};
+  height: 40px;
+  text-align-vertical: center;
+`;
