@@ -1,6 +1,6 @@
 {
   "name": "react-native-awesome-component",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "React Native Awesome Component",
   "main": "index.js",
   "typings": "./index.d.ts",
@@ -15,6 +15,9 @@
     "custom button",
     "custom header",
     "custom alert",
+    "custom text input",
+    "custom date picker",
+    "custom select",
     "connection handler",
     "useful method"
   ],
