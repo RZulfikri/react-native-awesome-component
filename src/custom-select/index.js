@@ -1,15 +1,17 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react/forbid-prop-types */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   ViewPropTypes,
   View,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import ModalList from './Modal';
 import CustomInput from '../custom-input';
 import { GlobalConst } from '../..';
+import Colors from '../colors';
 
 const CustomSelect = props => {
   const {
@@ -40,11 +42,11 @@ const CustomSelect = props => {
     const temp =
       keyValue && keyDescription
         ? value.map(
-            item =>
-              data.find(dataItem => dataItem[keyValue] === item)[
-                keyDescription
-              ],
-          )
+          item =>
+            data.find(dataItem => dataItem[keyValue] === item)[
+            keyDescription
+            ],
+        )
         : value;
     valueText = temp.join(multiSeparator);
   } else if (keyDescription && keyValue && value) {
@@ -61,6 +63,7 @@ const CustomSelect = props => {
         onPress={() => setModalVisible(true)}
         isRequired={isRequired}
         defaultValue={valueText}
+        renderRightAction={() => <Icon name="chevron-right" size={14} color={Colors.slate_grey} />}
       />
       <ModalList
         data={data}

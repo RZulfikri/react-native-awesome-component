@@ -28,15 +28,15 @@ const ModalHeader = props => {
       <TouchableOpacity
         style={{padding: 16, marginRight: 10}}
         onPress={closeModal}>
-        <Icon name="arrow-left" size={24} color={Colors.slate_grey} />
+        <Icon name="arrow-left" size={20} color={Colors.slate_grey} />
       </TouchableOpacity>
       <View style={{flex: 1}}>
-        <Text style={{fontSize: 20}}>{`Select ${label}`}</Text>
+        <Text style={{fontSize: 18}}>{`Select ${label}`}</Text>
       </View>
       <TouchableOpacity
         style={{padding: 16, marginLeft: 10}}
         onPress={onSubmit}>
-        <Icon name="check" size={24} color={Colors.slate_grey} />
+        <Icon name="check" size={20} color={Colors.slate_grey} />
       </TouchableOpacity>
     </View>
   );
