@@ -95,6 +95,7 @@ Read more [here](./doc/no-connection-container.md)
 Read more [here](./doc/custom-flatlist.md)
 
 ## CustomInput
+
 Read more [here](./doc/custom-input.md)
 
 ## Styled
@@ -111,4 +112,8 @@ Read more [here](./doc/method.md)
 
 ## CustomSelect
 
-Read more [here](./doc/)
+Read more [here](./doc/custom-select.md)
+
+## CustomDatepicker
+
+Read more [here](./doc/custom-datepicker.md)
