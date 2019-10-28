@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, KeyboardAvoidingView, Keyboard, UIManager, findNodeHandle, Dimensions, TouchableOpacity } from 'react-native'
+import { View, KeyboardAvoidingView, Keyboard, TouchableOpacity } from 'react-native'
 import { TopContainer, RowContainer, Label, StyledTextInput, ErrorLabel, StyledTextInputContainer } from './custom-input.styled'
 import { Formik } from 'formik';
-import Colors from '../colors'
 import * as Obj from '../method/object'
 import * as GlobalConst from '../global-const'
 import * as Yup from 'yup'
@@ -23,8 +22,6 @@ const INPUT_TYPE = {
   text: 'text',
   textArea: 'text-area',
 }
-
-const { width, height } = Dimensions.get('window')
 
 class CustomInput extends Component {
   static propTypes = {
@@ -57,16 +54,12 @@ class CustomInput extends Component {
   }
 
   static defaultProps = {
-    labelType: GlobalConst.getValue().CUSTOM_INPUT_LABEL_TYPE,
     inputType: INPUT_TYPE.text,
     isRequired: false,
   }
 
   constructor(props) {
     super(props)
-    this.state = {
-      focusStyle: {}
-    }
     this.setRef = this.setRef.bind(this)
     this.getContainerByType = this.getContainerByType.bind(this)
     this.getLabelStyleByType = this.getLabelStyleByType.bind(this)
@@ -74,9 +67,6 @@ class CustomInput extends Component {
     this.getKeyboardType = this.getKeyboardType.bind(this)
     this.renderLabel = this.renderLabel.bind(this)
     this.renderInput = this.renderInput.bind(this)
-
-    this._keyboardDidShow = this._keyboardDidShow.bind(this)
-    this._keyboardDidHide = this._keyboardDidHide.bind(this)
   }
 
   value = ''
@@ -93,44 +83,6 @@ class CustomInput extends Component {
       'keyboardDidHide',
       this._keyboardDidHide,
     );
-  }
-
-  componentWillUnmount() {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
-  }
-
-  _keyboardDidShow(props) {
-    if (this.isFocus) {
-      const { endCoordinates, startCoordinates } = props
-      console.log('KEYBOARD SHOW')
-      console.log({ keyboardShow: props, position: this.layoutPosition })
-      const keyboardPosition = endCoordinates.screenY
-      const itemHeight = this.layoutPosition.height
-      const handle = findNodeHandle(this.textInput);
-      UIManager.measure(
-        handle,
-        (x, y, w, h, px, py) => {
-          console.log('offset', x, y, w, h, px, py);
-          const itemPosition = itemHeight + py
-          if (keyboardPosition < itemPosition) {
-            console.log('ITEM IN BOTTOM')
-            const bottomOffset = itemPosition - keyboardPosition
-            console.log({ bottomOffset })
-            this.setState({ focusStyle: { bottom: bottomOffset, backgroundColor: Colors.red, zIndex: 999 } })
-          } else {
-            console.log('ITEM IN TOP')
-          }
-        });
-    }
-  }
-
-  _keyboardDidHide(props) {
-    if (!this.isFocus) {
-      console.log('KEYBOARD HIDE')
-      console.log({ keyboardHide: props, position: this.layoutPosition })
-      this.setState({ focusStyle: {} })
-    }
   }
 
   setRef(currentRef) {
@@ -254,8 +206,8 @@ class CustomInput extends Component {
     }
   }
 
-  renderLabel(labelStyle) {
-    const { label, labelType } = this.props
+  renderLabel(labelType, labelStyle) {
+    const { label } = this.props
     return (
       <View style={{ justifyContent: 'center' }}>
         <Label style={[this.getLabelStyleByType(labelType), labelStyle]}>
@@ -267,7 +219,12 @@ class CustomInput extends Component {
 
   renderInput(formikProps) {
     const { errors, touched } = formikProps
-    const { label, labelType, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress } = this.props
+    const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress } = this.props
+    let { labelType } = this.props
+
+    if (labelType === undefined || labelType === null) {
+      labelType = GlobalConst.getValue().CUSTOM_INPUT_LABEL_TYPE
+    }
 
     let activeProps = { ...this.props }
 
@@ -328,11 +285,15 @@ class CustomInput extends Component {
     }
 
     // HANDLER CUSTOM STYLE
+    let styledTextInputContainerStyle = {}
     let textInputStyle = GlobalConst.getValue().CUSTOM_INPUT_TEXT_INPUT_STYLE
     if ((labelType === LABEL_TYPE.left) || (labelType === LABEL_TYPE.right)) {
       textInputStyle = {
         ...textInputStyle,
-        flex: 1
+        flex: 1,
+      }
+      styledTextInputContainerStyle = {
+        flex: 1,
       }
     }
 
@@ -379,11 +340,11 @@ class CustomInput extends Component {
     return (
       <KeyboardAvoidingView keyboardVerticalOffset={500} behavior={'padding'} contentContainerStyle={{ flexGrow: 1 }} onLayout={(e) => this.layoutPosition = e.nativeEvent.layout} >
         <Container style={[containerTyle]}>
-          {labelType === LABEL_TYPE.top && label && this.renderLabel(labelStyle)}
-          {labelType === LABEL_TYPE.left && label && this.renderLabel(labelStyle)}
+          {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle)}
+          {labelType === LABEL_TYPE.left && label && this.renderLabel(labelType, labelStyle)}
           {onPress ?
             <TouchableOpacity onPress={onPress}>
-              <StyledTextInputContainer>
+              <StyledTextInputContainer style={[styledTextInputContainerStyle]}>
                 {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
                 <StyledTextInput
                   ref={currentRef => this.setRef(currentRef)}
@@ -402,8 +363,8 @@ class CustomInput extends Component {
                 />
                 {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
               </StyledTextInputContainer>
-            </TouchableOpacity> : 
-            <StyledTextInputContainer>
+            </TouchableOpacity> :
+            <StyledTextInputContainer style={[styledTextInputContainerStyle]}>
               {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
               <StyledTextInput
                 ref={currentRef => this.setRef(currentRef)}
