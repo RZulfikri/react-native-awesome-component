@@ -242,7 +242,7 @@ export class PlaceholderText extends React.Component<TextProps> { }
 export class CustomButton extends React.Component<ICustomButtonProps> { }
 export class CustomHeader extends React.Component<ICustomHeaderProps> { }
 export class ConnectionHandler extends React.Component<ICustomHeaderProps> { }
-export class CutomAlert extends React.Component<ICustomAlert> { }
+export class CustomAlert extends React.Component<ICustomAlert> { }
 export class CustomStepBar extends React.Component<ICustomStepBar> { }
 export class EmptyContainer extends React.Component<ICustomContainerView> { }
 export class ErrorContainer extends React.Component<ICustomContainerView> { }
