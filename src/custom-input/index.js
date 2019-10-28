@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import * as Obj from '../method/object'
 import * as GlobalConst from '../global-const'
 import * as Yup from 'yup'
+import _ from 'lodash'
 
 const LABEL_TYPE = {
   top: 'top-label',
@@ -38,6 +39,7 @@ class CustomInput extends Component {
     errorColor: PropTypes.string,
     validateOnChange: PropTypes.bool,
     onPress: PropTypes.func,
+    onChangeValidation: PropTypes.func,
 
     // ERROR MESSAGE
     passwordRegex: PropTypes.any,
@@ -56,6 +58,7 @@ class CustomInput extends Component {
   static defaultProps = {
     inputType: INPUT_TYPE.text,
     isRequired: false,
+    onChangeValidation: () => null,
   }
 
   constructor(props) {
@@ -70,6 +73,7 @@ class CustomInput extends Component {
   }
 
   value = ''
+  errorValue
   layoutPosition
   isFocus
   textInput
@@ -219,7 +223,7 @@ class CustomInput extends Component {
 
   renderInput(formikProps) {
     const { errors, touched } = formikProps
-    const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress } = this.props
+    const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress, onChangeValidation } = this.props
     let { labelType } = this.props
 
     if (labelType === undefined || labelType === null) {
@@ -270,6 +274,11 @@ class CustomInput extends Component {
         {fErrorMessage}
       </ErrorLabel>
     )
+
+    if (!_.isEqual(fErrorMessage, this.errorValue) && onChangeValidation) {
+      this.errorValue = fErrorMessage
+      onChangeValidation(fErrorMessage !== '' ? true : false)
+    }
 
     // HANDLE ONCHANGE TEXT
     if (this.props.onChangeText) {

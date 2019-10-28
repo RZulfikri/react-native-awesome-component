@@ -1,6 +1,6 @@
 {
   "name": "react-native-awesome-component",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "React Native Awesome Component",
   "main": "index.js",
   "typings": "./index.d.ts",
@@ -25,6 +25,7 @@
   "author": "Rahmat Zulfikri",
   "dependencies": {
     "formik": "^1.1.1",
+    "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
     "rn-placeholder": "2.0.0",
     "styled-components": "^4.3.2",

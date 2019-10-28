@@ -15,6 +15,7 @@ To help maintain keyboard I suggest to install `react-native-keyboard-aware-scro
     super(props)
     this.state = {
       userId: '',
+      userIdError: true,
       password: '',
       confirmPassword: '',
       email: '',
@@ -41,6 +42,7 @@ To help maintain keyboard I suggest to install `react-native-keyboard-aware-scro
             minLength={5}
             value={userId}
             onChangeText={(text) => this.setState({ userId: text })}
+            onChangeValidation={(status) => this.setState({userIdError: status});}
             renderLeftAction={() => {
               return (
                 <View style={{ marginRight: 10 }}>
@@ -161,3 +163,4 @@ errorMinimum: (label: string, min: number) => string or string | props to set er
 errorMaximum: (label: string, max: number) => string or string | props to set error of maximum length message | `check global const`
 renderLeftAction: () => any | props to render left action | `undefined`
 renderRightAction: () => any | props to render right action | `undefined`
+onChangeValidation: (status: boolean) => void | props to get status of validation | `true`
