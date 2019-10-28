@@ -27,6 +27,7 @@ Props | Description | Default
 loading: boolean | props to set/show button loading | `false` 
 disabled: boolean | props to disable button | `false` 
 title: string | props to set button title | `'Button Title'` 
+buttonTitle: string | props to set button title | `'Button Title'` 
 onPress: () => void | props to handle onPress button | `() => null` 
 activeColor: string | props to set active button color | `#1abc9c`
 disabledColor: string | props to set disable button color | `#EBEBE4`

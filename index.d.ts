@@ -344,8 +344,10 @@ interface IGlobalConstValue {
   // BUTTON STYLE
   ACTIVE_BUTTON_COLOR: string;
   ACTIVE_BUTTON_TITLE_COLOR: string;
+  ACTIVE_BUTTON_TITLE_STYLE: StyleProp<TextStyle>;
   DISABLE_BUTTON_COLOR: string;
   DISABLE_BUTTON_TITLE_COLOR: string;
+  DISABLE_BUTTON_TITLE_STYLE: StyleProp<TextStyle>;
   BUTTON_TITLE_SIZE: number;
   BUTTON_HEIGHT_SIZE: number;
   BUTTON_LOADING_COLOR: string;
@@ -433,6 +435,7 @@ interface IGlobalConstValue {
   // CUSTOM INPUT
   CUSTOM_INPUT_LABEL_TYPE: string;
   CUSTOM_INPUT_LABEL_STYLE: StyleProp<TextStyle>;
+  CUSTOM_INPUT_PLACEHOLDER_COLOR: string;
   CUSTOM_INPUT_TEXT_INPUT_STYLE: StyleProp<TextStyle>;
   CUSTOM_INPUT_ERROR_LABEL_STYLE: StyleProp<TextStyle>;
   CUSTOM_INPUT_UNDERLINE_WIDTH: number;
@@ -454,8 +457,10 @@ interface IGlobalConst {
   // CUSTOM BUTTON
   setGlobalActiveButtonColor: (color: string) => void;
   setGlobalActiveButtonTitleColor: (color: string) => void;
+  setGlobalActiveButtonTitleStyle: (value: StyleProp<TextStyle>) => void;
   setGlobalDisableButtonColor: (color: string) => void;
   setGlobalDisableButtonTitleColor: (color: string) => void;
+  setGlobalDisableButtonTitleStyle: (value: StyleProp<TextStyle>) => void;
   setGlobalButtonTitleSize: (size: number) => void;
   setGlobalButtonHeightSize: (size: number) => void;
   setGlobalButtonLoadingColor: (color: string) => void;
@@ -525,6 +530,7 @@ interface IGlobalConst {
   // CUSTOM INPUT
   setGlobalCustomInputLabelType: (value: CustomInputLabelType) => void;
   setGlobalCustomInputLabelStyle: (value: StyleProp<TextStyle>) => void;
+  setGlobalCustomInputPlaceholderColor: (value: string) => void;
   setGlobalCustomInputTextInputStyle: (value: StyleProp<TextStyle>) => void;
   setGlobalCustomInputErrorLabelStyle: (value: StyleProp<TextStyle>) => void;
   setGlobalCustomInputUnderlineWidth: (value: number) => void;
