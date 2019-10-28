@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Platform, View } from 'react-native'
+import { Platform, View, Image } from 'react-native'
 import { Container } from '../styled/share.styled'
 import * as Obj from '../method/object'
 import * as GlobalConst from '../global-const'
@@ -81,19 +81,26 @@ function getIconByType(type) {
 }
 
 function getSideContent(iconName, iconType, actionTitle, type) {
-  if (actionTitle) {
-    let actionTitleStyle = {
-      fontSize: type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ACTION_TITLE_SIZE : GlobalConst.getValue().HEADER_RIGHT_ACTION_TITLE_SIZE,
-      color: type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ACTION_TITLE_COLOR : GlobalConst.getValue().HEADER_RIGHT_ACTION_TITLE_COLOR
-    }
-    return <ActionTitle style={[actionTitleStyle]}>{actionTitle}</ActionTitle>
-  }
 
-  if (iconName) {
-    const Icon = getIconByType(iconType)
-    let iconSize = type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ICON_SIZE : GlobalConst.getValue().HEADER_RIGHT_ICON_SIZE
-    let iconColor = type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ICON_COLOR : GlobalConst.getValue().HEADER_RIGHT_ICON_COLOR
-    return <Icon name={iconName} size={iconSize} color={iconColor} />
+  if ((type === 'left') && (iconName === GlobalConst.getValue().HEADER_LEFT_ICON_NAME) && (iconType === GlobalConst.getValue().HEADER_ICON_TYPE) && (GlobalConst.getValue().HEADER_LEFT_BACK_ICON_IMAGE !== undefined)) {
+    const globalBackIconImage = GlobalConst.getValue().HEADER_LEFT_BACK_ICON_IMAGE
+    const globalBackIconImageStyle = GlobalConst.getValue().HEADER_LEFT_BACK_ICON_IMAGE_STYLE
+    return <Image source={globalBackIconImage} style={[globalBackIconImageStyle]} />
+  } else {
+    if (actionTitle) {
+      let actionTitleStyle = {
+        fontSize: type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ACTION_TITLE_SIZE : GlobalConst.getValue().HEADER_RIGHT_ACTION_TITLE_SIZE,
+        color: type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ACTION_TITLE_COLOR : GlobalConst.getValue().HEADER_RIGHT_ACTION_TITLE_COLOR
+      }
+      return <ActionTitle style={[actionTitleStyle]}>{actionTitle}</ActionTitle>
+    }
+
+    if (iconName) {
+      const Icon = getIconByType(iconType)
+      let iconSize = type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ICON_SIZE : GlobalConst.getValue().HEADER_RIGHT_ICON_SIZE
+      let iconColor = type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ICON_COLOR : GlobalConst.getValue().HEADER_RIGHT_ICON_COLOR
+      return <Icon name={iconName} size={iconSize} color={iconColor} />
+    }
   }
 }
 
@@ -105,6 +112,7 @@ const CustomHeader = (props) => {
     isCard,
     iphoneXPadding,
     title,
+    titleStyle,
     iconLeft,
     titleLeft,
     renderLeft,
@@ -147,12 +155,13 @@ const CustomHeader = (props) => {
     paddingHorizontal: GlobalConst.getValue().PADDING,
   }
 
-  let titleStyle = {
+  const headerTitleStyle = {
+    ...GlobalConst.getValue().HEADER_TITLE_STYLE,
     fontSize: GlobalConst.getValue().HEADER_TITLE_SIZE,
     color: GlobalConst.getValue().HEADER_TITLE_COLOR,
   }
 
-  if (iconRight === undefined && !isFirstRoute) {
+  if (iconLeft === undefined && !isFirstRoute) {
     iconLeft = GlobalConst.getValue().HEADER_LEFT_ICON_NAME
     iconType = GlobalConst.getValue().HEADER_ICON_TYPE
   }
@@ -189,7 +198,7 @@ const CustomHeader = (props) => {
           </LeftTouchableContainer>
         )}
       <TitleContainer>
-        <Title style={[titleStyle]}>
+        <Title style={[headerTitleStyle, titleStyle]}>
           {headerTitle}
         </Title>
       </TitleContainer>
@@ -214,6 +223,7 @@ CustomHeader.propTypes = {
   isCard: PropTypes.bool,
 
   title: PropTypes.string,
+  titleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 
   iconLeft: PropTypes.string,
   titleLeftt: PropTypes.string,
@@ -244,6 +254,7 @@ CustomHeader.propTypes = {
 CustomHeader.defaultProps = {
   iphoneXPadding: true,
   isCard: true,
+  titleStyle: {},
 }
 
 export default CustomHeader
