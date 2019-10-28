@@ -40,9 +40,12 @@ const DEFAULT_GLOBAL_CONST = {
   HEADER_BACKGROUND: Colors.white,
   HEADER_TITLE_SIZE: 20,
   HEADER_TITLE_COLOR: Colors.black,
+  HEADER_TITLE_STYLE: {fontSize: 20, color: Colors.black},
   HEADER_LEFT_ICON_NAME: 'arrow-left',
   HEADER_LEFT_ICON_SIZE: 20,
   HEADER_LEFT_ICON_COLOR: Colors.black,
+  HEADER_LEFT_BACK_ICON_IMAGE: undefined,
+  HEADER_LEFT_BACK_ICON_IMAGE_STYLE: {width: 24, height: 24},
   HEADER_LEFT_ACTION_TITLE_SIZE: 15,
   HEADER_LEFT_ACTION_TITLE_COLOR: Colors.black,
   HEADER_RIGHT_ICON_SIZE: 20,
@@ -199,6 +202,9 @@ export function setGlobalHeaderTitleSize(value) {
 export function setGlobalHeaderTitleColor(value) {
   globalConst = Object.appendObject(globalConst, 'HEADER_TITLE_COLOR', value)
 }
+export function setGlobalHeaderTitleStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'HEADER_TITLE_STYLE', value)
+}
 export function setGlobalHeaderLeftIconName(value) {
   globalConst = Object.appendObject(globalConst, 'HEADER_LEFT_ICON_NAME', value)
 }
@@ -228,6 +234,12 @@ export function setGlobalHeaderRightActionTitleColor(value) {
 }
 export function setGlobalHeaderIconType(value) {
   globalConst = Object.appendObject(globalConst, 'HEADER_ICON_TYPE', value)
+}
+export function setGlobalHeaderBackIconImage(value) {
+  globalConst = Object.appendObject(globalConst, 'HEADER_LEFT_BACK_ICON_IMAGE', value)
+}
+export function setGlobalHeaderBackIconImageStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'HEADER_LEFT_BACK_ICON_IMAGE_STYLE', value)
 }
 
 // CONNECTION HANDLER

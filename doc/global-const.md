@@ -3,37 +3,41 @@ This is method to custom global constant/value that used in this component.
 
 ```javascript
   DEFAULT_GLOBAL_CONST: {
-    PADDING: metrics.padding, // 10
-    SAFE_AREA_BACKGROUND_COLOR: Colors.white, // #FFFFFF
-    BACKGROUND_COLOR: Colors.white, // #FFFFFF
+    PADDING: metrics.padding,
+    SAFE_AREA_BACKGROUND_COLOR: Colors.white,
+    BACKGROUND_COLOR: Colors.white,
 
     // BUTTON STYLE
-    ACTIVE_BUTTON_COLOR: Colors.turqoise, // #1abc9c
-    ACTIVE_BUTTON_TITLE_COLOR: Colors.white, // #FFFFFF
-    DISABLE_BUTTON_COLOR: Colors.carara, // #EBEBE4
-    DISABLE_BUTTON_TITLE_COLOR: Colors.black, // #000000
-    BUTTON_TITLE_SIZE: scale(15), // 15
-    BUTTON_HEIGHT_SIZE: scale(50), // 50
-    BUTTON_LOADING_COLOR: Colors.turqoise, // #1abc9c
+    ACTIVE_BUTTON_COLOR: Colors.turqoise,
+    ACTIVE_BUTTON_TITLE_COLOR: Colors.white,
+    DISABLE_BUTTON_COLOR: Colors.carara,
+    DISABLE_BUTTON_TITLE_COLOR: Colors.black,
+    BUTTON_TITLE_SIZE: scale(15),
+    BUTTON_HEIGHT_SIZE: scale(50),
+    BUTTON_LOADING_COLOR: Colors.turqoise,
 
     // FONT STYLE
-    FONT_SIZE: scale(14) // 14
-    H1: 12,
-    H2: 14,
-    H3: 16,
-    H4: 18,
-    H5: 28,
-    H6: 36,
-    H7: 48,
+    FONT_SIZE: scale(14),
+    FONT_SMALL_SIZE: scale(12),
+    H1: metrics.font.h1,
+    H2: metrics.font.h2,
+    H3: metrics.font.h3,
+    H4: metrics.font.h4,
+    H5: metrics.font.h5,
+    H6: metrics.font.h6,
+    H7: metrics.font.h7,
 
     // HEADER STYLE
     HEADER_HEIGHT: metrics.headerHeight,
     HEADER_BACKGROUND: Colors.white,
     HEADER_TITLE_SIZE: 20,
     HEADER_TITLE_COLOR: Colors.black,
+    HEADER_TITLE_STYLE: {fontSize: 20, color: Colors.black},
     HEADER_LEFT_ICON_NAME: 'arrow-left',
     HEADER_LEFT_ICON_SIZE: 20,
     HEADER_LEFT_ICON_COLOR: Colors.black,
+    HEADER_LEFT_BACK_ICON_IMAGE: undefined,
+    HEADER_LEFT_BACK_ICON_IMAGE_STYLE: {width: 24, height: 24},
     HEADER_LEFT_ACTION_TITLE_SIZE: 15,
     HEADER_LEFT_ACTION_TITLE_COLOR: Colors.black,
     HEADER_RIGHT_ICON_SIZE: 20,
@@ -49,60 +53,66 @@ This is method to custom global constant/value that used in this component.
     CONNECTION_ERROR_MESSAGE: 'No internet connection',
 
     // CUSTOM STEP BAR
-    CUSTOM_STEP_BAR_HEIGHT: 2;
-    CUSTOM_STEP_BAR_ACTIVE_COLOR: '#67c100';
-    CUSTOM_STEP_BAR_INACTIVE_COLOR: '#eaeaea';
-    CUSTOM_STEP_BAR_SEPARATOR: true;
-    CUSTOM_STEP_BAR_ROUND_CORNER: true;
+    CUSTOM_STEP_BAR_HEIGHT: 8,
+    CUSTOM_STEP_BAR_ACTIVE_COLOR: Colors.kermit_green,
+    CUSTOM_STEP_BAR_INACTIVE_COLOR: Colors.very_light_pink_two,
+    CUSTOM_STEP_BAR_SEPARATOR: true,
+    CUSTOM_STEP_BAR_ROUND_CORNER: true,
 
     // EMPTY CONTAINER
-    EMPTY_CONTAINER_TITLE: string;
-    EMPTY_CONTAINER_MESSAGE: string;
-    EMPTY_CONTAINER_IMAGE: any;
-    EMPTY_CONTAINER_TITLE_STYLE: object;
-    EMPTY_CONTAINER_MESSAGE_STYLE: object;
-    EMPTY_CONTAINER_IMAGE_STYLE: object;
-    EMPTY_CONTAINER_BUTTON: any; // value must be view instance such as <CustomButton />
+    EMPTY_CONTAINER_TITLE: 'No Item Found',
+    EMPTY_CONTAINER_MESSAGE: `We apologize, we don't have any item that you request for.`,
+    EMPTY_CONTAINER_IMAGE: undefined,
+    EMPTY_CONTAINER_TITLE_STYLE: {},
+    EMPTY_CONTAINER_MESSAGE_STYLE: {},
+    EMPTY_CONTAINER_IMAGE_STYLE: {},
+    EMPTY_CONTAINER_BUTTON: undefined, // value must be view instance such as <CustomButton />
 
     // ERROR CONTAINER
-    ERROR_CONTAINER_TITLE: string;
-    ERROR_CONTAINER_MESSAGE: string;
-    ERROR_CONTAINER_IMAGE: any;
-    ERROR_CONTAINER_TITLE_STYLE: object;
-    ERROR_CONTAINER_MESSAGE_STYLE: object;
-    ERROR_CONTAINER_IMAGE_STYLE: object;
-    ERROR_CONTAINER_BUTTON: any; // value must be view instance such as <CustomButton />
+    ERROR_CONTAINER_TITLE: 'Sorry something went wrong',
+    ERROR_CONTAINER_MESSAGE: 'We apologize for the inconvenience, please try again later.',
+    ERROR_CONTAINER_IMAGE: undefined,
+    ERROR_CONTAINER_TITLE_STYLE: {},
+    ERROR_CONTAINER_MESSAGE_STYLE: {},
+    ERROR_CONTAINER_IMAGE_STYLE: {},
+    ERROR_CONTAINER_BUTTON: undefined, // value must be view instance such as <CustomButton />
 
     // NO CONNECTION CONTAINER
-    NO_CONNECTION_CONTAINER_TITLE: string;
-    NO_CONNECTION_CONTAINER_MESSAGE: string;
-    NO_CONNECTION_CONTAINER_IMAGE: any;
-    NO_CONNECTION_CONTAINER_TITLE_STYLE: object;
-    NO_CONNECTION_CONTAINER_MESSAGE_STYLE: object;
-    NO_CONNECTION_CONTAINER_IMAGE_STYLE: object;
-    NO_CONNECTION_CONTAINER_BUTTON: any; // value must be view instance such as <CustomButton />
+    NO_CONNECTION_CONTAINER_TITLE: 'No Internet Connection',
+    NO_CONNECTION_CONTAINER_MESSAGE: 'You are not connected to the internet. Make sure your mobile data or Wi-Fi is on.',
+    NO_CONNECTION_CONTAINER_IMAGE: undefined,
+    NO_CONNECTION_CONTAINER_TITLE_STYLE: {},
+    NO_CONNECTION_CONTAINER_MESSAGE_STYLE: {},
+    NO_CONNECTION_CONTAINER_IMAGE_STYLE: {},
+    NO_CONNECTION_CONTAINER_BUTTON: undefined, // value must be view instance such as <CustomButton />
 
     // CUSTOM FLAT LIST
-    FLATLIST_EMPTY_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
-    FLATLIST_ERROR_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
-    FLATLIST_NO_CONNECTION_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
+    FLATLIST_EMPTY_CONTAINER: <EmptyContainer />, // make sure you have onRefresh props to pass refresh function
+    FLATLIST_ERROR_CONTAINER: <ErrorContainer />, // make sure you have onRefresh props to pass refresh function
+    FLATLIST_NO_CONNECTION_CONTAINER: <NoConnectionContainer />, // make sure you have onRefresh props to pass refresh function
+
+    // CUSTOM SELECT
+    CUSTOM_SELECT_SELECTED_COLOR: Colors.warm_grey,
+    CUSTOM_SELECT_UNSELECTED_COLOR: Colors.warm_grey,
+    CUSTOM_SELECT_HEADER_BACKGROUND_COLOR: Colors.white,
+    CUSTOM_SELECT_HEADER_COLOR: Colors.warm_grey,
 
     // CUSTOM INPUT
-    CUSTOM_INPUT_LABEL_TYPE: string; // 'top-label' | 'default' | 'left-label' | 'right-label'
-    CUSTOM_INPUT_LABEL_STYLE: TextStyle; // {}
-    CUSTOM_INPUT_TEXT_INPUT_STYLE: TextStyle; // {}
-    CUSTOM_INPUT_ERROR_LABEL_STYLE: TextStyle; // {}
-    CUSTOM_INPUT_UNDERLINE_WIDTH: number; // 1
-    CUSTOM_INPUT_UNDERLINE_COLOR: string;
-    CUSTOM_INPUT_FOCUS_COLOR: string;
-    CUSTOM_INPUT_ERROR_COLOR: string;
-    CUSTOM_INPUT_VALIDATE_ON_CHANGE: boolean; // true
-    CUSTOM_INPUT_PASSWORD_REGEX: any; // new RegExp('^(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
-    CUSTOM_INPUT_ERROR_MESSAGE_EMAIL: string; // 'Invalid email address',
-    CUSTOM_INPUT_ERROR_MESSAGE_PASSWORD: string; // 'Password must contain letters and number.',
-    CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED: (label: string) => string | string; // (label) => label ? `${label} is required` : 'This field is required',
-    CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM: (label: string, min: number) => string | string; // (label, min) => label ? `${label} must have at least ${min} characters` : `This field must have at least ${min} characters`,
-    CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM: (label: string, min: number) => string | string; // (label, max) => label ? `${label} must have at least ${max} characters` : `This field maximum have ${max} characters`,
+    CUSTOM_INPUT_LABEL_TYPE: 'default',
+    CUSTOM_INPUT_LABEL_STYLE: {},
+    CUSTOM_INPUT_TEXT_INPUT_STYLE: {},
+    CUSTOM_INPUT_ERROR_LABEL_STYLE: {},
+    CUSTOM_INPUT_UNDERLINE_WIDTH: 1,
+    CUSTOM_INPUT_UNDERLINE_COLOR: Colors.very_light_pink_five,
+    CUSTOM_INPUT_FOCUS_COLOR: Colors.alertSuccess,
+    CUSTOM_INPUT_ERROR_COLOR: Colors.alertError,
+    CUSTOM_INPUT_VALIDATE_ON_CHANGE: true,
+    CUSTOM_INPUT_PASSWORD_REGEX: new RegExp('^(?=.*?[a-z])(?=.*?[0-9]).{8,}$'),
+    CUSTOM_INPUT_ERROR_MESSAGE_EMAIL: 'Invalid email address',
+    CUSTOM_INPUT_ERROR_MESSAGE_PASSWORD: 'Password must contain letters and number.',
+    CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED: (label) => label ? `${label} is required` : 'This field is required',
+    CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM: (label, min) => label ? `${label} must have at least ${min} characters` : `This field must have at least ${min} characters`,
+    CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM: (label, max) => label ? `${label} must have at least ${max} characters` : `This field maximum have ${max} characters`,
   }
 ```
 
@@ -144,6 +154,7 @@ setGlobalHeaderHeightSize | function to change global header height size | (valu
 setGlobalHeaderBackgroundColor | function to change global header background color | (value: string) | - 
 setGlobalHeaderTitleSize | function to change global header title size | (value: number) | - 
 setGlobalHeaderTitleColor | function to change global header title color | (value: string) | - 
+setGlobalHeaderTitleStyle | function to set global header style | (value: TextStyle) | -
 setGlobalHeaderLeftIconName | function to change global header left icon name | (value: string) | - 
 setGlobalHeaderLeftIconSize | function to change global header left icon size | (value: number) | - 
 setGlobalHeaderLeftIconColor | function to change global header left icon color | (value: string) | - 
@@ -154,6 +165,8 @@ setGlobalHeaderRightIconColor | function to change global header right icon colo
 setGlobalHeaderRightActionTitleSize | function to change global header right action title size | (value: number) | - 
 setGlobalHeaderRightActionTitleColor | function to change global header right action title color | (value: string) | - 
 setGlobalHeaderIconType | function to change global header icon type `(ant-design, entypo, evil-icons, feather, font-awesome, font-awesome5, fontisto, foundation, ionicons, material-community, material-icons, octicons)` | (value: string) | - 
+setGlobalHeaderBackIconImage | function to set global back icon image | (value: imageInstance) | `undefined` 
+setGlobalHeaderBackIconImageStyle | function to set global custom back icon image style | (value: ImagStyle) | {height: 24, width: 24} |
 
 ### ConnectionHandler
 Name | Description | Params | Return 

@@ -65,6 +65,7 @@ interface ICustomHeaderProps {
   iphoneXPadding: boolean;
   isCard: boolean;
   title: string;
+  titleStyle: StyleProp<TextStyle>;
   iconLeft: string;
   titleLeftt: string;
   renderLeft: () => void;
@@ -364,9 +365,12 @@ interface IGlobalConstValue {
   HEADER_BACKGROUND: string;
   HEADER_TITLE_SIZE: number;
   HEADER_TITLE_COLOR: string;
+  HEADER_TITLE_STYLE: StyleProp<TextStyle>;
   HEADER_LEFT_ICON_NAME: string;
   HEADER_LEFT_ICON_SIZE: number;
   HEADER_LEFT_ICON_COLOR: string;
+  HEADER_LEFT_BACK_ICON_IMAGE: any,
+  HEADER_LEFT_BACK_ICON_IMAGE_STYLE: StyleProp<ImageStyle>;
   HEADER_LEFT_ACTION_TITLE_SIZE: number;
   HEADER_LEFT_ACTION_TITLE_COLOR: string;
   HEADER_RIGHT_ICON_SIZE: number;
@@ -466,6 +470,7 @@ interface IGlobalConst {
   setGlobalHeaderBackgroundColor: (value: string) => void;
   setGlobalHeaderTitleSize: (value: number) => void;
   setGlobalHeaderTitleColor: (value: string) => void;
+  setGlobalHeaderTitleStyle: (value: StyleProp<TextStyle>) => void;
   setGlobalHeaderLeftIconName: (value: string) => void;
   setGlobalHeaderLeftIconSize: (value: number) => void;
   setGlobalHeaderLeftIconColor: (value: string) => void;
@@ -476,6 +481,8 @@ interface IGlobalConst {
   setGlobalHeaderRightActionTitleSize: (value: number) => void;
   setGlobalHeaderRightActionTitleColor: (value: string) => void;
   setGlobalHeaderIconType: (value: HeaderIconType) => void;
+  setGlobalHeaderBackIconImage: (value: any) => void; 
+  setGlobalHeaderBackIconImageStyle: (value: StyleProp<ImageStyle>) => void;
   // CONNECTION HANDLER
   setGlobalConnectionHandlerSuccessTitle: (value: string) => void;
   setGlobalConnectionHandlerSuccessMessage: (value: string) => void;

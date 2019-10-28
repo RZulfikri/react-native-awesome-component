@@ -4,7 +4,7 @@ This is Custom header component.
 **How to use**
 
 ```javascript
-import {CustomHeader} from 'react-native-awesome-component
+import {CustomHeader} from 'react-native-awesome-component'
 
 const PrimaryNav = createStackNavigator({
   'Example Screen': { 
@@ -45,6 +45,7 @@ Props | Description | Default
   iphoneXPadding: boolean | props to set padding top in iphone-x series | `true` 
   isCard: boolean | props to set header shadow | `true `
   title: string | props to set header title | `''` or navigation screen routeName (if exist)
+  titleStyle: TextStyle | props to set header title style | `{}`
   iconLeft: string | props to set icon left name | `arrow-left` 
   titleLeftt: string | props to set action title left | - 
   renderLeft: () => void | props to set custom left action | - 
