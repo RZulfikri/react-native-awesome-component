@@ -10,8 +10,10 @@ This is method to custom global constant/value that used in this component.
     // BUTTON STYLE
     ACTIVE_BUTTON_COLOR: Colors.turqoise,
     ACTIVE_BUTTON_TITLE_COLOR: Colors.white,
+    ACTIVE_BUTTON_TITLE_STYLE: {},
     DISABLE_BUTTON_COLOR: Colors.carara,
     DISABLE_BUTTON_TITLE_COLOR: Colors.black,
+    DISABLE_BUTTON_TITLE_STYLE: {},
     BUTTON_TITLE_SIZE: scale(15),
     BUTTON_HEIGHT_SIZE: scale(50),
     BUTTON_LOADING_COLOR: Colors.turqoise,
@@ -100,6 +102,7 @@ This is method to custom global constant/value that used in this component.
     // CUSTOM INPUT
     CUSTOM_INPUT_LABEL_TYPE: 'default',
     CUSTOM_INPUT_LABEL_STYLE: {},
+    CUSTOM_INPUT_PLACEHOLDER_COLOR: undefined,
     CUSTOM_INPUT_TEXT_INPUT_STYLE: {},
     CUSTOM_INPUT_ERROR_LABEL_STYLE: {},
     CUSTOM_INPUT_UNDERLINE_WIDTH: 1,
@@ -132,8 +135,10 @@ Name | Description | Params | Return
 --- | --- | --- | --- 
 setGlobalActiveButtonColor | function to change global active button color | (color: string) | - 
 setGlobalActiveButtonTitleColor | function to change global active button title color | (color: string) | -
+setGlobalActiveButtonTitleStyle | function to change global active button title style | (value: TextStyle) | -
 setGlobalDisableButtonColor | function to change global disable button color | (color: string) | - 
 setGlobalDisableButtonTitleColor | function to change global disable button title color | (color: string) | - 
+setGlobalDisableButtonTitleStyle | function to change global active button title style | (value: TextStyle) | -
 setGlobalButtonTitleSize | function to change global button title size | (size: number) | - 
 setGlobalButtonHeightSize | function to change global button height | (size: number) | -
 setGlobalButtonLoadingColor | function to change global button loading color | (color: string) | -
@@ -230,6 +235,7 @@ Name | Description | Params | Return
 --- | --- | --- | --- 
 setGlobalCustomInputLabelType | function to set global custom input label type | (value: CustomInputLabelType) | -
 setGlobalCustomInputLabelStyle | function to set global custom input label style | (value: TextStyle) | -
+setGlobalCustomInputPlaceholderColor | function to set global custom placeholder color | (value: string) | -
 setGlobalCustomInputTextInputStyle | function to set global custom textInput style | (value: TextStyle) | - 
 setGlobalCustomInputErrorLabelStyle | function to set global custom error label style | (value: TextStyle) | -
 setGlobalCustomInputUnderlineWidth | function to set global custom input underline width | (value: number) | -

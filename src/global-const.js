@@ -18,8 +18,10 @@ const DEFAULT_GLOBAL_CONST = {
   // BUTTON STYLE
   ACTIVE_BUTTON_COLOR: Colors.turqoise,
   ACTIVE_BUTTON_TITLE_COLOR: Colors.white,
+  ACTIVE_BUTTON_TITLE_STYLE: {},
   DISABLE_BUTTON_COLOR: Colors.carara,
   DISABLE_BUTTON_TITLE_COLOR: Colors.black,
+  DISABLE_BUTTON_TITLE_STYLE: {},
   BUTTON_TITLE_SIZE: scale(15),
   BUTTON_HEIGHT_SIZE: scale(50),
   BUTTON_LOADING_COLOR: Colors.turqoise,
@@ -108,6 +110,7 @@ const DEFAULT_GLOBAL_CONST = {
   // CUSTOM INPUT
   CUSTOM_INPUT_LABEL_TYPE: 'default',
   CUSTOM_INPUT_LABEL_STYLE: {},
+  CUSTOM_INPUT_PLACEHOLDER_COLOR: undefined,
   CUSTOM_INPUT_TEXT_INPUT_STYLE: {},
   CUSTOM_INPUT_ERROR_LABEL_STYLE: {},
   CUSTOM_INPUT_UNDERLINE_WIDTH: 1,
@@ -145,11 +148,17 @@ export function setGlobalActiveButtonColor(value) {
 export function setGlobalActiveButtonTitleColor(value) {
   globalConst = Object.appendObject(globalConst, 'ACTIVE_BUTTON_TITLE_COLOR', value)
 }
+export function setGlobalActiveButtonTitleStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'ACTIVE_BUTTON_TITLE_STYLE', value)
+}
 export function setGlobalDisableButtonColor(value) {
   globalConst = Object.appendObject(globalConst, 'DISABLE_BUTTON_COLOR', value)
 }
 export function setGlobalDisableButtonTitleColor(value) {
   globalConst = Object.appendObject(globalConst, 'DISABLE_BUTTON_TITLE_COLOR', value)
+}
+export function setGlobalDisableButtonTitleStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'DISABLE_BUTTON_TITLE_STYLE', value)
 }
 export function setGlobalButtonTitleSize(value) {
   globalConst = Object.appendObject(globalConst, 'BUTTON_TITLE_SIZE', value)
@@ -359,6 +368,9 @@ export function setGlobalCustomInputLabelType(value) {
 }
 export function setGlobalCustomInputLabelStyle(value) {
   globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_LABEL_STYLE', value)
+}
+export function setGlobalCustomInputPlaceholderColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_PLACEHOLDER_COLOR', value)
 }
 export function setGlobalCustomInputTextInputStyle(value) {
   globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_TEXT_INPUT_STYLE', value)

@@ -17,10 +17,13 @@ const Button = (props) => {
       backgroundColor: GlobalConst.getValue().DISABLE_BUTTON_COLOR,
     },
     activeTitleStyle: {
+      ...GlobalConst.getValue().ACTIVE_BUTTON_TITLE_STYLE,
       color: GlobalConst.getValue().ACTIVE_BUTTON_TITLE_COLOR,
       fontSize: GlobalConst.getValue().BUTTON_TITLE_SIZE,
     },
     disableTitleStyle: {
+      ...GlobalConst.getValue().DISABLE_BUTTON_TITLE_STYLE,
+      fontSize: GlobalConst.getValue().BUTTON_TITLE_SIZE,
       color: GlobalConst.getValue().DISABLE_BUTTON_TITLE_COLOR,
     }
   }

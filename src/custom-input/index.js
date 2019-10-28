@@ -360,6 +360,10 @@ class CustomInput extends Component {
       }
     }
 
+    if (activeProps.placeholderTextColor === undefined && GlobalConst.getValue().CUSTOM_INPUT_PLACEHOLDER_COLOR) {
+      activeProps = Obj.appendObject(activeProps, 'placeholderTextColor', GlobalConst.getValue().CUSTOM_INPUT_PLACEHOLDER_COLOR)
+    }
+
     // REMOVE UNUSED PROPS
     delete activeProps.ref
     delete activeProps.underlineColorAndroid
