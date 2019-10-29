@@ -21,6 +21,7 @@ After you install this package you need to make sure you install / link this pac
 ```
 1. "react-native-vector-icons": "^6.6.0",
 2. "@react-native-community/netinfo": "^4.4.0",
+3. "react-native-date-picker": "^2.7.0",
 ```
 
 ## Extra steps
@@ -28,7 +29,7 @@ After you install this package you need to make sure you install / link this pac
 ### react-native >= 0.60.0
 
 ```
-1. yarn add react-native-vector-icons @react-native-community/netinfo
+1. yarn add react-native-vector-icons @react-native-community/netinfo react-native-date-picker
 2. cd ios
 3. pod install
 ```
@@ -36,9 +37,10 @@ After you install this package you need to make sure you install / link this pac
 ### react-native < 0.60.0
 
 ```
-1. yarn add react-native-vector-icons @react-native-community/netinfo
+1. yarn add react-native-vector-icons @react-native-community/netinfo react-native-date-picker
 2. react-native link react-native-vector-icons
 3. react-native link @react-native-community/netinfo
+4. react-native link react-native-date-picker
 ```
 
 for more information about that extra steps check this link :

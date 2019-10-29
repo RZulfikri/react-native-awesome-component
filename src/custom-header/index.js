@@ -5,7 +5,7 @@ import { Container } from '../styled/share.styled'
 import * as Obj from '../method/object'
 import * as GlobalConst from '../global-const'
 import { LeftContainer, LeftTouchableContainer, TitleContainer, ActionTitle, Title, RightContainer, RightTouchableContainer } from './styled'
-import { getStatusBarHeight } from 'react-native-iphone-x-helper'
+import { getStatusBarHeight, isIphoneX } from 'react-native-iphone-x-helper'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Entypo from 'react-native-vector-icons/Entypo'
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
@@ -138,7 +138,7 @@ const CustomHeader = (props) => {
   }
 
   let containerStyle = {
-    height: GlobalConst.getValue().HEADER_HEIGHT + headerPaddingTop,
+    height: GlobalConst.getValue().HEADER_HEIGHT + isIphoneX ? headerPaddingTop : 0,
     backgroundColor: GlobalConst.getValue().HEADER_BACKGROUND,
     flexDirection: 'row',
   }
@@ -187,7 +187,7 @@ const CustomHeader = (props) => {
   }
 
   return (
-    <Container style={[containerStyle, { paddingTop: headerPaddingTop }]} isCard={isCard}>
+    <Container style={[containerStyle, { paddingTop: isIphoneX ? headerPaddingTop : 0 }]} isCard={isCard}>
       {renderLeft ? (
         <LeftContainer style={[leftContainerStyle]}>
           {renderLeft()}
