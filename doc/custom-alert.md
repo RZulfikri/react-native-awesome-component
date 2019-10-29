@@ -13,7 +13,28 @@ import { CustomAlert } from 'react-native-awesome-component'
 render() {
   return (
     <View style={styles.applicationView}>
-      <CustomAlert />
+      <CustomAlert
+        iconType={'material-community'}
+        iconSuccessName={'check-circle'}
+        iconInfoName={'alert-circle'}
+        iconErrorName={'close-circle'}
+        iconSuccessSize={50}
+        iconInfoSize={50}
+        iconErrorSize={50}
+        iconSuccessStyle={{ color: Colors.slateGrey }}
+        iconInfoStyle={{ color: Colors.lightNavy }}
+        iconErrorStyle={{ color: Colors.pastelRed }}
+        titleStyle={{ fontFamily: Fonts.type.OpenSans.regular }}
+        customConfiguration={{
+          enableDismiss: false,
+          successColor: Colors.lightNavy,
+          errorColor: Colors.pastelRed,
+          infoColor: Colors.lightNavy,
+        }}
+        containerStyle={{
+          borderRadius: 5
+        }}
+      />
       <StatusBar barStyle='light-content' />
       <ReduxNavigation />
     </View>
@@ -31,6 +52,10 @@ how to show the alert check documention below [here](../doc/custom-alert.md#b-ou
 //ICustomAlertConfiguration (Alert options object)
 ICustomAlertConfiguration = {
   type: AlertType, // success | info | error. if value undefined it will show alert without top image / icon
+  iconType: undefined, // it use to replace current alert icon type
+  iconName: undefined, // it use to replace current alert icon name
+  iconSize: undefined, // it use to replace current alert icon size
+  iconStyle: {}, // it use to replace current alert icon style
   imgError: undefined, // image path (require(./)). if value undefined it will show default success icon
   imgSuccess: undefined. // image path (require(./)). if value undefined it will show default info icon
   imgInfo: undefined, // image path (require(./)). if value undefined it will show default error icon
@@ -54,6 +79,16 @@ ICustomAlertConfiguration = {
 CustomAlertProps = {
   containerStyle: {}, // view style
   titleStyle: {}, // text style
+  iconType: string, // it use to set default icon type `(ant-design, entypo, evil-icons, feather, font-awesome, font-awesome5, fontisto, foundation, ionicons, material-community, material-icons, octicons)` | `font-awesome5`
+  iconSuccessName: string, // it use to set default icon success name 
+  iconInfoName: string, // it use to set default icon info name
+  iconErrorName: string, // it use to set default icon error name
+  iconSuccessSize: number, // it use to set default icon success size
+  iconInfoSize: number, // it use to set default icon info size
+  iconErrorSize: number, // it use to set default icon error size
+  iconSuccessStyle: StyleProp<ImageStyle>, // it use to set default icon success style
+  iconInfoStyle: StyleProp<ImageStyle>, // it use to set default icon info style
+  iconErrorStyle: StyleProp<ImageStyle>, // it use to set default icon error style
   messageStyle: {}, // text style
   imageStyle: {}, // image style
   singleButtonContainerStyle: {}, // view style
@@ -75,6 +110,16 @@ Props | Description | Default
 --- | --- | --- 
 enableDismiss: boolean | props to enable / disable dismiss onpress backdrop | false 
 containerStyle: StyleProp<ViewStyle> | props to set style of alert container | {} 
+iconType: string; | props to set default icon type `(ant-design, entypo, evil-icons, feather, font-awesome, font-awesome5, fontisto, foundation, ionicons, material-community, material-icons, octicons)` | `font-awesome5`
+iconSuccessName: string | props to set default icon success name | `check-circle`
+iconInfoName: string | props to set default icon info name | `info-circle`
+iconErrorName: string | props to set default icon error name | `times-circle`
+iconSuccessSize: number| props to set default icon success size | 50
+iconInfoSize: number | props to set default icon info size | 50
+iconErrorSize: number | props to set default icon error size | 50
+iconSuccessStyle: StyleProp<ImageStyle> | props to set default icon success style | {}
+iconInfoStyle: StyleProp<ImageStyle> | props to set default icon info style | {}
+iconErrorStyle: StyleProp<ImageStyle> | props to set default icon error style | {}
 titleStyle: TextProps | props to set style of alert title | {} 
 messageStyle: TextProps | props to set style of alert message | {} 
 imageStyle: ImageStyle | props to set style of alert image | {}
