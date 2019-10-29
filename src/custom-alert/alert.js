@@ -7,7 +7,7 @@ import { Title, Message, ImageContainer, ImageAlert } from './styled'
 import CustomButton from '../custom-button'
 import Colors from '../colors'
 import * as scale from '../method/scale'
-import Icons from 'react-native-vector-icons/FontAwesome5'
+import { getIconByType } from '../method/helper'
 
 const ALERT_TYPE = {
   success: 'success',
@@ -19,6 +19,29 @@ class Alert extends PureComponent {
   static propTypes = {
     enableDismiss: PropTypes.bool,
     containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    iconType: PropTypes.oneOf([
+      'ant-design',
+      'entypo',
+      'evil-icons',
+      'feather',
+      'font-awesome',
+      'font-awesome5',
+      'fontisto',
+      'foundation',
+      'ionicons',
+      'material-community',
+      'material-icons',
+      'octicons',
+    ]),
+    iconSuccessName: PropTypes.string,
+    iconInfoName: PropTypes.string,
+    iconErrorName: PropTypes.string,
+    iconSuccessSize: PropTypes.number,
+    iconInfoSize: PropTypes.number,
+    iconErrorSize: PropTypes.number,
+    iconSuccessStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    iconInfoStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    iconErrorStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     titleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     imageStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     messageStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
@@ -29,6 +52,23 @@ class Alert extends PureComponent {
     customConfiguration: PropTypes.shape({
       enableDismiss: PropTypes.bool,
       type: PropTypes.string,
+      iconType: PropTypes.oneOf([
+        'ant-design',
+        'entypo',
+        'evil-icons',
+        'feather',
+        'font-awesome',
+        'font-awesome5',
+        'fontisto',
+        'foundation',
+        'ionicons',
+        'material-community',
+        'material-icons',
+        'octicons',
+      ]),
+      iconName: PropTypes.string,
+      iconSize: PropTypes.number,
+      iconStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
       imgError: PropTypes.any,
       imgSuccess: PropTypes.any,
       imgInfo: PropTypes.any,
@@ -51,6 +91,16 @@ class Alert extends PureComponent {
   static defaultProps = {
     enableDismiss: true,
     containerStyle: {},
+    iconType: 'font-awesome5',
+    iconSuccessName: 'check-circle',
+    iconInfoName: 'info-circle',
+    iconErrorName: 'times-circle',
+    iconSuccessSize: 50,
+    iconInfoSize: 50,
+    iconErrorSize: 50,
+    iconSuccessStyle: {},
+    iconInfoStyle: {},
+    iconErrorStyle: {},
     titleStyle: {},
     messageStyle: {},
     imageStyle: {},
@@ -72,6 +122,10 @@ class Alert extends PureComponent {
     let option = {
       enableDismiss: true,
       type: ALERT_TYPE.success,
+      iconType: undefined,
+      iconName: undefined,
+      iconSize: undefined,
+      iconStyle: {},
       imgError: undefined,
       imgSuccess: undefined,
       imgInfo: undefined,
@@ -101,21 +155,32 @@ class Alert extends PureComponent {
     this.onCancel = this.onCancel.bind(this)
   }
 
+  oldOption
+  oldCustomStyle
+
   show(configuration, customStyleConfiguration) {
     let { option, customStyle } = this.state
     if (configuration) {
-      option = configuration
+      this.oldOption = option
+      option = {
+        ...option,
+        ...configuration,
+      }
     }
 
     if (customStyleConfiguration) {
-      customStyle = customStyleConfiguration
+      this.oldCustomStyle = customStyle
+      customStyle = {
+        ...customStyle,
+        ...customStyleConfiguration
+      }
     }
 
     this.setState({ visible: true, option, customStyle })
   }
 
   hide() {
-    this.setState({ visible: false, customStyle: undefined })
+    this.setState({ visible: false, customStyle: undefined, option: this.oldOption, customStyle: this.oldCustomStyle })
   }
 
   onConfirm() {
@@ -209,15 +274,20 @@ class Alert extends PureComponent {
 
   renderIcon() {
     const { option, customStyle } = this.state
-    const { type, imgSuccess, imgInfo, imgError, successColor, infoColor, errorColor } = option
+    const { type, imgSuccess, imgInfo, imgError, successColor, infoColor, errorColor, iconName, iconSize, iconStyle } = option
+    const { iconSuccessName, iconInfoName, iconErrorName, iconSuccessSize, iconInfoSize, iconErrorSize, iconSuccessStyle, iconInfoStyle, iconErrorStyle } = this.props
     const { imageStyle } = customStyle ? customStyle : this.props
+
+    const uIconType = option.iconType ? option.iconType : this.props.iconType
+
+    const Icons = getIconByType(uIconType)
 
     switch (type) {
       case ALERT_TYPE.success: {
         if (imgSuccess) {
           return <ImageAlert source={imgSuccess} style={imageStyle} resizeMethod='resize' resizeMode='contain' />
         } else {
-          return <Icons name={'check-circle'} size={50} color={successColor} />
+          return <Icons name={iconName ? iconName : iconSuccessName} size={iconSize ? iconSize : iconSuccessSize} color={successColor} style={[iconSuccessStyle, iconStyle]} />
         }
       }
 
@@ -225,7 +295,7 @@ class Alert extends PureComponent {
         if (imgInfo) {
           return <ImageAlert source={imgInfo} style={imageStyle} resizeMethod='resize' resizeMode='contain' />
         } else {
-          return <Icons name={'info-circle'} size={50} color={infoColor} />
+          return <Icons name={iconName ? iconName : iconInfoName} size={iconSize ? iconSize: iconInfoSize} color={infoColor} style={[iconInfoStyle, iconStyle]} />
         }
       }
 
@@ -233,7 +303,7 @@ class Alert extends PureComponent {
         if (imgError) {
           return <ImageAlert source={imgError} style={imageStyle} resizeMethod='resize' resizeMode='contain' />
         } else {
-          return <Icons name={'times-circle'} size={50} color={errorColor} />
+          return <Icons name={iconName ? iconName : iconErrorName} size={iconSize ? iconSize : iconErrorSize} color={errorColor} style={[iconErrorStyle, iconStyle]} />
         }
       }
     }

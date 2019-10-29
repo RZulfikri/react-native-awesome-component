@@ -7,7 +7,7 @@ import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle, FlatListProps, 
 
 type ResizeMethodType = "auto" | "resize" | "scale"
 type ResizeModeType = "cover" | "contain" | "stretch" | "repeat" | "center"
-type HeaderIconType = 'ant-design' | 'entypo' | 'evil-icons' | 'feather' | 'font-awesome' | 'font-awesome5' | 'fontisto' | 'foundation' | 'ionicons' | 'material-community' | 'material-icons' | 'octicons'
+type IconType = 'ant-design' | 'entypo' | 'evil-icons' | 'feather' | 'font-awesome' | 'font-awesome5' | 'fontisto' | 'foundation' | 'ionicons' | 'material-community' | 'material-icons' | 'octicons'
 type AlertType = 'success' | 'error' | 'info'
 type DatepickerType = 'time' | 'date' | 'datetime'
 
@@ -74,7 +74,7 @@ interface ICustomHeaderProps {
   titleRight: string;
   renderRight: () => void;
   onPressRight: () => void;
-  iconType: HeaderIconType;
+  IconType: IconType;
 }
 
 interface IConnectionHandler {
@@ -94,6 +94,10 @@ interface ICustomAlertMultiButtonStyle {
 interface ICustomAlertConfiguration {
   enableDismiss: boolean;
   type: AlertType;
+  iconType: IconType;
+  iconName: string;
+  iconSize: number;
+  iconStyle: StyleProp<ImageStyle>;
   imgError: any;
   imgSuccess: any;
   imgInfo: any;
@@ -109,6 +113,16 @@ interface ICustomAlertConfiguration {
 interface ICustomAlert {
   enableDismiss: boolean;
   containerStyle: StyleProp<ViewStyle>;
+  iconType: IconType;
+  iconSuccessName: string;
+  iconInfoName: string;
+  iconErrorName: string;
+  iconSuccessSize: number;
+  iconInfoSize: number;
+  iconErrorSize: number;
+  iconSuccessStyle: StyleProp<ImageStyle>;
+  iconInfoStyle: StyleProp<ImageStyle>;
+  iconErrorStyle: StyleProp<ImageStyle>;
   titleStyle: TextProps;
   messageStyle: TextProps;
   imageStyle: ImageStyle;
@@ -486,7 +500,7 @@ interface IGlobalConst {
   setGlobalHeaderRightIconColor: (value: string) => void;
   setGlobalHeaderRightActionTitleSize: (value: number) => void;
   setGlobalHeaderRightActionTitleColor: (value: string) => void;
-  setGlobalHeaderIconType: (value: HeaderIconType) => void;
+  setGlobalIconType: (value: IconType) => void;
   setGlobalHeaderBackIconImage: (value: any) => void; 
   setGlobalHeaderBackIconImageStyle: (value: StyleProp<ImageStyle>) => void;
   // CONNECTION HANDLER
