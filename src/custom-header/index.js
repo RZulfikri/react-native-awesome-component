@@ -124,7 +124,8 @@ const CustomHeader = (props) => {
     iconType,
   } = props
 
-  const headerPaddingTop = Platform.OS === 'ios' ? iphoneXPadding ? getStatusBarHeight() : 0 : 0
+  const iPhoneX = isIphoneX();
+  const headerPaddingTop = Platform.OS === 'ios' ? iPhoneX ? getStatusBarHeight() : 0 : 0
   let headerTitle = ''
   let isFirstRoute = false
 
@@ -138,7 +139,7 @@ const CustomHeader = (props) => {
   }
 
   let containerStyle = {
-    height: GlobalConst.getValue().HEADER_HEIGHT + isIphoneX ? headerPaddingTop : 0,
+    height: GlobalConst.getValue().HEADER_HEIGHT + headerPaddingTop,
     backgroundColor: GlobalConst.getValue().HEADER_BACKGROUND,
     flexDirection: 'row',
   }
@@ -187,7 +188,7 @@ const CustomHeader = (props) => {
   }
 
   return (
-    <Container style={[containerStyle, { paddingTop: isIphoneX ? headerPaddingTop : 0 }]} isCard={isCard}>
+    <Container style={[containerStyle, { paddingTop: headerPaddingTop }]} isCard={isCard}>
       {renderLeft ? (
         <LeftContainer style={[leftContainerStyle]}>
           {renderLeft()}
