@@ -74,7 +74,7 @@ class PlaceholderText extends Component {
     }
     if (style) {
       textStyle = {
-        textStyle,
+        ...textStyle,
         ...style
       }
     }
