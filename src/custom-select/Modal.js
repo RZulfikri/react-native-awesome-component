@@ -1,18 +1,21 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-closing-bracket-location */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, FlatList} from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import Modal from 'react-native-modal';
 import ModalHeader from './ModalHeader';
 import Item from './item';
 import Colors from '../colors';
+import { GlobalConst } from '../..';
+import _ from 'lodash'
+import { getBottomSpace } from 'react-native-iphone-x-helper';
 
 const ModalList = props => {
   const {
     modalVisible,
-    label,
+    title,
     data,
     closeModal,
     onSubmit,
@@ -22,66 +25,89 @@ const ModalList = props => {
     multiSelect,
     selectedPickerColor,
     unSelectedPickerColor,
+    renderHeader,
+    renderItem,
   } = props;
 
   const [value, setValue] = useState(initialValue);
 
+  const leftAction = () => {
+    closeModal();
+    setValue(initialValue);
+  }
+
+  const rightAction = () => {
+    onSubmit(value);
+    closeModal();
+  }
+
+  const onPressItem = (data) => {
+    if (multiSelect) {
+      if (Array.isArray(value)) {
+        const newValue = [...value]
+        const index = newValue.findIndex(item => _.isEqual(item, data))
+        if (index >= 0) {
+          newValue.splice(index, 1)
+        } else {
+          newValue.push(data)
+        }
+        setValue(newValue)
+      } else {
+        setValue([data])
+      }
+    } else {
+      setValue(data)
+    }
+  }
+
+  const checkIsSelected = (item, value) => {
+    if (multiSelect) {
+      if (Array.isArray(value)) {
+        return _.some(value, item)
+      } else {
+        return false
+      }
+    } else {
+      return _.isEqual(item, value)
+    }
+  }
+
+  const backgroundColor = GlobalConst.getValue().CUSTOM_SELECT_BACKGROUND_COLOR
+
   return (
     <Modal
       isVisible={modalVisible}
-      style={{margin: 0, backgroundColor: 'white'}}>
-      <View style={{flex: 1, backgroundColor: Colors.carara}}>
-        <ModalHeader
-          label={label}
-          closeModal={() => {
-            closeModal();
-            setValue(initialValue);
-          }}
-          onSubmit={() => {
-            onSubmit(value);
-            closeModal();
-          }}
-        />
+      style={{ margin: 0, backgroundColor: backgroundColor }}>
+      <View style={{ flex: 1, backgroundColor: backgroundColor }}>
+        {renderHeader ? renderHeader({ label, leftAction, rightAction }) : (
+          <ModalHeader
+            title={title}
+            closeModal={() => leftAction()}
+            onSubmit={() => rightAction()}
+          />
+        )}
         <FlatList
           data={data}
-          renderItem={({item, index}) => (
-            <Item
-              item={item}
-              multiSelect={multiSelect}
-              keyValue={keyValue}
-              selectedPickerColor={selectedPickerColor}
-              unSelectedPickerColor={unSelectedPickerColor}
-              isSelected={
-                multiSelect
-                  ? value.findIndex(
-                      itemValue =>
-                        itemValue ===
-                        (keyDescription && keyValue ? item[keyValue] : item),
-                    ) !== -1
-                  : value === keyDescription && keyValue
-                  ? item[keyValue]
-                  : item
-              }
-              keyDescription={keyDescription}
-              onPressItem={(dataValue, isSelected) => {
-                if (multiSelect) {
-                  const temp = [...value];
-                  if (!isSelected) {
-                    temp.push(dataValue);
-                  } else {
-                    const removeIndex = temp.findIndex(
-                      itemTemp => itemTemp === dataValue,
-                    );
-                    temp.splice(removeIndex, 1);
-                  }
-                  setValue(temp);
-                } else {
-                  setValue(dataValue);
-                }
-              }}
-            />
-          )}
+          renderItem={({ item, index }) => {
+            if (renderItem) {
+              return renderItem({ item, index })
+            } else {
+              return (
+                <Item
+                  item={item}
+                  multiSelect={multiSelect}
+                  keyValue={keyValue}
+                  selectedPickerColor={selectedPickerColor}
+                  unSelectedPickerColor={unSelectedPickerColor}
+                  isSelected={checkIsSelected(item, value)}
+                  keyDescription={keyDescription}
+                  onPressItem={(data, isSelected) => onPressItem(data, isSelected)}
+                />
+              )
+            }
+          }}
           keyExtractor={(item, index) => index.toString()}
+          contentContainerStyle={{ paddingBottom: getBottomSpace() }}
         />
       </View>
     </Modal>
@@ -90,7 +116,7 @@ const ModalList = props => {
 
 ModalList.propTypes = {
   modalVisible: PropTypes.bool.isRequired,
-  label: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   closeModal: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
@@ -100,6 +126,8 @@ ModalList.propTypes = {
   multiSelect: PropTypes.bool.isRequired,
   selectedPickerColor: PropTypes.string.isRequired,
   unSelectedPickerColor: PropTypes.string.isRequired,
+  renderItem: PropTypes.func,
+  renderHeader: PropTypes.func,
 };
 
 ModalList.defaultProps = {

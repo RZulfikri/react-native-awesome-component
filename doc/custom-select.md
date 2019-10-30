@@ -52,21 +52,22 @@ return (
 
 **Props**
 
-| Props                                  | Description                                                     | Default              |
-| -------------------------------------- | --------------------------------------------------------------- | -------------------- |
-| placeholder: string                    | props to set placeholder text                                   | -                    |
-| value: string                          | props to set value                                              | -                    |
-| data: any[]                            | props to set list of data that available to pick                | []                   |
-| onChangeValue: (value: string) => void | props to handle when value has changed                          | `(value) => null`    |
-| textStyle: `StyleProp<TextStyle>`      | props to set style of text                                      | -                    |
-| style: `StyleProp<ViewStyle>`          | props to set style of picker form                               | -                    |
-| label: string                          | props to set display label                                      | -                    |
-| isRequired?: boolean                   | props to set the picker is required                             | false                |
-| error?: any                            | props to set error                                              | -                    |
-| keyValue?: string                      | props to set key value when using array of objects              | -                    |
-| keyDescription?: string                | props to set key of displayed desc. when using array of objects | -                    |
-| multiSelect?: boolean                  | props to set picker is multi select mode                        | `false`              |
-| multiSeparator?: string                | props to set multi select separator                             | `', '`               |
-| labelType?: CustomInputLabelType       | props to set label position                                     | `top-label`          |
-| selectedPickerColor?: string           | props to set colors of selected value                           | `check global const` |
-| unSelectedPickerColor?: string         | props to set colors of unselected value                         | `check global const` |
+Props | Description | Default  
+--- | --- | --- 
+placeholder: string; | props to set placeholder | -
+value: any; | props to set value | -
+data: any[]; | props to set list to pick | -
+onChangeValue: (value: any) => void | props to handle once value is change | -
+label: string; | props to set label | -
+isRequired: boolean; | props to set if input is required | `false`
+error: string; | props to set error message | -
+rightIcon: string; | props to set input right icon name | -
+keyValue: string; | props to set key value | -
+keyDescription: string; | props to set description key to show item | -
+multiSelect: boolean; | props to set select type, multiple or single | `false`
+labelType: string; | props to set label type | `top-label`
+selectedPickerColor: string; | props to set selected color | -
+unSelectedPickerColor: string; | props to set unselected color | -
+selectTitle: string; | props to set modal select title | `Select Item`
+disabled: string; | props to disable input | `false`
+onChangeValidation: (hasError: boolean) => void; | props handle/get value is input is error | -

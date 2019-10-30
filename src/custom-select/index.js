@@ -7,11 +7,11 @@ import {
   ViewPropTypes,
   View,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import ModalList from './Modal';
 import CustomInput from '../custom-input';
 import { GlobalConst } from '../..';
 import Colors from '../colors';
+import { getIconByType } from '../method/helper'
 
 const CustomSelect = props => {
   const {
@@ -22,8 +22,6 @@ const CustomSelect = props => {
     error,
     data,
     onChangeValue,
-    style,
-    textStyle,
     rightIcon,
     labelType,
     multiSelect,
@@ -31,27 +29,50 @@ const CustomSelect = props => {
     keyDescription,
     selectedPickerColor,
     unSelectedPickerColor,
-    multiSeparator,
+    selectTitle,
+    disabled,
+    onChangeValidation,
   } = props;
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
 
-  let valueText = value;
+  let valueText = '';
 
-  if (multiSelect && value) {
-    const temp =
-      keyValue && keyDescription
-        ? value.map(
-          item =>
-            data.find(dataItem => dataItem[keyValue] === item)[
-            keyDescription
-            ],
-        )
-        : value;
-    valueText = temp.join(multiSeparator);
-  } else if (keyDescription && keyValue && value) {
-    valueText = data.find(item => item[keyValue] === value)[keyDescription];
+  if (value) {
+    if (multiSelect && Array.isArray(value)) {
+      if (keyDescription) {
+        const arrayString = value.map((item) => item[keyDescription])
+        valueText = arrayString.join(', ')
+      } else {
+        valueText = value.join(', ')
+      }
+    } else {
+      if (keyDescription) {
+        valueText = value[keyDescription]
+      } else {
+        valueText = value
+      }
+    }
   }
+
+  const iconType = GlobalConst.getValue().CUSTOM_SELECT_ICON_TYPE
+  const rightIconName = rightIcon ? rightIcon : GlobalConst.getValue().CUSTOM_SELECT_RIGHT_ICON_NAME
+  const rightIconSize = GlobalConst.getValue().CUSTOM_SELECT_RIGHT_ICON_SIZE
+  const rightIconColor = GlobalConst.getValue().CUSTOM_SELECT_RIGHT_ICON_COLOR
+  const rightIconStyle = GlobalConst.getValue().CUSTOM_SELECT_RIGHT_ICON_STYLE
+  const rightIconRender = GlobalConst.getValue().CUSTOM_SELECT_RIGHT_RENDER
+
+  const renderItem = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_RENDER : GlobalConst.getValue().CUSTOM_SELECT_ITEM_RENDER
+  const renderHeader = GlobalConst.getValue().CUSTOM_SELECT_HEADER_RENDER
+
+  let errorMessage = error ? error : ''
+
+  if (isRequired && isTouch && valueText.length === 0) {
+    errorMessage = GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED(label)
+  }
+
+  const Icon = getIconByType(iconType)
 
   return (
     <View>
@@ -60,25 +81,42 @@ const CustomSelect = props => {
         label={label}
         labelType={labelType}
         underlineWidth={1}
-        onPress={() => setModalVisible(true)}
+        editable={!disabled}
+        onPress={disabled ? undefined : () => setModalVisible(true)}
         isRequired={isRequired}
         defaultValue={valueText}
-        renderRightAction={() => <Icon name="chevron-right" size={14} color={Colors.slate_grey} />}
+        renderRightAction={() => {
+          if (typeof rightIconRender === 'function') {
+            return rightIconRender()
+          } else {
+            return <Icon name={rightIconName} size={rightIconSize} color={rightIconColor} style={rightIconStyle} />
+          }
+        }}
+        forceErrorMessage={errorMessage}
       />
       <ModalList
         data={data}
         multiSelect={multiSelect}
         keyDescription={keyDescription}
         keyValue={keyValue}
-        initialValue={multiSelect && !value ? [] : value}
+        initialValue={value}
         modalVisible={modalVisible}
         onSubmit={selectValue => {
+          setModalVisible(false)
           onChangeValue(selectValue);
+          onChangeValidation(errorMessage.length > 0 ? true : false)
+          setIsTouch(true)
         }}
         selectedPickerColor={selectedPickerColor}
         unSelectedPickerColor={unSelectedPickerColor}
-        closeModal={() => setModalVisible(false)}
-        label={label}
+        closeModal={() => {
+          setModalVisible(false)
+          onChangeValidation(errorMessage.length > 0 ? true : false)
+          setIsTouch(true)
+        }}
+        renderItem={renderItem}
+        renderHeader={renderHeader}
+        title={selectTitle}
       />
     </View>
   );
@@ -89,8 +127,6 @@ CustomSelect.propTypes = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
   data: PropTypes.array.isRequired,
   onChangeValue: PropTypes.func.isRequired,
-  textStyle: ViewPropTypes.style,
-  style: ViewPropTypes.style,
   label: PropTypes.string,
   isRequired: PropTypes.bool,
   error: PropTypes.string,
@@ -98,28 +134,23 @@ CustomSelect.propTypes = {
   keyValue: PropTypes.string,
   keyDescription: PropTypes.string,
   multiSelect: PropTypes.bool,
-  multiSeparator: PropTypes.string,
   selectedPickerColor: PropTypes.string,
   unSelectedPickerColor: PropTypes.string,
-  labelType: PropTypes.oneOf(['top-label', 'default', 'left-label', 'right-label'])
+  labelType: PropTypes.oneOf(['top-label', 'default', 'left-label', 'right-label']),
+  selectTitle: PropTypes.string,
+  disabled: PropTypes.bool,
+  onChangeValidation: PropTypes.func,
 };
 
 CustomSelect.defaultProps = {
   label: '',
   placeholder: '',
   isRequired: false,
-  error: null,
-  rightIcon: '',
-  textStyle: null,
-  value: null,
-  style: undefined,
-  keyValue: null,
-  keyDescription: null,
   multiSelect: false,
-  multiSeparator: ', ',
   labelType: 'top-label',
-  unSelectedPickerColor: GlobalConst.getValue().CUSTOM_SELECT_SELECTED_COLOR,
-  selectedPickerColor: GlobalConst.getValue().CUSTOM_SELECT_UNSELECTED_COLOR,
+  selectTitle: 'Select Item',
+  disabled: false,
+  onChangeValidation: () => null,
 };
 
 export default CustomSelect;
