@@ -189,19 +189,19 @@ interface ICustomSelect {
   value: string;
   data: any[];
   onChangeValue: (value: string) => void;
-  textStyle: StyleProp<TextStyle>;
-  style: StyleProp<ViewStyle>;
   label: string;
   isRequired?: boolean;
-  error?: any; 
+  error?: any;
   rightIcon?: string;
   keyValue?: string;
   keyDescription?: string;
   multiSelect?: boolean;
-  multiSeparator?: string; 
   labelType?: CustomInputLabelType;
   selectedPickerColor?: string;
   unSelectedPickerColor?: string;
+  selectTitle: string;
+  disabled: boolean;
+  onChangeValidation: (hasError: boolean) => void;
 }
 
 interface ICustomDatepicker {
@@ -409,12 +409,6 @@ interface IGlobalConstValue {
   CUSTOM_STEP_BAR_SEPARATOR: boolean;
   CUSTOM_STEP_BAR_ROUND_CORNER: boolean;
 
-  // CUSTOM SELECT
-  CUSTOM_SELECT_SELECTED_COLOR: string;
-  CUSTOM_SELECT_UNSELECTED_COLOR: string;
-  CUSTOM_SELECT_HEADER_BACKGROUND_COLOR: string;
-  CUSTOM_SELECT_HEADER_COLOR: string;
-
   // EMPTY CONTAINER
   EMPTY_CONTAINER_TITLE: string;
   EMPTY_CONTAINER_MESSAGE: string;
@@ -446,6 +440,50 @@ interface IGlobalConstValue {
   FLATLIST_EMPTY_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
   FLATLIST_ERROR_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
   FLATLIST_NO_CONNECTION_CONTAINER: any; // make sure you have onRefresh props to pass refresh function
+
+  // CUSTOM SELECT
+  CUSTOM_SELECT_BACKGROUND_COLOR: string;
+  CUSTOM_SELECT_ICON_TYPE: IconType;
+  CUSTOM_SELECT_RIGHT_ICON_NAME: string;
+  CUSTOM_SELECT_RIGHT_ICON_COLOR: string;
+  CUSTOM_SELECT_RIGHT_ICON_SIZE: number;
+  CUSTOM_SELECT_RIGHT_ICON_STYLE: StyleProp<ImageStyle>;
+  CUSTOM_SELECT_RIGHT_RENDER: any;
+  CUSTOM_SELECT_HEADER_TITLE_STYLE: StyleProp<TextStyle>;
+  CUSTOM_SELECT_HEADER_BACKGROUND_COLOR: string;
+  CUSTOM_SELECT_HEADER_LEFT_ICON_NAME: string;
+  CUSTOM_SELECT_HEADER_LEFT_ICON_SIZE: number;
+  CUSTOM_SELECT_HEADER_LEFT_ICON_COLOR: string;
+  CUSTOM_SELECT_HEADER_LEFT_ICON_STYLE: StyleProp<ImageStyle>;
+  CUSTOM_SELECT_HEADER_RIGHT_ICON_NAME: string;
+  CUSTOM_SELECT_HEADER_RIGHT_ICON_SIZE: number;
+  CUSTOM_SELECT_HEADER_RIGHT_ICON_COLOR: string;
+  CUSTOM_SELECT_HEADER_RIGHT_ICON_STYLE: StyleProp<ImageStyle>;
+  CUSTOM_SELECT_HEADER_RENDER_LEFT: any;
+  CUSTOM_SELECT_HEADER_RENDER_RIGHT: any;
+  CUSTOM_SELECT_HEADER_RENDER: any;
+  CUSTOM_SELECT_ITEM_RENDER: any;
+  CUSTOM_SELECT_ITEM_TITLE_STYLE: StyleProp<TextStyle>;
+  CUSTOM_SELECT_ITEM_STYLE: StyleProp<ViewStyle>;
+  CUSTOM_SELECT_ITEM_SELECT_ICON_NAME: string;
+  CUSTOM_SELECT_ITEM_SELECT_ICON_COLOR: string;
+  CUSTOM_SELECT_ITEM_SELECT_ICON_SIZE: number;
+  CUSTOM_SELECT_ITEM_SELECT_ICON_STYLE: StyleProp<ImageStyle>;
+  CUSTOM_SELECT_ITEM_UNSELECT_ICON_NAME: string;
+  CUSTOM_SELECT_ITEM_UNSELECT_ICON_COLOR: string;
+  CUSTOM_SELECT_ITEM_UNSELECT_ICON_SIZE: number;
+  CUSTOM_SELECT_ITEM_UNSELECT_ICON_STYLE: StyleProp<ImageStyle>;
+  CUSTOM_SELECT_ITEM_MULTI_RENDER: any;
+  CUSTOM_SELECT_ITEM_MULTI_TITLE_STYLE: StyleProp<TextStyle>;
+  CUSTOM_SELECT_ITEM_MULTI_STYLE: StyleProp<ViewStyle>;
+  CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_NAME: string;
+  CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_COLOR: string;
+  CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_SIZE: number;
+  CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_STYLE: StyleProp<ImageStyle>;
+  CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_NAME: string;
+  CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_COLOR: string;
+  CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_SIZE: number;
+  CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_STYLE: StyleProp<ImageStyle>;
 
   // CUSTOM INPUT
   CUSTOM_INPUT_LABEL_TYPE: string;
@@ -501,7 +539,7 @@ interface IGlobalConst {
   setGlobalHeaderRightActionTitleSize: (value: number) => void;
   setGlobalHeaderRightActionTitleColor: (value: string) => void;
   setGlobalIconType: (value: IconType) => void;
-  setGlobalHeaderBackIconImage: (value: any) => void; 
+  setGlobalHeaderBackIconImage: (value: any) => void;
   setGlobalHeaderBackIconImageStyle: (value: StyleProp<ImageStyle>) => void;
   // CONNECTION HANDLER
   setGlobalConnectionHandlerSuccessTitle: (value: string) => void;
@@ -542,6 +580,49 @@ interface IGlobalConst {
   setGlobalFlatlistEmptyContainer: (value: any) => void;
   setGlobalFlatlistErrorContainer: (value: any) => void;
   setGlobalFlatlistNoConnectionContainer: (value: any) => void;
+  // CUSTOM SELECT
+  setGlobalCustomSelectBackgroundColor: (value: string) => void;
+  setGlobalCustomSelectIconType: (value: IconType) => void;
+  setGlobalCustomSelectRightIconName: (value: string) => void;
+  setGlobalCustomSelectRightIconColor: (value: string) => void;
+  setGlobalCustomSelectRightIconSize: (value: number) => void;
+  setGlobalCustomSelectRightIconStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalCustomSelectRightRender: (value: any) => void;
+  setGlobalCustomSelectHeaderTitleStyle: (value: StyleProp<TextStyle>) => void;
+  setGlobalCustomSelectHeaderBackgroundColor: (value: string) => void;
+  setGlobalCustomSelectHeaderLeftIconName: (value: string) => void;
+  setGlobalCustomSelectHeaderLeftIconSize: (value: number) => void;
+  setGlobalCustomSelectHeaderLeftIconColor: (value: string) => void;
+  setGlobalCustomSelectHeaderLeftIconStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalCustomSelectHeaderRightIconName: (value: string) => void;
+  setGlobalCustomSelectHeaderRightIconSize: (value: number) => void;
+  setGlobalCustomSelectHeaderRightIconColor: (value: string) => void;
+  setGlobalCustomSelectHeaderRightIconStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalCustomSelectHeaderRenderLeft: (value: any) => void;
+  setGlobalCustomSelectHeaderRenderRight: (value: any) => void;
+  setGlobalCustomSelectHeaderRender: (value: any) => void;
+  setGlobalCustomSelectItemRender: (value: any) => void;
+  setGlobalCustomSelectItemTitleStyle: (value: StyleProp<TextStyle>) => void;
+  setGlobalCustomSelectItemStyle: (value: StyleProp<ViewStyle>) => void;
+  setGlobalCustomSelectItemSelectIconName: (value: string) => void;
+  setGlobalCustomSelectItemSelectIconColor: (value: string) => void;
+  setGlobalCustomSelectItemSelectIconSize: (value: number) => void;
+  setGlobalCustomSelectItemSelectIconStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalCustomSelectItemUnselectIconName: (value: string) => void;
+  setGlobalCustomSelectItemUnselectIconSize: (value: string) => void;
+  setGlobalCustomSelectItemUnselectIconColor: (value: number) => void;
+  setGlobalCustomSelectItemUnselectIconStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalCustomSelectItemMultiRender: (value: any) => void;
+  setGlobalCustomSelectItemMultiTitleStyle: (value: StyleProp<TextStyle>) => void;
+  setGlobalCustomSelectItemMultiStyle: (value: StyleProp<ViewStyle>) => void;
+  setGlobalCustomSelectItemMultiSelectIconName: (value: string) => void;
+  setGlobalCustomSelectItemMultiSelectIconColor: (value: string) => void;
+  setGlobalCustomSelectItemMultiSelectIconSize: (value: number) => void;
+  setGlobalCustomSelectItemMultiSelectIconStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalCustomSelectItemMultiUnselectIconName: (value: string) => void;
+  setGlobalCustomSelectItemMultiUnselectIconSize: (value: string) => void;
+  setGlobalCustomSelectItemMultiUnselectIconColor: (value: number) => void;
+  setGlobalCustomSelectItemMultiUnselectIconStyle: (value: StyleProp<ImageStyle>) => void;
   // CUSTOM INPUT
   setGlobalCustomInputLabelType: (value: CustomInputLabelType) => void;
   setGlobalCustomInputLabelStyle: (value: StyleProp<TextStyle>) => void;

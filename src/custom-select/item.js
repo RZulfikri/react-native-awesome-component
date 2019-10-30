@@ -2,11 +2,13 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { TouchableOpacity, Text } from 'react-native';
 import Colors from '../colors';
 import { ValueText } from '../styled/share.styled';
 import metrics from '../metrics';
+import { getIconByType } from '../method/helper';
+import { GlobalConst, PlaceholderText } from '../..';
+import { ItemContainer } from './styled';
 
 const Item = props => {
   const {
@@ -19,34 +21,36 @@ const Item = props => {
     selectedPickerColor,
     unSelectedPickerColor,
   } = props;
-  const checkedIcon = multiSelect ? 'check-box' : 'radio-button-checked';
-  const uncheckedIcon = multiSelect
-    ? 'check-box-outline-blank'
-    : 'radio-button-unchecked';
+
+  const iconType = GlobalConst.getValue().CUSTOM_SELECT_ICON_TYPE
+  const iconSelectName = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_NAME : GlobalConst.getValue().CUSTOM_SELECT_ITEM_SELECT_ICON_NAME
+  const iconSelectSize = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_SIZE : GlobalConst.getValue().CUSTOM_SELECT_ITEM_SELECT_ICON_SIZE
+  const iconSelectColor = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_COLOR : GlobalConst.getValue().CUSTOM_SELECT_ITEM_SELECT_ICON_COLOR
+  const iconSelectStyle = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_STYLE : GlobalConst.getValue().CUSTOM_SELECT_ITEM_SELECT_ICON_STYLE
+
+  const iconUnselectName = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_NAME : GlobalConst.getValue().CUSTOM_SELECT_ITEM_UNSELECT_ICON_NAME
+  const iconUnselectSize = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_SIZE : GlobalConst.getValue().CUSTOM_SELECT_ITEM_UNSELECT_ICON_SIZE
+  const iconUnselectColor = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_COLOR : GlobalConst.getValue().CUSTOM_SELECT_ITEM_UNSELECT_ICON_COLOR
+  const iconUnselectStyle = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_STYLE : GlobalConst.getValue().CUSTOM_SELECT_ITEM_UNSELECT_ICON_STYLE
+
+  const itemStyle = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_STYLE : GlobalConst.getValue().CUSTOM_SELECT_ITEM_STYLE
+  const itemTitleStyle = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_TITLE_STYLE : GlobalConst.getValue().CUSTOM_SELECT_ITEM_TITLE_STYLE
+
+  const Icons = getIconByType(iconType)
+
   return (
-    <TouchableOpacity
-      style={{
-        borderBottomWidth: 1,
-        borderTopWidth: 1,
-        borderTopColor: Colors.carara,
-        borderBottomColor: Colors.carara,
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: metrics.padding,
-        backgroundColor: 'white',
-      }}
-      onPress={() => {
-        onPressItem(keyValue ? item[keyValue] : item, isSelected);
-      }}>
-      <ValueText isEmpty={false}>
-        {keyDescription ? item[keyDescription] : item}
-      </ValueText>
-      <Icon
-        name={isSelected ? checkedIcon : uncheckedIcon}
-        size={20}
-        color={isSelected ? selectedPickerColor : unSelectedPickerColor}
+    <ItemContainer
+      activeOpacity={0.8}
+      style={[itemStyle]}
+      onPress={() => onPressItem(item, isSelected)}>
+      <Text style={[{ flex: 1 }, itemTitleStyle]}>{keyDescription ? item[keyDescription] : item}</Text>
+      <Icons
+        name={isSelected ? iconSelectName : iconUnselectName}
+        size={isSelected ? iconSelectSize : iconUnselectSize}
+        color={isSelected ? iconSelectColor : iconUnselectColor}
+        style={isSelected ? iconSelectStyle : iconUnselectStyle}
       />
-    </TouchableOpacity>
+    </ItemContainer>
   );
 };
 

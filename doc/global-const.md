@@ -94,10 +94,48 @@ This is method to custom global constant/value that used in this component.
     FLATLIST_NO_CONNECTION_CONTAINER: <NoConnectionContainer />, // make sure you have onRefresh props to pass refresh function
 
     // CUSTOM SELECT
-    CUSTOM_SELECT_SELECTED_COLOR: Colors.warm_grey,
-    CUSTOM_SELECT_UNSELECTED_COLOR: Colors.warm_grey,
+    CUSTOM_SELECT_BACKGROUND_COLOR: Colors.very_light_pink_two,
+    CUSTOM_SELECT_ICON_TYPE: 'material-community',
+    CUSTOM_SELECT_RIGHT_ICON_NAME: 'chevron-right',
+    CUSTOM_SELECT_RIGHT_ICON_COLOR: Colors.black,
+    CUSTOM_SELECT_RIGHT_ICON_SIZE: 20,
+    CUSTOM_SELECT_RIGHT_ICON_STYLE: {},
+    CUSTOM_SELECT_RIGHT_RENDER: undefined,
+    CUSTOM_SELECT_HEADER_TITLE_STYLE: {},
     CUSTOM_SELECT_HEADER_BACKGROUND_COLOR: Colors.white,
-    CUSTOM_SELECT_HEADER_COLOR: Colors.warm_grey,
+    CUSTOM_SELECT_HEADER_LEFT_ICON_NAME: 'arrow-left',
+    CUSTOM_SELECT_HEADER_LEFT_ICON_SIZE: 20,
+    CUSTOM_SELECT_HEADER_LEFT_ICON_COLOR: Colors.black,
+    CUSTOM_SELECT_HEADER_LEFT_ICON_STYLE: {},
+    CUSTOM_SELECT_HEADER_RIGHT_ICON_NAME: 'check',
+    CUSTOM_SELECT_HEADER_RIGHT_ICON_SIZE: 20,
+    CUSTOM_SELECT_HEADER_RIGHT_ICON_COLOR: Colors.black,
+    CUSTOM_SELECT_HEADER_RIGHT_ICON_STYLE: {},
+    CUSTOM_SELECT_HEADER_RENDER_LEFT: undefined,
+    CUSTOM_SELECT_HEADER_RENDER_RIGHT: undefined,
+    CUSTOM_SELECT_HEADER_RENDER: undefined,
+    CUSTOM_SELECT_ITEM_RENDER: undefined,
+    CUSTOM_SELECT_ITEM_TITLE_STYLE: {},
+    CUSTOM_SELECT_ITEM_STYLE: {},
+    CUSTOM_SELECT_ITEM_SELECT_ICON_NAME: 'radiobox-marked',
+    CUSTOM_SELECT_ITEM_SELECT_ICON_COLOR: Colors.dark_slate_blue,
+    CUSTOM_SELECT_ITEM_SELECT_ICON_SIZE: 20,
+    CUSTOM_SELECT_ITEM_SELECT_ICON_STYLE: {},
+    CUSTOM_SELECT_ITEM_UNSELECT_ICON_NAME: 'radiobox-blank',
+    CUSTOM_SELECT_ITEM_UNSELECT_ICON_COLOR: Colors.warm_grey,
+    CUSTOM_SELECT_ITEM_UNSELECT_ICON_SIZE: 20,
+    CUSTOM_SELECT_ITEM_UNSELECT_ICON_STYLE: {},
+    CUSTOM_SELECT_ITEM_MULTI_RENDER: undefined,
+    CUSTOM_SELECT_ITEM_MULTI_TITLE_STYLE: {},
+    CUSTOM_SELECT_ITEM_MULTI_STYLE: {},
+    CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_NAME: 'checkbox-marked',
+    CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_COLOR: Colors.dark_slate_blue,
+    CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_SIZE: 20,
+    CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_STYLE: {},
+    CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_NAME: 'checkbox-blank-outline',
+    CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_COLOR: Colors.warm_grey,
+    CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_SIZE: 20,
+    CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_STYLE: {},
 
     // CUSTOM INPUT
     CUSTOM_INPUT_LABEL_TYPE: 'default',
@@ -229,6 +267,52 @@ Name | Description | Params | Return
 setGlobalFlatlistEmptyContainer | function to set default empty container component | (value: any) | -
 setGlobalFlatlistErrorContainer | function to set default error container component | (value: any) | -
 setGlobalFlatlistNoConnectionContainer | function to set default no connection container component | (value: any) | -
+
+### CustomSelect
+Name | Description | Params | Return 
+--- | --- | --- | --- 
+setGlobalCustomSelectBackgroundColor | function to set default modal background | (value: string) | -
+setGlobalCustomSelectIconType | function to set icon type that used in this componrnt (value: IconType) | -
+setGlobalCustomSelectRightIconName | function to set input right icon name | (value: string) | -
+setGlobalCustomSelectRightIconColor | function to set input right icon color |  (value: string) | -
+setGlobalCustomSelectRightIconSize | function to set input right icon size | (value: number) | -
+setGlobalCustomSelectRightIconStyle | function to set input right icon style | (value: StyleProp<ImageStyle>) | -
+setGlobalCustomSelectRightRender | function to render right icon | (value: any) | -
+setGlobalCustomSelectHeaderTitleStyle | function to set header title style | (value: StyleProp<TextStyle>) | -
+setGlobalCustomSelectHeaderBackgroundColor | function to set header background color | (value: string) | -
+setGlobalCustomSelectHeaderLeftIconName | function to set header left icon name | (value: string) | -
+setGlobalCustomSelectHeaderLeftIconSize | function to set header left icon size | (value: number) | -
+setGlobalCustomSelectHeaderLeftIconColor | function to set header left icon color | (value: string) | -
+setGlobalCustomSelectHeaderLeftIconStyle | function to set header left icon style | (value: StyleProp<ImageStyle>) | -
+setGlobalCustomSelectHeaderRightIconName | function to set header right icon name | (value: string) | -
+setGlobalCustomSelectHeaderRightIconSize | function to set header right icon size | (value: number) | -
+setGlobalCustomSelectHeaderRightIconColor | function to set header right icon color | (value: string) | -
+setGlobalCustomSelectHeaderRightIconStyle | function to set header right icon style | (value: StyleProp<ImageStyle>) | -
+setGlobalCustomSelectHeaderRenderLeft | function to render header left action | (value: any) | -
+setGlobalCustomSelectHeaderRenderRight | function to render header right action | (value: any) | -
+setGlobalCustomSelectHeaderRender | function to render header | (value: any) | -
+setGlobalCustomSelectItemRender | function to render item | (value: any) | -
+setGlobalCustomSelectItemTitleStyle | function to set item title style | (value: StyleProp<TextStyle>) | -
+setGlobalCustomSelectItemStyle | function to set item style | (value: StyleProp<ViewStyle>) | -
+setGlobalCustomSelectItemSelectIconName | function to set select icon name | (value: string) | -
+setGlobalCustomSelectItemSelectIconColor | function to set select icon color | (value: string) | -
+setGlobalCustomSelectItemSelectIconSize | function to set select icon size | (value: number) | -
+setGlobalCustomSelectItemSelectIconStyle | function to set select icon style | (value: StyleProp<ImageStyle>) | -
+setGlobalCustomSelectItemUnselectIconName | function to set unselect icon name | (value: string) | -
+setGlobalCustomSelectItemUnselectIconSize | function to set unselect icon size | (value: string) | -
+setGlobalCustomSelectItemUnselectIconColor | function to set unselect icon color | (value: number) | -
+setGlobalCustomSelectItemUnselectIconStyle | function to set unselect icon style | (value: StyleProp<ImageStyle>) | -
+setGlobalCustomSelectItemMultiRender | function to render multi item | (value: any) | -
+setGlobalCustomSelectItemMultiTitleStyle | function to set multi title style | (value: StyleProp<TextStyle>) | -
+setGlobalCustomSelectItemMultiStyle | function to set multi item style | (value: StyleProp<ViewStyle>) | -
+setGlobalCustomSelectItemMultiSelectIconName | function to set multi select icon name | (value: string) | -
+setGlobalCustomSelectItemMultiSelectIconColor | function to set multi select icon color | (value: string) | -
+setGlobalCustomSelectItemMultiSelectIconSize | function to set multi select icon size | (value: number) | -
+setGlobalCustomSelectItemMultiSelectIconStyle | function to set multi select icon style | (value: StyleProp<ImageStyle>) | -
+setGlobalCustomSelectItemMultiUnselectIconName | function to set milti unselect icon name | (value: string) | -
+setGlobalCustomSelectItemMultiUnselectIconSize | function to set milti unselect icon size | (value: string) | -
+setGlobalCustomSelectItemMultiUnselectIconColor | function to set milti unselect icon color | (value: number) | -
+setGlobalCustomSelectItemMultiUnselectIconStyle | function to set milti unselect icon style | (value: StyleProp<ImageStyle>) | -
 
 ### CustomInput
 Name | Description | Params | Return 

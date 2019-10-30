@@ -53,7 +53,7 @@ const CustomHeader = (props) => {
     iconType,
   } = props
 
-  const headerPaddingTop = Platform.OS === 'ios' ? getStatusBarHeight() : 0 
+  const headerPaddingTop = Platform.OS === 'ios' ? getStatusBarHeight() : 0
   let headerTitle = ''
   let isFirstRoute = false
 
@@ -116,7 +116,7 @@ const CustomHeader = (props) => {
   }
 
   return (
-    <Container style={[containerStyle, { paddingTop: headerPaddingTop }]} isCard={isCard}>
+    <Container style={[containerStyle, { paddingTop: headerPaddingTop, zIndex: 99 }]} isCard={isCard}>
       {renderLeft ? (
         <LeftContainer style={[leftContainerStyle]}>
           {renderLeft()}

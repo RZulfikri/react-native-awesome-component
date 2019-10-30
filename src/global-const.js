@@ -42,12 +42,12 @@ const DEFAULT_GLOBAL_CONST = {
   HEADER_BACKGROUND: Colors.white,
   HEADER_TITLE_SIZE: 20,
   HEADER_TITLE_COLOR: Colors.black,
-  HEADER_TITLE_STYLE: {fontSize: 20, color: Colors.black},
+  HEADER_TITLE_STYLE: { fontSize: 20, color: Colors.black },
   HEADER_LEFT_ICON_NAME: 'arrow-left',
   HEADER_LEFT_ICON_SIZE: 20,
   HEADER_LEFT_ICON_COLOR: Colors.black,
   HEADER_LEFT_BACK_ICON_IMAGE: undefined,
-  HEADER_LEFT_BACK_ICON_IMAGE_STYLE: {width: 24, height: 24},
+  HEADER_LEFT_BACK_ICON_IMAGE_STYLE: { width: 24, height: 24 },
   HEADER_LEFT_ACTION_TITLE_SIZE: 15,
   HEADER_LEFT_ACTION_TITLE_COLOR: Colors.black,
   HEADER_RIGHT_ICON_SIZE: 20,
@@ -102,10 +102,49 @@ const DEFAULT_GLOBAL_CONST = {
   FLATLIST_NO_CONNECTION_CONTAINER: <NoConnectionContainer />, // make sure you have onRefresh props to pass refresh function
 
   // CUSTOM SELECT
-  CUSTOM_SELECT_SELECTED_COLOR: Colors.warm_grey,
-  CUSTOM_SELECT_UNSELECTED_COLOR: Colors.warm_grey,
+  CUSTOM_SELECT_BACKGROUND_COLOR: Colors.very_light_pink_two,
+  CUSTOM_SELECT_ICON_TYPE: 'material-community',
+  CUSTOM_SELECT_RIGHT_ICON_NAME: 'chevron-right',
+  CUSTOM_SELECT_RIGHT_ICON_COLOR: Colors.black,
+  CUSTOM_SELECT_RIGHT_ICON_SIZE: 20,
+  CUSTOM_SELECT_RIGHT_ICON_STYLE: {},
+  CUSTOM_SELECT_RIGHT_RENDER: undefined,
+  CUSTOM_SELECT_HEADER_TITLE_STYLE: {},
   CUSTOM_SELECT_HEADER_BACKGROUND_COLOR: Colors.white,
-  CUSTOM_SELECT_HEADER_COLOR: Colors.warm_grey,
+  CUSTOM_SELECT_HEADER_LEFT_ICON_NAME: 'arrow-left',
+  CUSTOM_SELECT_HEADER_LEFT_ICON_SIZE: 20,
+  CUSTOM_SELECT_HEADER_LEFT_ICON_COLOR: Colors.black,
+  CUSTOM_SELECT_HEADER_LEFT_ICON_STYLE: {},
+  CUSTOM_SELECT_HEADER_RIGHT_ICON_NAME: 'check',
+  CUSTOM_SELECT_HEADER_RIGHT_ICON_SIZE: 20,
+  CUSTOM_SELECT_HEADER_RIGHT_ICON_COLOR: Colors.black,
+  CUSTOM_SELECT_HEADER_RIGHT_ICON_STYLE: {},
+  CUSTOM_SELECT_HEADER_RENDER_LEFT: undefined,
+  CUSTOM_SELECT_HEADER_RENDER_RIGHT: undefined,
+  CUSTOM_SELECT_HEADER_RENDER: undefined,
+  CUSTOM_SELECT_ITEM_RENDER: undefined,
+  CUSTOM_SELECT_ITEM_TITLE_STYLE: {},
+  CUSTOM_SELECT_ITEM_STYLE: {},
+  CUSTOM_SELECT_ITEM_SELECT_ICON_NAME: 'radiobox-marked',
+  CUSTOM_SELECT_ITEM_SELECT_ICON_COLOR: Colors.dark_slate_blue,
+  CUSTOM_SELECT_ITEM_SELECT_ICON_SIZE: 20,
+  CUSTOM_SELECT_ITEM_SELECT_ICON_STYLE: {},
+  CUSTOM_SELECT_ITEM_UNSELECT_ICON_NAME: 'radiobox-blank',
+  CUSTOM_SELECT_ITEM_UNSELECT_ICON_COLOR: Colors.warm_grey,
+  CUSTOM_SELECT_ITEM_UNSELECT_ICON_SIZE: 20,
+  CUSTOM_SELECT_ITEM_UNSELECT_ICON_STYLE: {},
+  CUSTOM_SELECT_ITEM_MULTI_RENDER: undefined,
+  CUSTOM_SELECT_ITEM_MULTI_TITLE_STYLE: {},
+  CUSTOM_SELECT_ITEM_MULTI_STYLE: {},
+  CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_NAME: 'checkbox-marked',
+  CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_COLOR: Colors.dark_slate_blue,
+  CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_SIZE: 20,
+  CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_STYLE: {},
+  CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_NAME: 'checkbox-blank-outline',
+  CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_COLOR: Colors.warm_grey,
+  CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_SIZE: 20,
+  CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_STYLE: {},
+
 
   // CUSTOM INPUT
   CUSTOM_INPUT_LABEL_TYPE: 'default',
@@ -360,6 +399,134 @@ export function setGlobalFlatlistErrorContainer(value) {
 }
 export function setGlobalFlatlistNoConnectionContainer(value) {
   globalConst = Object.appendObject(globalConst, 'FLATLIST_NO_CONNECTION_CONTAINER', value)
+}
+
+// CUSTOM SELECT
+export function setGlobalCustomSelectBackgroundColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_BACKGROUND_COLOR', value)
+}
+export function setGlobalCustomSelectIconType(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ICON_TYPE', value)
+}
+export function setGlobalCustomSelectRightIconName(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_RIGHT_ICON_NAME', value)
+}
+export function setGlobalCustomSelectRightIconColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_RIGHT_ICON_COLOR', value)
+}
+export function setGlobalCustomSelectRightIconSize(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_RIGHT_ICON_SIZE', value)
+}
+export function setGlobalCustomSelectRightIconStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_RIGHT_ICON_STYLE', value)
+}
+export function setGlobalCustomSelectRightRender(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_RIGHT_RENDER', value)
+}
+export function setGlobalCustomSelectHeaderTitleStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_TITLE_STYLE', value)
+}
+export function setGlobalCustomSelectHeaderBackgroundColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_BACKGROUND_COLOR', value)
+}
+export function setGlobalCustomSelectHeaderLeftIconName(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_LEFT_ICON_NAME', value)
+}
+export function setGlobalCustomSelectHeaderLeftIconSize(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_LEFT_ICON_SIZE', value)
+}
+export function setGlobalCustomSelectHeaderLeftIconColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_LEFT_ICON_COLOR', value)
+}
+export function setGlobalCustomSelectHeaderLeftIconStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_LEFT_ICON_STYLE', value)
+}
+export function setGlobalCustomSelectHeaderRightIconName(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_RIGHT_ICON_NAME', value)
+}
+export function setGlobalCustomSelectHeaderRightIconSize(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_RIGHT_ICON_SIZE', value)
+}
+export function setGlobalCustomSelectHeaderRightIconColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_RIGHT_ICON_COLOR', value)
+}
+export function setGlobalCustomSelectHeaderRightIconStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_RIGHT_ICON_STYLE', value)
+}
+export function setGlobalCustomSelectHeaderRenderLeft(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_RENDER_LEFT', value)
+}
+export function setGlobalCustomSelectHeaderRenderRight(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_RENDER_RIGHT', value)
+}
+export function setGlobalCustomSelectHeaderRender(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_HEADER_RENDER', value)
+}
+export function setGlobalCustomSelectItemRender(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_RENDER', value)
+}
+export function setGlobalCustomSelectItemTitleStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_TITLE_STYLE', value)
+}
+export function setGlobalCustomSelectItemStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_STYLE', value)
+}
+export function setGlobalCustomSelectItemSelectIconName(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_SELECT_ICON_NAME', value)
+}
+export function setGlobalCustomSelectItemSelectIconColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_SELECT_ICON_COLOR', value)
+}
+export function setGlobalCustomSelectItemSelectIconSize(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_SELECT_ICON_SIZE', value)
+}
+export function setGlobalCustomSelectItemSelectIconStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_SELECT_ICON_STYLE', value)
+}
+export function setGlobalCustomSelectItemUnselectIconName(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_UNSELECT_ICON_NAME', value)
+}
+export function setGlobalCustomSelectItemUnselectIconSize(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_UNSELECT_ICON_SIZE', value)
+}
+export function setGlobalCustomSelectItemUnselectIconColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_UNSELECT_ICON_COLOR', value)
+}
+export function setGlobalCustomSelectItemUnselectIconStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_UNSELECT_ICON_STYLE', value)
+}
+export function setGlobalCustomSelectItemMultiRender(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_MULTI_RENDER', value)
+}
+export function setGlobalCustomSelectItemMultiTitleStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_MULTI_TITLE_STYLE', value)
+}
+export function setGlobalCustomSelectItemMultiStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_MULTI_STYLE', value)
+}
+export function setGlobalCustomSelectItemMultiSelectIconName(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_NAME', value)
+}
+export function setGlobalCustomSelectItemMultiSelectIconColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_COLOR', value)
+}
+export function setGlobalCustomSelectItemMultiSelectIconSize(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_SIZE', value)
+}
+export function setGlobalCustomSelectItemMultiSelectIconStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_STYLE', value)
+}
+export function setGlobalCustomSelectItemMultiUnselectIconName(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_NAME', value)
+}
+export function setGlobalCustomSelectItemMultiUnselectIconSize(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_SIZE', value)
+}
+export function setGlobalCustomSelectItemMultiUnselectIconColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_COLOR', value)
+}
+export function setGlobalCustomSelectItemMultiUnselectIconStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_SELECT_ITEM_MULTI_UNSELECT_ICON_STYLE', value)
 }
 
 // CUSTOM INPUT

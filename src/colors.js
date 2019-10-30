@@ -18,6 +18,7 @@ const Colors = {
   alertSuccess: '#32A54A',
   alertError: '#cc3232',
   alertInfo: '#2B73B6',
+  veryLightPink: "#ececec",
 }
 
 export default Colors
