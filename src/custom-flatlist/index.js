@@ -30,12 +30,16 @@ class CustomFlatList extends Component {
     meta: PropTypes.shape({
       current_page: PropTypes.number,
       next_page: PropTypes.number,
-    })
+    }),
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    contentContainerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   }
 
   static defaulProps = {
     data: [],
     renderItem: () => null,
+    style: {},
+    contentContainerStyle: {},
   }
 
   constructor(props) {
@@ -81,7 +85,8 @@ class CustomFlatList extends Component {
 
   render() {
     const { data, renderItem, error, loading,
-      renderEmpty, renderNoConnection, renderError } = this.props
+      renderEmpty, renderNoConnection, renderError,
+      style, contentContainerStyle, } = this.props
     const { flatListData } = this.state
 
     const isConnected = getConnectionStatus()
@@ -120,7 +125,8 @@ class CustomFlatList extends Component {
         data={flatListData}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={[{ paddingBottom: getBottomSpace() }]}
+        style={[style]}
+        contentContainerStyle={[{ paddingBottom: getBottomSpace() }, contentContainerStyle]}
         onEndReached={this.onLoadMore}
         onRefresh={this.onRefresh}
         refreshing={loading}

@@ -182,6 +182,8 @@ interface ICustomFlatList {
   renderNoConnection: () => any;
   renderError: () => any;
   meta: IMetaPage;
+  style: StyleProp<ViewStyle>;
+  contentContainerStyle: StyleProp<ViewStyle>;
 }
 
 interface ICustomSelect {
