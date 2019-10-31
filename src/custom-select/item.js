@@ -59,8 +59,8 @@ Item.propTypes = {
   keyValue: PropTypes.string,
   keyDescription: PropTypes.string,
   multiSelect: PropTypes.bool,
-  isSelected: PropTypes.bool.isRequired,
-  onPressItem: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool,
+  onPressItem: PropTypes.func,
 };
 
 Item.defaultProps = {
