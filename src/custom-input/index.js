@@ -223,6 +223,7 @@ class CustomInput extends Component {
       case INPUT_TYPE.email: return 'email-address'
       case INPUT_TYPE.password: return 'default'
       case INPUT_TYPE.phone: return 'phone-pad'
+      case INPUT_TYPE.phoneCountry: return 'phone-pad'
       case INPUT_TYPE.number: return 'numeric'
       case INPUT_TYPE.text: return 'default'
       case INPUT_TYPE.textArea: return 'default'
@@ -230,12 +231,22 @@ class CustomInput extends Component {
   }
 
   renderLabel(labelType, labelStyle) {
-    const { label } = this.props
+    const { label, isRequired, errorColor } = this.props
+    const lErrorColor = errorColor ? errorColor : GlobalConst.getValue().CUSTOM_INPUT_ERROR_COLOR
+
+    let renderLabel = <Label style={[this.getLabelStyleByType(labelType), labelStyle]}>
+      {label}
+    </Label>
+
+    if (isRequired) {
+      const additionalRequired = <Label style={[this.getLabelStyleByType(labelType), labelStyle, {color: lErrorColor}]}>
+      *
+    </Label>
+      renderLabel = Obj.appendChildToView(renderLabel, additionalRequired)
+    }
     return (
       <View style={{ justifyContent: 'center' }}>
-        <Label style={[this.getLabelStyleByType(labelType), labelStyle]}>
-          {label}
-        </Label>
+        {renderLabel}
       </View>
     )
   }
@@ -422,6 +433,10 @@ class CustomInput extends Component {
 
     if (activeProps.placeholderTextColor === undefined && GlobalConst.getValue().CUSTOM_INPUT_PLACEHOLDER_COLOR) {
       activeProps = Obj.appendObject(activeProps, 'placeholderTextColor', GlobalConst.getValue().CUSTOM_INPUT_PLACEHOLDER_COLOR)
+    }
+
+    if ((inputType === INPUT_TYPE.phone || inputType === INPUT_TYPE.phoneCountry) && activeProps.returnKeyType === undefined) {
+      activeProps = Obj.appendObject(activeProps, 'returnKeyType', 'done')
     }
 
     // REMOVE UNUSED PROPS
