@@ -154,6 +154,16 @@ This is method to custom global constant/value that used in this component.
     CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED: (label) => label ? `${label} is required` : 'This field is required',
     CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM: (label, min) => label ? `${label} must have at least ${min} characters` : `This field must have at least ${min} characters`,
     CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM: (label, max) => label ? `${label} must have at least ${max} characters` : `This field maximum have ${max} characters`,
+    CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER: 'Code',
+    CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL: 'Select Country',
+
+    // CUSTOM DATEPICKER
+    CUSTOM_DATE_PICKER_ICON_TYPE: 'material-community',
+    CUSTOM_DATE_PICKER_RIGHT_ICON_NAME: 'calendar',
+    CUSTOM_DATE_PICKER_RIGHT_ICON_COLOR: Colors.brownGrey,
+    CUSTOM_DATE_PICKER_RIGHT_ICON_SIZE: 28,
+    CUSTOM_DATE_PICKER_RIGHT_ICON_STYLE: {},
+    CUSTOM_DATE_PICKER_RIGHT_RENDER: undefined,
   }
 ```
 
@@ -333,3 +343,15 @@ setGlobalCustomInputErrorMessagePassword | function to set global custom input e
 setGlobalCustomInputErrorMessageRequired | function to set global custom input error required message | (value: any) | -
 setGlobalCustomInputErrorMessageMinimum | function to set global custom input error minimum length message | (value: any) | -
 setGlobalCustomInputErrorMessageMaximum | function to set global custom input error maximum length message | (value: any) | -
+setGlobalCustomInputPhoneCountryPlaceholder | function to set global custom input phone-county placeholder | (value: string) | -
+setGlobalCustomInputPhoneCountrySelectLabel | function to set global custom input phone-county select label | (value: string) | -
+
+### CustomDatePicker
+Name | Description | Params | Return 
+--- | --- | --- | --- 
+setGlobalCustomDatePickerIconType | function to set flobal custom date picker icon type | (value: string) | -
+setGlobalCustomDatePickerRightIconName | function to set flobal custom date picker right icon name | (value: string) | -
+setGlobalCustomDatePickerRightIconColor | function to set flobal custom date picker right icon color | (value: string) | -
+setGlobalCustomDatePickerRightIconSize | function to set flobal custom date picker right icon size | (value: number) | -
+setGlobalCustomDatePickerRightIconStyle | function to set flobal custom date picker right icon style | (value: StyleProp<TextStyle>) | -
+setGlobalCustomDatePickerRightRender | function to set flobal custom date picker render right icon | (value: any) | -

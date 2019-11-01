@@ -30,7 +30,6 @@ return (
 | placeholder: string                | props to set placeholder                                                                        | -                      |
 | value: `string | Date`             | props to set value                                                                              | -                      |
 | onDateChange: (date: Date) => void | props to handle value changed                                                                   | `(data: Date) => null` |
-| textStyle: `StyleProp<TextStyle>`  | props to set text style                                                                         | -                      |
 | label: string                      | props to set label                                                                              | -                      |
 | isRequired?: boolean               | props to set datepicker is required                                                             | `false`                |
 | error?: any                        | props to set error                                                                              | -                      |
@@ -42,3 +41,5 @@ return (
 | minimumDate?: Date                 | props to set minimum date                                                                       | `undefined`            |
 | style: StyleProp<ViewStyle>        | props to set datepicker form style                                                              | -                      |
 | labelType?: CustomInputLabelType   | props to set label position `('top-label', 'default', 'left-label', 'right-label') | top-label` | `top-label`            |
+| rightIcon?: string   | props to set right icon name | `undefined`            |
+| onChangeValidation?: function   | props to to get is validation correct or not return (`isError`: boolean) | `undefined`            |

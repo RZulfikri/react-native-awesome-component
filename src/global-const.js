@@ -149,7 +149,7 @@ const DEFAULT_GLOBAL_CONST = {
   // CUSTOM INPUT
   CUSTOM_INPUT_LABEL_TYPE: 'default',
   CUSTOM_INPUT_LABEL_STYLE: {},
-  CUSTOM_INPUT_PLACEHOLDER_COLOR: undefined,
+  CUSTOM_INPUT_PLACEHOLDER_COLOR: Colors.warm_grey,
   CUSTOM_INPUT_TEXT_INPUT_STYLE: {},
   CUSTOM_INPUT_ERROR_LABEL_STYLE: {},
   CUSTOM_INPUT_UNDERLINE_WIDTH: 1,
@@ -163,6 +163,16 @@ const DEFAULT_GLOBAL_CONST = {
   CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED: (label) => label ? `${label} is required` : 'This field is required',
   CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM: (label, min) => label ? `${label} must have at least ${min} characters` : `This field must have at least ${min} characters`,
   CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM: (label, max) => label ? `${label} must have at least ${max} characters` : `This field maximum have ${max} characters`,
+  CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER: 'Code',
+  CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL: 'Select Country',
+
+  // CUSTOM DATEPICKER
+  CUSTOM_DATE_PICKER_ICON_TYPE: 'material-community',
+  CUSTOM_DATE_PICKER_RIGHT_ICON_NAME: 'calendar',
+  CUSTOM_DATE_PICKER_RIGHT_ICON_COLOR: Colors.brownGrey,
+  CUSTOM_DATE_PICKER_RIGHT_ICON_SIZE: 28,
+  CUSTOM_DATE_PICKER_RIGHT_ICON_STYLE: {},
+  CUSTOM_DATE_PICKER_RIGHT_RENDER: undefined,
 }
 
 let globalConst = {
@@ -577,6 +587,32 @@ export function setGlobalCustomInputErrorMessageMinimum(value) {
 }
 export function setGlobalCustomInputErrorMessageMaximum(value) {
   globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM', value)
+}
+export function setGlobalCustomInputPhoneCountryPlaceholder(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER', value)
+}
+export function setGlobalCustomInputPhoneCountrySelectLabel(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL', value)
+}
+
+// CUSTOM DATEPICKER
+export function setGlobalCustomDatePickerIconType(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_DATE_PICKER_ICON_TYPE', value)
+}
+export function setGlobalCustomDatePickerRightIconName(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_DATE_PICKER_RIGHT_ICON_NAME', value)
+}
+export function setGlobalCustomDatePickerRightIconColor(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_DATE_PICKER_RIGHT_ICON_COLOR', value)
+}
+export function setGlobalCustomDatePickerRightIconSize(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_DATE_PICKER_RIGHT_ICON_SIZE', value)
+}
+export function setGlobalCustomDatePickerRightIconStyle(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_DATE_PICKER_RIGHT_ICON_STYLE', value)
+}
+export function setGlobalCustomDatePickerRightRender(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_DATE_PICKER_RIGHT_RENDER', value)
 }
 
 // FUNCTION GET DEFAULT/VALUE

@@ -43,6 +43,8 @@ Name | Description | Params | Return
 --- | --- | --- | --- 
 getFileNameFromPath | function to get file name from file path | (`path: string` = file path) | `string` file name
 getFileNameFromURL | function to get file name from url path | (`url: string` = url path) | `string` file name 
+getIconByType | function to get icon component by icon type | (`iconType`) | react-native-vector-icon component
+getSimpleCountryList | function to get simple country list | (`useFlag`) | flag object
 
 ### #Alert Handler
 This is function to hide / show custom alert. For more information about CustomAlert check this [link](../doc/custom-alert.md).

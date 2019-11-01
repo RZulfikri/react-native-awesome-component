@@ -135,7 +135,18 @@ Global const used to set global value. it used to set the style for all of this 
 
 ```typescript
 type CustomInputLabelType = 'top-label' | 'default' | 'left-label' | 'right-label'
-type CustomInputType = 'email' | 'password' | 'phone' | 'number' | 'text' | 'text-area'
+type CustomInputType = 'email' | 'password' | 'phone' | 'phone-country' | 'number' | 'text' | 'text-area'
+```
+
+```javascript
+  const defaultCountryValue = {
+    id: 101,
+    name: 'Indonesia',
+    nameWithFlag: '🇮🇩 Indonesia',
+    flag: '🇮🇩',
+    code: 'ID',
+    callingCode: '62',
+  }
 ```
 
 Basically this component using TextInput props, and adding few new props that listed below.
@@ -164,3 +175,7 @@ errorMaximum: (label: string, max: number) => string or string | props to set er
 renderLeftAction: () => any | props to render left action | `undefined`
 renderRightAction: () => any | props to render right action | `undefined`
 onChangeValidation: (status: boolean) => void | props to get status of validation | `true`
+valueCountry: ISimpleCountryFlagResponse | props to set default country code | `{id: 101, name: 'Indonesia', nameWithFlag: '🇮🇩 Indonesia', flag: '🇮🇩', code: 'ID', callingCode: '62',}`
+onSelectCountry: () => void | props to get value of selected county | `ISimpleCountryFlagResponse`
+countryPlaceholder: string | props to set select country placeholder | -
+countrySelectionLabel: string | props to set select country selection label | 

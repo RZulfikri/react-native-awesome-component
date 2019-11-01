@@ -10,6 +10,7 @@ import IconIcon from 'react-native-vector-icons/Ionicons'
 import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import Octicon from 'react-native-vector-icons/Octicons'
+import _ from 'lodash'
 
 export function getIconByType(type) {
   let Icon
@@ -87,4 +88,29 @@ export function isEmptyOrSpaces(str) {
     return str.match(/^ *$/) !== null;
   }
   return true;
+}
+
+export function getSimpleCountryList(addFlag) {
+  const COUNTRIES_CODE = _.sortBy(require('world-countries'), ['name.common'], ['asc']);
+  if (addFlag) {
+    return COUNTRIES_CODE.map((item, index) => {
+      return {
+        id: index,
+        name: item.name.common,
+        nameWithFlag: `${item.flag} ${item.name.common}`,
+        flag: item.flag,
+        code: item.cca2,
+        callingCode: item.callingCode ? item.callingCode[0] : null,
+      }
+    })
+  } else {
+    return COUNTRIES_CODE.map((item, index) => {
+      return {
+        id: index,
+        name: item.name.common,
+        code: item.cca2,
+        callingCode: item.callingCode ? item.callingCode[0] : null,
+      }
+    })
+  }
 }

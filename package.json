@@ -1,6 +1,6 @@
 {
   "name": "react-native-awesome-component",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "React Native Awesome Component",
   "main": "index.js",
   "typings": "./index.d.ts",
@@ -36,6 +36,7 @@
     "@react-native-community/netinfo": "^4.4.0",
     "react-native-dropdownalert": "^4.2.0",
     "react-native-modal": "^11.4.0",
+    "world-countries": "^2.1.0",
     "yup": "^0.27.0"
   },
   "devDependencies": {},

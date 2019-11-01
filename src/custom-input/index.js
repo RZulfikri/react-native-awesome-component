@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, KeyboardAvoidingView, Keyboard, TouchableOpacity } from 'react-native'
+import { View, Keyboard, TouchableOpacity, Text } from 'react-native'
 import { TopContainer, RowContainer, Label, StyledTextInput, ErrorLabel, StyledTextInputContainer } from './custom-input.styled'
 import { Formik } from 'formik';
 import * as Obj from '../method/object'
 import * as GlobalConst from '../global-const'
 import * as Yup from 'yup'
 import _ from 'lodash'
+import { getSimpleCountryList } from '../method/helper'
+import { Container, TouchableContainer } from '../styled/share.styled'
+import ModalList from '../custom-select/Modal'
+import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const LABEL_TYPE = {
   top: 'top-label',
@@ -19,6 +23,7 @@ const INPUT_TYPE = {
   email: 'email',
   password: 'password',
   phone: 'phone',
+  phoneCountry: 'phone-country',
   number: 'number',
   text: 'text',
   textArea: 'text-area',
@@ -29,7 +34,7 @@ class CustomInput extends Component {
     minLength: PropTypes.number,
     labelType: PropTypes.oneOf([LABEL_TYPE.top, LABEL_TYPE.default, LABEL_TYPE.left, LABEL_TYPE.right]),
     label: PropTypes.string,
-    inputType: PropTypes.oneOf([INPUT_TYPE.email, INPUT_TYPE.password, INPUT_TYPE.phone, INPUT_TYPE.number, INPUT_TYPE.text, INPUT_TYPE.textArea]),
+    inputType: PropTypes.oneOf([INPUT_TYPE.email, INPUT_TYPE.password, INPUT_TYPE.phone, INPUT_TYPE.number, INPUT_TYPE.text, INPUT_TYPE.textArea, INPUT_TYPE.phoneCountry]),
     labelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     errorLabelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     underlineWidth: PropTypes.number,
@@ -53,16 +58,40 @@ class CustomInput extends Component {
     // ACTION BUTTON
     renderLeftAction: PropTypes.func,
     renderRightAction: PropTypes.func,
+
+    // PROPS FOR PHONE COUNTRY TYPE
+    valueCountry: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      nameWithFlag: PropTypes.string,
+      flag: PropTypes.string,
+      code: PropTypes.string,
+      callingCode: PropTypes.string,
+    }),
+    onSelectCountry: PropTypes.func,
+    countryPlaceholder: PropTypes.string,
+    countrySelectionLabel: PropTypes.string
   }
 
   static defaultProps = {
     inputType: INPUT_TYPE.text,
     isRequired: false,
     onChangeValidation: () => null,
+    valueCountry: {
+      id: 101,
+      name: 'Indonesia',
+      nameWithFlag: '🇮🇩 Indonesia',
+      flag: '🇮🇩',
+      code: 'ID',
+      callingCode: '62',
+    }
   }
 
   constructor(props) {
     super(props)
+    this.state = {
+      showCountryList: false,
+    }
     this.setRef = this.setRef.bind(this)
     this.getContainerByType = this.getContainerByType.bind(this)
     this.getLabelStyleByType = this.getLabelStyleByType.bind(this)
@@ -70,24 +99,14 @@ class CustomInput extends Component {
     this.getKeyboardType = this.getKeyboardType.bind(this)
     this.renderLabel = this.renderLabel.bind(this)
     this.renderInput = this.renderInput.bind(this)
+    this.renderModalSelectCountry = this.renderModalSelectCountry.bind(this)
+    this.setCountryListVisible = this.setCountryListVisible.bind(this)
   }
 
   value = ''
   errorValue
-  layoutPosition
   isFocus
   textInput
-
-  componentDidMount() {
-    this.keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      this._keyboardDidShow,
-    );
-    this.keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      this._keyboardDidHide,
-    );
-  }
 
   setRef(currentRef) {
     this.textInput = currentRef
@@ -221,6 +240,77 @@ class CustomInput extends Component {
     )
   }
 
+  setCountryListVisible(isVisible) {
+    this.setState({ showCountryList: isVisible })
+  }
+
+  renderModalSelectCountry(formikProps) {
+    const { showCountryList } = this.state
+    const { style, valueCountry, onSelectCountry, countryPlaceholder, countrySelectionLabel } = this.props
+    const countriesCode = getSimpleCountryList(true)
+    const renderItem = GlobalConst.getValue().CUSTOM_SELECT_ITEM_RENDER
+    const renderHeader = GlobalConst.getValue().CUSTOM_SELECT_HEADER_RENDER
+
+    const placeholder = countryPlaceholder ? countryPlaceholder : GlobalConst.getValue().CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER
+    const selectionLabel = countrySelectionLabel ? countrySelectionLabel : GlobalConst.getValue().CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL
+
+    let textInputStyle = GlobalConst.getValue().CUSTOM_INPUT_TEXT_INPUT_STYLE
+    let placeholderStyle = {}
+    if (style) {
+      textInputStyle = {
+        ...textInputStyle,
+        ...style,
+      }
+    }
+
+    if (this.props.placeholderTextColor === undefined && GlobalConst.getValue().CUSTOM_INPUT_PLACEHOLDER_COLOR) {
+      placeholderStyle = {
+        ...placeholderStyle,
+        color: GlobalConst.getValue().CUSTOM_INPUT_PLACEHOLDER_COLOR
+      }
+    }
+
+    if (this.props.placeholderTextColor) {
+      placeholderStyle = {
+        ...placeholderStyle,
+        color: this.props.placeholderTextColor
+      }
+    }
+
+    let value = placeholder
+
+    if (valueCountry) {
+      value = `${valueCountry.code} (+${valueCountry.callingCode})`
+    }
+
+    return (
+      <Container style={{ width: '25%', backgroundColor: 'transparent', marginRight: 5 }}>
+        <TouchableContainer onPress={() => this.setCountryListVisible(true)} style={{ backgroundColor: 'transparent', flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={[{ flex: 1 }, textInputStyle, placeholderStyle]}>{value}</Text>
+          <Icons name='menu-down' size={28} color={`rgba(0,0,0,0.5)`} />
+        </TouchableContainer>
+        <ModalList
+          data={countriesCode}
+          multiSelect={false}
+          keyDescription={'nameWithFlag'}
+          keyValue={'id'}
+          initialValue={valueCountry}
+          modalVisible={showCountryList}
+          onSubmit={selectValue => {
+            this.setCountryListVisible(false)
+            onSelectCountry(selectValue);
+          }}
+          closeModal={() => {
+            this.setCountryListVisible(false)
+          }}
+          renderItem={renderItem}
+          renderHeader={renderHeader}
+          title={selectionLabel}
+        />
+      </Container>
+    )
+  }
+
   renderInput(formikProps) {
     const { errors, touched } = formikProps
     const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress, onChangeValidation } = this.props
@@ -347,7 +437,7 @@ class CustomInput extends Component {
     delete activeProps.keyboardType
 
     return (
-      <KeyboardAvoidingView keyboardVerticalOffset={500} behavior={'padding'} contentContainerStyle={{ flexGrow: 1 }} onLayout={(e) => this.layoutPosition = e.nativeEvent.layout} >
+      <View contentContainerStyle={{ flexGrow: 1 }} >
         <Container style={[containerTyle]}>
           {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle)}
           {labelType === LABEL_TYPE.left && label && this.renderLabel(labelType, labelStyle)}
@@ -375,12 +465,14 @@ class CustomInput extends Component {
             </TouchableOpacity> :
             <StyledTextInputContainer style={[styledTextInputContainerStyle]}>
               {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
+              {renderLeftAction && (typeof renderLeftAction === 'function') && render()}
+              {inputType === INPUT_TYPE.phoneCountry && this.renderModalSelectCountry(formikProps)}
               <StyledTextInput
                 ref={currentRef => this.setRef(currentRef)}
                 secureTextEntry={inputType === INPUT_TYPE.password}
                 {...activeProps}
                 underlineColorAndroid={'transparent'}
-                style={textInputStyle}
+                style={[textInputStyle]}
                 defaultValue={formikProps.initialValues.value}
                 onChangeText={formikProps.handleChange('value')}
                 value={formikProps.values.value}
@@ -395,7 +487,7 @@ class CustomInput extends Component {
           {labelType === LABEL_TYPE.right && label && this.renderLabel(labelStyle)}
         </Container>
         {errorLabel}
-      </KeyboardAvoidingView>
+      </View>
     )
   }
 

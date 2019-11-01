@@ -12,7 +12,23 @@ type AlertType = 'success' | 'error' | 'info'
 type DatepickerType = 'time' | 'date' | 'datetime'
 
 type CustomInputLabelType = 'top-label' | 'default' | 'left-label' | 'right-label'
-type CustomInputType = 'email' | 'password' | 'phone' | 'number' | 'text' | 'text-area'
+type CustomInputType = 'email' | 'password' | 'phone' | 'number' | 'text' | 'text-area' | 'phone-country'
+
+interface ISimpleCountryResponse {
+  id: number;
+  name: string;
+  code: string;
+  callingCode: string;
+}
+
+interface ISimpleCountryFlagResponse {
+  id: number;
+  name: string;
+  nameWithFlag: string;
+  flag: string;
+  code: string;
+  callingCode: string;
+}
 
 interface IPlaceholderImageProps {
   uri?: string;
@@ -210,10 +226,10 @@ interface ICustomDatepicker {
   placeholder: string;
   value: string | Date;
   onDateChange: (date: Date) => void;
-  textStyle: StyleProp<TextStyle>;
+  // textStyle: StyleProp<TextStyle>;
   label: string;
   isRequired?: boolean;
-  error?: any;
+  error?: string;
   dateFormat?: string;
   locale?: string;
   mode?: DatepickerType;
@@ -222,6 +238,8 @@ interface ICustomDatepicker {
   minimumDate?: Date;
   style: StyleProp<ViewStyle>;
   labelType?: CustomInputLabelType;
+  rightIcon: string;
+  onChangeValidation: () => boolean;
 }
 interface ICustomInput extends TextInputProps {
   minLength: number;
@@ -251,6 +269,12 @@ interface ICustomInput extends TextInputProps {
   // ACTION BUTTON
   renderLeftAction: () => any,
   renderRightAction: () => any,
+
+  // PROPS FOR PHONE COUNTRY TYPE
+  valueCountry: ISimpleCountryFlagResponse;
+  onSelectCountry: () => void;
+  countryPlaceholder: string;
+  countrySelectionLabel: string;
 }
 
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
@@ -330,6 +354,8 @@ interface IArray {
 interface IHelper {
   getFileNameFromPath: (path: string) => void;
   getFileNameFromURL: (url: string) => void;
+  getIconByType: (iconType: IconType) => any;
+  getSimpleCountryList: (useFlag: boolean) => ISimpleCountryResponse | ISimpleCountryFlagResponse
 }
 
 interface IAlertHandler {
@@ -504,6 +530,16 @@ interface IGlobalConstValue {
   CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED: (label: string) => string | string;
   CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM: (label: string, min: number) => string | string;
   CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM: (label: string, min: number) => string | string;
+  CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER: string;
+  CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL: string;
+
+  // CUSTOM DATEPICKER
+  CUSTOM_DATE_PICKER_ICON_TYPE: string;
+  CUSTOM_DATE_PICKER_RIGHT_ICON_NAME: string;
+  CUSTOM_DATE_PICKER_RIGHT_ICON_COLOR: string;
+  CUSTOM_DATE_PICKER_RIGHT_ICON_SIZE: number;
+  CUSTOM_DATE_PICKER_RIGHT_ICON_STYLE: StyleProp<TextStyle>;
+  CUSTOM_DATE_PICKER_RIGHT_RENDER: any
 }
 
 interface IGlobalConst {
@@ -642,6 +678,15 @@ interface IGlobalConst {
   setGlobalCustomInputErrorMessageRequired: (value: any) => void;
   setGlobalCustomInputErrorMessageMinimum: (value: any) => void;
   setGlobalCustomInputErrorMessageMaximum: (value: any) => void;
+  setGlobalCustomInputPhoneCountryPlaceholder: (value: string) => void;
+  setGlobalCustomInputPhoneCountrySelectLabel: (value: string) => void;
+  // CUSTOM DATE PICKER
+  setGlobalCustomDatePickerIconType: (value: string) => void;
+  setGlobalCustomDatePickerRightIconName: (value: string) => void;
+  setGlobalCustomDatePickerRightIconColor: (value: string) => void;
+  setGlobalCustomDatePickerRightIconSize: (value: number) => void;
+  setGlobalCustomDatePickerRightIconStyle: (value: StyleProp<TextStyle>) => void;
+  setGlobalCustomDatePickerRightRender: (value: any) => void;
 }
 
 export const GlobalConst: IGlobalConst

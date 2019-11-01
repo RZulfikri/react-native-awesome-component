@@ -1,12 +1,13 @@
 /* eslint-disable react/jsx-closing-bracket-location */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {TouchableOpacity, ViewPropTypes, StyleSheet, View} from 'react-native';
+import { TouchableOpacity, ViewPropTypes, StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
 import DatePicker from 'react-native-date-picker';
 import moment from 'moment-timezone';
 import metrics from '../metrics';
-import { CustomInput } from '../..';
+import { CustomInput, GlobalConst } from '../..';
+import { getIconByType } from '../method/helper';
 
 const CustomDatePicker = props => {
   const {
@@ -19,22 +20,45 @@ const CustomDatePicker = props => {
     dateFormat,
     locale,
     mode,
-    textStyle,
+    // textStyle,
     initialDate,
     minimumDate,
     maximumDate,
-    labelType,
     style,
+    labelType,
+    rightIcon,
+    onChangeValidation,
   } = props;
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
+
+  const iconType = GlobalConst.getValue().CUSTOM_DATE_PICKER_ICON_TYPE
+  const rightIconName = rightIcon ? rightIcon : GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_ICON_NAME
+  const rightIconSize = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_ICON_SIZE
+  const rightIconColor = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_ICON_COLOR
+  const rightIconStyle = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_ICON_STYLE
+  const rightIconRender = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_RENDER
+
+  let errorMessage = error ? error : ''
+
+  if (isRequired && isTouch && ((value === undefined) || value === null || (value && value.length === 0))) {
+    errorMessage = GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED(label)
+  }
 
   const changeDate = date => {
-    console.log(date);
     if (onDateChange) {
       onDateChange(moment.tz(date, 'UTC').format(dateFormat));
     }
+
+    if (onChangeValidation) {
+      onChangeValidation(errorMessage.length > 0 ? true : false)
+    }
+
+    setIsTouch(true)
   };
+
+  const Icon = getIconByType(iconType)
 
   return (
     <View>
@@ -47,11 +71,27 @@ const CustomDatePicker = props => {
         isRequired={isRequired}
         defaultValue={value}
         style={style}
+        renderRightAction={() => {
+          if (typeof rightIconRender === 'function') {
+            return rightIconRender()
+          } else {
+            return <Icon name={rightIconName} size={rightIconSize} color={rightIconColor} style={rightIconStyle} />
+          }
+        }}
+        forceErrorMessage={errorMessage}
       />
       <Modal
         isVisible={modalVisible}
-        onBackButtonPress={() => setModalVisible(false)}
-        onBackdropPress={() => setModalVisible(false)}
+        onBackButtonPress={() => {
+          setModalVisible(false)
+          setIsTouch(true)
+          onChangeValidation(errorMessage.length > 0 ? true : false)
+        }}
+        onBackdropPress={() => {
+          setModalVisible(false)
+          setIsTouch(true)
+          onChangeValidation(errorMessage.length > 0 ? true : false)
+        }}
         style={{
           justifyContent: 'flex-end',
           alignContent: 'center',
@@ -93,7 +133,7 @@ CustomDatePicker.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onDateChange: PropTypes.func.isRequired,
-  textStyle: ViewPropTypes.style,
+  // textStyle: ViewPropTypes.style,
   label: PropTypes.string,
   isRequired: PropTypes.bool,
   error: PropTypes.string,
@@ -104,7 +144,9 @@ CustomDatePicker.propTypes = {
   maximumDate: PropTypes.instanceOf(Date),
   minimumDate: PropTypes.instanceOf(Date),
   style: ViewPropTypes.style,
-  labelType: PropTypes.oneOf(['top-label', 'default', 'left-label', 'right-label'])
+  labelType: PropTypes.oneOf(['top-label', 'default', 'left-label', 'right-label']),
+  rightIcon: PropTypes.string,
+  onChangeValidation: PropTypes.func,
 };
 
 CustomDatePicker.defaultProps = {
@@ -112,7 +154,7 @@ CustomDatePicker.defaultProps = {
   placeholder: '',
   isRequired: false,
   error: null,
-  textStyle: undefined,
+  // textStyle: undefined,
   value: null,
   mode: 'date',
   dateFormat: 'DD/MM/YYYY',
@@ -122,6 +164,7 @@ CustomDatePicker.defaultProps = {
   minimumDate: undefined,
   style: undefined,
   labelType: 'top-label',
+  onChangeValidation: () => null
 };
 
 export default CustomDatePicker;

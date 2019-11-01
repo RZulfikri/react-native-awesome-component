@@ -19,6 +19,7 @@ const Colors = {
   alertError: '#cc3232',
   alertInfo: '#2B73B6',
   veryLightPink: "#ececec",
+  brownGrey: "#909090",
 }
 
 export default Colors
