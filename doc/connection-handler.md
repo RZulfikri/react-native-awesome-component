@@ -22,7 +22,7 @@ render() {
 ```
 
 **API response handler**
-To handle response of api such as code 200, 400, 500 check this code documentation [here](./method.md#apihelper)
+To handle response of api such as code 2xx, 4xx, 5xx check this code documentation [here](./method.md#api-helper)
 
 **Global Setup**
 
