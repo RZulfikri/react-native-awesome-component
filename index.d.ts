@@ -364,6 +364,10 @@ interface IAlertHandler {
   hideAlert: () => void;
 }
 
+interface IApiHelper {
+  responseMonitoring: (response: any, callback200: (response: any) => void, callback400: (response: any) => void, callback500: (response: any) => void) => any
+}
+
 interface IMethod {
   Math: IMath;
   Scale: IScale;
@@ -371,6 +375,7 @@ interface IMethod {
   Array: IArray;
   Helper: IHelper;
   AlertHandler: IAlertHandler;
+  ApiHelper: IApiHelper
 }
 
 export const Method: IMethod
@@ -429,6 +434,12 @@ interface IGlobalConstValue {
   CONNECTION_SUCCESS_MESSAGE: string;
   CONNECTION_ERROR_TITLE: string;
   CONNECTION_ERROR_MESSAGE: string;
+  CONNECTION_200_ALERT_TITLE: string;
+  CONNECTION_200_ALERT_MESSAGE: string;
+  CONNECTION_400_ALERT_TITLE: string;
+  CONNECTION_400_ALERT_MESSAGE: string;
+  CONNECTION_500_ALERT_TITLE: string;
+  CONNECTION_500_ALERT_MESSAGE: string;
 
   // CUSTOM STEP BAR
   CUSTOM_STEP_BAR_HEIGHT: number;
@@ -584,6 +595,12 @@ interface IGlobalConst {
   setGlobalConnectionHandlerSuccessMessage: (value: string) => void;
   setGlobalConnectionHandlerErrorTitle: (value: string) => void;
   setGlobalConnectionHandlerErrorMessage: (value: string) => void;
+  setGlobalConnectionHandler200AlertTitle: (value: string) => void;
+  setGlobalConnectionHandler200AlertMessage: (value: string) => void;
+  setGlobalConnectionHandler400AlertTitle: (value: string) => void;
+  setGlobalConnectionHandler400AlertMessage: (value: string) => void;
+  setGlobalConnectionHandler500AlertTitle: (value: string) => void;
+  setGlobalConnectionHandler500AlertMessage: (value: string) => void;
   // CUSTOM STEP BAR
   setGlobalCustomStepBarHeight: (value: number) => void;
   setGlobalCustomStepBarActiveColor: (value: string) => void;

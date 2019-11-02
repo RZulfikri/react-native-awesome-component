@@ -53,6 +53,12 @@ This is method to custom global constant/value that used in this component.
     CONNECTION_SUCCESS_MESSAGE: 'Connected to the internet',
     CONNECTION_ERROR_TITLE: 'Disconected',
     CONNECTION_ERROR_MESSAGE: 'No internet connection',
+    CONNECTION_200_ALERT_TITLE: 'Request submitted',
+    CONNECTION_200_ALERT_MESSAGE: 'Your request successfully submitted',
+    CONNECTION_400_ALERT_TITLE: 'Sorry request failure',
+    CONNECTION_400_ALERT_MESSAGE: 'Please check your input and try again',
+    CONNECTION_500_ALERT_TITLE: 'Sorry for the inconvenience',
+    CONNECTION_500_ALERT_MESSAGE: `Something error on our server, we're working on this error. Please try again later.`,
 
     // CUSTOM STEP BAR
     CUSTOM_STEP_BAR_HEIGHT: 8,
@@ -228,6 +234,12 @@ setGlobalConnectionHandlerSuccessTitle | function to change global connected tit
 setGlobalConnectionHandlerSuccessMessage | function to change global connected message | (value: string) | -
 setGlobalConnectionHandlerErrorTitle | function to change global disconected title | (value: string) | - 
 setGlobalConnectionHandlerErrorMessage | function to change global disconected message | (value: string) | -
+setGlobalConnectionHandler200AlertTitle | function to set global connection handler success 200 code title | (value: string) | -
+setGlobalConnectionHandler200AlertMessage | function to set global connection handler success 200 code message | (value: string) | -
+setGlobalConnectionHandler400AlertTitle | function to set global connection handler error 400 code title | (value: string) | -
+setGlobalConnectionHandler400AlertMessage | function to set global connection handler error 400 code message | (value: string) | -
+setGlobalConnectionHandler500AlertTitle | function to set global connection handler error 500 code title | (value: string) | -
+setGlobalConnectionHandler500AlertMessage | function to set global connection handler error 500 code message | (value: string) | -
 
 ### CustomStepBar
 Name | Description | Params | Return 

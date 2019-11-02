@@ -100,3 +100,18 @@ Name | Description | Params | Return
 --- | --- | --- | --- 
 showAlert | function to show custom alert | (`options: ICustomAlertConfiguration`, `style?: ICustomAlertStyleConfiguration [OPTIONAL]`) | -
 hideAlert | function to hide custom alert | - | - 
+
+
+### #API Helper
+This is function to help you handle API response such as response 2xx, 4xx, 5xx. You need to add this `connection-handler` component to use this method. Chek this [link](../doc/connection-handler.md).
+
+```javascript
+  import { Method } from 'react-native-awesome-component/'
+
+  // At your Api.js
+  api.addMonitor(response => Method.ApiHelper.responseMonitoring(response))// you can custom response by adding callback of response code 2xx, 4xx, 5xx.
+```
+
+Name | Description | Params | Return 
+--- | --- | --- | --- 
+responseMonitoring | function handle api response code such as 2xx, 4xx, 5xx then show alert | (response: any, callback200: (response: any) => void, callback400: (response: any) => void, callback500: (response: any) => void) | -

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FlatList, FlatListProps, View, ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 // import { CustomFlatListStyle } from '../Components/styled/custom-flatlist.styled'
-import { getConnectionStatus } from '../connection-handler'
+import { getConnectionStatus } from '../connection-handler/connection-error-helper'
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import * as Obj from '../method/object'
 import * as GlobalConst from '../global-const'

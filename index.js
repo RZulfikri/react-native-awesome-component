@@ -17,6 +17,7 @@ import * as Scale from './src/method/scale'
 import * as Math from './src/method/math'
 import * as Arr from './src/method/array'
 import * as Helper from './src/method/helper'
+import * as ApiHelper from './src/method/api-helper'
 import * as GlobalConst from './src/global-const'
 import PlaceholderImage from './src/placeholder-image'
 import PlaceholderText from './src/placeholder-text'
@@ -56,6 +57,7 @@ const Method = {
   Array: Arr,
   Helper: Helper,
   AlertHandler,
+  ApiHelper,
 }
 
 export {

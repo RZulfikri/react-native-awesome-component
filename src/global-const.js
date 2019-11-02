@@ -61,6 +61,12 @@ const DEFAULT_GLOBAL_CONST = {
   CONNECTION_SUCCESS_MESSAGE: 'Connected to the internet',
   CONNECTION_ERROR_TITLE: 'Disconected',
   CONNECTION_ERROR_MESSAGE: 'No internet connection',
+  CONNECTION_200_ALERT_TITLE: 'Request submitted',
+  CONNECTION_200_ALERT_MESSAGE: 'Your request successfully submitted',
+  CONNECTION_400_ALERT_TITLE: 'Sorry request failure',
+  CONNECTION_400_ALERT_MESSAGE: 'Please check your input and try again',
+  CONNECTION_500_ALERT_TITLE: 'Sorry for the inconvenience',
+  CONNECTION_500_ALERT_MESSAGE: `Something error on our server, we're working on this error. Please try again later.`,
 
   // CUSTOM STEP BAR
   CUSTOM_STEP_BAR_HEIGHT: 8,
@@ -312,6 +318,24 @@ export function setGlobalConnectionHandlerErrorTitle(value) {
 }
 export function setGlobalConnectionHandlerErrorMessage(value) {
   globalConst = Object.appendObject(globalConst, 'CONNECTION_ERROR_MESSAGE', value)
+}
+export function setGlobalConnectionHandler200AlertTitle(value) {
+  globalConst = Object.appendObject(globalConst, 'CONNECTION_200_ALERT_TITLE', value)
+}
+export function setGlobalConnectionHandler200AlertMessage(value) {
+  globalConst = Object.appendObject(globalConst, 'CONNECTION_200_ALERT_MESSAGE', value)
+}
+export function setGlobalConnectionHandler400AlertTitle(value) {
+  globalConst = Object.appendObject(globalConst, 'CONNECTION_400_ALERT_TITLE', value)
+}
+export function setGlobalConnectionHandler400AlertMessage(value) {
+  globalConst = Object.appendObject(globalConst, 'CONNECTION_400_ALERT_MESSAGE', value)
+}
+export function setGlobalConnectionHandler500AlertTitle(value) {
+  globalConst = Object.appendObject(globalConst, 'CONNECTION_500_ALERT_TITLE', value)
+}
+export function setGlobalConnectionHandler500AlertMessage(value) {
+  globalConst = Object.appendObject(globalConst, 'CONNECTION_500_ALERT_MESSAGE', value)
 }
 
 // CUSTOM STEP BAR

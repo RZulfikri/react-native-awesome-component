@@ -21,6 +21,9 @@ render() {
   }
 ```
 
+**API response handler**
+To handle response of api such as code 200, 400, 500 check this code documentation [here](./global-const.md#apihelper)
+
 **Global Setup**
 
 Global const used to set global value. it used to set the style for all of this component. for more detail check [here](./global-const.md#connectionhandler)
