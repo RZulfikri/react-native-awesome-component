@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { getConnectionStatus } from '../connection-handler/connection-error-helper'
 import NoConnectionContainer from '../custom-flatlist/no-connection-container'
 import ErrorContainer from '../custom-flatlist/error-container'
 
-class CustomView extends PureComponent {
+class CustomView extends Component {
   static propTypes = {
     isError: PropTypes.bool,
     fetchRequest: PropTypes.func,
