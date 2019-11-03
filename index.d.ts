@@ -277,6 +277,14 @@ interface ICustomInput extends TextInputProps {
   countrySelectionLabel: string;
 }
 
+interface ICustomView {
+  isError: boolean;
+  fetchRequest: () => void;
+  renderMainContent: () => void;
+  renderErrorContent: () => void;
+  renderNoInternetContent: () => void;
+}
+
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
 export class PlaceholderText extends React.Component<TextProps> { }
 export class CustomButton extends React.Component<ICustomButtonProps> { }
@@ -291,6 +299,7 @@ export class CustomFlatList extends React.Component<ICustomFlatList> { }
 export class CustomSelect extends React.Component<ICustomSelect> { }
 export class CustomDatepicker extends React.Component<ICustomDatepicker> { }
 export class CustomInput extends React.Component<ICustomInput> { }
+export class CustomView extends React.Component<ICustomView> { }
 
 /**
  * STYLED COMPONENT
