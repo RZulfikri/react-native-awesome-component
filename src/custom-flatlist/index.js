@@ -7,18 +7,6 @@ import { getBottomSpace } from 'react-native-iphone-x-helper';
 import * as Obj from '../method/object'
 import * as GlobalConst from '../global-const'
 
-const loadingData = [
-  { id: 1, loading: true },
-  { id: 2, loading: true },
-  { id: 3, loading: true },
-  { id: 4, loading: true },
-  { id: 5, loading: true },
-  { id: 6, loading: true },
-  { id: 7, loading: true },
-  { id: 8, loading: true },
-  { id: 9, loading: true }
-]
-
 class CustomFlatList extends Component {
   static propTypes = {
     data: PropTypes.array.isRequired,
@@ -33,6 +21,7 @@ class CustomFlatList extends Component {
     }),
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     contentContainerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    placeholderCount: PropTypes.number,
   }
 
   static defaulProps = {
@@ -40,25 +29,38 @@ class CustomFlatList extends Component {
     renderItem: () => null,
     style: {},
     contentContainerStyle: {},
+    placeholderCount: 9,
   }
 
   constructor(props) {
     super(props)
+
+    const { placeholderCount } = props;
+
+    const placeholderItems = [];
+
+    for (let index = 0; index < placeholderCount; index++) {
+      placeholderItems.push({ id: index + 1, loading: true });
+    }
+
     this.state = {
-      flatListData: []
+      flatListData: [],
+      loadingData: placeholderItems
     }
     this.onRefresh = this.onRefresh.bind(this)
     this.onLoadMore = this.onLoadMore.bind(this)
   }
 
   componentDidMount() {
+    const { loadingData } = this.state;
+
     this.setState({ flatListData: loadingData },
       () => this.onRefresh())
   }
 
   componentWillReceiveProps(nextProps) {
     const { data, loading, meta } = nextProps
-    let { flatListData } = this.state
+    let { flatListData, loadingData } = this.state
 
     if (!loading && data && meta) {
       flatListData = data
