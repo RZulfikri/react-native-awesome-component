@@ -200,6 +200,7 @@ interface ICustomFlatList {
   meta: IMetaPage;
   style: StyleProp<ViewStyle>;
   contentContainerStyle: StyleProp<ViewStyle>;
+  placeholderCount?: number;
 }
 
 interface ICustomSelect {

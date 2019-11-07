@@ -79,4 +79,5 @@ renderItem: () => void | props to render item in flatlist |
 renderEmpty: () => any | props to render `empty` state | `<EmptyContainer />`
 renderNoConnection: () => any | props to render `no connection` state | `<NoConnectionContainer />`
 renderError: () => any | props to render `error` state | `<ErrorContainer />`
+placeholderCount: number | props to define amount of placeholder will displayed | 9
 meta: { current_page, next_page} | props to set meta | 
