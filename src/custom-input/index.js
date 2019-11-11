@@ -324,7 +324,7 @@ class CustomInput extends Component {
 
   renderInput(formikProps) {
     const { errors, touched } = formikProps
-    const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress, onChangeValidation } = this.props
+    const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress, onChangeValidation, editable } = this.props
     let { labelType } = this.props
 
     if (labelType === undefined || labelType === null) {
@@ -450,14 +450,13 @@ class CustomInput extends Component {
     delete activeProps.onFocus
     delete activeProps.onBlur
     delete activeProps.keyboardType
-
     return (
       <View contentContainerStyle={{ flexGrow: 1 }} >
         <Container style={[containerTyle]}>
           {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle)}
           {labelType === LABEL_TYPE.left && label && this.renderLabel(labelType, labelStyle)}
           {onPress ?
-            <TouchableOpacity onPress={onPress}>
+            <TouchableOpacity activeOpacity={0.8} onPress={onPress} disabled={!editable}>
               <StyledTextInputContainer style={[styledTextInputContainerStyle]}>
                 {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
                 <StyledTextInput
@@ -474,6 +473,7 @@ class CustomInput extends Component {
                   onFocus={() => formikProps.setFieldTouched('value')}
                   onBlur={() => formikProps.setFieldTouched('value', false)}
                   keyboardType={this.getKeyboardType(inputType)}
+                  editable={false}
                 />
                 {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
               </StyledTextInputContainer>
