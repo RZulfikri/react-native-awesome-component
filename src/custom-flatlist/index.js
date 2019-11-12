@@ -24,7 +24,7 @@ class CustomFlatList extends Component {
     placeholderCount: PropTypes.number,
   }
 
-  static defaulProps = {
+  static defaultProps = {
     data: [],
     renderItem: () => null,
     style: {},
