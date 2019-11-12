@@ -8,7 +8,7 @@ import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle, FlatListProps, 
 type ResizeMethodType = "auto" | "resize" | "scale"
 type ResizeModeType = "cover" | "contain" | "stretch" | "repeat" | "center"
 type IconType = 'ant-design' | 'entypo' | 'evil-icons' | 'feather' | 'font-awesome' | 'font-awesome5' | 'fontisto' | 'foundation' | 'ionicons' | 'material-community' | 'material-icons' | 'octicons'
-type AlertType = 'success' | 'error' | 'info'
+type AlertType = 'success' | 'error' | 'info' | 'custom-confirm'
 type DatepickerType = 'time' | 'date' | 'datetime'
 
 type CustomInputLabelType = 'top-label' | 'default' | 'left-label' | 'right-label'
@@ -190,7 +190,7 @@ interface IMetaPage {
   next_page: number;
 }
 
-interface ICustomFlatList {
+interface ICustomFlatList extends FlatListProps {
   data: any[];
   fetchFunction: () => void;
   renderItem: () => void;

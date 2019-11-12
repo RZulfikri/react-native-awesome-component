@@ -51,7 +51,7 @@ how to show the alert check documention below [here](../doc/custom-alert.md#b-ou
 
 //ICustomAlertConfiguration (Alert options object)
 ICustomAlertConfiguration = {
-  type: AlertType, // success | info | error. if value undefined it will show alert without top image / icon
+  type: AlertType, // success | info | error | custom-confirm. if value undefined it will show alert without top image / icon
   iconType: undefined, // it use to replace current alert icon type
   iconName: undefined, // it use to replace current alert icon name
   iconSize: undefined, // it use to replace current alert icon size

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import Modal from "react-native-modal"
 import { Container } from '../styled/share.styled'
 import { Title, Message, ImageContainer, ImageAlert } from './styled'
@@ -12,7 +12,8 @@ import { getIconByType } from '../method/helper'
 const ALERT_TYPE = {
   success: 'success',
   info: 'info',
-  error: 'error'
+  error: 'error',
+  customConfirm: 'custom-confirm',
 }
 
 class Alert extends PureComponent {
@@ -295,7 +296,7 @@ class Alert extends PureComponent {
         if (imgInfo) {
           return <ImageAlert source={imgInfo} style={imageStyle} resizeMethod='resize' resizeMode='contain' />
         } else {
-          return <Icons name={iconName ? iconName : iconInfoName} size={iconSize ? iconSize: iconInfoSize} color={infoColor} style={[iconInfoStyle, iconStyle]} />
+          return <Icons name={iconName ? iconName : iconInfoName} size={iconSize ? iconSize : iconInfoSize} color={infoColor} style={[iconInfoStyle, iconStyle]} />
         }
       }
 
@@ -311,8 +312,8 @@ class Alert extends PureComponent {
 
   render() {
     const { visible, option, customStyle } = this.state
-    const { enableDismiss, containerStyle, titleStyle, messageStyle } = customStyle ? customStyle : this.props
-
+    const { enableDismiss, containerStyle, titleStyle, messageStyle, multiButtonTitleStyle } = customStyle ? customStyle : this.props
+    const { type, confirm, cancel } = option
     let isDismiss = option.enableDismiss !== undefined ? option.enableDismiss : enableDismiss
     return (
       <View>
@@ -324,14 +325,46 @@ class Alert extends PureComponent {
           animationOut={'fadeOut'}
           onBackButtonPress={isDismiss ? this.hide : () => null}
         >
-          <Container style={[{ width: '85%', borderRadius: 5 }, containerStyle]}>
-            <ImageContainer>
-              {this.renderIcon()}
-            </ImageContainer>
-            <Title style={[titleStyle]}>{option.title}</Title>
-            {option.message && <Message style={[messageStyle]}>{option.message}</Message>}
-            {this.renderButton(option)}
-          </Container>
+          {type === ALERT_TYPE.customConfirm ? (
+            <Container padded padding={23} style={[{ width: scale.scale(320), borderRadius: 5 }, containerStyle]}>
+              <Title style={[titleStyle, { textAlign: 'left' }]}>{option.title}</Title>
+              {option.message && <Message style={[messageStyle, { textAlign: 'left' }]}>{option.message}</Message>}
+              <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: scale.scale(25) }}>
+                {cancel && (
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={this.onCancel}
+                    style={{ marginRight: 28 }}
+                  >
+                    <Text
+                      style={[multiButtonTitleStyle && multiButtonTitleStyle.cancel ? multiButtonTitleStyle.cancel : {}]}
+                    >
+                      {cancel.title}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  onPress={this.onConfirm}
+                >
+                  <Text
+                    style={[{color: Colors.dark_slate_blue}, multiButtonTitleStyle && multiButtonTitleStyle.confirm ? multiButtonTitleStyle.confirm : {}]}
+                  >
+                    {confirm.title}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </Container>
+          ) : (
+              <Container style={[{ width: '85%', borderRadius: 5 }, containerStyle]}>
+                <ImageContainer>
+                  {this.renderIcon()}
+                </ImageContainer>
+                <Title style={[titleStyle]}>{option.title}</Title>
+                {option.message && <Message style={[messageStyle]}>{option.message}</Message>}
+                {this.renderButton(option)}
+              </Container>
+            )}
         </Modal>
       </View>
     )
