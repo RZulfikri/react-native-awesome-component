@@ -240,6 +240,7 @@ interface ICustomDatepicker {
   style: StyleProp<ViewStyle>;
   labelType?: CustomInputLabelType;
   rightIcon: string;
+  disabled: boolean;
   onChangeValidation: () => boolean;
 }
 interface ICustomInput extends TextInputProps {

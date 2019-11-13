@@ -27,6 +27,7 @@ const CustomDatePicker = props => {
     style,
     labelType,
     rightIcon,
+    disabled,
     onChangeValidation,
   } = props;
 
@@ -67,6 +68,7 @@ const CustomDatePicker = props => {
         label={label}
         labelType={labelType}
         underlineWidth={1}
+        editable={!disabled}
         onPress={() => setModalVisible(true)}
         isRequired={isRequired}
         defaultValue={value}
@@ -146,6 +148,7 @@ CustomDatePicker.propTypes = {
   style: ViewPropTypes.style,
   labelType: PropTypes.oneOf(['top-label', 'default', 'left-label', 'right-label']),
   rightIcon: PropTypes.string,
+  disabled: PropTypes.bool,
   onChangeValidation: PropTypes.func,
 };
 
@@ -164,6 +167,7 @@ CustomDatePicker.defaultProps = {
   minimumDate: undefined,
   style: undefined,
   labelType: 'top-label',
+  disabled: false,
   onChangeValidation: () => null
 };
 
