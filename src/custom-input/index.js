@@ -322,7 +322,7 @@ class CustomInput extends Component {
     )
   }
 
-  renderInput(formikProps, index) {
+  renderInput(formikProps) {
     const { errors, touched } = formikProps
     const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress, onChangeValidation, editable } = this.props
     let { labelType } = this.props
