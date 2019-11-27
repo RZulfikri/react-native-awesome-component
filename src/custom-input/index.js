@@ -234,12 +234,12 @@ class CustomInput extends Component {
     const { label, isRequired, errorColor } = this.props
     const lErrorColor = errorColor ? errorColor : GlobalConst.getValue().CUSTOM_INPUT_ERROR_COLOR
 
-    let renderLabel = <Label style={[this.getLabelStyleByType(labelType), labelStyle]}>
+    let renderLabel = <Label style={[this.getLabelStyleByType(labelType), labelStyle]} key={'main-label'}>
       {label}
     </Label>
 
     if (isRequired) {
-      const additionalRequired = <Label style={[this.getLabelStyleByType(labelType), labelStyle, {color: lErrorColor}]}>
+      const additionalRequired = <Label style={[this.getLabelStyleByType(labelType), labelStyle, {color: lErrorColor}]} key={'required-mark'}>
       *
     </Label>
       renderLabel = Obj.appendChildToView(renderLabel, additionalRequired)
@@ -322,7 +322,7 @@ class CustomInput extends Component {
     )
   }
 
-  renderInput(formikProps) {
+  renderInput(formikProps, index) {
     const { errors, touched } = formikProps
     const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress, onChangeValidation, editable } = this.props
     let { labelType } = this.props
