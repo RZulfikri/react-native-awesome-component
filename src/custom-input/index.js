@@ -45,6 +45,7 @@ class CustomInput extends Component {
     validateOnChange: PropTypes.bool,
     onPress: PropTypes.func,
     onChangeValidation: PropTypes.func,
+    containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 
     // ERROR MESSAGE
     passwordRegex: PropTypes.any,
@@ -114,6 +115,13 @@ class CustomInput extends Component {
       this.props.ref(currentRef)
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { value, formikProps } = this.props;
+
+
+  }
+  
 
   getContainerByType(labelType) {
     switch (labelType) {
@@ -324,7 +332,7 @@ class CustomInput extends Component {
 
   renderInput(formikProps) {
     const { errors, touched } = formikProps
-    const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress, onChangeValidation, editable } = this.props
+    const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress, onChangeValidation, editable, containerStyle } = this.props
     let { labelType } = this.props
 
     if (labelType === undefined || labelType === null) {
@@ -340,6 +348,7 @@ class CustomInput extends Component {
 
     // HANDLER BORDER STYLE
     let containerTyle = {
+      ...containerStyle,
       borderBottomWidth: underlineWidth ? underlineWidth : GlobalConst.getValue().CUSTOM_INPUT_UNDERLINE_WIDTH,
       borderBottomColor: underlineColor ? underlineColor : GlobalConst.getValue().CUSTOM_INPUT_UNDERLINE_COLOR,
     }
@@ -439,6 +448,9 @@ class CustomInput extends Component {
       activeProps = Obj.appendObject(activeProps, 'returnKeyType', 'done')
     }
 
+    const onFocus = activeProps.onFocus;
+    const onBlur = activeProps.onBlur;
+
     // REMOVE UNUSED PROPS
     delete activeProps.ref
     delete activeProps.underlineColorAndroid
@@ -447,9 +459,10 @@ class CustomInput extends Component {
     delete activeProps.onChangeText
     delete activeProps.value
     delete activeProps.onSubmitEditing
-    delete activeProps.onFocus
-    delete activeProps.onBlur
+    // delete activeProps.onFocus
+    // delete activeProps.onBlur
     delete activeProps.keyboardType
+
     return (
       <View contentContainerStyle={{ flexGrow: 1 }} >
         <Container style={[containerTyle]}>
@@ -470,8 +483,18 @@ class CustomInput extends Component {
                   onChangeText={formikProps.handleChange('value')}
                   value={formikProps.values.value}
                   onSubmitEditing={formikProps.handleSubmit}
-                  onFocus={() => formikProps.setFieldTouched('value')}
-                  onBlur={() => formikProps.setFieldTouched('value', false)}
+                  onFocus={() => {
+                    formikProps.setFieldTouched('value');
+                    if (onFocus) {
+                      onFocus();
+                    }
+                  }}
+                  onBlur={() => {
+                    formikProps.setFieldTouched('value', false);
+                    if (onBlur) {
+                      onBlur();
+                    }
+                  }}
                   keyboardType={this.getKeyboardType(inputType)}
                   editable={false}
                 />
@@ -492,8 +515,18 @@ class CustomInput extends Component {
                 onChangeText={formikProps.handleChange('value')}
                 value={formikProps.values.value}
                 onSubmitEditing={formikProps.handleSubmit}
-                onFocus={() => formikProps.setFieldTouched('value')}
-                onBlur={() => formikProps.setFieldTouched('value', false)}
+                onFocus={() => {
+                  formikProps.setFieldTouched('value');
+                  if (onFocus) {
+                    onFocus();
+                  }
+                }}
+                onBlur={() => {
+                  formikProps.setFieldTouched('value', false);
+                  if (onBlur) {
+                    onBlur();
+                  }
+                }}
                 keyboardType={this.getKeyboardType(inputType)}
               />
               {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
@@ -520,7 +553,7 @@ class CustomInput extends Component {
           validateOnChange={lValidateOnChange}
           validateOnBlur={true}
           onSubmit={lOnSubmit}
-          enableReinitialize={!!onPress}
+          enableReinitialize
         >
           {props => this.renderInput(props)}
         </Formik>

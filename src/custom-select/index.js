@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react/forbid-prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   ViewPropTypes,
@@ -11,7 +11,7 @@ import ModalList from './Modal';
 import CustomInput from '../custom-input';
 import { GlobalConst } from '../..';
 import Colors from '../colors';
-import { getIconByType } from '../method/helper'
+import { getIconByType, stringEquals, isEmptyOrSpaces } from '../method/helper'
 
 const CustomSelect = props => {
   const {
@@ -31,11 +31,13 @@ const CustomSelect = props => {
     unSelectedPickerColor,
     selectTitle,
     disabled,
+    keyOther,
     onChangeValidation,
   } = props;
 
   const [modalVisible, setModalVisible] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
+  // const [dataList, setdataList] = useState(data);
 
   let valueText = '';
 
@@ -49,9 +51,13 @@ const CustomSelect = props => {
       }
     } else {
       if (keyDescription) {
-        valueText = value[keyDescription]
+        if (!isEmptyOrSpaces(keyOther) && stringEquals(value[keyDescription], keyOther)) {
+          valueText = value[keyValue]
+        } else {
+          valueText = value[keyDescription]
+        }
       } else {
-        valueText = value
+        valueText = value;
       }
     }
   }
@@ -94,13 +100,14 @@ const CustomSelect = props => {
         }}
         forceErrorMessage={errorMessage}
       />
-      <ModalList
+      {modalVisible ? <ModalList
         data={data}
         multiSelect={multiSelect}
         keyDescription={keyDescription}
         keyValue={keyValue}
         initialValue={value}
         modalVisible={modalVisible}
+        keyOther={keyOther}
         onSubmit={selectValue => {
           setModalVisible(false)
           onChangeValue(selectValue);
@@ -117,7 +124,8 @@ const CustomSelect = props => {
         renderItem={renderItem}
         renderHeader={renderHeader}
         title={selectTitle}
-      />
+      /> : undefined}
+
     </View>
   );
 };
@@ -140,6 +148,7 @@ CustomSelect.propTypes = {
   selectTitle: PropTypes.string,
   disabled: PropTypes.bool,
   onChangeValidation: PropTypes.func,
+  keyOther: PropTypes.string,
 };
 
 CustomSelect.defaultProps = {
@@ -151,6 +160,7 @@ CustomSelect.defaultProps = {
   selectTitle: 'Select Item',
   disabled: false,
   onChangeValidation: () => null,
+  keyOther: null,
 };
 
 export default CustomSelect;

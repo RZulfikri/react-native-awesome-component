@@ -11,6 +11,7 @@ import Colors from '../colors';
 import { GlobalConst } from '../..';
 import _ from 'lodash'
 import { getBottomSpace } from 'react-native-iphone-x-helper';
+import { stringEquals, isEmptyOrSpaces } from '../method/helper';
 
 const ModalList = props => {
   const {
@@ -27,9 +28,25 @@ const ModalList = props => {
     unSelectedPickerColor,
     renderHeader,
     renderItem,
+    keyOther,
   } = props;
+  const [value, setValue] = useState('');
 
-  const [value, setValue] = useState(initialValue);
+  useEffect(() => {
+    if (data) {
+      if (!keyDescription && !isEmptyOrSpaces(keyOther)) {
+        if (!isEmptyOrSpaces(initialValue)) {
+          setValue(
+            data.findIndex(item => stringEquals(item, initialValue)) === -1
+              ? `${keyOther}-${initialValue}`
+              : initialValue,
+          );
+        }
+      } else {
+        setValue(initialValue);
+      }
+    }
+  }, [initialValue, data]);
 
   const leftAction = () => {
     closeModal();
@@ -37,7 +54,12 @@ const ModalList = props => {
   }
 
   const rightAction = () => {
-    onSubmit(value);
+    let tempValue = value;
+    if (!isEmptyOrSpaces(keyOther) && !keyDescription && tempValue.toLowerCase().includes(keyOther.toLowerCase())) {
+      tempValue = value.substr(keyOther.length + 1);
+    }
+    console.tron.warn({tempValue})
+    onSubmit(tempValue);
     closeModal();
   }
 
@@ -56,11 +78,12 @@ const ModalList = props => {
         setValue([data])
       }
     } else {
+      console.tron.warn({data});
       setValue(data)
     }
   }
 
-  const checkIsSelected = (item, value) => {
+  const checkIsSelected = (item) => {
     if (multiSelect) {
       if (Array.isArray(value)) {
         return _.some(value, item)
@@ -68,7 +91,22 @@ const ModalList = props => {
         return false
       }
     } else {
-      return _.isEqual(item, value)
+      if (keyDescription) {
+        if (value) {
+          return stringEquals(item[keyDescription], value[keyDescription]);
+        }
+        return false
+      } else {
+        const toLowerCaseValue = value.toLowerCase();
+        const toLowerCaseItem = item.toLowerCase();
+        if (!isEmptyOrSpaces(keyOther)) {
+          const toLowerCaseKeyOther = keyOther.toLowerCase();
+          if (toLowerCaseValue.includes(toLowerCaseKeyOther)) {
+            return toLowerCaseValue.includes(toLowerCaseKeyOther) && toLowerCaseItem.includes(toLowerCaseKeyOther);
+          }
+        }
+        return toLowerCaseValue === toLowerCaseItem;
+      }
     }
   }
 
@@ -95,13 +133,15 @@ const ModalList = props => {
               return (
                 <Item
                   item={item}
+                  initialValue={initialValue}
+                  keyOther={keyOther}
                   multiSelect={multiSelect}
                   keyValue={keyValue}
                   selectedPickerColor={selectedPickerColor}
                   unSelectedPickerColor={unSelectedPickerColor}
                   isSelected={checkIsSelected(item, value)}
                   keyDescription={keyDescription}
-                  onPressItem={(data, isSelected) => onPressItem(data, isSelected)}
+                  onPressItem={(data) => onPressItem(data)}
                 />
               )
             }
@@ -128,6 +168,7 @@ ModalList.propTypes = {
   unSelectedPickerColor: PropTypes.string.isRequired,
   renderItem: PropTypes.func,
   renderHeader: PropTypes.func,
+  keyOther: PropTypes.string.isRequired,
 };
 
 ModalList.defaultProps = {

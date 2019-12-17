@@ -1,12 +1,14 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-closing-bracket-location */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, View } from 'react-native';
 import Colors from '../colors';
 import { ValueText } from '../styled/share.styled';
 import metrics from '../metrics';
-import { getIconByType } from '../method/helper';
+import { getIconByType, isEmptyOrSpaces } from '../method/helper';
+// import CustomInput from '../custom-input'
+import CustomInput from '../custom-input';
 import { GlobalConst, PlaceholderText } from '../..';
 import { ItemContainer } from './styled';
 
@@ -15,12 +17,21 @@ const Item = props => {
     item,
     keyValue,
     keyDescription,
+    keyOther,
     multiSelect,
     isSelected,
     onPressItem,
-    selectedPickerColor,
-    unSelectedPickerColor,
+    initialValue,
   } = props;
+  const [otherText, setOtherText] = useState('');
+
+  useEffect(() => {
+    if (!keyDescription && !isEmptyOrSpaces(keyOther)) {
+      setOtherText(initialValue);
+    }
+  }, []);
+
+  const isOther = !isEmptyOrSpaces(keyOther) && ((!keyDescription && item.toLowerCase().includes(keyOther)) || (keyDescription && item[keyDescription].toLowerCase() === keyOther));
 
   const iconType = GlobalConst.getValue().CUSTOM_SELECT_ICON_TYPE
   const iconSelectName = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_NAME : GlobalConst.getValue().CUSTOM_SELECT_ITEM_SELECT_ICON_NAME
@@ -38,19 +49,51 @@ const Item = props => {
 
   const Icons = getIconByType(iconType)
 
+  const onChange = (text) => {
+    let temp = item;
+    if (isOther) {
+      if (keyDescription) {
+        temp = { ...item, [keyValue]: otherText };
+      } else {
+        temp = `${keyOther}-${text ? text : otherText}`;
+      }
+    }
+    onPressItem(temp);
+  }
+
   return (
-    <ItemContainer
-      activeOpacity={0.8}
-      style={[itemStyle]}
-      onPress={() => onPressItem(item, isSelected)}>
-      <Text style={[{ flex: 1 }, itemTitleStyle]}>{keyDescription ? item[keyDescription] : item}</Text>
-      <Icons
-        name={isSelected ? iconSelectName : iconUnselectName}
-        size={isSelected ? iconSelectSize : iconUnselectSize}
-        color={isSelected ? iconSelectColor : iconUnselectColor}
-        style={isSelected ? iconSelectStyle : iconUnselectStyle}
-      />
-    </ItemContainer>
+    <View style={{ backgroundColor: 'white'}}>
+      <ItemContainer
+        activeOpacity={0.8}
+        style={[itemStyle]}
+        onPress={onChange}>
+        <Text style={[{ flex: 1 }, itemTitleStyle]}>{keyDescription ? item[keyDescription] : item.includes(keyOther) ? keyOther : item}</Text>
+        <Icons
+          name={isSelected ? iconSelectName : iconUnselectName}
+          size={isSelected ? iconSelectSize : iconUnselectSize}
+          color={isSelected ? iconSelectColor : iconUnselectColor}
+          style={isSelected ? iconSelectStyle : iconUnselectStyle}
+        />
+      </ItemContainer>
+      {isSelected && isOther ? (
+        <CustomInput
+          placeholder={''}
+          label={undefined}
+          containerStyle={{marginHorizontal: 10}}
+          labelType={undefined}
+          underlineWidth={1}
+          defaultValue={otherText}
+          onChangeText={(text) => {
+            setOtherText(text);
+            onChange(text);
+          }}
+          isRequired={false}
+          forceErrorMessage={''}
+          autoCorrect={false}
+          autoCapitalize='none'
+        />
+      ) : undefined}
+    </View>
   );
 };
 
@@ -61,6 +104,8 @@ Item.propTypes = {
   multiSelect: PropTypes.bool,
   isSelected: PropTypes.bool,
   onPressItem: PropTypes.func,
+  keyOther: PropTypes.string.isRequired,
+  initialValue: PropTypes.string,
 };
 
 Item.defaultProps = {
@@ -68,6 +113,7 @@ Item.defaultProps = {
   keyValue: null,
   keyDescription: null,
   item: null,
+  initialValue: null,
 };
 
 export default Item;

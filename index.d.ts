@@ -220,6 +220,7 @@ interface ICustomSelect {
   unSelectedPickerColor?: string;
   selectTitle: string;
   disabled: boolean;
+  keyOther?: string;
   onChangeValidation: (hasError: boolean) => void;
 }
 
