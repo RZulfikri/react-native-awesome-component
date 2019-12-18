@@ -559,7 +559,6 @@ class CustomInput extends Component {
             </TouchableOpacity> :
             <StyledTextInputContainer style={[styledTextInputContainerStyle]}>
               {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
-              {renderLeftAction && (typeof renderLeftAction === 'function') && render()}
               {inputType === INPUT_TYPE.phoneCountry && this.renderModalSelectCountry(formikProps)}
               <StyledTextInput
                 ref={currentRef => this.setRef(currentRef)}
