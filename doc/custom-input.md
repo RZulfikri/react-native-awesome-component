@@ -179,3 +179,4 @@ valueCountry: ISimpleCountryFlagResponse | props to set default country code | `
 onSelectCountry: () => void | props to get value of selected county | `ISimpleCountryFlagResponse`
 countryPlaceholder: string | props to set select country placeholder | -
 countrySelectionLabel: string | props to set select country selection label | 
+countryValueLabel: string | props to set label value of counrty input | -

@@ -278,6 +278,7 @@ interface ICustomInput extends TextInputProps {
   onSelectCountry: () => void;
   countryPlaceholder: string;
   countrySelectionLabel: string;
+  countryValueLabel: string;
 }
 
 interface ICustomView {

@@ -71,7 +71,8 @@ class CustomInput extends Component {
     }),
     onSelectCountry: PropTypes.func,
     countryPlaceholder: PropTypes.string,
-    countrySelectionLabel: PropTypes.string
+    countrySelectionLabel: PropTypes.string,
+    countryValueLabel: PropTypes.string,
   }
 
   static defaultProps = {
@@ -265,7 +266,7 @@ class CustomInput extends Component {
 
   renderModalSelectCountry(formikProps) {
     const { showCountryList } = this.state
-    const { style, valueCountry, onSelectCountry, countryPlaceholder, countrySelectionLabel } = this.props
+    const { style, valueCountry, onSelectCountry, countryPlaceholder, countrySelectionLabel, countryValueLabel } = this.props
     const countriesCode = getSimpleCountryList(true)
     const renderItem = GlobalConst.getValue().CUSTOM_SELECT_ITEM_RENDER
     const renderHeader = GlobalConst.getValue().CUSTOM_SELECT_HEADER_RENDER
@@ -299,7 +300,11 @@ class CustomInput extends Component {
     let value = placeholder
 
     if (valueCountry) {
-      value = `${valueCountry.code} (+${valueCountry.callingCode})`
+      if (countryValueLabel) {
+        value = countryValueLabel
+      } else {
+        value = `${valueCountry.code} (+${valueCountry.callingCode})`
+      }
     }
 
     return (
