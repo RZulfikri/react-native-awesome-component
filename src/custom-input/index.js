@@ -119,10 +119,53 @@ class CustomInput extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     const thisProps = this.props
-    if (nextProps.value === thisProps.value) {
-      return false
+    const thisState = this.state
+
+    let shouldUpdate = true
+
+    // this condition to ignore custom select that using custom input
+    if (nextProps.onPress === undefined) {
+      // this condition to prevent re render for common input
+      if ((
+        (nextProps.inputType === INPUT_TYPE.text) ||
+        (nextProps.inputType === INPUT_TYPE.email) ||
+        (nextProps.inputType === INPUT_TYPE.password) ||
+        (nextProps.inputType === INPUT_TYPE.phone) ||
+        (nextProps.inputType === INPUT_TYPE.number) ||
+        (nextProps.inputType === INPUT_TYPE.textArea)
+      )
+        && (nextProps.value === thisProps.value)
+        && (nextProps.defaultValue === thisProps.defaultValue)
+      ) {
+        shouldUpdate = false
+      }
+
+      // this condition to prevent re render for phone-country input
+      if ((nextProps.inputType === INPUT_TYPE.phoneCountry) && 
+      (
+        (nextProps.valueCountry && thisProps.valueCountry) && (nextProps.valueCountry.id === thisProps.valueCountry.id)
+      ) && (
+        (nextProps.defaultValue === thisProps.defaultValue)
+      )) {
+        if (thisState.showCountryList === nextState.showCountryList) {
+          shouldUpdate = false
+        } else {
+          shouldUpdate = true
+        }
+      }
+    } else {
+      // this condition to prevent re render for custom input, that used in custom select
+      if (thisProps.defaultValue === nextProps.defaultValue) {
+        shouldUpdate = false
+      }
     }
-    return true
+
+    // condition to check other props, that makes app need to re render but value is equal
+    if (thisProps.editable !== nextProps.editable) {
+      shouldUpdate = true
+    }
+
+    return shouldUpdate
   }
 
   getContainerByType(labelType) {
@@ -206,6 +249,13 @@ class CustomInput extends Component {
       case INPUT_TYPE.password: {
         value = value.min(8, GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM(label, 8))
         value = value.matches(regexPassword, errorPasswordMessage)
+        break
+      }
+
+      case INPUT_TYPE.phoneCountry:
+      case INPUT_TYPE.phone:
+      case INPUT_TYPE.number: {
+        value = value.matches(new RegExp('^\\d+$'), GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_INPUT)
         break
       }
     }

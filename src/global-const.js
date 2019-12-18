@@ -164,6 +164,7 @@ const DEFAULT_GLOBAL_CONST = {
   CUSTOM_INPUT_ERROR_COLOR: Colors.alertError,
   CUSTOM_INPUT_VALIDATE_ON_CHANGE: true,
   CUSTOM_INPUT_PASSWORD_REGEX: new RegExp('^(?=.*?[a-z])(?=.*?[0-9]).{8,}$'),
+  CUSTOM_INPUT_ERROR_MESSAGE_INPUT: 'Invalid input',
   CUSTOM_INPUT_ERROR_MESSAGE_EMAIL: 'Invalid email address',
   CUSTOM_INPUT_ERROR_MESSAGE_PASSWORD: 'Password must contain letters and number.',
   CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED: (label) => label ? `${label} is required` : 'This field is required',
@@ -596,6 +597,9 @@ export function setGlobalCustomInputValidateOnChange(value) {
 }
 export function setGlobalCustomInputPasswordRegex(value) {
   globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_PASSWORD_REGEX', value)
+}
+export function setGlobalCustomInputErrorMessageInput(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_MESSAGE_INPUT', value)
 }
 export function setGlobalCustomInputErrorMessageEmail(value) {
   globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_MESSAGE_EMAIL', value)
