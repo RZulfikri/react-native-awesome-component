@@ -117,12 +117,13 @@ class CustomInput extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { value, formikProps } = this.props;
-
-
+  shouldComponentUpdate(nextProps, nextState) {
+    const thisProps = this.props
+    if (nextProps.value === thisProps.value) {
+      return false
+    }
+    return true
   }
-  
 
   getContainerByType(labelType) {
     switch (labelType) {
@@ -248,8 +249,8 @@ class CustomInput extends Component {
     </Label>
 
     if (isRequired) {
-      const additionalRequired = <Label style={[this.getLabelStyleByType(labelType), labelStyle, {color: lErrorColor}]} key={'required-mark'}>
-      *
+      const additionalRequired = <Label style={[this.getLabelStyleByType(labelType), labelStyle, { color: lErrorColor }]} key={'required-mark'}>
+        *
     </Label>
       renderLabel = Obj.appendChildToView(renderLabel, additionalRequired)
     }
