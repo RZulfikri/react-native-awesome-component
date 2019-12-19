@@ -409,8 +409,8 @@ class CustomInput extends Component {
       borderBottomColor: underlineColor ? underlineColor : GlobalConst.getValue().CUSTOM_INPUT_UNDERLINE_COLOR,
     }
 
-    let labelStyle = {}
-    let errorLabelStyle = {}
+    let labelStyle = this.props.labelStyle ? this.props.labelStyle : GlobalConst.getValue().CUSTOM_INPUT_LABEL_STYLE
+    let errorLabelStyle = this.props.errorLabelStyle ? this.props.errorLabelStyle : GlobalConst.getValue().CUSTOM_INPUT_ERROR_LABEL_STYLE
     let errorLabel = <View />
 
     // HANDLE ERROR STYLE
