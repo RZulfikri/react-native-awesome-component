@@ -90,7 +90,7 @@ interface ICustomHeaderProps {
   titleRight: string;
   renderRight: () => void;
   onPressRight: () => void;
-  IconType: IconType;
+  iconType: IconType;
 }
 
 interface IConnectionHandler {
