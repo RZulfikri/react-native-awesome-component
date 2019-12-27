@@ -31,6 +31,7 @@ const INPUT_TYPE = {
 
 class CustomInput extends Component {
   static propTypes = {
+    setRef: PropTypes.func,
     minLength: PropTypes.number,
     labelType: PropTypes.oneOf([LABEL_TYPE.top, LABEL_TYPE.default, LABEL_TYPE.left, LABEL_TYPE.right]),
     label: PropTypes.string,
@@ -112,8 +113,8 @@ class CustomInput extends Component {
 
   setRef(currentRef) {
     this.textInput = currentRef
-    if (this.props.ref) {
-      this.props.ref(currentRef)
+    if (this.props.setRef) {
+      this.props.setRef(currentRef)
     }
   }
 
@@ -604,7 +605,7 @@ class CustomInput extends Component {
     let validationSchema = this.getValidationSchema(inputType)
     const initialValues = defaultValue ? { value: defaultValue } : { value: '' }
     const lValidateOnChange = validateOnChange ? validateOnChange : GlobalConst.getValue().CUSTOM_INPUT_VALIDATE_ON_CHANGE
-    const lOnSubmit = onSubmitEditing ? () => null : onSubmitEditing
+    const lOnSubmit = onSubmitEditing ? onSubmitEditing : () => null
     return (
       <View>
         <Formik

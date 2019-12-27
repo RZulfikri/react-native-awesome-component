@@ -205,6 +205,7 @@ interface ICustomFlatList extends FlatListProps {
 }
 
 interface ICustomSelect {
+  setRef: (ref: any) => void;
   placeholder: string;
   value: string;
   data: any[];

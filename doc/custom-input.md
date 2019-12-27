@@ -153,6 +153,7 @@ Basically this component using TextInput props, and adding few new props that li
 
 Props | Description | Default  
 --- | --- | --- 
+setRef: (ref) => void | props to set input ref | `undefined`
 minLength: number | props to set min length | `undefined`
 labelType: CustomInputLabelType | props to set custom input label type | `check global const`
 label: string | props to set label value | `check global const`
