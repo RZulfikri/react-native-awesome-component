@@ -141,12 +141,12 @@ class CustomInput extends Component {
       }
 
       // this condition to prevent re render for phone-country input
-      if ((nextProps.inputType === INPUT_TYPE.phoneCountry) && 
-      (
-        (nextProps.valueCountry && thisProps.valueCountry) && (nextProps.valueCountry.id === thisProps.valueCountry.id)
-      ) && (
-        (nextProps.defaultValue === thisProps.defaultValue)
-      )) {
+      if ((nextProps.inputType === INPUT_TYPE.phoneCountry) &&
+        (
+          (nextProps.valueCountry && thisProps.valueCountry) && (nextProps.valueCountry.id === thisProps.valueCountry.id)
+        ) && (
+          (nextProps.defaultValue === thisProps.defaultValue)
+        )) {
         if (thisState.showCountryList === nextState.showCountryList) {
           shouldUpdate = false
         } else {
@@ -388,7 +388,7 @@ class CustomInput extends Component {
 
   renderInput(formikProps) {
     const { errors, touched } = formikProps
-    const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress, onChangeValidation, editable, containerStyle } = this.props
+    const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress, onChangeValidation, editable, containerStyle, isRequired } = this.props
     let { labelType } = this.props
 
     if (labelType === undefined || labelType === null) {
@@ -443,7 +443,12 @@ class CustomInput extends Component {
 
     if (!_.isEqual(fErrorMessage, this.errorValue) && onChangeValidation) {
       this.errorValue = fErrorMessage
-      onChangeValidation(fErrorMessage !== '' ? true : false)
+      if (isRequired) {
+        let isError = formikProps.values.value.length > 0
+        onChangeValidation(fErrorMessage !== '' ? true : !isError)
+      } else {
+        onChangeValidation(fErrorMessage !== '' ? true : false)
+      }
     }
 
     // HANDLE ONCHANGE TEXT
