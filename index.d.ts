@@ -81,6 +81,7 @@ interface ICustomHeaderProps {
   iphoneXPadding: boolean;
   isCard: boolean;
   title: string;
+  renderTitle: () => void;
   titleStyle: StyleProp<TextStyle>;
   iconLeft: string;
   titleLeftt: string;
