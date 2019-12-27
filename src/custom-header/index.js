@@ -41,6 +41,7 @@ const CustomHeader = (props) => {
     isCard,
     iphoneXPadding,
     title,
+    renderTitle,
     titleStyle,
     iconLeft,
     titleLeft,
@@ -116,32 +117,47 @@ const CustomHeader = (props) => {
   }
 
   return (
-    <Container style={[containerStyle, { paddingTop: headerPaddingTop, zIndex: 99 }]} isCard={isCard}>
+    <Container
+      style={[containerStyle, { paddingTop: headerPaddingTop, zIndex: 99 }]}
+      isCard={isCard}
+    >
       {renderLeft ? (
         <LeftContainer style={[leftContainerStyle]}>
           {renderLeft()}
         </LeftContainer>
       ) : (
-          <LeftTouchableContainer style={[leftContainerStyle]} activeOpacity={0.8} disabled={!enableLeftAction} onPress={leftActionPress}>
-            {getSideContent(iconLeft, iconType, titleLeft, 'left')}
-          </LeftTouchableContainer>
-        )}
+        <LeftTouchableContainer
+          style={[leftContainerStyle]}
+          activeOpacity={0.8}
+          disabled={!enableLeftAction}
+          onPress={leftActionPress}
+        >
+          {getSideContent(iconLeft, iconType, titleLeft, "left")}
+        </LeftTouchableContainer>
+      )}
       <TitleContainer>
-        <Title style={[headerTitleStyle, titleStyle]}>
-          {headerTitle}
-        </Title>
+        {renderTitle ? (
+          renderTitle()
+        ) : (
+          <Title style={[headerTitleStyle, titleStyle]}>{headerTitle}</Title>
+        )}
       </TitleContainer>
       {renderRight ? (
-        <RightContainer style={[rightContainerStyle]} >
+        <RightContainer style={[rightContainerStyle]}>
           {renderRight()}
         </RightContainer>
       ) : (
-          <RightTouchableContainer style={[rightContainerStyle]} activeOpacity={0.8} disabled={!enableRightAction} onPress={rightActionPress}>
-            {getSideContent(iconRight, iconType, titleRight, 'right')}
-          </RightTouchableContainer>
-        )}
-    </Container >
-  )
+        <RightTouchableContainer
+          style={[rightContainerStyle]}
+          activeOpacity={0.8}
+          disabled={!enableRightAction}
+          onPress={rightActionPress}
+        >
+          {getSideContent(iconRight, iconType, titleRight, "right")}
+        </RightTouchableContainer>
+      )}
+    </Container>
+  );
 }
 
 CustomHeader.propTypes = {
@@ -152,6 +168,7 @@ CustomHeader.propTypes = {
   isCard: PropTypes.bool,
 
   title: PropTypes.string,
+  renderTitle: PropTypes.func,
   titleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 
   iconLeft: PropTypes.string,
