@@ -81,3 +81,5 @@ renderNoConnection: () => any | props to render `no connection` state | `<NoConn
 renderError: () => any | props to render `error` state | `<ErrorContainer />`
 placeholderCount: number | props to define amount of placeholder will displayed | 9
 meta: { current_page, next_page} | props to set meta | 
+loading: boolean | props to tell that data of flatlist is loading | false 
+error: boolean | props to tell that data of flatlist is error | false

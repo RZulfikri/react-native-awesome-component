@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle, FlatListProps, TextInputProps } from 'react-native'
+import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle, FlatListProps, TextInputProps, ListRenderItem } from 'react-native'
 
 /**
  * CLASS COMPONENT
@@ -191,10 +191,10 @@ interface IMetaPage {
   next_page: number;
 }
 
-interface ICustomFlatList extends FlatListProps {
+interface ICustomFlatList<ItemT> extends FlatListProps<ItemT> {
   data: any[];
   fetchFunction: () => void;
-  renderItem: () => void;
+  renderItem: ListRenderItem<ItemT>;
   renderEmpty: () => any;
   renderNoConnection: () => any;
   renderError: () => any;
@@ -202,6 +202,8 @@ interface ICustomFlatList extends FlatListProps {
   style: StyleProp<ViewStyle>;
   contentContainerStyle: StyleProp<ViewStyle>;
   placeholderCount?: number;
+  loading: boolean;
+  error: boolean;
 }
 
 interface ICustomSelect {
@@ -301,7 +303,7 @@ export class CustomStepBar extends React.Component<ICustomStepBar> { }
 export class EmptyContainer extends React.Component<ICustomContainerView> { }
 export class ErrorContainer extends React.Component<ICustomContainerView> { }
 export class NoConnectionContainer extends React.Component<ICustomContainerView> { }
-export class CustomFlatList extends React.Component<ICustomFlatList> { }
+export class CustomFlatList<ItemT> extends React.Component<ICustomFlatList<ItemT>> { }
 export class CustomSelect extends React.Component<ICustomSelect> { }
 export class CustomDatepicker extends React.Component<ICustomDatepicker> { }
 export class CustomInput extends React.Component<ICustomInput> { }
@@ -311,31 +313,33 @@ export class CustomView extends React.Component<ICustomView> { }
  * STYLED COMPONENT
  */
 
-class Container extends React.Component<IContainerProps> { }
-class FlexContainer extends React.Component<IContainerProps> { }
-class SafeContainer extends React.Component<IContainerProps> { }
-class TouchableContainer extends React.Component<IContainerProps> { }
-class H1 extends React.Component<TextProps> { }
-class H2 extends React.Component<TextProps> { }
-class H3 extends React.Component<TextProps> { }
-class H4 extends React.Component<TextProps> { }
-class H5 extends React.Component<TextProps> { }
-class H6 extends React.Component<TextProps> { }
-class H7 extends React.Component<TextProps> { }
+declare class Container extends React.Component<IContainerProps> { }
+declare class FlexContainer extends React.Component<IContainerProps> { }
+declare class SafeContainer extends React.Component<IContainerProps> { }
+declare class TouchableContainer extends React.Component<IContainerProps> { }
+declare class H1 extends React.Component<TextProps> { }
+declare class H2 extends React.Component<TextProps> { }
+declare class H3 extends React.Component<TextProps> { }
+declare class H4 extends React.Component<TextProps> { }
+declare class H5 extends React.Component<TextProps> { }
+declare class H6 extends React.Component<TextProps> { }
+declare class H7 extends React.Component<TextProps> { }
 
-export const Styled = {
-  Container,
-  FlexContainer,
-  SafeContainer,
-  TouchableContainer,
-  H1,
-  H2,
-  H3,
-  H4,
-  H5,
-  H6,
-  H7,
+interface IStyled {
+  Container: Container;
+  FlexContainer: FlexContainer;
+  SafeContainer: SafeContainer;
+  TouchableContainer: TouchableContainer;
+  H1: H1;
+  H2: H2;
+  H3: H3;
+  H4: H4;
+  H5: H5;
+  H6: H6;
+  H7: H7;
 }
+
+export const Styled: IStyled
 
 /**
  * METHOD

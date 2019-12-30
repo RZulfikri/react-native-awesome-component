@@ -25,6 +25,8 @@ class CustomFlatList extends Component {
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     contentContainerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     placeholderCount: PropTypes.number,
+    loading: PropTypes.bool,
+    error: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -33,6 +35,8 @@ class CustomFlatList extends Component {
     style: {},
     contentContainerStyle: {},
     placeholderCount: 9,
+    loading: false,
+    error: false,
   }
 
   constructor(props) {
