@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 import { FlexContainer } from '../styled/share.styled'
 import FeatherIcons from 'react-native-vector-icons/Feather'
@@ -92,18 +92,20 @@ const EmptyContainer = (props) => {
   }
 
   return (
-    <FlexContainer padded style={{ paddingTop: Scale.scaleHeight(175), backgroundColor: Colors.very_light_pink_three }}>
-      <View style={{ alignItems: 'center' }}>
-        {!hideImage && renderImage}
-        {!hideTitle && renderTitle}
-        {!hideMessage && renderMessage}
-        {!hideButton && (
-          <View style={{ width: 140, marginTop: 20 }}>
-            {renderButton}
-          </View>
-        )}
-      </View>
-    </FlexContainer>
+    <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: Colors.very_light_pink_three }}>
+      <FlexContainer padded style={{ paddingTop: Scale.scaleHeight(175) }}>
+        <View style={{ alignItems: 'center' }}>
+          {!hideImage && renderImage}
+          {!hideTitle && renderTitle}
+          {!hideMessage && renderMessage}
+          {!hideButton && (
+            <View style={{ width: 140, marginTop: 20 }}>
+              {renderButton}
+            </View>
+          )}
+        </View>
+      </FlexContainer>
+    </ScrollView>
   )
 }
 

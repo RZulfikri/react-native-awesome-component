@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import PropTypes from 'prop-types'
 import { FlexContainer } from '../styled/share.styled'
 import FeatherIcons from 'react-native-vector-icons/Feather'
@@ -19,7 +19,7 @@ const ErrorContainer = (props) => {
   const imgSrc = image ? image : GlobalConst.getValue().ERROR_CONTAINER_IMAGE
   const globalImageStyle = GlobalConst.getValue().ERROR_CONTAINER_IMAGE_STYLE
   const globalTitleStyle = GlobalConst.getValue().ERROR_CONTAINER_TITLE_STYLE
-  const globalMessageStyle = GlobalConst.getValue().ERROR_CONTAINER_MESSAGE_STYLE  
+  const globalMessageStyle = GlobalConst.getValue().ERROR_CONTAINER_MESSAGE_STYLE
   const globalButton = GlobalConst.getValue().ERROR_CONTAINER_BUTTON
 
   renderImage = (
@@ -92,18 +92,20 @@ const ErrorContainer = (props) => {
   }
 
   return (
-    <FlexContainer padded style={{ paddingTop: Scale.scaleHeight(175), backgroundColor: Colors.very_light_pink_three }}>
-      <View style={{ alignItems: 'center' }}>
-        {!hideImage && renderImage}
-        {!hideTitle && renderTitle}
-        {!hideMessage && renderMessage}
-        {!hideButton && (
-          <View style={{ width: 140, marginTop: 20 }}>
-            {renderButton}
-          </View>
-        )}
-      </View>
-    </FlexContainer>
+    <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: Colors.very_light_pink_three }}>
+      <FlexContainer padded style={{ paddingTop: Scale.scaleHeight(175) }}>
+        <View style={{ alignItems: 'center' }}>
+          {!hideImage && renderImage}
+          {!hideTitle && renderTitle}
+          {!hideMessage && renderMessage}
+          {!hideButton && (
+            <View style={{ width: 140, marginTop: 20 }}>
+              {renderButton}
+            </View>
+          )}
+        </View>
+      </FlexContainer>
+    </ScrollView>
   )
 }
 
