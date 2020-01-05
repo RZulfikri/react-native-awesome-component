@@ -92,8 +92,8 @@ const EmptyContainer = (props) => {
   }
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: Colors.very_light_pink_three }}>
-      <FlexContainer padded style={{ paddingTop: Scale.scaleHeight(175) }}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={{ backgroundColor: Colors.very_light_pink_three }}>
+      <FlexContainer padded style={{ paddingTop: Scale.scaleHeight(175), backgroundColor: Colors.very_light_pink_three }}>
         <View style={{ alignItems: 'center' }}>
           {!hideImage && renderImage}
           {!hideTitle && renderTitle}
