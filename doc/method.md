@@ -36,7 +36,7 @@ getRandomInt | function to get random value in range | (min: number, max: number
 Name | Description | Params | Return 
 --- | --- | --- | --- 
 mergeAndReplace | function to merge and replace old array to new array | (`oldArray: array = []`, `newArray: array = []`, `key: string = 'id'`, `sortId?: string`, `sortOrder?: mergeOrder`, `isDate: boolean = false`)<br/><br/>1. `oldArray` : is an old array that you want to merge<br/>2. `newArray` : ia a new array that you want to merge<br/>3. `key`: is key of object that you want to check and merge, so if key is exist old object will replaced by new object<br/>4. `sortId`: is key/id that use to sort array <br/>5. `sortOrder`: type or order for array `asc` or `desc`<br/>6. `isDate`: it used once the key/id is date | new array 
-compareValues | function to compare value or array object, it used to sort/order array of object how to use `array.sort(compareValues(sortId, sortOrder, isDate))` | (`key: string`, `order: mergeOrder = 'asc'`, `isDate: boolean = false`)<br/><br/>1. `key`: is key of object you want to check for order/sort<br/>2. `order`: type of order (`asc` or `desc`)<br/>3. `isDate`: it used once the key/id is date | sorted array 
+compareValues | function to compare value or array object, it used to sort/order array of object how to use `array.sort(compareValues(sortId, sortOrder, isDate))` | (`key: string`, `order: mergeOrder = 'asc'`, `isDate: boolean = false`)<br/><br/>1. `key`: is key of object you want to check for order/sort<br/>2. `order`: type of order (`asc` or `desc`)<br/>3. `isDate`: it used once the key/id is date<br/>4. `isTimeToken`: it used once the key/id is `timetoken` (date id with 17 char) | sorted array 
 
 ### #Helper
 Name | Description | Params | Return 

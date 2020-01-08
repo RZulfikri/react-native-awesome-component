@@ -7,6 +7,7 @@ export function compareValues(
   key,
   order = ORDER_TYPE.ASC,
   isDate = false,
+  isTimeToken = false,
 ) {
   return (a, b) => {
     if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
@@ -18,8 +19,8 @@ export function compareValues(
     let varB = typeof b[key] === 'string' ? b[key].toUpperCase() : b[key];
 
     if (isDate) {
-      varA = moment(varA).valueOf();
-      varB = moment(varB).valueOf();
+      varA = new Date(isTimeToken ? (varA / 1e4) : varA)
+      varB = new Date(isTimeToken ? (varB / 1e4) : varB)
     }
 
     let comparison = 0;

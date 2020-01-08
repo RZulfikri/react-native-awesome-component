@@ -367,7 +367,7 @@ type mergeOrder = "asc" | "desc"
 
 interface IArray {
   mergeAndReplace: (oldArray: any[], newArray: any[], key: string, sortId?: string, sortOrder?: mergeOrder, isDate?: boolean) => any[]
-  compareValues: (key: string, order: mergeOrder, isDate: boolean) => any[]
+  compareValues: (key: string, order: mergeOrder, isDate: boolean, isTimeToken: boolean) => any[]
 }
 
 interface IHelper {
