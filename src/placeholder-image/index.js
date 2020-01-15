@@ -2,15 +2,11 @@ import React, { Component } from 'react'
 import { Image, ImagePropsBase, ImageStyle, ImageBackground, View } from 'react-native'
 import PropTypes from 'prop-types'
 import { StyledImage } from '../styled/share.styled'
-import {
-  Placeholder,
-  PlaceholderMedia,
-  ShineOverlay,
-} from 'rn-placeholder'
+import Placeholder, { Media } from 'rn-placeholder'
 
 class PlaceholderImage extends Component {
   static propTypes = {
-    uri: PropTypes.string.isRequired,
+    uri: PropTypes.string,
     width: PropTypes.number,
     height: PropTypes.number,
     radius: PropTypes.number,
@@ -23,7 +19,7 @@ class PlaceholderImage extends Component {
   }
 
   static defaultProps = {
-    uri: '',
+    // uri: '',
     resizeMethod: 'resize',
     resizeMode: 'cover',
     width: 100,
@@ -67,31 +63,42 @@ class PlaceholderImage extends Component {
     } = this.props
 
     const { loading } = this.state
-
     return (
       <View>
-        <StyledImage
-          source={{ uri }}
-          resizeMethod={resizeMethod}
-          resizeMode={resizeMode}
-          style={{
-            width,
-            height,
-            borderWidth,
-            borderColor,
-            borderRadius: radius,
-          }}
-          defaultSource={defaultSource}
-          onLoad={this.onLoad}
-          onError={this.onError}
-          isCard={isCard}
-        />
-        {loading || (uri === undefined || uri === '') && (
-          <View style={{marginTop: -height}}>
+        {(!loading || uri !== undefined || uri !== '') ? (
+          <StyledImage
+            source={{ uri }}
+            resizeMethod={resizeMethod}
+            resizeMode={resizeMode}
+            style={{
+              width,
+              height,
+              borderWidth,
+              borderColor,
+              borderRadius: radius,
+            }}
+            defaultSource={defaultSource}
+            onLoad={this.onLoad}
+            onError={this.onError}
+            isCard={isCard}
+          />
+        ) : (
+            <View
+              style={{
+                width,
+                height,
+                borderWidth,
+                borderColor,
+                borderRadius: radius,
+              }}
+            />
+          )}
+        {(loading || uri === undefined || uri === '') && (
+          <View style={{ marginTop: -height }}>
             <Placeholder
-              Animation={ShineOverlay}
+              animation={'shine'}
             >
-              <PlaceholderMedia
+              <Media
                 style={{
                   width,
                   height,

@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, TextProps } from 'react-native'
-import {
-  Placeholder,
-  PlaceholderLine,
-  ShineOverlay,
-} from 'rn-placeholder'
+import Placeholder, { Line } from 'rn-placeholder'
 import * as GlobalConst from '../global-const'
 import * as Scale from '../method/scale'
 import * as Math from '../method/math'
+import * as Obj from '../method/object'
 
 class PlaceholderText extends Component {
   static propTypes = {
@@ -49,41 +46,39 @@ class PlaceholderText extends Component {
     if (style && style.fontSize) {
       height = style.fontSize
     }
-    const placeholderlines = []
+
+    let MainPlaceholder = <Placeholder animation={'shine'} />
     for (i = 0; i < numberOfLines; i++) {
-      placeholderlines.push(
-        <PlaceholderLine
-          key={i}
-          height={height}
-          noMargin
-          style={{ marginTop: Scale.scale(height / 10), marginBottom: Scale.scale(height / 12) }}
-          width={`${Math.getRandomInt(80, 100)}%`}
-        />)
+      let child = <Line
+        key={i}
+        height={height}
+        noMargin
+        style={{ marginTop: Scale.scale(height / 10), marginBottom: Scale.scale(height / 12) }}
+        width={`${Math.getRandomInt(80, 100)}%`}
+      />
+      MainPlaceholder = Obj.appendChildToView(MainPlaceholder, child)
     }
-    return (
-      <Placeholder
-        Animation={ShineOverlay}
-      >
-        {placeholderlines.map((e) => e)}
-      </Placeholder>
-    )
+
+    return MainPlaceholder
   }
 
   render() {
     const { numberOfLines, children, style } = this.props
-    const childrenStringValue = this.getValueOfTextChildren(children)
+    let childrenStringValue
+    if (children !== undefined) {
+      childrenStringValue = this.getValueOfTextChildren(children)
+    }
     let textStyle = {
       fontSize: GlobalConst.getValue().fontSize,
       textAlignVertical: 'center',
     }
-    console.log({ children })
     if (style) {
       textStyle = {
-        textStyle,
+        ...textStyle,
         ...style
       }
     }
-    if (childrenStringValue) {
+    if (childrenStringValue !== undefined) {
       return (
         <Text
           ellipsizeMode={'tail'}

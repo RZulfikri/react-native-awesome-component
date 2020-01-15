@@ -5,8 +5,8 @@ This is custom styled component, kind of components with default style.
 
 **How to use**
 
-```
-import {Styled} from 'react-native-awesome-component
+```javascript
+import {Styled} from 'react-native-awesome-component'
 
 return(
   <Styled.Component isCard={true} />

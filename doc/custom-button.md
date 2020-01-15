@@ -5,8 +5,8 @@ This is Button with default style and condition.
 
 **How to use**
 
-```
-import {CustomButton} from 'react-native-awesome-component
+```javascript
+import {CustomButton} from 'react-native-awesome-component'
 
 return(
   <CustomButton
@@ -15,6 +15,11 @@ return(
   />
 )
 ```
+
+**Global Setup**
+
+Global const used to set global value. it used to set the style for all of this component. for more detail check [here](./global-const.md#custombutton)
+
 **Props**
 
 Props | Description | Default  
@@ -22,9 +27,13 @@ Props | Description | Default
 loading: boolean | props to set/show button loading | `false` 
 disabled: boolean | props to disable button | `false` 
 title: string | props to set button title | `'Button Title'` 
+buttonTitle: string | props to set button title | `'Button Title'` 
 onPress: () => void | props to handle onPress button | `() => null` 
 activeColor: string | props to set active button color | `#1abc9c`
 disabledColor: string | props to set disable button color | `#EBEBE4`
+renderActiveTitle: () => void | props to render custom active title | -
+renderDisableTitle: () => void | props to render custom disable title | - 
+renderLoading: () => void | props to render custom loading | -
 width: number | props to set button width | -
 height: number | props to set button height | `50`
 radius: number | props to set button radius | -

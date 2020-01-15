@@ -17,10 +17,13 @@ const Button = (props) => {
       backgroundColor: GlobalConst.getValue().DISABLE_BUTTON_COLOR,
     },
     activeTitleStyle: {
+      ...GlobalConst.getValue().ACTIVE_BUTTON_TITLE_STYLE,
       color: GlobalConst.getValue().ACTIVE_BUTTON_TITLE_COLOR,
       fontSize: GlobalConst.getValue().BUTTON_TITLE_SIZE,
     },
     disableTitleStyle: {
+      ...GlobalConst.getValue().DISABLE_BUTTON_TITLE_STYLE,
+      fontSize: GlobalConst.getValue().BUTTON_TITLE_SIZE,
       color: GlobalConst.getValue().DISABLE_BUTTON_TITLE_COLOR,
     }
   }
@@ -33,6 +36,10 @@ const Button = (props) => {
     containerStyle,
     activeTitleStyle,
     disableTitleStyle,
+
+    renderActiveTitle,
+    renderDisableTitle,
+    renderLoading,
 
     activeColor,
     disabledColor,
@@ -65,7 +72,7 @@ const Button = (props) => {
           isCard={isCard}
           style={[styles.buttonContainer, styles.disableButtonStyle, customContainerStyle]}
         >
-          <ActivityIndicator size='small' color={loadingColor ? loadingColor : GlobalConst.getValue().BUTTON_LOADING_COLOR} />
+          {renderLoading ? renderLoading() : <ActivityIndicator size='small' color={loadingColor ? loadingColor : GlobalConst.getValue().BUTTON_LOADING_COLOR} />}
         </Container>
       )
     } else {
@@ -74,7 +81,7 @@ const Button = (props) => {
           isCard={isCard}
           style={[styles.buttonContainer, styles.disableButtonStyle, customContainerStyle]}
         >
-          <Text style={[styles.disableTitleStyle, disableTitleStyle]} >{title}</Text>
+          {renderDisableTitle ? renderDisableTitle() : <Text style={[styles.disableTitleStyle, disableTitleStyle]} >{title}</Text>}
         </Container>
       )
     }
@@ -86,7 +93,7 @@ const Button = (props) => {
         onPress={onPress}
         style={[styles.buttonContainer, customContainerStyle]}
       >
-        <Text style={[styles.activeTitleStyle, activeTitleStyle]}>{title}</Text>
+        {renderActiveTitle ? renderActiveTitle() : <Text style={[styles.activeTitleStyle, activeTitleStyle]}>{title}</Text>}
       </TouchableContainer>
     )
   }
@@ -97,6 +104,10 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   title: PropTypes.string,
   onPress: PropTypes.func,
+  renderActiveTitle: PropTypes.func,
+  renderDisableTitle: PropTypes.func,
+  renderLoading: PropTypes.func,
+
   activeColor: PropTypes.string,
   disabledColor: PropTypes.string,
   width: PropTypes.number,
@@ -104,9 +115,9 @@ Button.propTypes = {
   radius: PropTypes.number,
   borderWidth: PropTypes.number,
   borderColor: PropTypes.string,
-  containerStyle: ViewStyle,
-  activeTitleStyle: TextStyle,
-  disableTitleStyle: TextStyle,
+  containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  activeTitleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  disableTitleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   loadingColor: PropTypes.string,
   isCard: PropTypes.bool,
 }
@@ -117,6 +128,9 @@ Button.defaultProps = {
   titlr: 'Button Title',
   onPress: () => null,
   isCard: false,
+  containerStyle: {},
+  disableTitleStyle: {},
+  activeTitleStyle: {},
 }
 
 export default Button

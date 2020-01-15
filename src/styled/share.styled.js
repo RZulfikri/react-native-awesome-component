@@ -1,9 +1,7 @@
 import styled from 'styled-components/native'
 import * as GlobalConst from '../global-const'
 import PropTypes from 'prop-types';
-import metrics from '../metrics'
-
-const fontSize = metrics.font
+import Colors from '../colors';
 
 const paddingType = {
   VERTICAL: 'vertical',
@@ -94,32 +92,62 @@ const StyledImage = styled.Image`
 `
 
 export const H1 = styled.Text`
-  font-size: ${fontSize.h1}
+  font-size: ${GlobalConst.getValue().H1}
 `
 export const H2 = styled.Text`
-  font-size: ${fontSize.h2}
+  font-size: ${GlobalConst.getValue().H2}
 `
 export const H3 = styled.Text`
-  font-size: ${fontSize.h3}
+  font-size: ${GlobalConst.getValue().H3}
 `
 export const H4 = styled.Text`
-  font-size: ${fontSize.h4}
+  font-size: ${GlobalConst.getValue().H4}
 `
 export const H5 = styled.Text`
-  font-size: ${fontSize.h5}
+  font-size: ${GlobalConst.getValue().H5}
 `
 export const H6 = styled.Text`
-  font-size: ${fontSize.h6}
+  font-size: ${GlobalConst.getValue().H6}
+`
+export const H7 = styled.Text`
+  font-size: ${GlobalConst.getValue().H7}
 `
 
-export const H7 = styled.Text`
-  font-size: ${fontSize.h7}
-`
+const InputContainer = styled.View`
+  flex-direction: column;
+  width: 100%;
+  padding: 0px 16px;
+`;
+
+const LabelContainer = styled.View`
+  flex-direction: row;
+`;
+
+const LabelText = styled.Text`
+  color: ${Colors.slate_grey};
+  font-size: ${GlobalConst.getValue().FONT_SMALL_SIZE};
+`;
+
+const RequiredMark = styled.Text`
+  color: ${Colors.alertError};
+  font-size: ${GlobalConst.getValue().FONT_SMALL_SIZE};
+`;
+
+const ValueText = styled.Text`
+  color: ${props => (props.isEmpty ? Colors.warm_grey : '#303030')};
+  font-size: ${GlobalConst.getValue().FONT_SIZE};
+  flex: 1;
+`;
 
 export {
   SafeContainer,
   Container,
   FlexContainer,
   TouchableContainer,
-  StyledImage
+  StyledImage,
+  InputContainer,
+  LabelContainer,
+  LabelText,
+  RequiredMark,
+  ValueText,
 }

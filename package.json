@@ -1,24 +1,51 @@
 {
   "name": "react-native-awesome-component",
-  "version": "0.0.1",
+  "version": "0.1.40",
   "description": "React Native Awesome Component",
   "main": "index.js",
   "typings": "./index.d.ts",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/RZulfikri/react-native-awesome-component.git"
+    "type": "git",
+    "url": "git+https://github.com/RZulfikri/react-native-awesome-component.git"
   },
   "keywords": [
-      "react-native"
+    "react-native",
+    "placehoder image",
+    "placeholder text",
+    "custom button",
+    "custom header",
+    "custom alert",
+    "custom text input",
+    "custom date picker",
+    "custom select",
+    "connection handler",
+    "useful method"
   ],
+  "scripts": {},
   "author": "Rahmat Zulfikri",
   "dependencies": {
+    "formik": "^1.1.1",
+    "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
-    "rn-placeholder": "^3.0.0",
-    "styled-components": "^4.3.2"
+    "rn-placeholder": "2.0.0",
+    "moment-timezone": "^0.5.27",
+    "react-native-date-picker": "^2.7.0",
+    "styled-components": "^4.3.2",
+    "react-native-iphone-x-helper": "^1.2.1",
+    "react-native-vector-icons": "^6.6.0",
+    "@react-native-community/netinfo": "^4.4.0",
+    "react-native-dropdownalert": "^4.2.0",
+    "react-native-modal": "^11.4.0",
+    "world-countries": "^2.1.0",
+    "yup": "^0.27.0"
   },
-  "devDependencies": {
-    "babel-plugin-root-import": "^6.4.1"
+  "devDependencies": {},
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/RZulfikri/react-native-awesome-component/issues"
   },
-  "license": "Apache License 2.0"
+  "homepage": "https://github.com/RZulfikri/react-native-awesome-component#readme",
+  "directories": {
+    "doc": "doc"
+  }
 }
