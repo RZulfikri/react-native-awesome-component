@@ -418,7 +418,7 @@ class CustomInput extends Component {
     if (errors.value) {
       containerTyle = Obj.appendObject(containerTyle, 'borderBottomColor', lErrorColor)
       labelStyle = Obj.appendObject(labelStyle, 'color', lErrorColor)
-      errorLabelStyle = { color: lErrorColor }
+      errorLabelStyle = Obj.appendObject(errorLabelStyle, 'color', lErrorColor)
       fErrorMessage = errors.value
     }
 
@@ -426,7 +426,7 @@ class CustomInput extends Component {
     if (touched.value) {
       containerTyle = Obj.appendObject(containerTyle, 'borderBottomColor', lFocusColor)
       labelStyle = Obj.appendObject(labelStyle, 'color', lFocusColor)
-      errorLabelStyle = { color: lFocusColor }
+      errorLabelStyle = Obj.appendObject(errorLabelStyle, 'color', lFocusColor)
     }
 
     // HANDLE FORCE MESSAGE STYLE
