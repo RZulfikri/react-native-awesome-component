@@ -27,6 +27,10 @@ class CustomFlatList extends Component {
     placeholderCount: PropTypes.number,
     loading: PropTypes.bool,
     error: PropTypes.bool,
+
+    disableRenderNoConnection: PropTypes.bool,
+    disableRenderEmpty: PropTypes.bool,
+    disableRenderError: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -37,6 +41,9 @@ class CustomFlatList extends Component {
     placeholderCount: 9,
     loading: false,
     error: false,
+    disableRenderNoConnection: false,
+    disableRenderEmpty: false,
+    disableRenderError: false,
   }
 
   constructor(props) {
@@ -95,12 +102,14 @@ class CustomFlatList extends Component {
   render() {
     const { data, renderItem, error, loading,
       renderEmpty, renderNoConnection, renderError,
-      style, contentContainerStyle, meta } = this.props
+      style, contentContainerStyle, meta,
+      disableRenderNoConnection, disableRenderEmpty,
+      disableRenderError, } = this.props
     const { flatListData } = this.state
     let isLoadMore = false
 
     const isConnected = getConnectionStatus()
-    if (!isConnected) {
+    if (!isConnected && !disableRenderNoConnection) {
       if (renderNoConnection) {
         return renderNoConnection({ onRefresh: this.onRefresh })
       } else {
@@ -110,7 +119,7 @@ class CustomFlatList extends Component {
       }
     }
 
-    if (!loading && data.length === 0 && error) {
+    if (!loading && (data.length === 0) && error && !disableRenderError) {
       if (renderError) {
         return renderError({ onRefresh: this.onRefresh })
       } else {
@@ -120,7 +129,7 @@ class CustomFlatList extends Component {
       }
     }
 
-    if (!loading && data.length === 0) {
+    if (!loading && (data.length === 0) && !disableRenderEmpty) {
       if (renderEmpty) {
         return renderEmpty({ onRefresh: this.onRefresh })
       } else {

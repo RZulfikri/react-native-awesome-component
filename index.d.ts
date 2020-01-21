@@ -204,6 +204,9 @@ interface ICustomFlatList<ItemT> extends FlatListProps<ItemT> {
   placeholderCount?: number;
   loading: boolean;
   error: boolean;
+  disableRenderNoConnection?: boolean;
+  disableRenderEmpty?: boolean;
+  disableRenderError?: boolean;
 }
 
 interface ICustomSelect {

@@ -83,3 +83,6 @@ placeholderCount: number | props to define amount of placeholder will displayed 
 meta: { current_page, next_page} | props to set meta | 
 loading: boolean | props to tell that data of flatlist is loading | false 
 error: boolean | props to tell that data of flatlist is error | false
+disableRenderNoConnection?: boolean | props to disable render no connection | false 
+disableRenderEmpty?: boolean | props to disable render empty | false 
+disableRenderError?: boolean | props to disable render error | false 
