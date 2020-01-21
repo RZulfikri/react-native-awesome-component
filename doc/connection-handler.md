@@ -32,4 +32,4 @@ Global const used to set global value. it used to set the style for all of this 
 
 Props | Description | Default  
 --- | --- | --- 
-onChangeState: function | props to get state change (connected / disconnected) from component as boolean | - 
+onStateChange: function | props to get state change (connected / disconnected) from component as boolean | - 
