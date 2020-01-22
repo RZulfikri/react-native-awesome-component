@@ -33,6 +33,9 @@ class CustomInput extends Component {
   static propTypes = {
     setRef: PropTypes.func,
     minLength: PropTypes.number,
+    maxLength: PropTypes.number,
+    min: PropTypes.number,
+    max: PropTypes.number,
     labelType: PropTypes.oneOf([LABEL_TYPE.top, LABEL_TYPE.default, LABEL_TYPE.left, LABEL_TYPE.right]),
     label: PropTypes.string,
     inputType: PropTypes.oneOf([INPUT_TYPE.email, INPUT_TYPE.password, INPUT_TYPE.phone, INPUT_TYPE.number, INPUT_TYPE.text, INPUT_TYPE.textArea, INPUT_TYPE.phoneCountry]),
@@ -56,6 +59,8 @@ class CustomInput extends Component {
     errorRequired: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     errorMinimum: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     errorMaximum: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    errorMinimumNumber: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    errorMaximumNumber: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 
     // ACTION BUTTON
     renderLeftAction: PropTypes.func,
@@ -202,18 +207,24 @@ class CustomInput extends Component {
       label,
       maxLength,
       minLength,
+      min,
+      max,
       passwordRegex,
       errorEmail,
       errorPassword,
       errorRequired,
       errorMinimum,
       errorMaximum,
+      errorMinimumNumber,
+      errorMaximumNumber,
     } = this.props
 
     let value = Yup.string()
     let errorRequiredString = GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED(label)
     let errorMinLength = GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM(label, minLength)
     let errorMaxLength = GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM(label, maxLength)
+    let errorMinNumber = GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM_NUMBER(label, min)
+    let errorMaxNumber = GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM_NUMBER(label, max)
     let errorEmailMessage = errorEmail ? errorEmail : GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_EMAIL
     let regexPassword = passwordRegex ? passwordRegex : GlobalConst.getValue().CUSTOM_INPUT_PASSWORD_REGEX
     let errorPasswordMessage = errorPassword ? errorPassword : GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_PASSWORD
@@ -242,6 +253,22 @@ class CustomInput extends Component {
       }
     }
 
+    if (errorMinimumNumber) {
+      if (typeof errorMinimumNumber === 'function') {
+        errorMinNumber = errorMinimumNumber(label, minLength)
+      } else {
+        errorMinNumber = errorMinimumNumber
+      }
+    }
+
+    if (errorMaximumNumber) {
+      if (typeof errorMaximumNumber === 'function') {
+        errorMaxNumber = errorMaximumNumber(label, maxLength)
+      } else {
+        errorMaxNumber = errorMaximumNumber
+      }
+    }
+
     switch (inputType) {
       case INPUT_TYPE.email: {
         value = value.email(errorEmailMessage)
@@ -254,21 +281,32 @@ class CustomInput extends Component {
       }
 
       case INPUT_TYPE.phoneCountry:
-      case INPUT_TYPE.phone:
-      case INPUT_TYPE.number: {
+      case INPUT_TYPE.phone: {
         value = value.matches(new RegExp('^\\d+$'), GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_INPUT)
+        break
+      }
+      case INPUT_TYPE.number: {
+        value = Yup.number()
+        value = value.typeError(GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_INPUT)
+
+        if (min !== undefined) {
+          value = value.min(min, errorMinNumber)
+        }
+
+        if (max !== undefined) {
+          value = value.max(max, errorMaxNumber)
+        }
         break
       }
     }
 
-    if (maxLength) {
+    if (maxLength && (inputType !== INPUT_TYPE.number)) {
       value = value.max(maxLength, errorMaxLength)
     }
 
-    if (minLength && minLength > 0) {
+    if (minLength && (minLength > 0) && (inputType !== INPUT_TYPE.number)) {
       value = value.min(minLength, errorMinLength)
     }
-
 
     if (isRequired) {
       value = value.required(errorRequiredString)

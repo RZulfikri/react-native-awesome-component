@@ -252,7 +252,10 @@ interface ICustomDatepicker {
   onChangeValidation: () => boolean;
 }
 interface ICustomInput extends TextInputProps {
-  minLength: number;
+  minLength?: number;
+  maxLength?: number;
+  min?: number;
+  max?: number;
   labelType: CustomInputLabelType,
   label: string;
   inputType: CustomInputType;
@@ -275,6 +278,8 @@ interface ICustomInput extends TextInputProps {
   errorRequired: (label: string) => string | string;
   errorMinimum: (label: string, min: number) => string | string;
   errorMaximum: (label: string, max: number) => string | string;
+  errorMinimumNumber: (label: string, min: number) => string | string;
+  errorMaximumNumber: (label: string, max: number) => string | string;
 
   // ACTION BUTTON
   renderLeftAction: () => any,
@@ -563,6 +568,8 @@ interface IGlobalConstValue {
   CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED: (label: string) => string | string;
   CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM: (label: string, min: number) => string | string;
   CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM: (label: string, min: number) => string | string;
+  CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM_NUMBER: (label: string, min: number) => string | string;
+  CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM_NUMBER: (label: string, min: number) => string | string;
   CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER: string;
   CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL: string;
 
@@ -717,6 +724,8 @@ interface IGlobalConst {
   setGlobalCustomInputErrorMessageRequired: (value: any) => void;
   setGlobalCustomInputErrorMessageMinimum: (value: any) => void;
   setGlobalCustomInputErrorMessageMaximum: (value: any) => void;
+  setGlobalCustomInputErrorMessageMinimumNumber: (value: any) => void;
+  setGlobalCustomInputErrorMessageMaximumNumber: (value: any) => void;
   setGlobalCustomInputPhoneCountryPlaceholder: (value: string) => void;
   setGlobalCustomInputPhoneCountrySelectLabel: (value: string) => void;
   // CUSTOM DATE PICKER
