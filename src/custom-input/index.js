@@ -127,7 +127,7 @@ class CustomInput extends Component {
     const thisProps = this.props
     const thisState = this.state
 
-    let shouldUpdate = true
+    let shouldUpdate = false
 
     // this condition to ignore custom select that using custom input
     if (nextProps.onPress === undefined) {
@@ -140,10 +140,10 @@ class CustomInput extends Component {
         (nextProps.inputType === INPUT_TYPE.number) ||
         (nextProps.inputType === INPUT_TYPE.textArea)
       )
-        && (nextProps.value === thisProps.value)
-        && (nextProps.defaultValue === thisProps.defaultValue)
+        && ((nextProps.value !== thisProps.value)
+        || (nextProps.defaultValue !== thisProps.defaultValue))
       ) {
-        shouldUpdate = false
+        shouldUpdate = true
       }
 
       // this condition to prevent re render for phone-country input
@@ -153,16 +153,23 @@ class CustomInput extends Component {
         ) && (
           (nextProps.defaultValue === thisProps.defaultValue)
         )) {
-        if (thisState.showCountryList === nextState.showCountryList) {
-          shouldUpdate = false
+        if (thisState.showCountryList !== nextState.showCountryList) {
+          shouldUpdate = true
         } else {
+          shouldUpdate = false
+        }
+      }
+
+      if (nextProps.inputType === INPUT_TYPE.password) {
+        if (nextProps.secureTextEntry !== thisProps.secureTextEntry) {
           shouldUpdate = true
         }
       }
+
     } else {
       // this condition to prevent re render for custom input, that used in custom select
-      if (thisProps.defaultValue === nextProps.defaultValue) {
-        shouldUpdate = false
+      if (thisProps.defaultValue !== nextProps.defaultValue) {
+        shouldUpdate = true
       }
     }
 
