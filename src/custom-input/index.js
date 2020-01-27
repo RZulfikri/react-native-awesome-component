@@ -141,22 +141,23 @@ class CustomInput extends Component {
         (nextProps.inputType === INPUT_TYPE.textArea)
       )
         && ((nextProps.value !== thisProps.value)
-        || (nextProps.defaultValue !== thisProps.defaultValue))
+          || (nextProps.defaultValue !== thisProps.defaultValue))
       ) {
         shouldUpdate = true
       }
 
       // this condition to prevent re render for phone-country input
-      if ((nextProps.inputType === INPUT_TYPE.phoneCountry) &&
-        (
-          (nextProps.valueCountry && thisProps.valueCountry) && (nextProps.valueCountry.id === thisProps.valueCountry.id)
-        ) && (
-          (nextProps.defaultValue === thisProps.defaultValue)
-        )) {
+      if (nextProps.inputType === INPUT_TYPE.phoneCountry) {
+        if ((nextProps.valueCountry && thisProps.valueCountry) && (nextProps.valueCountry.id !== thisProps.valueCountry.id)) {
+          shouldUpdate = true
+        }
+
+        if (((nextProps.value !== thisProps.value) || (nextProps.defaultValue !== thisProps.defaultValue))) {
+          shouldUpdate = true
+        }
+
         if (thisState.showCountryList !== nextState.showCountryList) {
           shouldUpdate = true
-        } else {
-          shouldUpdate = false
         }
       }
 
@@ -363,10 +364,10 @@ class CustomInput extends Component {
 
   renderModalSelectCountry(formikProps) {
     const { showCountryList } = this.state
-    const { style, valueCountry, onSelectCountry, countryPlaceholder, countrySelectionLabel, countryValueLabel } = this.props
+    const { style, valueCountry, onSelectCountry, countryPlaceholder, countrySelectionLabel, countryValueLabel, renderCountry, renderCountryHeader } = this.props
     const countriesCode = getSimpleCountryList(true)
-    const renderItem = GlobalConst.getValue().CUSTOM_SELECT_ITEM_RENDER
-    const renderHeader = GlobalConst.getValue().CUSTOM_SELECT_HEADER_RENDER
+    const renderItem = renderCountry ? renderCountry : GlobalConst.getValue().CUSTOM_SELECT_ITEM_RENDER
+    const renderHeader = renderCountryHeader ? renderCountryHeader : GlobalConst.getValue().CUSTOM_SELECT_HEADER_RENDER
 
     const placeholder = countryPlaceholder ? countryPlaceholder : GlobalConst.getValue().CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER
     const selectionLabel = countrySelectionLabel ? countrySelectionLabel : GlobalConst.getValue().CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL

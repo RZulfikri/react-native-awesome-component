@@ -58,7 +58,6 @@ const ModalList = props => {
     if (!isEmptyOrSpaces(keyOther) && !keyDescription && tempValue.toLowerCase().includes(keyOther.toLowerCase())) {
       tempValue = value.substr(keyOther.length + 1);
     }
-    console.tron.warn({tempValue})
     onSubmit(tempValue);
     closeModal();
   }
@@ -78,7 +77,6 @@ const ModalList = props => {
         setValue([data])
       }
     } else {
-      console.tron.warn({data});
       setValue(data)
     }
   }
@@ -128,7 +126,7 @@ const ModalList = props => {
           data={data}
           renderItem={({ item, index }) => {
             if (renderItem) {
-              return renderItem({ item, index })
+              return renderItem({ item, index, onPressItem, isSelected: checkIsSelected(item, value) })
             } else {
               return (
                 <Item
