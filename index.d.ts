@@ -229,6 +229,8 @@ interface ICustomSelect {
   disabled: boolean;
   keyOther?: string;
   onChangeValidation: (hasError: boolean) => void;
+  renderItem: ({ item, index, onPressItem, isSelected }) => void;
+  renderHeader: ({ label, leftAction, rightAction }) => void;
 }
 
 interface ICustomDatepicker {
