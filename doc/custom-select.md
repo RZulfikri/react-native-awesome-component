@@ -71,3 +71,5 @@ unSelectedPickerColor: string; | props to set unselected color | -
 selectTitle: string; | props to set modal select title | `Select Item`
 disabled: string; | props to disable input | `false`
 onChangeValidation: (hasError: boolean) => void; | props handle/get value is input is error | -
+renderItem: ({item, index, onPressItem, isSelected}) | props to custom render list item | -
+renderHeader: ({label, leftAction, rightAction}) | props to custom render header list | -

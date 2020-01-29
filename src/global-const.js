@@ -170,6 +170,8 @@ const DEFAULT_GLOBAL_CONST = {
   CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED: (label) => label ? `${label} is required` : 'This field is required',
   CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM: (label, min) => label ? `${label} must have at least ${min} characters` : `This field must have at least ${min} characters`,
   CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM: (label, max) => label ? `${label} must have at least ${max} characters` : `This field maximum have ${max} characters`,
+  CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM_NUMBER: (label, min) => label ? `${label} must be more then ${min}` : `This field must be more then ${min}`,
+  CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM_NUMBER: (label, max) => label ? `${label} must be less then ${max}` : `This field must be lestt then ${max}`,
   CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER: 'Code',
   CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL: 'Select Country',
 
@@ -615,6 +617,12 @@ export function setGlobalCustomInputErrorMessageMinimum(value) {
 }
 export function setGlobalCustomInputErrorMessageMaximum(value) {
   globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM', value)
+}
+export function setGlobalCustomInputErrorMessageMinimumNumber(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM_NUMBER', value)
+}
+export function setGlobalCustomInputErrorMessageMaximumNumber(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM_NUMBER', value)
 }
 export function setGlobalCustomInputPhoneCountryPlaceholder(value) {
   globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER', value)

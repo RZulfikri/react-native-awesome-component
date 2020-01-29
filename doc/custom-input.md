@@ -181,3 +181,5 @@ onSelectCountry: () => void | props to get value of selected county | `ISimpleCo
 countryPlaceholder: string | props to set select country placeholder | -
 countrySelectionLabel: string | props to set select country selection label | 
 countryValueLabel: string | props to set label value of counrty input | -
+renderCountry: ({item, index, onPressItem, isSelected}) | props to custom render country list item | -
+renderCountryHeader: ({label, leftAction, rightAction}) | props to custom render header country list | -
