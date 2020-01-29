@@ -11,6 +11,7 @@ import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import Octicon from 'react-native-vector-icons/Octicons'
 import _ from 'lodash'
+import URL from 'url'
 
 export function getIconByType(type) {
   let Icon

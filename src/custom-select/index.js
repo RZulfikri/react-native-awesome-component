@@ -69,8 +69,8 @@ const CustomSelect = props => {
   const rightIconStyle = GlobalConst.getValue().CUSTOM_SELECT_RIGHT_ICON_STYLE
   const rightIconRender = GlobalConst.getValue().CUSTOM_SELECT_RIGHT_RENDER
 
-  const renderItem = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_RENDER : GlobalConst.getValue().CUSTOM_SELECT_ITEM_RENDER
-  const renderHeader = GlobalConst.getValue().CUSTOM_SELECT_HEADER_RENDER
+  const renderItem = props.renderItem ? props.renderItem : multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_RENDER : GlobalConst.getValue().CUSTOM_SELECT_ITEM_RENDER
+  const renderHeader = props.renderHeader ? props.renderHeader : GlobalConst.getValue().CUSTOM_SELECT_HEADER_RENDER
 
   let errorMessage = error ? error : ''
 
