@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="https://i.imgur.com/6Csaarm.gif">
+</p>
+
 ## Usage
 ### Example
 ```jsx harmony
