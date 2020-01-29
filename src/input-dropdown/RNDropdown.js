@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity, Modal, Animated, ScrollView, TextInput, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { debounce } from "throttle-debounce"
+import { debounce } from 'throttle-debounce'
 
 export default class RNDropdown extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ export default class RNDropdown extends Component {
     if (fetchData) {
       fetchData(item.id, "")
     }
-    
+
     this._toggleModal()
   }
 
@@ -85,16 +85,16 @@ export default class RNDropdown extends Component {
       return result && result.map((item, index) => (
         <TouchableOpacity key={index} style={styles.itemWrapper} activeOpacity={0.8} onPress={() => this.onSelect(item)}>
           <Text style={styles.itemLabel}>{item.name}</Text>
-  
-          {value && value.id == item.id ? <Icon name="ios-checkmark" size={25} color="#232323" /> : null}
+
+          {value && value.id === item.id ? <Icon name="ios-checkmark" size={25} color="#232323" /> : null}
         </TouchableOpacity>
       ))
     } else {
       return data && data.map((item, index) => (
         <TouchableOpacity key={index} style={styles.itemWrapper} activeOpacity={0.8} onPress={() => this.onSelect(item)}>
           <Text style={styles.itemLabel}>{item.name}</Text>
-  
-          {value && value.id == item.id ? <Icon name="ios-checkmark" size={25} color="#232323" /> : null}
+
+          {value && value.id === item.id ? <Icon name="ios-checkmark" size={25} color="#232323" /> : null}
         </TouchableOpacity>
       ))
     }
@@ -120,13 +120,13 @@ export default class RNDropdown extends Component {
     } = this.props
     const { bottom } = this.state
 
-    const showError = error && error.length > 0 ? true : false;
+    const showError = error && error.length > 0;
     const countHeight = data ? data.length * 55 : 55
     const maxHeight = countHeight > 330 ? 330 : countHeight
 
     return (
       <View style={styles.container}>
-        {this.props.mode == "bottom" && <Modal
+        {this.props.mode === "bottom" && <Modal
         transparent={true}
         visible={this.state.bottomVisible}
         onRequestClose={() => this._toggleModal()}>
@@ -136,7 +136,7 @@ export default class RNDropdown extends Component {
                 <Icon color='#5E5E5E' containerStyle={{ marginRight: 5 }} name='ios-search' size={20} />
 
                 <TextInput
-                  style={{padding:0, flex:1, width:'100%'}}
+                  style={{padding:0, flex:1, width:'100%', marginLeft:5}}
                   value={this.state.query}
                   onChangeText={(value) => this.onSearch(value)}
                 />
@@ -149,20 +149,20 @@ export default class RNDropdown extends Component {
           </TouchableOpacity>
         </Modal>}
 
-        {this.props.mode == "modal" && <Modal
+        {this.props.mode === "modal" && <Modal
         transparent={true}
         visible={this.state.modalVisible}
         onRequestClose={() => this._toggleModal()}>
-          <TouchableOpacity 
-          activeOpacity={1} 
-          style={[styles.modalBackDrop, {alignItems:'center', justifyContent:'center'}]} 
+          <TouchableOpacity
+          activeOpacity={1}
+          style={[styles.modalBackDrop, {alignItems:'center', justifyContent:'center'}]}
           onPress={() => this._toggleModal()}>
             <View style={[styles.modalContainer, {height: data && data.length <= 1 ? 120 : maxHeight + 15}]}>
               <View style={styles.searchBoxWrapper}>
                 <Icon color='#5E5E5E' containerStyle={{ marginRight: 5 }} name='ios-search' size={20} />
 
                 <TextInput
-                  style={{padding:0, flex:1, width:'100%'}}
+                  style={{padding:0, flex:1, width:'100%', marginLeft:5}}
                   value={this.state.query}
                   onChangeText={(value) => this.onSearch(value)}
                 />
@@ -177,14 +177,14 @@ export default class RNDropdown extends Component {
           </TouchableOpacity>
         </Modal>}
 
-        <TouchableOpacity 
+        <TouchableOpacity
         disabled={disabled}
-        activeOpacity={1} 
-        style={inputContainer ? [inputContainer, disabled && styles.inputDisabled] : 
-        [styles.inputWrapper, disabled && styles.inputDisabled]} 
+        activeOpacity={1}
+        style={inputContainer ? [inputContainer, disabled && styles.inputDisabled] :
+        [styles.inputWrapper, disabled && styles.inputDisabled]}
         onPress={() => this._toggleModal()}>
-          {value ? 
-          <Text style={styles.inputValue}>{value.name}</Text> : 
+          {value ?
+          <Text style={styles.inputValue}>{value.name}</Text> :
           <Text style={[styles.inputValue, {color: '#9A9A9A'}]}>{placeholder}</Text>}
 
           <Icon name="ios-arrow-down" size={25} color="#9A9A9A" />
