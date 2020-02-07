@@ -115,7 +115,7 @@ const ModalList = props => {
       isVisible={modalVisible}
       style={{ margin: 0, backgroundColor: backgroundColor }}>
       <View style={{ flex: 1, backgroundColor: backgroundColor }}>
-        {renderHeader ? renderHeader({ label, leftAction, rightAction }) : (
+        {renderHeader ? renderHeader({ title, leftAction, rightAction }) : (
           <ModalHeader
             title={title}
             closeModal={() => leftAction()}
