@@ -6,14 +6,17 @@ import * as GlobalConst from '../global-const'
 import * as Scale from '../method/scale'
 import * as Math from '../method/math'
 import * as Obj from '../method/object'
+import Colors from '../colors'
 
 class PlaceholderText extends Component {
   static propTypes = {
-    ...TextProps
+    ...TextProps,
+    disableAnimation: PropTypes.bool,
   }
 
   static defaultProps = {
-    numberOfLines: 3
+    numberOfLines: 3,
+    disableAnimation: false,
   }
 
   constructor(props) {
@@ -41,24 +44,38 @@ class PlaceholderText extends Component {
   }
 
   renderLinePlaceHolder() {
-    const { numberOfLines, style } = this.props
+    const { numberOfLines, style, disableAnimation } = this.props
     let height = GlobalConst.getValue().FONT_SIZE
     if (style && style.fontSize) {
       height = style.fontSize
     }
 
-    let MainPlaceholder = <Placeholder animation={'shine'} />
-    for (i = 0; i < numberOfLines; i++) {
-      let child = <Line
-        key={i}
-        height={height}
-        noMargin
-        style={{ marginTop: Scale.scale(height / 10), marginBottom: Scale.scale(height / 12) }}
-        width={`${Math.getRandomInt(80, 100)}%`}
-      />
-      MainPlaceholder = Obj.appendChildToView(MainPlaceholder, child)
-    }
+    const lineLength = `${Math.getRandomInt(80, 100)}%`
 
+    let MainPlaceholder = <View />
+
+    if (disableAnimation) {
+      for (i = 0; i < numberOfLines; i++) {
+        let child = <View
+          key={i}
+          style={{ marginTop: Scale.scale(height / 10), marginBottom: Scale.scale(height / 12), height, width: lineLength, backgroundColor: Colors.very_light_pink_two, borderRadius: 2 }}
+        />
+        MainPlaceholder = Obj.appendChildToView(MainPlaceholder, child)
+      }
+    } else {
+      MainPlaceholder = <Placeholder animation={'shine'} />
+      for (i = 0; i < numberOfLines; i++) {
+        let child = <Line
+          key={i}
+          height={height}
+          noMargin
+          style={{ marginTop: Scale.scale(height / 10), marginBottom: Scale.scale(height / 12) }}
+          width={lineLength}
+        />
+        MainPlaceholder = Obj.appendChildToView(MainPlaceholder, child)
+      }
+    }
+  
     return MainPlaceholder
   }
 

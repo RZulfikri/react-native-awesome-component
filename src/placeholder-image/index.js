@@ -3,6 +3,7 @@ import { Image, ImagePropsBase, ImageStyle, ImageBackground, View } from 'react-
 import PropTypes from 'prop-types'
 import { StyledImage } from '../styled/share.styled'
 import Placeholder, { Media } from 'rn-placeholder'
+import Colors from '../colors'
 
 class PlaceholderImage extends Component {
   static propTypes = {
@@ -16,6 +17,7 @@ class PlaceholderImage extends Component {
     resizeMethod: PropTypes.oneOf(["auto", "resize", "scale"]),
     resizeMode: PropTypes.oneOf(["cover", "contain", "stretch", "repeat", "center"]),
     isCard: PropTypes.bool,
+    disableAnimation: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -27,7 +29,8 @@ class PlaceholderImage extends Component {
     borderWidth: 0,
     borderColor: '#000000',
     defaultSource: require('./image-placeholder.png'),
-    isCard: true
+    isCard: true,
+    disableAnimation: false,
   }
 
   constructor(props) {
@@ -60,6 +63,7 @@ class PlaceholderImage extends Component {
       borderWidth,
       borderColor,
       isCard,
+      disableAnimation,
     } = this.props
 
     const { loading } = this.state
@@ -95,19 +99,23 @@ class PlaceholderImage extends Component {
           )}
         {(loading || uri === undefined || uri === '') && (
           <View style={{ marginTop: -height }}>
-            <Placeholder
-              animation={'shine'}
-            >
-              <Media
-                style={{
-                  width,
-                  height,
-                  borderWidth,
-                  borderColor,
-                  borderRadius: radius,
-                }}
-              />
-            </Placeholder>
+            {disableAnimation ? (
+              <View style={{ backgroundColor: Colors.very_light_pink_two, width, height, borderRadius: radius, borderColor, borderWidth }} />
+            ) : (
+                <Placeholder
+                  animation={'shine'}
+                >
+                  <Media
+                    style={{
+                      width,
+                      height,
+                      borderWidth,
+                      borderColor,
+                      borderRadius: radius,
+                    }}
+                  />
+                </Placeholder>
+              )}
           </View>
         )}
       </View>

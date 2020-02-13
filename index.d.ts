@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle, FlatListProps, TextInputProps, ListRenderItem } from 'react-native'
+import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle, FlatListProps, TextInputProps, ListRenderItem, ImageProps } from 'react-native'
 
 /**
  * CLASS COMPONENT
@@ -30,7 +30,7 @@ interface ISimpleCountryFlagResponse {
   callingCode: string;
 }
 
-interface IPlaceholderImageProps {
+interface IPlaceholderImageProps extends ImageProps {
   uri?: string;
   width?: number;
   height?: number;
@@ -41,6 +41,7 @@ interface IPlaceholderImageProps {
   resizeMethod?: ResizeMethodType;
   resizeMode?: ResizeModeType;
   isCard?: boolean;
+  disableAnimation?: boolean;
 }
 
 interface IContainerProps {
@@ -305,8 +306,12 @@ interface ICustomView {
   renderNoInternetContent: () => void;
 }
 
+interface IPlaceholderTextProps extends TextProps {
+  disableAnimation?: boolean;
+}
+
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
-export class PlaceholderText extends React.Component<TextProps> { }
+export class PlaceholderText extends React.Component<IPlaceholderTextProps> { }
 export class CustomButton extends React.Component<ICustomButtonProps> { }
 export class CustomHeader extends React.Component<ICustomHeaderProps> { }
 export class ConnectionHandler extends React.Component<ICustomHeaderProps> { }
