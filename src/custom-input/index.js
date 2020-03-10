@@ -10,7 +10,8 @@ import _ from 'lodash'
 import { getSimpleCountryList } from '../method/helper'
 import { Container, TouchableContainer } from '../styled/share.styled'
 import ModalList from '../custom-select/Modal'
-import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icons from 'react-native-vector-icons/Ionicons'
+import CountryListModal from 'react-native-awesome-component/src/custom-input/country-list.modal';
 
 const LABEL_TYPE = {
   top: 'top-label',
@@ -364,8 +365,8 @@ class CustomInput extends Component {
 
   renderModalSelectCountry(formikProps) {
     const { showCountryList } = this.state
-    const { style, valueCountry, onSelectCountry, countryPlaceholder, countrySelectionLabel, countryValueLabel, renderCountry, renderCountryHeader } = this.props
-    const countriesCode = getSimpleCountryList(true)
+    const { style, valueCountry, onSelectCountry, countryPlaceholder, countrySelectionLabel, countryValueLabel, renderCountry, renderCountryHeader, containerStyle } = this.props
+    const countriesCode = getSimpleCountryList(true, true)
     const renderItem = renderCountry ? renderCountry : GlobalConst.getValue().CUSTOM_SELECT_ITEM_RENDER
     const renderHeader = renderCountryHeader ? renderCountryHeader : GlobalConst.getValue().CUSTOM_SELECT_HEADER_RENDER
 
@@ -374,6 +375,7 @@ class CustomInput extends Component {
 
     let textInputStyle = GlobalConst.getValue().CUSTOM_INPUT_TEXT_INPUT_STYLE
     let placeholderStyle = {}
+    let borderStyle = {}
     if (style) {
       textInputStyle = {
         ...textInputStyle,
@@ -405,29 +407,41 @@ class CustomInput extends Component {
       }
     }
 
+    if (containerStyle.borderWidth === 1) {
+      borderStyle = {
+        borderRightWidth: containerStyle.borderWidth,
+        borderRightColor: containerStyle.borderColor,
+      }
+    }
+
+    delete textInputStyle.padding
+    delete textInputStyle.paddingHorizontal
+    delete textInputStyle.paddingVertical
+    delete textInputStyle.paddingTop
+    delete textInputStyle.paddingBottom
+    delete textInputStyle.paddingLeft
+    delete textInputStyle.paddingRight
+
     return (
-      <Container style={{ width: '25%', backgroundColor: 'transparent', marginRight: 5 }}>
-        <TouchableContainer onPress={() => this.setCountryListVisible(true)} style={{ backgroundColor: 'transparent', flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={[{ flex: 1 }, textInputStyle, placeholderStyle]}>{value}</Text>
-          <Icons name='menu-down' size={28} color={`rgba(0,0,0,0.5)`} />
+      <Container style={[{ backgroundColor: 'transparent', paddingLeft: 10, paddingRight: 10 }, borderStyle]}>
+        <TouchableContainer
+          onPress={() => this.setCountryListVisible(true)}
+          style={{ backgroundColor: 'transparent', flexDirection: 'row', alignItems: 'center' }}
+        >
+          <Text style={[placeholderStyle, textInputStyle, { marginRight: 10 }]}>{value}</Text>
+          <Icons name='ios-arrow-down' size={15} color={`rgba(0,0,0,0.5)`} />
         </TouchableContainer>
-        <ModalList
+        <CountryListModal 
           data={countriesCode}
-          multiSelect={false}
-          keyDescription={'nameWithFlag'}
-          keyValue={'id'}
-          initialValue={valueCountry}
           modalVisible={showCountryList}
+          closeModal={() => {
+            this.setCountryListVisible(false)
+          }}
           onSubmit={selectValue => {
             this.setCountryListVisible(false)
             onSelectCountry(selectValue);
           }}
-          closeModal={() => {
-            this.setCountryListVisible(false)
-          }}
-          renderItem={renderItem}
-          renderHeader={renderHeader}
-          title={selectionLabel}
+          value={valueCountry}
         />
       </Container>
     )
@@ -450,7 +464,7 @@ class CustomInput extends Component {
     let fErrorMessage = forceErrorMessage ? forceErrorMessage : ''
 
     // HANDLER BORDER STYLE
-    let containerTyle = {
+    let lContainerStyle = {
       ...containerStyle,
       borderBottomWidth: underlineWidth ? underlineWidth : GlobalConst.getValue().CUSTOM_INPUT_UNDERLINE_WIDTH,
       borderBottomColor: underlineColor ? underlineColor : GlobalConst.getValue().CUSTOM_INPUT_UNDERLINE_COLOR,
@@ -462,7 +476,7 @@ class CustomInput extends Component {
 
     // HANDLE ERROR STYLE
     if (errors.value) {
-      containerTyle = Obj.appendObject(containerTyle, 'borderBottomColor', lErrorColor)
+      lContainerStyle = Obj.appendObject(lContainerStyle, 'borderBottomColor', lErrorColor)
       labelStyle = Obj.appendObject(labelStyle, 'color', lErrorColor)
       errorLabelStyle = Obj.appendObject(errorLabelStyle, 'color', lErrorColor)
       fErrorMessage = errors.value
@@ -470,14 +484,14 @@ class CustomInput extends Component {
 
     // HANDLE FOCUS STYLE
     if (touched.value) {
-      containerTyle = Obj.appendObject(containerTyle, 'borderBottomColor', lFocusColor)
+      lContainerStyle = Obj.appendObject(lContainerStyle, 'borderBottomColor', lFocusColor)
       labelStyle = Obj.appendObject(labelStyle, 'color', lFocusColor)
       errorLabelStyle = Obj.appendObject(errorLabelStyle, 'color', lFocusColor)
     }
 
     // HANDLE FORCE MESSAGE STYLE
     if (fErrorMessage && !touched.value) {
-      containerTyle = Obj.appendObject(containerTyle, 'borderBottomColor', lErrorColor)
+      lContainerStyle = Obj.appendObject(lContainerStyle, 'borderBottomColor', lErrorColor)
       labelStyle = Obj.appendObject(labelStyle, 'color', lErrorColor)
     }
 
@@ -573,7 +587,7 @@ class CustomInput extends Component {
 
     return (
       <View contentContainerStyle={{ flexGrow: 1 }} >
-        <Container style={[containerTyle]}>
+        <Container style={[lContainerStyle]}>
           {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle)}
           {labelType === LABEL_TYPE.left && label && this.renderLabel(labelType, labelStyle)}
           {onPress ?

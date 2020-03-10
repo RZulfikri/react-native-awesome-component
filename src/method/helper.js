@@ -95,10 +95,11 @@ export function isEmptyOrSpaces(str) {
   return true;
 }
 
-export function getSimpleCountryList(addFlag) {
+export function getSimpleCountryList(addFlag, addSection = false) {
   const COUNTRIES_CODE = _.sortBy(require('world-countries'), ['name.common'], ['asc']);
+  let NEW_COUNTRY_CODE = []
   if (addFlag) {
-    return COUNTRIES_CODE.map((item, index) => {
+    NEW_COUNTRY_CODE = COUNTRIES_CODE.map((item, index) => {
       return {
         id: index,
         name: item.name.common,
@@ -109,7 +110,7 @@ export function getSimpleCountryList(addFlag) {
       }
     })
   } else {
-    return COUNTRIES_CODE.map((item, index) => {
+    NEW_COUNTRY_CODE = COUNTRIES_CODE.map((item, index) => {
       return {
         id: index,
         name: item.name.common,
@@ -118,4 +119,26 @@ export function getSimpleCountryList(addFlag) {
       }
     })
   }
+
+  if (addSection) {
+    const TEMP_COUNTRIES_CODE = [...NEW_COUNTRY_CODE]
+
+    NEW_COUNTRY_CODE = []
+    let prevTitle = ''
+    let newIndex = -1
+    for (let i = 0; i < TEMP_COUNTRIES_CODE.length; i++) {
+      const nextTitle = TEMP_COUNTRIES_CODE[i].name.charAt(0)
+      if (prevTitle !== nextTitle) {
+        newIndex += 1
+        prevTitle = nextTitle
+        NEW_COUNTRY_CODE[newIndex] = {
+          title: nextTitle,
+          data: [TEMP_COUNTRIES_CODE[i]]
+        }
+      } else {
+        NEW_COUNTRY_CODE[newIndex].data.push(TEMP_COUNTRIES_CODE[i])
+      }
+    }
+  }
+  return NEW_COUNTRY_CODE
 }
