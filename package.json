@@ -1,6 +1,6 @@
 {
   "name": "react-native-awesome-component",
-  "version": "0.1.50",
+  "version": "0.1.51",
   "description": "React Native Awesome Component",
   "main": "index.js",
   "typings": "./index.d.ts",
@@ -33,7 +33,7 @@
     "styled-components": "^4.3.2",
     "react-native-iphone-x-helper": "^1.2.1",
     "react-native-vector-icons": "^6.6.0",
-    "@react-native-community/netinfo": "^4.4.0",
+    "@react-native-community/netinfo": "^5.6.2",
     "react-native-dropdownalert": "^4.2.0",
     "react-native-modal": "^11.4.0",
     "world-countries": "^2.1.0",
