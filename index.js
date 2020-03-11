@@ -35,6 +35,8 @@ import CustomDatepicker from './src/custom-datepicker'
 import CustomView from './src/custom-view'
 import * as AlertHandler from './src/custom-alert/alert-handler'
 import CustomInput from './src/custom-input'
+import LoadingModal from './src/loading-modal/index'
+import * as LoadingHelper from './src/loading-modal/loading-handler'
 
 const Styled = {
   Container,
@@ -59,6 +61,7 @@ const Method = {
   Helper: Helper,
   AlertHandler,
   ApiHelper,
+  LoadingHelper,
 }
 
 export {
@@ -78,6 +81,7 @@ export {
   CustomFlatList,
   CustomInput,
   CustomView,
+  LoadingModal,
 
   Styled,
   Method,

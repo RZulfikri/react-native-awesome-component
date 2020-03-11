@@ -311,6 +311,10 @@ interface IPlaceholderTextProps extends TextProps {
   disableAnimation?: boolean;
 }
 
+interface ILoadingModal {
+
+}
+
 export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
 export class PlaceholderText extends React.Component<IPlaceholderTextProps> { }
 export class CustomButton extends React.Component<ICustomButtonProps> { }
@@ -326,6 +330,7 @@ export class CustomSelect extends React.Component<ICustomSelect> { }
 export class CustomDatepicker extends React.Component<ICustomDatepicker> { }
 export class CustomInput extends React.Component<ICustomInput> { }
 export class CustomView extends React.Component<ICustomView> { }
+export class LoadingModal extends React.Component<ILoadingModal> { }
 
 /**
  * STYLED COMPONENT
@@ -405,6 +410,12 @@ interface IApiHelper {
   responseMonitoring: (response: any, callback200: (response: any) => void, callback400: (response: any) => void, callback500: (response: any) => void) => any
 }
 
+interface ILoadingHelper {
+  setLoadingInstance: (loading: any) => void;
+  showLoading: () => void;
+  hideLoading: () => void;
+}
+
 interface IMethod {
   Math: IMath;
   Scale: IScale;
@@ -412,7 +423,8 @@ interface IMethod {
   Array: IArray;
   Helper: IHelper;
   AlertHandler: IAlertHandler;
-  ApiHelper: IApiHelper
+  ApiHelper: IApiHelper,
+  LoadingHelper: ILoadingHelper
 }
 
 export const Method: IMethod
