@@ -29,6 +29,8 @@ const CustomDatePicker = props => {
     rightIcon,
     disabled,
     onChangeValidation,
+    renderRightAction,
+    renderLeftAction,
   } = props;
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -39,7 +41,8 @@ const CustomDatePicker = props => {
   const rightIconSize = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_ICON_SIZE
   const rightIconColor = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_ICON_COLOR
   const rightIconStyle = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_ICON_STYLE
-  const rightIconRender = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_RENDER
+  let rightIconRender = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_RENDER
+  let leftIconRender = undefined
 
   let errorMessage = error ? error : ''
 
@@ -61,6 +64,14 @@ const CustomDatePicker = props => {
 
   const Icon = getIconByType(iconType)
 
+  if (renderRightAction && typeof renderRightAction === 'function') {
+    rightIconRender = renderRightAction
+  }
+
+  if (renderLeftAction && typeof renderLeftAction === 'function') {
+    leftIconRender = renderLeftAction
+  }
+
   return (
     <View>
       <CustomInput
@@ -76,8 +87,14 @@ const CustomDatePicker = props => {
         renderRightAction={() => {
           if (typeof rightIconRender === 'function') {
             return rightIconRender()
-          } else {
-            return <Icon name={rightIconName} size={rightIconSize} color={rightIconColor} style={rightIconStyle} />
+          }
+          // else {
+          //   return <Icon name={rightIconName} size={rightIconSize} color={rightIconColor} style={rightIconStyle} />
+          // }
+        }}
+        renderLeftAction={() => {
+          if (typeof leftIconRender === 'function') {
+            return leftIconRender()
           }
         }}
         forceErrorMessage={errorMessage}
@@ -150,6 +167,8 @@ CustomDatePicker.propTypes = {
   rightIcon: PropTypes.string,
   disabled: PropTypes.bool,
   onChangeValidation: PropTypes.func,
+  rightIconRender: PropTypes.func,
+  leftIconRender: PropTypes.func,
 };
 
 CustomDatePicker.defaultProps = {
@@ -168,7 +187,9 @@ CustomDatePicker.defaultProps = {
   style: undefined,
   labelType: 'top-label',
   disabled: false,
-  onChangeValidation: () => null
+  onChangeValidation: () => null,
+  rightIconRender: undefined,
+  leftIconRender: undefined,
 };
 
 export default CustomDatePicker;

@@ -62,6 +62,7 @@ class CustomInput extends Component {
     errorMaximum: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     errorMinimumNumber: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     errorMaximumNumber: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    hideError: PropTypes.bool,
 
     // ACTION BUTTON
     renderLeftAction: PropTypes.func,
@@ -93,7 +94,8 @@ class CustomInput extends Component {
       flag: '🇮🇩',
       code: 'ID',
       callingCode: '62',
-    }
+    },
+    hideError: false,
   }
 
   constructor(props) {
@@ -431,7 +433,7 @@ class CustomInput extends Component {
           <Text style={[placeholderStyle, textInputStyle, { marginRight: 10 }]}>{value}</Text>
           <Icons name='ios-arrow-down' size={15} color={`rgba(0,0,0,0.5)`} />
         </TouchableContainer>
-        <CountryListModal 
+        <CountryListModal
           data={countriesCode}
           modalVisible={showCountryList}
           closeModal={() => {
@@ -449,7 +451,7 @@ class CustomInput extends Component {
 
   renderInput(formikProps) {
     const { errors, touched } = formikProps
-    const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress, onChangeValidation, editable, containerStyle, isRequired } = this.props
+    const { label, underlineWidth, underlineColor, inputType, focusColor, errorColor, forceErrorMessage, renderLeftAction, renderRightAction, onPress, onChangeValidation, editable, containerStyle, isRequired, hideError } = this.props
     let { labelType } = this.props
 
     if (labelType === undefined || labelType === null) {
@@ -590,7 +592,7 @@ class CustomInput extends Component {
         <Container style={[lContainerStyle]}>
           {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle)}
           {labelType === LABEL_TYPE.left && label && this.renderLabel(labelType, labelStyle)}
-          {onPress ?
+          {onPress ? (
             <TouchableOpacity activeOpacity={0.8} onPress={onPress} disabled={!editable}>
               <StyledTextInputContainer style={[styledTextInputContainerStyle]}>
                 {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
@@ -622,40 +624,42 @@ class CustomInput extends Component {
                 />
                 {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
               </StyledTextInputContainer>
-            </TouchableOpacity> :
-            <StyledTextInputContainer style={[styledTextInputContainerStyle]}>
-              {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
-              {inputType === INPUT_TYPE.phoneCountry && this.renderModalSelectCountry(formikProps)}
-              <StyledTextInput
-                ref={currentRef => this.setRef(currentRef)}
-                secureTextEntry={inputType === INPUT_TYPE.password}
-                {...activeProps}
-                underlineColorAndroid={'transparent'}
-                style={[textInputStyle]}
-                defaultValue={formikProps.initialValues.value}
-                onChangeText={formikProps.handleChange('value')}
-                value={formikProps.values.value}
-                onSubmitEditing={formikProps.handleSubmit}
-                onFocus={() => {
-                  formikProps.setFieldTouched('value');
-                  if (onFocus) {
-                    onFocus();
-                  }
-                }}
-                onBlur={() => {
-                  formikProps.setFieldTouched('value', false);
-                  if (onBlur) {
-                    onBlur();
-                  }
-                }}
-                keyboardType={this.getKeyboardType(inputType)}
-              />
-              {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
-            </StyledTextInputContainer>
+            </TouchableOpacity>
+          ) : (
+              <StyledTextInputContainer style={[styledTextInputContainerStyle]}>
+                {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
+                {inputType === INPUT_TYPE.phoneCountry && this.renderModalSelectCountry(formikProps)}
+                <StyledTextInput
+                  ref={currentRef => this.setRef(currentRef)}
+                  secureTextEntry={inputType === INPUT_TYPE.password}
+                  {...activeProps}
+                  underlineColorAndroid={'transparent'}
+                  style={[textInputStyle]}
+                  defaultValue={formikProps.initialValues.value}
+                  onChangeText={formikProps.handleChange('value')}
+                  value={formikProps.values.value}
+                  onSubmitEditing={formikProps.handleSubmit}
+                  onFocus={() => {
+                    formikProps.setFieldTouched('value');
+                    if (onFocus) {
+                      onFocus();
+                    }
+                  }}
+                  onBlur={() => {
+                    formikProps.setFieldTouched('value', false);
+                    if (onBlur) {
+                      onBlur();
+                    }
+                  }}
+                  keyboardType={this.getKeyboardType(inputType)}
+                />
+                {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
+              </StyledTextInputContainer>
+            )
           }
           {labelType === LABEL_TYPE.right && label && this.renderLabel(labelStyle)}
         </Container>
-        {errorLabel}
+        {!hideError && errorLabel}
       </View>
     )
   }

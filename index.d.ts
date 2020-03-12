@@ -284,6 +284,7 @@ interface ICustomInput extends TextInputProps {
   errorMaximum: (label: string, max: number) => string | string;
   errorMinimumNumber: (label: string, min: number) => string | string;
   errorMaximumNumber: (label: string, max: number) => string | string;
+  hideError: boolean;
 
   // ACTION BUTTON
   renderLeftAction: () => any,
