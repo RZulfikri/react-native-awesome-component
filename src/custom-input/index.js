@@ -409,9 +409,16 @@ class CustomInput extends Component {
       }
     }
 
-    if (containerStyle.borderWidth === 1) {
+    if (containerStyle && containerStyle.borderWidth) {
       borderStyle = {
+        ...borderStyle,
         borderRightWidth: containerStyle.borderWidth,
+      }
+    }
+
+    if (containerStyle && containerStyle.borderColor) {
+      borderStyle = {
+        ...borderStyle,
         borderRightColor: containerStyle.borderColor,
       }
     }
