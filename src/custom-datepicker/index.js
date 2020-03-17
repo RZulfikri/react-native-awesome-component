@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { TouchableOpacity, ViewPropTypes, StyleSheet, View } from 'react-native';
+import { TouchableOpacity, ViewPropTypes, StyleSheet, View, TextInputProps } from 'react-native';
 import Modal from 'react-native-modal';
 import DatePicker from 'react-native-date-picker';
 import moment from 'moment-timezone';
@@ -75,6 +75,7 @@ const CustomDatePicker = props => {
   return (
     <View>
       <CustomInput
+        {...props}
         placeholder={placeholder}
         label={label}
         labelType={labelType}
@@ -83,7 +84,7 @@ const CustomDatePicker = props => {
         onPress={() => setModalVisible(true)}
         isRequired={isRequired}
         defaultValue={value}
-        style={style}
+        textInputStyle={style}
         renderRightAction={() => {
           if (typeof rightIconRender === 'function') {
             return rightIconRender()
@@ -162,7 +163,7 @@ CustomDatePicker.propTypes = {
   initialDate: PropTypes.instanceOf(Date),
   maximumDate: PropTypes.instanceOf(Date),
   minimumDate: PropTypes.instanceOf(Date),
-  style: ViewPropTypes.style,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   labelType: PropTypes.oneOf(['top-label', 'default', 'left-label', 'right-label']),
   rightIcon: PropTypes.string,
   disabled: PropTypes.bool,

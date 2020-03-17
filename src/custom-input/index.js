@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Keyboard, TouchableOpacity, Text } from 'react-native'
+import { View, Keyboard, TouchableOpacity, Text, TextInputProps } from 'react-native'
 import { TopContainer, RowContainer, Label, StyledTextInput, ErrorLabel, StyledTextInputContainer } from './custom-input.styled'
 import { Formik } from 'formik';
 import * as Obj from '../method/object'
@@ -51,6 +51,7 @@ class CustomInput extends Component {
     onPress: PropTypes.func,
     onChangeValidation: PropTypes.func,
     containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    textInputStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 
     // ERROR MESSAGE
     passwordRegex: PropTypes.any,
