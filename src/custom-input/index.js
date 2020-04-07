@@ -601,8 +601,8 @@ class CustomInput extends Component {
           {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle)}
           {labelType === LABEL_TYPE.left && label && this.renderLabel(labelType, labelStyle)}
           {onPress ? (
-            <TouchableOpacity activeOpacity={0.8} onPress={onPress} disabled={!editable}>
-              <StyledTextInputContainer style={[styledTextInputContainerStyle]}>
+            <TouchableOpacity activeOpacity={0.8} onPress={onPress} disabled={!editable} style={[styledTextInputContainerStyle]}>
+              <StyledTextInputContainer>
                 {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
                 <StyledTextInput
                   ref={currentRef => this.setRef(currentRef)}
