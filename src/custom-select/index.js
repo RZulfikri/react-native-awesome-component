@@ -16,6 +16,10 @@ import { getIconByType, stringEquals, isEmptyOrSpaces } from '../method/helper'
 const CustomSelect = props => {
   const {
     label,
+    labelStyle,
+    style,
+    underlineColor,
+    underlineWidth,
     placeholder,
     isRequired,
     value,
@@ -33,6 +37,7 @@ const CustomSelect = props => {
     disabled,
     keyOther,
     onChangeValidation,
+    renderRightAction
   } = props;
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -67,7 +72,7 @@ const CustomSelect = props => {
   const rightIconSize = GlobalConst.getValue().CUSTOM_SELECT_RIGHT_ICON_SIZE
   const rightIconColor = GlobalConst.getValue().CUSTOM_SELECT_RIGHT_ICON_COLOR
   const rightIconStyle = GlobalConst.getValue().CUSTOM_SELECT_RIGHT_ICON_STYLE
-  const rightIconRender = GlobalConst.getValue().CUSTOM_SELECT_RIGHT_RENDER
+  let rightIconRender = GlobalConst.getValue().CUSTOM_SELECT_RIGHT_RENDER
 
   const renderItem = props.renderItem ? props.renderItem : multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_RENDER : GlobalConst.getValue().CUSTOM_SELECT_ITEM_RENDER
   const renderHeader = props.renderHeader ? props.renderHeader : GlobalConst.getValue().CUSTOM_SELECT_HEADER_RENDER
@@ -78,6 +83,10 @@ const CustomSelect = props => {
     errorMessage = GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED(label)
   }
 
+  if (renderRightAction && typeof renderRightAction === 'function') {
+    rightIconRender = renderRightAction
+  }
+
   const Icon = getIconByType(iconType)
 
   return (
@@ -86,7 +95,10 @@ const CustomSelect = props => {
         placeholder={placeholder}
         label={label}
         labelType={labelType}
-        underlineWidth={1}
+        labelStyle={labelStyle}
+        style={style}
+        underlineColor={underlineColor}
+        underlineWidth={underlineWidth}
         editable={!disabled}
         onPress={disabled ? undefined : () => setModalVisible(true)}
         isRequired={isRequired}
@@ -94,9 +106,10 @@ const CustomSelect = props => {
         renderRightAction={() => {
           if (typeof rightIconRender === 'function') {
             return rightIconRender()
-          } else {
-            return <Icon name={rightIconName} size={rightIconSize} color={rightIconColor} style={rightIconStyle} />
-          }
+          } 
+          // else {
+          //   return <Icon name={rightIconName} size={rightIconSize} color={rightIconColor} style={rightIconStyle} />
+          // }
         }}
         forceErrorMessage={errorMessage}
       />
