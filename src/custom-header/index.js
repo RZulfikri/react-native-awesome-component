@@ -56,7 +56,7 @@ const CustomHeader = (props) => {
 
   const headerPaddingTop = Platform.OS === 'ios' ? getStatusBarHeight() : 0
   let headerTitle = ''
-  let isFirstRoute = false
+  let isFirstRoute = true
 
   if (navigation) {
     isFirstRoute = navigation.isFirstRouteInParent()
