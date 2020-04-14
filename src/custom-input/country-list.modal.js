@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E5E5E5',
     borderRadius: 1,
-    height: Scale.scale(30),
+    height: Scale.scale(35),
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: Scale.scale(10),
@@ -212,6 +212,7 @@ class CountryListModal extends PureComponent {
           />
           {this._renderSearchBar()}
           <SectionList
+            keyboardShouldPersistTaps={'handled'}
             sections={this._getFilterData()}
             keyExtractor={(item) => item.id}
             renderItem={this._renderSectionItem}
