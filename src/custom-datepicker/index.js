@@ -17,6 +17,7 @@ const CustomDatePicker = props => {
     value,
     error,
     onDateChange,
+    onDone,
     dateFormat,
     locale,
     mode,
@@ -50,6 +51,8 @@ const CustomDatePicker = props => {
     errorMessage = GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED(label)
   }
 
+  let dateSelected = minimumDate
+
   const changeDate = date => {
     if (onDateChange) {
       onDateChange(moment.tz(date, 'UTC').format(dateFormat));
@@ -60,6 +63,23 @@ const CustomDatePicker = props => {
     }
 
     setIsTouch(true)
+  };
+
+  const onPressDone = date => {
+    if (onDone) {
+      onDone(moment.tz(date, 'UTC').format(dateFormat));
+      setModalVisible(false)
+    }
+
+    if (onChangeValidation) {
+      onChangeValidation(errorMessage.length > 0 ? true : false)
+    }
+
+    setIsTouch(true)
+  };
+
+  const onPressCancel = date => {
+    setModalVisible(false)
   };
 
   const Icon = getIconByType(iconType)
@@ -120,6 +140,16 @@ const CustomDatePicker = props => {
           width: '100%',
           padding: 0,
         }}>
+        <View style={{ backgroundColor: '#fff', width: '100%', padding: 10, justifyContent: 'space-between', flexDirection: 'row' }}>
+          <TouchableOpacity
+            onPress={() => onPressCancel(dateSelected)}>
+            <Text style={{ color: 'blue' }}>Cancel</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => onPressDone(dateSelected)}>
+            <Text style={{ color: 'blue' }}>Done</Text>
+          </TouchableOpacity>
+        </View>
         <DatePicker
           style={{
             backgroundColor: '#fff',
@@ -152,7 +182,9 @@ const CustomDatePicker = props => {
 CustomDatePicker.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  onDateChange: PropTypes.func.isRequired,
+  // onDateChange: PropTypes.func.isRequired,
+  onDone: PropTypes.func.isRequired,
+  // onCancel: PropTypes.func.isRequired,
   // textStyle: ViewPropTypes.style,
   label: PropTypes.string,
   isRequired: PropTypes.bool,
