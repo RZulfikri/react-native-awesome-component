@@ -1,13 +1,35 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { TouchableOpacity, ViewPropTypes, StyleSheet, View, TextInputProps } from 'react-native';
+import { TouchableOpacity, ViewPropTypes, StyleSheet, View, TextInputProps, Text } from 'react-native';
 import Modal from 'react-native-modal';
 import DatePicker from 'react-native-date-picker';
 import moment from 'moment-timezone';
 import metrics from '../metrics';
 import { CustomInput, GlobalConst } from '../..';
 import { getIconByType } from '../method/helper';
+import Colors from '../colors'
+import {scale} from '../method/scale'
+
+const styles = StyleSheet.create({
+  textConfirmation: {
+    fontSize: scale(16),
+    color: Colors.activeBlue
+  },
+  textCancel: {
+    fontSize: scale(16),
+    color: Colors.activeRed,
+  },
+  actionContainer: {
+    backgroundColor: Colors.white, 
+    width: '100%', 
+    padding: scale(10), 
+    justifyContent: 'space-between', 
+    flexDirection: 'row',
+    borderTopLeftRadius: scale(10),
+    borderTopRightRadius: scale(10)
+  }
+})
 
 const CustomDatePicker = props => {
   const {
@@ -140,14 +162,14 @@ const CustomDatePicker = props => {
           width: '100%',
           padding: 0,
         }}>
-        <View style={{ backgroundColor: '#fff', width: '100%', padding: 10, justifyContent: 'space-between', flexDirection: 'row' }}>
+        <View style={[styles.actionContainer]}>
           <TouchableOpacity
             onPress={() => onPressCancel(dateSelected)}>
-            <Text style={{ color: 'blue' }}>Cancel</Text>
+            <Text style={[styles.textCancel]}>Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => onPressDone(dateSelected)}>
-            <Text style={{ color: 'blue' }}>Done</Text>
+            <Text style={[styles.textConfirmation]}>Done</Text>
           </TouchableOpacity>
         </View>
         <DatePicker
