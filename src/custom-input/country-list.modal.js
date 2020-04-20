@@ -99,6 +99,7 @@ class CountryListModal extends PureComponent {
   onPressClose() {
     const { closeModal } = this.props
     closeModal()
+    this.setState({ selectedValue: this.props.value })
   }
 
   onSelectItem(item) {
