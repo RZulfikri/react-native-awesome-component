@@ -50,10 +50,14 @@ class ConnectionHandler extends PureComponent {
   }
 
   render() {
+    const { closeInterval: propCloseInterval } = this.props;
+
+    const closeInterval = propCloseInterval || GlobalConst.getValue().CONNECTION_CLOSE_INTERVAL
+
     return (
       <DropdownAlert
         ref={ref => setDropDownIntance(ref)}
-        closeInterval={-1}
+        closeInterval={closeInterval}
         onClose={handleOnCloseAlert}
         zIndex={100}
         renderImage={(props, data) => {
@@ -122,6 +126,10 @@ class ConnectionHandler extends PureComponent {
       />
     )
   }
+}
+
+ConnectionHandler.propTypes = {
+  closeInterval: PropTypes.number.isRequired,
 }
 
 export default ConnectionHandler

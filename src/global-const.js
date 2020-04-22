@@ -67,6 +67,7 @@ const DEFAULT_GLOBAL_CONST = {
   CONNECTION_400_ALERT_MESSAGE: 'Please check your input and try again',
   CONNECTION_500_ALERT_TITLE: 'Sorry for the inconvenience',
   CONNECTION_500_ALERT_MESSAGE: `Something error on our server, we're working on this error. Please try again later.`,
+  CONNECTION_CLOSE_INTERVAL: -1,
 
   // CUSTOM STEP BAR
   CUSTOM_STEP_BAR_HEIGHT: 8,
@@ -339,6 +340,9 @@ export function setGlobalConnectionHandler500AlertTitle(value) {
 }
 export function setGlobalConnectionHandler500AlertMessage(value) {
   globalConst = Object.appendObject(globalConst, 'CONNECTION_500_ALERT_MESSAGE', value)
+}
+export function setGlobalConnectionCloseInterval(value) {
+  globalConst = Object.appendObject(globalConst, 'CONNECTION_CLOSE_INTERVAL', value)
 }
 
 // CUSTOM STEP BAR
