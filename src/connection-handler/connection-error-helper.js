@@ -44,21 +44,27 @@ export function setDropDownIntance(instance) {
 }
 
 export function showConnectedWarning() {
-  currentAlert = ALERT_TYPE_CONNECTED
-  dropDownInstance.alertWithType(ALERT_TYPE_CONNECTED.type, GlobalConst.getValue().CONNECTION_SUCCESS_TITLE, GlobalConst.getValue().CONNECTION_SUCCESS_MESSAGE, { subType: ALERT_TYPE_CONNECTED.subType }, 1000)
+  if (!_.isEqual(currentAlert, ALERT_TYPE_CONNECTED)) {
+    currentAlert = ALERT_TYPE_CONNECTED
+    dropDownInstance.alertWithType(ALERT_TYPE_CONNECTED.type, GlobalConst.getValue().CONNECTION_SUCCESS_TITLE, GlobalConst.getValue().CONNECTION_SUCCESS_MESSAGE, { subType: ALERT_TYPE_CONNECTED.subType }, 1000)
+  }
 }
 
 export function showDisconnectedWarning() {
-  currentAlert = ALERT_TYPE_DISCONNECTED
-  dropDownInstance.alertWithType(ALERT_TYPE_DISCONNECTED.type, GlobalConst.getValue().CONNECTION_ERROR_TITLE, GlobalConst.getValue().CONNECTION_ERROR_MESSAGE, { subType: ALERT_TYPE_DISCONNECTED.subType });
+  if (!_.isEqual(currentAlert, ALERT_TYPE_DISCONNECTED)) {
+    currentAlert = ALERT_TYPE_DISCONNECTED
+    dropDownInstance.alertWithType(ALERT_TYPE_DISCONNECTED.type, GlobalConst.getValue().CONNECTION_ERROR_TITLE, GlobalConst.getValue().CONNECTION_ERROR_MESSAGE, { subType: ALERT_TYPE_DISCONNECTED.subType });
+  }
 }
 
 export function showAlert200(response, callback) {
-  currentAlert = ALERT_TYPE_200
-  if (callback) {
-    callback(response)
-  } else {
-    dropDownInstance.alertWithType(ALERT_TYPE_200.type, GlobalConst.getValue().CONNECTION_200_ALERT_TITLE, GlobalConst.getValue().CONNECTION_200_ALERT_MESSAGE, { subType:ALERT_TYPE_200.subType }, 1000);
+  if (!_.isEqual(currentAlert, ALERT_TYPE_200)) {
+    currentAlert = ALERT_TYPE_200
+    if (callback) {
+      callback(response)
+    } else {
+      dropDownInstance.alertWithType(ALERT_TYPE_200.type, GlobalConst.getValue().CONNECTION_200_ALERT_TITLE, GlobalConst.getValue().CONNECTION_200_ALERT_MESSAGE, { subType: ALERT_TYPE_200.subType }, 1000);
+    }
   }
 }
 
