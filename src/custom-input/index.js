@@ -431,6 +431,7 @@ class CustomInput extends Component {
     delete textInputStyle.paddingBottom
     delete textInputStyle.paddingLeft
     delete textInputStyle.paddingRight
+    delete textInputStyle.height
 
     return (
       <Container style={[{ backgroundColor: 'transparent', paddingLeft: 10, paddingRight: 10 }, borderStyle]}>
