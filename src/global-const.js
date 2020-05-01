@@ -55,6 +55,9 @@ const DEFAULT_GLOBAL_CONST = {
   HEADER_RIGHT_ACTION_TITLE_SIZE: 17,
   HEADER_RIGHT_ACTION_TITLE_COLOR: Colors.black,
   HEADER_ICON_TYPE: 'font-awesome5',
+  HEADER_SHOW_BORDER: false,
+  HEADER_BOTTOM_WIDTH: 1,
+  HEADER_BOTTOM_COLOR: 'rgba(0,0,0,0.07)',
 
   // CONNECTION HANDLER
   CONNECTION_SUCCESS_TITLE: 'Connected',
@@ -308,6 +311,15 @@ export function setGlobalHeaderBackIconImage(value) {
 }
 export function setGlobalHeaderBackIconImageStyle(value) {
   globalConst = Object.appendObject(globalConst, 'HEADER_LEFT_BACK_ICON_IMAGE_STYLE', value)
+}
+export function setGlobalHeaderShowBorder(value) {
+  globalConst = Object.appendObject(globalConst, 'HEADER_SHOW_BORDER', value)
+}
+export function setGlobalHeaderBottomWidth(value) {
+  globalConst = Object.appendObject(globalConst, 'HEADER_BOTTOM_WIDTH', value)
+}
+export function setGlobalHeaderBottomColor(value) {
+  globalConst = Object.appendObject(globalConst, 'HEADER_BOTTOM_COLOR', value)
 }
 
 // CONNECTION HANDLER

@@ -93,6 +93,9 @@ interface ICustomHeaderProps {
   renderRight: () => void;
   onPressRight: () => void;
   iconType: IconType;
+  showBorder: boolean;
+  borderBottomWidth: number;
+  borderBottomColor: string;
 }
 
 interface IConnectionHandler {
@@ -478,6 +481,9 @@ interface IGlobalConstValue {
   HEADER_RIGHT_ACTION_TITLE_SIZE: number;
   HEADER_RIGHT_ACTION_TITLE_COLOR: string;
   HEADER_ICON_TYPE: string;
+  HEADER_SHOW_BORDER: boolean;
+  HEADER_BOTTOM_WIDTH: number;
+  HEADER_BOTTOM_COLOR: string;
 
   // CONNECTION HANDLER
   CONNECTION_SUCCESS_TITLE: string;
@@ -642,6 +648,9 @@ interface IGlobalConst {
   setGlobalIconType: (value: IconType) => void;
   setGlobalHeaderBackIconImage: (value: any) => void;
   setGlobalHeaderBackIconImageStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalHeaderShowBorder: (value: boolean) => void;
+  setGlobalHeaderBottomWidth: (value: number) => void;
+  setGlobalHeaderBottomColor: (value: string) => void;
   // CONNECTION HANDLER
   setGlobalConnectionHandlerSuccessTitle: (value: string) => void;
   setGlobalConnectionHandlerSuccessMessage: (value: string) => void;

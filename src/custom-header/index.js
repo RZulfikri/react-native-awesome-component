@@ -52,11 +52,15 @@ const CustomHeader = (props) => {
     renderRight,
     onPressRight,
     iconType,
+    showBorder,
+    borderBottomWidth,
+    borderBottomColor,
   } = props
 
   const headerPaddingTop = Platform.OS === 'ios' ? getStatusBarHeight() : 0
   let headerTitle = ''
   let isFirstRoute = true
+  const showBottomBorder = showBorder ? showBorder : GlobalConst.getValue().HEADER_SHOW_BORDER;
 
   if (navigation) {
     isFirstRoute = navigation.isFirstRouteInParent()
@@ -114,6 +118,14 @@ const CustomHeader = (props) => {
 
   if (onPressRight) {
     rightActionPress = onPressRight
+  }
+
+  if (showBottomBorder) {
+    containerStyle = {
+      ...containerStyle,
+      borderBottomWidth: borderBottomWidth ? borderBottomWidth : GlobalConst.getValue().HEADER_BOTTOM_WIDTH,
+      borderBottomColor: borderBottomColor ? borderBottomColor : GlobalConst.getValue().HEADER_BOTTOM_COLOR,
+    }
   }
 
   return (
