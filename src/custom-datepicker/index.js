@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
   }
 })
 
+let dateSelected = undefined
+
 const CustomDatePicker = props => {
   const {
     label,
@@ -73,11 +75,13 @@ const CustomDatePicker = props => {
     errorMessage = GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED(label)
   }
 
-  let dateSelected = minimumDate
+  dateSelected = moment.tz(minimumDate, 'UTC').format(dateFormat)
 
   const changeDate = date => {
+    dateSelected = moment.tz(date, 'UTC').format(dateFormat)
+
     if (onDateChange) {
-      onDateChange(moment.tz(date, 'UTC').format(dateFormat));
+      onDateChange(dateSelected);
     }
 
     if (onChangeValidation) {
@@ -87,9 +91,9 @@ const CustomDatePicker = props => {
     setIsTouch(true)
   };
 
-  const onPressDone = date => {
+  const onPressDone = () => {
     if (onDone) {
-      onDone(moment.tz(date, 'UTC').format(dateFormat));
+      onDone(dateSelected);
       setModalVisible(false)
     }
 
@@ -100,7 +104,7 @@ const CustomDatePicker = props => {
     setIsTouch(true)
   };
 
-  const onPressCancel = date => {
+  const onPressCancel = () => {
     setModalVisible(false)
   };
 
@@ -164,11 +168,11 @@ const CustomDatePicker = props => {
         }}>
         <View style={[styles.actionContainer]}>
           <TouchableOpacity
-            onPress={() => onPressCancel(dateSelected)}>
+            onPress={onPressCancel}>
             <Text style={[styles.textCancel]}>Cancel</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => onPressDone(dateSelected)}>
+            onPress={onPressDone}>
             <Text style={[styles.textConfirmation]}>Done</Text>
           </TouchableOpacity>
         </View>
