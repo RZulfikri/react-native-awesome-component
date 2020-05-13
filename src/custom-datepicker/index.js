@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-closing-bracket-location */
-import React, { useState } from 'react';
+import React, { useState, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { TouchableOpacity, ViewPropTypes, StyleSheet, View, TextInputProps, Text } from 'react-native';
 import Modal from 'react-native-modal';
@@ -31,179 +31,186 @@ const styles = StyleSheet.create({
   }
 })
 
-let dateSelected = undefined
+class CustomDatePicker extends PureComponent {
+  dateSelected = undefined
 
-const CustomDatePicker = props => {
-  const {
-    label,
-    placeholder,
-    isRequired,
-    value,
-    error,
-    onDateChange,
-    onDone,
-    dateFormat,
-    locale,
-    mode,
-    // textStyle,
-    initialDate,
-    minimumDate,
-    maximumDate,
-    style,
-    labelType,
-    rightIcon,
-    disabled,
-    onChangeValidation,
-    renderRightAction,
-    renderLeftAction,
-  } = props;
+  constructor(props) {
+    super(props)
+    this.state = {
+      modalVisible: false,
+      isTouch: false,
+    }
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
+    this.changeDate = this.changeDate.bind(this)
+    this.onPressDone = this.onPressDone.bind(this)
+    this.onPressCancel = this.onPressCancel.bind(this)
 
-  const iconType = GlobalConst.getValue().CUSTOM_DATE_PICKER_ICON_TYPE
-  const rightIconName = rightIcon ? rightIcon : GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_ICON_NAME
-  const rightIconSize = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_ICON_SIZE
-  const rightIconColor = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_ICON_COLOR
-  const rightIconStyle = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_ICON_STYLE
-  let rightIconRender = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_RENDER
-  let leftIconRender = undefined
-
-  let errorMessage = error ? error : ''
-
-  if (isRequired && isTouch && ((value === undefined) || value === null || (value && value.length === 0))) {
-    errorMessage = GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED(label)
+    if (props.minimumDate) {
+      this.dateSelected = moment.tz(props.minimumDate, 'UTC').format(props.dateFormat)
+    } else {
+      this.dateSelected = moment.tz(new Date(), 'UTC').format(props.dateFormat)
+    }
   }
 
-  dateSelected = moment.tz(minimumDate, 'UTC').format(dateFormat)
+  changeDate(date) {
+    const {
+      onDateChange,
+      dateFormat,
+      onChangeValidation,
+    } = this.props;
 
-  const changeDate = date => {
-    dateSelected = moment.tz(date, 'UTC').format(dateFormat)
+    this.setState({isTouch: true}, () => {
+      this.dateSelected = moment.tz(date, 'UTC').format(dateFormat)
+      if (onDateChange) {
+        onDateChange(this,dateSelected);
+      }
+    })
+  };
 
-    if (onDateChange) {
-      onDateChange(dateSelected);
+  onPressDone(){
+    const {
+      onDone,
+    } = this.props;
+    this.setState({isTouch: true, modalVisible: false}, () => {
+      if (onDone) {
+        onDone(this.dateSelected);
+      }
+    })
+  };
+
+  onPressCancel() {
+    this.setState({isTouch: true, modalVisible: false})
+  };
+
+  render() {
+    const {
+      label,
+      placeholder,
+      isRequired,
+      value,
+      error,
+      dateFormat,
+      locale,
+      mode,
+      // textStyle,
+      initialDate,
+      minimumDate,
+      maximumDate,
+      style,
+      labelType,
+      rightIcon,
+      disabled,
+      onChangeValidation,
+      renderRightAction,
+      renderLeftAction,
+    } = this.props;
+    const {modalVisible, isTouch} = this.state
+  
+    let rightIconRender = GlobalConst.getValue().CUSTOM_DATE_PICKER_RIGHT_RENDER
+    let leftIconRender = undefined
+  
+    let errorMessage = error ? error : ''
+  
+    if (isRequired && isTouch && ((value === undefined) || value === null || (value && value.length === 0))) {
+      errorMessage = GlobalConst.getValue().CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED(label)
     }
 
     if (onChangeValidation) {
       onChangeValidation(errorMessage.length > 0 ? true : false)
     }
 
-    setIsTouch(true)
-  };
-
-  const onPressDone = () => {
-    if (onDone) {
-      onDone(dateSelected);
-      setModalVisible(false)
+  
+    if (renderRightAction && typeof renderRightAction === 'function') {
+      rightIconRender = renderRightAction
     }
-
-    if (onChangeValidation) {
-      onChangeValidation(errorMessage.length > 0 ? true : false)
+  
+    if (renderLeftAction && typeof renderLeftAction === 'function') {
+      leftIconRender = renderLeftAction
     }
-
-    setIsTouch(true)
-  };
-
-  const onPressCancel = () => {
-    setModalVisible(false)
-  };
-
-  const Icon = getIconByType(iconType)
-
-  if (renderRightAction && typeof renderRightAction === 'function') {
-    rightIconRender = renderRightAction
-  }
-
-  if (renderLeftAction && typeof renderLeftAction === 'function') {
-    leftIconRender = renderLeftAction
-  }
-
-  return (
-    <View>
-      <CustomInput
-        {...props}
-        placeholder={placeholder}
-        label={label}
-        labelType={labelType}
-        underlineWidth={1}
-        editable={!disabled}
-        onPress={() => setModalVisible(true)}
-        isRequired={isRequired}
-        defaultValue={value}
-        textInputStyle={style}
-        renderRightAction={() => {
-          if (typeof rightIconRender === 'function') {
-            return rightIconRender()
-          }
-          // else {
-          //   return <Icon name={rightIconName} size={rightIconSize} color={rightIconColor} style={rightIconStyle} />
-          // }
-        }}
-        renderLeftAction={() => {
-          if (typeof leftIconRender === 'function') {
-            return leftIconRender()
-          }
-        }}
-        forceErrorMessage={errorMessage}
-      />
-      <Modal
-        isVisible={modalVisible}
-        onBackButtonPress={() => {
-          setModalVisible(false)
-          setIsTouch(true)
-          onChangeValidation(errorMessage.length > 0 ? true : false)
-        }}
-        onBackdropPress={() => {
-          setModalVisible(false)
-          setIsTouch(true)
-          onChangeValidation(errorMessage.length > 0 ? true : false)
-        }}
-        style={{
-          justifyContent: 'flex-end',
-          alignContent: 'center',
-          alignItems: 'center',
-          margin: 0,
-          width: '100%',
-          padding: 0,
-        }}>
-        <View style={[styles.actionContainer]}>
-          <TouchableOpacity
-            onPress={onPressCancel}>
-            <Text style={[styles.textCancel]}>Cancel</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={onPressDone}>
-            <Text style={[styles.textConfirmation]}>Done</Text>
-          </TouchableOpacity>
-        </View>
-        <DatePicker
-          style={{
-            backgroundColor: '#fff',
-            justifyContent: 'center',
-            alignSelf: 'center',
-            width: metrics.screenWidth,
+  
+    console.tron.error({value})
+    return (
+      <View>
+        <CustomInput
+          {...this.props}
+          placeholder={placeholder}
+          label={label}
+          labelType={labelType}
+          underlineWidth={1}
+          editable={!disabled}
+          onPress={() => this.setState({modalVisible: true})}
+          isRequired={isRequired}
+          defaultValue={value}
+          textInputStyle={style}
+          renderRightAction={() => {
+            if (typeof rightIconRender === 'function') {
+              return rightIconRender()
+            }
           }}
-          initialDate={moment.tz(initialDate, 'UTC').toDate()}
-          onDateChange={changeDate}
-          maximumDate={
-            maximumDate ? moment.tz(maximumDate, 'UTC').toDate() : undefined
-          }
-          date={
-            value
-              ? moment.tz(value, dateFormat, 'UTC').toDate()
-              : moment.tz(undefined, 'UTC').toDate()
-          }
-          minimumDate={
-            minimumDate ? moment.tz(minimumDate, 'UTC').toDate() : undefined
-          }
-          mode={mode}
-          locale={locale}
-          timeZoneOffsetInMinutes={0}
+          renderLeftAction={() => {
+            if (typeof leftIconRender === 'function') {
+              return leftIconRender()
+            }
+          }}
+          forceErrorMessage={errorMessage}
         />
-      </Modal>
-    </View>
-  );
-};
+        <Modal
+          isVisible={modalVisible}
+          onBackButtonPress={() => {
+            this.setState({isTouch: true, modalVisible: false})
+            onChangeValidation(errorMessage.length > 0 ? true : false)
+          }}
+          onBackdropPress={() => {
+            this.setState({isTouch: true, modalVisible: false})
+            onChangeValidation(errorMessage.length > 0 ? true : false)
+          }}
+          style={{
+            justifyContent: 'flex-end',
+            alignContent: 'center',
+            alignItems: 'center',
+            margin: 0,
+            width: '100%',
+            padding: 0,
+          }}>
+          <View style={[styles.actionContainer]}>
+            <TouchableOpacity
+              onPress={this.onPressCancel}>
+              <Text style={[styles.textCancel]}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.onPressDone}>
+              <Text style={[styles.textConfirmation]}>Done</Text>
+            </TouchableOpacity>
+          </View>
+          <DatePicker
+            style={{
+              backgroundColor: '#fff',
+              justifyContent: 'center',
+              alignSelf: 'center',
+              width: metrics.screenWidth,
+            }}
+            initialDate={value ?  moment.tz(value, dateFormat, 'UTC').toDate() : moment.tz(initialDate, 'UTC').toDate()}
+            onDateChange={this.changeDate}
+            maximumDate={
+              maximumDate ? moment.tz(maximumDate, 'UTC').toDate() : undefined
+            }
+            date={
+              value
+                ? moment.tz(value, dateFormat, 'UTC').toDate()
+                : undefined
+            }
+            minimumDate={
+              minimumDate ? moment.tz(minimumDate, 'UTC').toDate() : undefined
+            }
+            mode={mode}
+            locale={locale}
+            timeZoneOffsetInMinutes={0}
+          />
+        </Modal>
+      </View>
+    );
+  }
+}
 
 CustomDatePicker.propTypes = {
   placeholder: PropTypes.string,
