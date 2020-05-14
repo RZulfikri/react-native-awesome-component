@@ -1,6 +1,6 @@
 {
   "name": "react-native-awesome-component",
-  "version": "0.1.67",
+  "version": "0.1.68",
   "description": "React Native Awesome Component",
   "main": "index.js",
   "typings": "./index.d.ts",

@@ -90,7 +90,7 @@ const CustomSelect = props => {
   const Icon = getIconByType(iconType)
 
   return (
-    <View>
+    <View style={{width: '100%'}}>
       <CustomInput
         placeholder={placeholder}
         label={label}
@@ -112,6 +112,7 @@ const CustomSelect = props => {
           // }
         }}
         forceErrorMessage={errorMessage}
+        hideError
       />
       {modalVisible ? <ModalList
         data={data}
