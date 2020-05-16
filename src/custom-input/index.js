@@ -52,6 +52,8 @@ class CustomInput extends Component {
     onChangeValidation: PropTypes.func,
     containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     textInputStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    showLength: PropTypes.bool,
+    lengthLabelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 
     // ERROR MESSAGE
     passwordRegex: PropTypes.any,
@@ -97,6 +99,8 @@ class CustomInput extends Component {
       callingCode: '62',
     },
     hideError: false,
+    showLength: false,
+    lengthLabelStyle: {}
   }
 
   constructor(props) {
@@ -341,10 +345,12 @@ class CustomInput extends Component {
     }
   }
 
-  renderLabel(labelType, labelStyle) {
-    const { label, isRequired, errorColor } = this.props
+  renderLabel(labelType, labelStyle, value) {
+    const { label, isRequired, errorColor, showLength, maxLength, lengthLabelStyle } = this.props
     const lErrorColor = errorColor ? errorColor : GlobalConst.getValue().CUSTOM_INPUT_ERROR_COLOR
-
+    let labelContainerStyle = { justifyContent: 'center' }
+    let countStyle = {}
+    let lengthLabel = ''
     let renderLabel = <Label style={[this.getLabelStyleByType(labelType), labelStyle]} key={'main-label'}>
       {label}
     </Label>
@@ -355,9 +361,31 @@ class CustomInput extends Component {
     </Label>
       renderLabel = Obj.appendChildToView(renderLabel, additionalRequired)
     }
+
+    if (showLength) {
+      labelContainerStyle = {
+        ...labelContainerStyle,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }
+      countStyle = {
+        ...countStyle,
+        ...lengthLabelStyle
+      }
+      if (value !== undefined) {
+        lengthLabel = value.length
+        if (maxLength) {
+          lengthLabel = `${value.length}/${maxLength}`
+        }
+      }
+    }
+
+
     return (
-      <View style={{ justifyContent: 'center' }}>
+      <View style={labelContainerStyle}>
         {renderLabel}
+        {showLength && (labelType === LABEL_TYPE.top) && <Text style={[this.getLabelStyleByType(labelType), countStyle]}>{lengthLabel}</Text>}
       </View>
     )
   }
@@ -601,9 +629,9 @@ class CustomInput extends Component {
         <Container style={[lContainerStyle]}>
           {onPress ? (
             <TouchableOpacity activeOpacity={0.8} onPress={onPress} disabled={!editable} style={[styledTextInputContainerStyle]}>
-              {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle)}
+              {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle, formikProps.values.value)}
               {labelType === LABEL_TYPE.left && label && this.renderLabel(labelType, labelStyle)}
-              <View style={{flex: 1}}>
+              <View style={(labelType === LABEL_TYPE.left || labelType === LABEL_TYPE.right) && {flex: 1}}>
                 <StyledTextInputContainer>
                   {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
                   <StyledTextInput
@@ -635,13 +663,13 @@ class CustomInput extends Component {
                   {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
                 </StyledTextInputContainer>
               </View>
-              {labelType === LABEL_TYPE.right && label && this.renderLabel(labelStyle)}
+              {labelType === LABEL_TYPE.right && label && this.renderLabel(labelType, labelStyle)}
             </TouchableOpacity>
           ) : (
               <View style={[styledTextInputContainerStyle]}>
-                {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle)}
+                {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle, formikProps.values.value)}
                 {labelType === LABEL_TYPE.left && label && this.renderLabel(labelType, labelStyle)}
-                <StyledTextInputContainer style={{flex: 1}}>
+                <StyledTextInputContainer style={(labelType === LABEL_TYPE.left || labelType === LABEL_TYPE.right) && {flex: 1}}>
                   {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
                   {inputType === INPUT_TYPE.phoneCountry && this.renderModalSelectCountry(formikProps)}
                   <StyledTextInput
@@ -670,7 +698,7 @@ class CustomInput extends Component {
                   />
                   {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
                 </StyledTextInputContainer>
-                {labelType === LABEL_TYPE.right && label && this.renderLabel(labelStyle)}
+                {labelType === LABEL_TYPE.right && label && this.renderLabel(labelType, labelStyle)}
               </View>
             )
           }

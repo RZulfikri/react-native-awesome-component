@@ -276,6 +276,8 @@ interface ICustomInput extends TextInputProps {
   onPress?: () => void;
   onChangeValidation: (status: boolean) => void;
   containerStyle: StyleProp<ViewStyle>;
+  showLength: boolean;
+  lengthLabelStyle: StyleProp<TextStyle>;
 
   // ERROR MESSAGE
   passwordRegex: any;
