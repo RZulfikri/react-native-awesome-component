@@ -10,17 +10,29 @@ export function compareValues(
   isTimeToken = false,
 ) {
   return (a, b) => {
+    let varA;
+    let varB;
     if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-      // property doesn't exist on either object
-      return 0;
-    }
+      const splitKey = key.split('.');
+      if (splitKey.length > 1) {
+        varA = a;
+        varB = b;
 
-    let varA = typeof a[key] === 'string' ? a[key].toUpperCase() : a[key];
-    let varB = typeof b[key] === 'string' ? b[key].toUpperCase() : b[key];
+        for (let i = 0; i < splitKey.length; i += 1) {
+          varA = varA[splitKey[i]];
+          varB = varB[splitKey[i]];
+        }
+      } else {
+        return 0;
+      }
+    } else {
+      varA = typeof a[key] === 'string' ? a[key].toUpperCase() : a[key];
+      varB = typeof b[key] === 'string' ? b[key].toUpperCase() : b[key];
 
-    if (isDate) {
-      varA = new Date(isTimeToken ? (varA / 1e4) : varA)
-      varB = new Date(isTimeToken ? (varB / 1e4) : varB)
+      if (isDate) {
+        varA = new Date(isTimeToken ? varA / 1e4 : varA);
+        varB = new Date(isTimeToken ? varB / 1e4 : varB);
+      }
     }
 
     let comparison = 0;
