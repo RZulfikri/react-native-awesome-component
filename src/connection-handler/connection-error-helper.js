@@ -5,6 +5,7 @@ let dropDownInstance
 let isConnected = true
 
 let currentAlert = undefined
+let currentResponse = undefined
 
 const ALERT_TYPE_CONNECTED = {
   type: 'success',
@@ -58,6 +59,7 @@ export function showDisconnectedWarning() {
 }
 
 export function showAlert200(response, callback) {
+  checkResponse(response)
   if (!_.isEqual(currentAlert, ALERT_TYPE_200)) {
     currentAlert = ALERT_TYPE_200
     if (callback) {
@@ -69,6 +71,7 @@ export function showAlert200(response, callback) {
 }
 
 export function showAlert400(response, callback) {
+  checkResponse(response)
   if (!_.isEqual(currentAlert, ALERT_TYPE_DISCONNECTED) && !_.isEqual(currentAlert, ALERT_TYPE_400)) {
     currentAlert = ALERT_TYPE_400
     if (callback) {
@@ -80,6 +83,7 @@ export function showAlert400(response, callback) {
 }
 
 export function showAlert500(response, callback) {
+  checkResponse(response)
   if (!_.isEqual(currentAlert, ALERT_TYPE_DISCONNECTED) && !_.isEqual(currentAlert, ALERT_TYPE_500)) {
     currentAlert = ALERT_TYPE_500
     if (callback) {
@@ -92,4 +96,15 @@ export function showAlert500(response, callback) {
 
 export function handleOnCloseAlert(alertData) {
   currentAlert = undefined
+}
+
+function checkResponse(response) {
+  if (currentResponse) {
+    if (JSON.stringify(currentResponse.data) !== JSON.stringify(response.data)) {
+      currentAlert = undefined
+      currentResponse = response
+    }
+  } else {
+    currentResponse = response
+  }
 }
