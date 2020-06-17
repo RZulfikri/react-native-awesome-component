@@ -179,6 +179,7 @@ const DEFAULT_GLOBAL_CONST = {
   CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER: 'Code',
   CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL: 'Select Country',
   CUSTOM_INPUT_PHONE_TOP_COUNTRY: [],
+  CUSTOM_INPUT_PHONE_SELECT_BEHAVIOR: 'on-done',
 
   // CUSTOM DATEPICKER
   CUSTOM_DATE_PICKER_ICON_TYPE: 'material-community',
@@ -649,6 +650,9 @@ export function setGlobalCustomInputPhoneCountrySelectLabel(value) {
 }
 export function setGlobalCustomInputPhoneTopCountry(value) {
   globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_PHONE_TOP_COUNTRY', value)
+}
+export function setGlobalCustomInputPhoneSelectBehavior(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_PHONE_SELECT_BEHAVIOR', value)
 }
 
 // CUSTOM DATEPICKER

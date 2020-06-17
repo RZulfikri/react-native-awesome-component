@@ -84,6 +84,7 @@ class CustomInput extends Component {
     countryPlaceholder: PropTypes.string,
     countrySelectionLabel: PropTypes.string,
     countryValueLabel: PropTypes.string,
+    selectBehavior: PropTypes.oneOf(['on-done', 'on-select'])
   }
 
   static defaultProps = {
@@ -396,7 +397,7 @@ class CustomInput extends Component {
 
   renderModalSelectCountry(formikProps) {
     const { showCountryList } = this.state
-    const { style, valueCountry, onSelectCountry, countryPlaceholder, countrySelectionLabel, countryValueLabel, renderCountry, renderCountryHeader, containerStyle } = this.props
+    const { style, valueCountry, onSelectCountry, countryPlaceholder, countrySelectionLabel, countryValueLabel, renderCountry, renderCountryHeader, containerStyle, selectBehavior } = this.props
     const countriesCode = getSimpleCountryList(true, true)
     const renderItem = renderCountry ? renderCountry : GlobalConst.getValue().CUSTOM_SELECT_ITEM_RENDER
     const renderHeader = renderCountryHeader ? renderCountryHeader : GlobalConst.getValue().CUSTOM_SELECT_HEADER_RENDER
@@ -481,6 +482,7 @@ class CustomInput extends Component {
             onSelectCountry(selectValue);
           }}
           value={valueCountry}
+          selectBehavior={selectBehavior}
         />
       </Container>
     )

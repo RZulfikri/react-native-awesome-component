@@ -103,7 +103,16 @@ class CountryListModal extends PureComponent {
   }
 
   onSelectItem(item) {
-    this.setState({ selectedValue: item })
+    const {selectBehavior, onSubmit} = this.props
+    let behavior = GlobalConst.getValue().CUSTOM_INPUT_PHONE_SELECT_BEHAVIOR
+    if (selectBehavior) {
+      behavior = selectBehavior
+    }
+    this.setState({ selectedValue: item }, () => {
+      if (behavior === 'on-select') {
+        onSubmit(item)
+      }
+    })
   }
 
   _renderSectionTitle(item) {
@@ -177,7 +186,7 @@ class CountryListModal extends PureComponent {
   }
 
   render() {
-    const { modalVisible, data } = this.props
+    const { modalVisible, selectBehavior } = this.props
 
     const iconType = GlobalConst.getValue().CUSTOM_SELECT_ICON_TYPE
     const backgroundColor = GlobalConst.getValue().CUSTOM_SELECT_HEADER_BACKGROUND_COLOR
@@ -191,6 +200,11 @@ class CountryListModal extends PureComponent {
       color: '#2D72CB',
       fontSize: 15,
       fontWeight: '600',
+    }
+
+    let behavior = GlobalConst.getValue().CUSTOM_INPUT_PHONE_SELECT_BEHAVIOR
+    if (selectBehavior) {
+      behavior = selectBehavior
     }
 
     return (
@@ -212,11 +226,15 @@ class CountryListModal extends PureComponent {
               )
             }}
             renderRight={() => {
-              return (
-                <TouchableOpacity activeOpacity={0.8} onPress={this.onPressDone}>
-                  <Text style={rightActionStyle}>Done</Text>
-                </TouchableOpacity>
-              )
+              if (behavior === 'on-done') {
+                return (
+                  <TouchableOpacity activeOpacity={0.8} onPress={this.onPressDone}>
+                    <Text style={rightActionStyle}>Done</Text>
+                  </TouchableOpacity>
+                )
+              }
+              
+              return null
             }}
           />
           {this._renderSearchBar()}
@@ -241,6 +259,7 @@ CountryListModal.propTypes = {
   onSubmit: PropTypes.func,
   data: PropTypes.array,
   value: PropTypes.object,
+  selectBehavior: PropTypes.oneOf(['on-done', 'on-select'])
 }
 
 CountryListModal.defaultProps = {

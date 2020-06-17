@@ -13,6 +13,7 @@ type DatepickerType = 'time' | 'date' | 'datetime'
 
 type CustomInputLabelType = 'top-label' | 'default' | 'left-label' | 'right-label'
 type CustomInputType = 'email' | 'password' | 'phone' | 'number' | 'text' | 'text-area' | 'phone-country'
+type CustomPhoneInputSelectBevavior = 'on-select' | 'on-done'
 
 interface ISimpleCountryResponse {
   id: number;
@@ -303,6 +304,7 @@ interface ICustomInput extends TextInputProps {
   countryValueLabel: string;
   renderCountry: () => any;
   renderCountryHeader: () => any;
+  selectBehavior: CustomPhoneInputSelectBevavior;
 }
 
 interface ICustomView {
@@ -604,6 +606,7 @@ interface IGlobalConstValue {
   CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER: string;
   CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL: string;
   CUSTOM_INPUT_PHONE_TOP_COUNTRY: [any]
+  CUSTOM_INPUT_PHONE_SELECT_BEHAVIOR: CustomPhoneInputSelectBevavior;
 
   // CUSTOM DATEPICKER
   CUSTOM_DATE_PICKER_ICON_TYPE: string;
@@ -765,6 +768,7 @@ interface IGlobalConst {
   setGlobalCustomInputPhoneCountryPlaceholder: (value: string) => void;
   setGlobalCustomInputPhoneCountrySelectLabel: (value: string) => void;
   setGlobalCustomInputPhoneTopCountry: (value: [any]) => void;
+  setGlobalCustomInputPhoneSelectBehavior: (value: CustomPhoneInputSelectBevavior) => void;
   // CUSTOM DATE PICKER
   setGlobalCustomDatePickerIconType: (value: string) => void;
   setGlobalCustomDatePickerRightIconName: (value: string) => void;
