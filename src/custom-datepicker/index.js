@@ -128,7 +128,6 @@ class CustomDatePicker extends PureComponent {
       leftIconRender = renderLeftAction
     }
   
-    console.tron.error({value})
     return (
       <View>
         <CustomInput
