@@ -178,6 +178,7 @@ const DEFAULT_GLOBAL_CONST = {
   CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM_NUMBER: (label, max) => label ? `${label} must be less then ${max}` : `This field must be lestt then ${max}`,
   CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER: 'Code',
   CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL: 'Select Country',
+  CUSTOM_INPUT_PHONE_TOP_COUNTRY: [],
 
   // CUSTOM DATEPICKER
   CUSTOM_DATE_PICKER_ICON_TYPE: 'material-community',
@@ -645,6 +646,9 @@ export function setGlobalCustomInputPhoneCountryPlaceholder(value) {
 }
 export function setGlobalCustomInputPhoneCountrySelectLabel(value) {
   globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL', value)
+}
+export function setGlobalCustomInputPhoneTopCountry(value) {
+  globalConst = Object.appendObject(globalConst, 'CUSTOM_INPUT_PHONE_TOP_COUNTRY', value)
 }
 
 // CUSTOM DATEPICKER

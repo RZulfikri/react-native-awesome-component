@@ -603,6 +603,7 @@ interface IGlobalConstValue {
   CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM_NUMBER: (label: string, min: number) => string | string;
   CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER: string;
   CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL: string;
+  CUSTOM_INPUT_PHONE_TOP_COUNTRY: [any]
 
   // CUSTOM DATEPICKER
   CUSTOM_DATE_PICKER_ICON_TYPE: string;
@@ -763,6 +764,7 @@ interface IGlobalConst {
   setGlobalCustomInputErrorMessageMaximumNumber: (value: any) => void;
   setGlobalCustomInputPhoneCountryPlaceholder: (value: string) => void;
   setGlobalCustomInputPhoneCountrySelectLabel: (value: string) => void;
+  setGlobalCustomInputPhoneTopCountry: (value: [any]) => void;
   // CUSTOM DATE PICKER
   setGlobalCustomDatePickerIconType: (value: string) => void;
   setGlobalCustomDatePickerRightIconName: (value: string) => void;

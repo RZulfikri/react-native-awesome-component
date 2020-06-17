@@ -151,8 +151,15 @@ class CountryListModal extends PureComponent {
 
   _getFilterData() {
     const { data } = this.props
+    const topCountry = GlobalConst.getValue().CUSTOM_INPUT_PHONE_TOP_COUNTRY
     const { search } = this.state
     let newData = []
+    if (topCountry.length > 0 && search.length === 0) {
+      newData.push({
+        title: '#',
+        data: topCountry
+      })
+    }
     if (search.length > 0) {
       for (let i = 0; i < data.length; i++) {
         const arrFilterData = data[i].data.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
@@ -164,7 +171,7 @@ class CountryListModal extends PureComponent {
         }
       }
     } else {
-      newData = [...data]
+      newData.push(...data)
     }
     return newData
   }
@@ -192,7 +199,8 @@ class CountryListModal extends PureComponent {
         style={styles.modalContainer}>
         <View style={styles.contentContainer}>
           <CustomHeader
-            isCard={true}
+            isCard={false}
+            showBorder={true}
             backgroundColor={backgroundColor}
             title={'Select Country'}
             titleStyle={[titleStyle]}
