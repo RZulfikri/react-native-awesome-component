@@ -9,167 +9,173 @@ import { LeftContainer, LeftTouchableContainer, TitleContainer, ActionTitle, Tit
 import { getStatusBarHeight } from 'react-native-iphone-x-helper'
 import { getIconByType } from '../method/helper'
 
-function getSideContent(iconName, iconType, actionTitle, type) {
+class CustomHeader extends PureComponent {
+  constructor(props) {
+    super(props)
+  }
 
-  if ((type === 'left') && (iconName === GlobalConst.getValue().HEADER_LEFT_ICON_NAME) && (iconType === GlobalConst.getValue().HEADER_ICON_TYPE) && (GlobalConst.getValue().HEADER_LEFT_BACK_ICON_IMAGE !== undefined)) {
-    const globalBackIconImage = GlobalConst.getValue().HEADER_LEFT_BACK_ICON_IMAGE
-    const globalBackIconImageStyle = GlobalConst.getValue().HEADER_LEFT_BACK_ICON_IMAGE_STYLE
-    return <Image source={globalBackIconImage} style={[globalBackIconImageStyle]} />
-  } else {
-    if (actionTitle) {
-      let actionTitleStyle = {
-        fontSize: type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ACTION_TITLE_SIZE : GlobalConst.getValue().HEADER_RIGHT_ACTION_TITLE_SIZE,
-        color: type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ACTION_TITLE_COLOR : GlobalConst.getValue().HEADER_RIGHT_ACTION_TITLE_COLOR
+  getSideContent(iconName, iconType, actionTitle, type) {
+    if ((type === 'left') && (iconName === GlobalConst.getValue().HEADER_LEFT_ICON_NAME) && (iconType === GlobalConst.getValue().HEADER_ICON_TYPE) && (GlobalConst.getValue().HEADER_LEFT_BACK_ICON_IMAGE !== undefined)) {
+      const { backImage, backImageStyle } = this.props
+      const globalBackIconImage = backImage ? backImage : GlobalConst.getValue().HEADER_LEFT_BACK_ICON_IMAGE
+      const globalBackIconImageStyle = GlobalConst.getValue().HEADER_LEFT_BACK_ICON_IMAGE_STYLE
+      return <Image source={globalBackIconImage} style={[globalBackIconImageStyle, backImageStyle]} />
+    } else {
+      if (actionTitle) {
+        let actionTitleStyle = {
+          fontSize: type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ACTION_TITLE_SIZE : GlobalConst.getValue().HEADER_RIGHT_ACTION_TITLE_SIZE,
+          color: type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ACTION_TITLE_COLOR : GlobalConst.getValue().HEADER_RIGHT_ACTION_TITLE_COLOR
+        }
+        return <ActionTitle style={[actionTitleStyle]}>{actionTitle}</ActionTitle>
       }
-      return <ActionTitle style={[actionTitleStyle]}>{actionTitle}</ActionTitle>
-    }
 
-    if (iconName) {
-      const Icon = getIconByType(iconType)
-      let iconSize = type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ICON_SIZE : GlobalConst.getValue().HEADER_RIGHT_ICON_SIZE
-      let iconColor = type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ICON_COLOR : GlobalConst.getValue().HEADER_RIGHT_ICON_COLOR
-      return <Icon name={iconName} size={iconSize} color={iconColor} />
-    }
-  }
-}
-
-const CustomHeader = (props) => {
-  let {
-    navigation,
-    height,
-    backgroundColor,
-    isCard,
-    iphoneXPadding,
-    title,
-    renderTitle,
-    titleStyle,
-    iconLeft,
-    titleLeft,
-    renderLeft,
-    onPressLeft,
-    iconRight,
-    titleRight,
-    renderRight,
-    onPressRight,
-    iconType,
-    showBorder,
-    borderBottomWidth,
-    borderBottomColor,
-  } = props
-
-  const headerPaddingTop = Platform.OS === 'ios' ? getStatusBarHeight() : 0
-  let headerTitle = ''
-  let isFirstRoute = true
-  const showBottomBorder = showBorder ? showBorder : GlobalConst.getValue().HEADER_SHOW_BORDER;
-
-  if (navigation) {
-    isFirstRoute = navigation.isFirstRouteInParent()
-    headerTitle = navigation.state.routeName
-  }
-
-  if (title) {
-    headerTitle = title
-  }
-
-  let containerStyle = {
-    height: GlobalConst.getValue().HEADER_HEIGHT + headerPaddingTop,
-    backgroundColor: GlobalConst.getValue().HEADER_BACKGROUND,
-    flexDirection: 'row',
-  }
-
-  let leftContainerStyle = {
-    top: headerPaddingTop,
-    height: GlobalConst.getValue().HEADER_HEIGHT,
-    paddingHorizontal: GlobalConst.getValue().PADDING,
-  }
-
-  let rightContainerStyle = {
-    top: headerPaddingTop,
-    height: GlobalConst.getValue().HEADER_HEIGHT,
-    paddingHorizontal: GlobalConst.getValue().PADDING,
-  }
-
-  const headerTitleStyle = {
-    ...GlobalConst.getValue().HEADER_TITLE_STYLE,
-    fontSize: GlobalConst.getValue().HEADER_TITLE_SIZE,
-    color: GlobalConst.getValue().HEADER_TITLE_COLOR,
-  }
-
-  if (iconLeft === undefined && !isFirstRoute) {
-    iconLeft = GlobalConst.getValue().HEADER_LEFT_ICON_NAME
-    iconType = GlobalConst.getValue().HEADER_ICON_TYPE
-  }
-
-  containerStyle = Obj.appendObject(containerStyle, 'height', height + headerPaddingTop)
-  containerStyle = Obj.appendObject(containerStyle, 'backgroundColor', backgroundColor)
-
-  leftContainerStyle = Obj.appendObject(leftContainerStyle, 'height', height)
-  rightContainerStyle = Obj.appendObject(rightContainerStyle, 'height', height)
-
-  const enableLeftAction = iconLeft || titleLeft
-  const enableRightAction = iconRight || titleRight
-
-  let leftActionPress = navigation ? () => navigation.goBack() : () => null
-  let rightActionPress = () => null
-
-  if (onPressLeft) {
-    leftActionPress = onPressLeft
-  }
-
-  if (onPressRight) {
-    rightActionPress = onPressRight
-  }
-
-  if (showBottomBorder) {
-    containerStyle = {
-      ...containerStyle,
-      borderBottomWidth: borderBottomWidth ? borderBottomWidth : GlobalConst.getValue().HEADER_BOTTOM_WIDTH,
-      borderBottomColor: borderBottomColor ? borderBottomColor : GlobalConst.getValue().HEADER_BOTTOM_COLOR,
+      if (iconName) {
+        const Icon = getIconByType(iconType)
+        let iconSize = type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ICON_SIZE : GlobalConst.getValue().HEADER_RIGHT_ICON_SIZE
+        let iconColor = type === 'left' ? GlobalConst.getValue().HEADER_LEFT_ICON_COLOR : GlobalConst.getValue().HEADER_RIGHT_ICON_COLOR
+        return <Icon name={iconName} size={iconSize} color={iconColor} />
+      }
     }
   }
 
-  return (
-    <Container
-      style={[containerStyle, { paddingTop: headerPaddingTop, zIndex: 99 }]}
-      isCard={isCard}
-    >
-      {renderLeft ? (
-        <LeftContainer style={[leftContainerStyle]}>
-          {renderLeft()}
-        </LeftContainer>
-      ) : (
-        <LeftTouchableContainer
-          style={[leftContainerStyle]}
-          activeOpacity={0.8}
-          disabled={!enableLeftAction}
-          onPress={leftActionPress}
-        >
-          {getSideContent(iconLeft, iconType, titleLeft, "left")}
-        </LeftTouchableContainer>
-      )}
-      <TitleContainer>
-        {renderTitle ? (
-          renderTitle()
+  render() {
+    let {
+      navigation,
+      height,
+      backgroundColor,
+      isCard,
+      iphoneXPadding,
+      title,
+      renderTitle,
+      titleStyle,
+      iconLeft,
+      titleLeft,
+      renderLeft,
+      onPressLeft,
+      iconRight,
+      titleRight,
+      renderRight,
+      onPressRight,
+      iconType,
+      showBorder,
+      borderBottomWidth,
+      borderBottomColor,
+    } = this.props
+
+    const headerPaddingTop = Platform.OS === 'ios' ? getStatusBarHeight() : 0
+    let headerTitle = ''
+    let isFirstRoute = true
+    const showBottomBorder = showBorder ? showBorder : GlobalConst.getValue().HEADER_SHOW_BORDER;
+
+    if (navigation) {
+      isFirstRoute = navigation.isFirstRouteInParent()
+      headerTitle = navigation.state.routeName
+    }
+
+    if (title) {
+      headerTitle = title
+    }
+
+    let containerStyle = {
+      height: GlobalConst.getValue().HEADER_HEIGHT + headerPaddingTop,
+      backgroundColor: GlobalConst.getValue().HEADER_BACKGROUND,
+      flexDirection: 'row',
+    }
+
+    let leftContainerStyle = {
+      top: headerPaddingTop,
+      height: GlobalConst.getValue().HEADER_HEIGHT,
+      paddingHorizontal: GlobalConst.getValue().PADDING,
+    }
+
+    let rightContainerStyle = {
+      top: headerPaddingTop,
+      height: GlobalConst.getValue().HEADER_HEIGHT,
+      paddingHorizontal: GlobalConst.getValue().PADDING,
+    }
+
+    const headerTitleStyle = {
+      ...GlobalConst.getValue().HEADER_TITLE_STYLE,
+      fontSize: GlobalConst.getValue().HEADER_TITLE_SIZE,
+      color: GlobalConst.getValue().HEADER_TITLE_COLOR,
+    }
+
+    if (iconLeft === undefined && !isFirstRoute) {
+      iconLeft = GlobalConst.getValue().HEADER_LEFT_ICON_NAME
+      iconType = GlobalConst.getValue().HEADER_ICON_TYPE
+    }
+
+    containerStyle = Obj.appendObject(containerStyle, 'height', height + headerPaddingTop)
+    containerStyle = Obj.appendObject(containerStyle, 'backgroundColor', backgroundColor)
+
+    leftContainerStyle = Obj.appendObject(leftContainerStyle, 'height', height)
+    rightContainerStyle = Obj.appendObject(rightContainerStyle, 'height', height)
+
+    const enableLeftAction = iconLeft || titleLeft
+    const enableRightAction = iconRight || titleRight
+
+    let leftActionPress = navigation ? () => navigation.goBack() : () => null
+    let rightActionPress = () => null
+
+    if (onPressLeft) {
+      leftActionPress = onPressLeft
+    }
+
+    if (onPressRight) {
+      rightActionPress = onPressRight
+    }
+
+    if (showBottomBorder) {
+      containerStyle = {
+        ...containerStyle,
+        borderBottomWidth: borderBottomWidth ? borderBottomWidth : GlobalConst.getValue().HEADER_BOTTOM_WIDTH,
+        borderBottomColor: borderBottomColor ? borderBottomColor : GlobalConst.getValue().HEADER_BOTTOM_COLOR,
+      }
+    }
+
+    return (
+      <Container
+        style={[containerStyle, { paddingTop: headerPaddingTop, zIndex: 99 }]}
+        isCard={isCard}
+      >
+        {renderLeft ? (
+          <LeftContainer style={[leftContainerStyle]}>
+            {renderLeft()}
+          </LeftContainer>
         ) : (
-          <Title style={[headerTitleStyle, titleStyle]}>{headerTitle}</Title>
-        )}
-      </TitleContainer>
-      {renderRight ? (
-        <RightContainer style={[rightContainerStyle]}>
-          {renderRight()}
-        </RightContainer>
-      ) : (
-        <RightTouchableContainer
-          style={[rightContainerStyle]}
-          activeOpacity={0.8}
-          disabled={!enableRightAction}
-          onPress={rightActionPress}
-        >
-          {getSideContent(iconRight, iconType, titleRight, "right")}
-        </RightTouchableContainer>
-      )}
-    </Container>
-  );
+            <LeftTouchableContainer
+              style={[leftContainerStyle]}
+              activeOpacity={0.8}
+              disabled={!enableLeftAction}
+              onPress={leftActionPress}
+            >
+              {this.getSideContent(iconLeft, iconType, titleLeft, "left")}
+            </LeftTouchableContainer>
+          )}
+        <TitleContainer>
+          {renderTitle ? (
+            renderTitle()
+          ) : (
+              <Title style={[headerTitleStyle, titleStyle]}>{headerTitle}</Title>
+            )}
+        </TitleContainer>
+        {renderRight ? (
+          <RightContainer style={[rightContainerStyle]}>
+            {renderRight()}
+          </RightContainer>
+        ) : (
+            <RightTouchableContainer
+              style={[rightContainerStyle]}
+              activeOpacity={0.8}
+              disabled={!enableRightAction}
+              onPress={rightActionPress}
+            >
+              {this.getSideContent(iconRight, iconType, titleRight, "right")}
+            </RightTouchableContainer>
+          )}
+      </Container>
+    );
+  }
 }
 
 CustomHeader.propTypes = {
@@ -206,7 +212,10 @@ CustomHeader.propTypes = {
     'material-community',
     'material-icons',
     'octicons',
-  ])
+  ]),
+
+  backImage: PropTypes.string, 
+  backImageStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 }
 
 CustomHeader.defaultProps = {

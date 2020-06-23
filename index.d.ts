@@ -97,6 +97,8 @@ interface ICustomHeaderProps {
   showBorder: boolean;
   borderBottomWidth: number;
   borderBottomColor: string;
+  backImage: string, 
+  backImageStyle: StyleProp<ImageStyle>;
 }
 
 interface IConnectionHandler {
