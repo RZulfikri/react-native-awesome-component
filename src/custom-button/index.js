@@ -70,7 +70,7 @@ const Button = (props) => {
       return (
         <Container
           isCard={isCard}
-          style={[styles.buttonContainer, styles.disableButtonStyle, customContainerStyle]}
+          style={[styles.buttonContainer, customContainerStyle, styles.disableButtonStyle]}
         >
           {renderLoading ? renderLoading() : <ActivityIndicator size='small' color={loadingColor ? loadingColor : GlobalConst.getValue().BUTTON_LOADING_COLOR} />}
         </Container>
@@ -79,7 +79,7 @@ const Button = (props) => {
       return (
         <Container
           isCard={isCard}
-          style={[styles.buttonContainer, styles.disableButtonStyle, customContainerStyle]}
+          style={[styles.buttonContainer, customContainerStyle, styles.disableButtonStyle, ]}
         >
           {renderDisableTitle ? renderDisableTitle() : <Text style={[styles.disableTitleStyle, disableTitleStyle]} >{title}</Text>}
         </Container>
