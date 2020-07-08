@@ -306,6 +306,7 @@ interface ICustomInput extends TextInputProps {
   countryValueLabel: string;
   renderCountry: () => any;
   renderCountryHeader: () => any;
+  countryLabelStyle: StyleProp<TextStyle>;
   selectBehavior: CustomPhoneInputSelectBevavior;
 }
 
@@ -609,6 +610,7 @@ interface IGlobalConstValue {
   CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL: string;
   CUSTOM_INPUT_PHONE_TOP_COUNTRY: [any]
   CUSTOM_INPUT_PHONE_SELECT_BEHAVIOR: CustomPhoneInputSelectBevavior;
+  CUSTOM_INPUT_PHONE_COUNTRY_LABEL_STYLE: StyleProp<TextStyle>;
 
   // CUSTOM DATEPICKER
   CUSTOM_DATE_PICKER_ICON_TYPE: string;
@@ -769,6 +771,7 @@ interface IGlobalConst {
   setGlobalCustomInputErrorMessageMaximumNumber: (value: any) => void;
   setGlobalCustomInputPhoneCountryPlaceholder: (value: string) => void;
   setGlobalCustomInputPhoneCountrySelectLabel: (value: string) => void;
+  setGlobalCustomInputPhoneCountryLabelStyle: (value: StyleProp<TextStyle>) => void;
   setGlobalCustomInputPhoneTopCountry: (value: [any]) => void;
   setGlobalCustomInputPhoneSelectBehavior: (value: CustomPhoneInputSelectBevavior) => void;
   // CUSTOM DATE PICKER

@@ -84,6 +84,7 @@ class CustomInput extends Component {
     countryPlaceholder: PropTypes.string,
     countrySelectionLabel: PropTypes.string,
     countryValueLabel: PropTypes.string,
+    countryLabelStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     selectBehavior: PropTypes.oneOf(['on-done', 'on-select'])
   }
 
@@ -101,7 +102,7 @@ class CustomInput extends Component {
     },
     hideError: false,
     showLength: false,
-    lengthLabelStyle: {}
+    lengthLabelStyle: {},
   }
 
   constructor(props) {
@@ -397,13 +398,14 @@ class CustomInput extends Component {
 
   renderModalSelectCountry(formikProps) {
     const { showCountryList } = this.state
-    const { style, valueCountry, onSelectCountry, countryPlaceholder, countrySelectionLabel, countryValueLabel, renderCountry, renderCountryHeader, containerStyle, selectBehavior } = this.props
+    const { style, valueCountry, onSelectCountry, countryPlaceholder, countrySelectionLabel, countryValueLabel, renderCountry, renderCountryHeader, containerStyle, countryLabelStyle, selectBehavior } = this.props
     const countriesCode = getSimpleCountryList(true, true)
     const renderItem = renderCountry ? renderCountry : GlobalConst.getValue().CUSTOM_SELECT_ITEM_RENDER
     const renderHeader = renderCountryHeader ? renderCountryHeader : GlobalConst.getValue().CUSTOM_SELECT_HEADER_RENDER
 
     const placeholder = countryPlaceholder ? countryPlaceholder : GlobalConst.getValue().CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER
     const selectionLabel = countrySelectionLabel ? countrySelectionLabel : GlobalConst.getValue().CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL
+    const lCountryLabelStyle = countryLabelStyle ? countryLabelStyle : GlobalConst.getValue().CUSTOM_INPUT_PHONE_COUNTRY_LABEL_STYLE
 
     let textInputStyle = GlobalConst.getValue().CUSTOM_INPUT_TEXT_INPUT_STYLE
     let placeholderStyle = {}
@@ -468,7 +470,7 @@ class CustomInput extends Component {
           onPress={() => this.setCountryListVisible(true)}
           style={{ backgroundColor: 'transparent', flexDirection: 'row', alignItems: 'center' }}
         >
-          <Text style={[placeholderStyle, textInputStyle, { marginRight: 10 }]}>{value}</Text>
+          <Text style={[placeholderStyle, textInputStyle, lCountryLabelStyle, { marginRight: 10 }]}>{value}</Text>
           <Icons name='ios-arrow-down' size={15} color={`rgba(0,0,0,0.5)`} />
         </TouchableContainer>
         <CountryListModal
