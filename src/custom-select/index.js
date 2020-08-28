@@ -90,7 +90,7 @@ const CustomSelect = props => {
   const Icon = getIconByType(iconType)
 
   return (
-    <View style={{width: '100%'}}>
+    <View>
       <CustomInput
         placeholder={placeholder}
         label={label}
