@@ -75,7 +75,7 @@ class CustomDatePicker extends PureComponent {
       }
 
       if (onDateChange) {
-        onDateChange(this,dateSelected);
+        onDateChange(this.dateSelected);
       }
     })
   };
