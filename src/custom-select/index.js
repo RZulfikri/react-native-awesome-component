@@ -18,6 +18,7 @@ const CustomSelect = props => {
     label,
     labelStyle,
     style,
+    containerStyle,
     underlineColor,
     underlineWidth,
     placeholder,
@@ -90,13 +91,14 @@ const CustomSelect = props => {
   const Icon = getIconByType(iconType)
 
   return (
-    <View style={{width: '100%'}}>
+    <View>
       <CustomInput
         placeholder={placeholder}
         label={label}
         labelType={labelType}
         labelStyle={labelStyle}
         style={style}
+        containerStyle={containerStyle}
         underlineColor={underlineColor}
         underlineWidth={underlineWidth}
         editable={!disabled}

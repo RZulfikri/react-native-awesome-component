@@ -31,6 +31,12 @@ const styles = StyleSheet.create({
   }
 })
 
+const MODE_TYPE = {
+  date: 'date',
+  datetime: 'datetime',
+  time: 'time',
+}
+
 class CustomDatePicker extends PureComponent {
   dateSelected = undefined
 
@@ -56,11 +62,18 @@ class CustomDatePicker extends PureComponent {
     const {
       onDateChange,
       dateFormat,
+      timeFormat,
+      mode,
       onChangeValidation,
     } = this.props;
 
     this.setState({isTouch: true}, () => {
-      this.dateSelected = moment.tz(date, 'UTC').format(dateFormat)
+      if(mode == MODE_TYPE.time){
+        this.dateSelected = moment.tz(date, 'UTC').format(timeFormat)
+      }else{
+        this.dateSelected = moment.tz(date, 'UTC').format(dateFormat)
+      }
+
       if (onDateChange) {
         onDateChange(this,dateSelected);
       }
@@ -90,6 +103,7 @@ class CustomDatePicker extends PureComponent {
       value,
       error,
       dateFormat,
+      timeFormat,
       locale,
       mode,
       // textStyle,
@@ -97,6 +111,7 @@ class CustomDatePicker extends PureComponent {
       minimumDate,
       maximumDate,
       style,
+      containerStyle,
       labelType,
       rightIcon,
       disabled,
@@ -141,6 +156,7 @@ class CustomDatePicker extends PureComponent {
           isRequired={isRequired}
           defaultValue={value}
           textInputStyle={style}
+          containerStyle={containerStyle}
           renderRightAction={() => {
             if (typeof rightIconRender === 'function') {
               return rightIconRender()
@@ -188,14 +204,14 @@ class CustomDatePicker extends PureComponent {
               alignSelf: 'center',
               width: metrics.screenWidth,
             }}
-            initialDate={value ?  moment.tz(value, dateFormat, 'UTC').toDate() : moment.tz(initialDate, 'UTC').toDate()}
+            initialDate={value ?  moment.tz(value, mode != MODE_TYPE.time ? dateFormat : timeFormat, 'UTC').toDate() : moment.tz(initialDate, 'UTC').toDate()}
             onDateChange={this.changeDate}
             maximumDate={
               maximumDate ? moment.tz(maximumDate, 'UTC').toDate() : undefined
             }
             date={
               value
-                ? moment.tz(value, dateFormat, 'UTC').toDate()
+                ? moment.tz(value, mode != MODE_TYPE.time ? dateFormat : timeFormat, 'UTC').toDate()
                 : undefined
             }
             minimumDate={
@@ -222,6 +238,7 @@ CustomDatePicker.propTypes = {
   isRequired: PropTypes.bool,
   error: PropTypes.string,
   dateFormat: PropTypes.string,
+  timeFormat: PropTypes.string,
   locale: PropTypes.string,
   mode: PropTypes.oneOf(['date', 'time', 'datetime']),
   initialDate: PropTypes.instanceOf(Date),
@@ -245,6 +262,7 @@ CustomDatePicker.defaultProps = {
   value: null,
   mode: 'date',
   dateFormat: 'DD/MM/YYYY',
+  timeFormat: 'h:mm A',
   locale: 'en-GB',
   initialDate: undefined,
   maximumDate: undefined,
