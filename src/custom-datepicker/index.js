@@ -103,6 +103,7 @@ class CustomDatePicker extends PureComponent {
       value,
       error,
       dateFormat,
+      timeFormat,
       locale,
       mode,
       // textStyle,
