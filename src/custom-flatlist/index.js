@@ -8,7 +8,7 @@ import * as Styled from '../styled/share.styled'
 import * as Obj from '../method/object'
 import * as GlobalConst from '../global-const'
 import _ from 'lodash'
-import Colors from 'react-native-awesome-component/src/colors';
+import Colors from '../colors';
 
 class CustomFlatList extends Component {
   static propTypes = {

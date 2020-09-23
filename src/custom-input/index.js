@@ -11,7 +11,7 @@ import { getSimpleCountryList } from '../method/helper'
 import { Container, TouchableContainer } from '../styled/share.styled'
 import ModalList from '../custom-select/Modal'
 import Icons from 'react-native-vector-icons/Ionicons'
-import CountryListModal from 'react-native-awesome-component/src/custom-input/country-list.modal';
+import CountryListModal from '../custom-input/country-list.modal';
 
 const LABEL_TYPE = {
   top: 'top-label',

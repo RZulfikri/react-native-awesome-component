@@ -5,8 +5,8 @@ import NetInfo from "@react-native-community/netinfo"
 import DropdownAlert from 'react-native-dropdownalert'
 import * as GlobalConst from '../global-const'
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
-import Colors from 'react-native-awesome-component/src/colors'
-import { setDropDownIntance, showConnectedWarning, showDisconnectedWarning, setConnectionStatus, handleOnCloseAlert } from 'react-native-awesome-component/src/connection-handler/connection-error-helper'
+import Colors from '../colors'
+import { setDropDownIntance, showConnectedWarning, showDisconnectedWarning, setConnectionStatus, handleOnCloseAlert } from '../connection-handler/connection-error-helper'
 
 class ConnectionHandler extends PureComponent {
   constructor(props) {
