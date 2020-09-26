@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
-import { StyleSheet, ActivityIndicator, View } from 'react-native';
+import { StyleSheet, ActivityIndicator, View, ActivityIndicatorProps } from 'react-native';
 import Modal from 'react-native-modal';
 import * as Scale from '../method/scale'
 
@@ -44,6 +44,7 @@ class LoadingModal extends PureComponent {
 
   render() {
     const { modalVisible } = this.state
+    const { size, color } = this.props
     return (
       <Modal
         isVisible={modalVisible}
@@ -53,7 +54,7 @@ class LoadingModal extends PureComponent {
       >
         <View style={styles.contentContainer}>
           <View style={styles.loadingContainer}>
-            <ActivityIndicator size={'large'} />
+            <ActivityIndicator size={size} color={color} />
           </View>
         </View>
       </Modal>
@@ -62,11 +63,13 @@ class LoadingModal extends PureComponent {
 }
 
 LoadingModal.propTypes = {
-
+  color: PropTypes.string,
+  size: PropTypes.oneOfType([PropTypes.oneOf(['small', 'large']), PropTypes.number]),
 }
 
 LoadingModal.defaultProps = {
-
+  color: '#999999',
+  size: 'large'
 }
 
 export default LoadingModal
