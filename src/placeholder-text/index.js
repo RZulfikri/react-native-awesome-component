@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, TextProps } from 'react-native'
-import Placeholder, { Line } from 'rn-placeholder'
+import { Placeholder, PlaceholderLine, Shine } from 'rn-placeholder'
 import * as GlobalConst from '../global-const'
 import * as Scale from '../method/scale'
 import * as Math from '../method/math'
@@ -63,9 +63,9 @@ class PlaceholderText extends Component {
         MainPlaceholder = Obj.appendChildToView(MainPlaceholder, child)
       }
     } else {
-      MainPlaceholder = <Placeholder animation={'shine'} />
+      MainPlaceholder = <Placeholder Animation={Shine} />
       for (i = 0; i < numberOfLines; i++) {
-        let child = <Line
+        let child = <PlaceholderLine
           key={i}
           height={height}
           noMargin
@@ -75,7 +75,7 @@ class PlaceholderText extends Component {
         MainPlaceholder = Obj.appendChildToView(MainPlaceholder, child)
       }
     }
-  
+
     return MainPlaceholder
   }
 

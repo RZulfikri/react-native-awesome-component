@@ -1,6 +1,6 @@
 {
   "name": "react-native-awesome-component",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "React Native Awesome Component",
   "main": "index.js",
   "typings": "./index.d.ts",
@@ -27,7 +27,7 @@
     "formik": "^1.1.1",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
-    "rn-placeholder": "2.0.0",
+    "rn-placeholder": "3.0.3",
     "moment-timezone": "^0.5.27",
     "react-native-date-picker": "^3.2.3",
     "styled-components": "^4.3.2",

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Image, ImagePropsBase, ImageStyle, ImageBackground, View } from 'react-native'
 import PropTypes from 'prop-types'
 import { StyledImage } from '../styled/share.styled'
-import Placeholder, { Media } from 'rn-placeholder'
+import { Placeholder, PlaceholderMedia, Shine } from 'rn-placeholder'
 import Colors from '../colors'
 
 class PlaceholderImage extends Component {
@@ -102,10 +102,8 @@ class PlaceholderImage extends Component {
             {disableAnimation ? (
               <View style={{ backgroundColor: Colors.very_light_pink_two, width, height, borderRadius: radius, borderColor, borderWidth }} />
             ) : (
-                <Placeholder
-                  animation={'shine'}
-                >
-                  <Media
+                <Placeholder Animation={Shine}>
+                  <PlaceholderMedia
                     style={{
                       width,
                       height,
