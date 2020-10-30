@@ -77,21 +77,22 @@ class CustomHeader extends PureComponent {
     }
 
     let containerStyle = {
-      height: GlobalConst.getValue().HEADER_HEIGHT + headerPaddingTop,
+      height: GlobalConst.getValue().HEADER_HEIGHT,
       backgroundColor: GlobalConst.getValue().HEADER_BACKGROUND,
       flexDirection: 'row',
+      paddingTop: headerPaddingTop
     }
 
     let leftContainerStyle = {
-      top: headerPaddingTop,
       height: GlobalConst.getValue().HEADER_HEIGHT,
       paddingHorizontal: GlobalConst.getValue().PADDING,
+      paddingTop: headerPaddingTop
     }
 
     let rightContainerStyle = {
-      top: headerPaddingTop,
       height: GlobalConst.getValue().HEADER_HEIGHT,
       paddingHorizontal: GlobalConst.getValue().PADDING,
+      paddingTop: headerPaddingTop
     }
 
     const headerTitleStyle = {
@@ -135,7 +136,7 @@ class CustomHeader extends PureComponent {
 
     return (
       <Container
-        style={[containerStyle, { paddingTop: headerPaddingTop, zIndex: 99 }]}
+        style={[containerStyle, {zIndex: 99, backgroundColor }]}
         isCard={isCard}
       >
         {renderLeft ? (
