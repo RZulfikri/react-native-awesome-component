@@ -162,12 +162,22 @@ class CustomFlatList extends Component {
       <FlatList
         data={flatListData}
         renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item, index) => {
+          if (this.props.keyExtractor) {
+            this.props.keyExtractor(item, index)
+          } else {
+            if (item.id) {
+              return item.id.toString()
+            } else {
+              return index.toString()
+            }
+          }
+        }}
         style={[style]}
         contentContainerStyle={[{ paddingBottom: getBottomSpace() }, contentContainerStyle]}
         onEndReached={_.throttle(this.onLoadMore, 2000)}
         onRefresh={this.onRefresh}
-        refreshing={loading}
+        refreshing={loading && !isLoadMore}
         ListFooterComponent={() => {
           if (isLoadMore) {
             return (

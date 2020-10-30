@@ -66,12 +66,11 @@ class PlaceholderImage extends Component {
       disableAnimation,
     } = this.props
 
-    const { loading } = this.state
     return (
       <View>
-        {(!loading || uri !== undefined || uri !== '') ? (
+        {(this.props.loading === undefined) ? (
           <StyledImage
-            source={{ uri }}
+            source={typeof uri === 'string' ? {uri} : defaultSource}
             resizeMethod={resizeMethod}
             resizeMode={resizeMode}
             style={{
@@ -93,11 +92,12 @@ class PlaceholderImage extends Component {
                 height,
                 borderWidth,
                 borderColor,
-                borderRadius: radius,
+                borderRadius: radius
               }}
+              onLayout={this.onError}
             />
           )}
-        {(loading || uri === undefined || uri === '') && (
+        {this.props.loading || this.state.loading ? (
           <View style={{ marginTop: -height }}>
             {disableAnimation ? (
               <View style={{ backgroundColor: Colors.very_light_pink_two, width, height, borderRadius: radius, borderColor, borderWidth }} />
@@ -115,7 +115,7 @@ class PlaceholderImage extends Component {
                 </Placeholder>
               )}
           </View>
-        )}
+        ) : null}
       </View>
     )
   }
