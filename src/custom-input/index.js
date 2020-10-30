@@ -648,7 +648,7 @@ class CustomInput extends Component {
                     defaultValue={formikProps.initialValues.value}
                     onChangeText={formikProps.handleChange('value')}
                     value={formikProps.values.value}
-                    onSubmitEditing={formikProps.handleSubmit}
+                    onSubmitEditing={formikProps.submitForm}
                     onFocus={() => {
                       formikProps.setFieldTouched('value');
                       if (onFocus) {
@@ -685,7 +685,7 @@ class CustomInput extends Component {
                     defaultValue={formikProps.initialValues.value}
                     onChangeText={formikProps.handleChange('value')}
                     value={formikProps.values.value}
-                    onSubmitEditing={formikProps.handleSubmit}
+                    onSubmitEditing={formikProps.submitForm}
                     onFocus={() => {
                       formikProps.setFieldTouched('value');
                       if (onFocus) {
