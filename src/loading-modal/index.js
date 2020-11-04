@@ -45,6 +45,9 @@ class LoadingModal extends PureComponent {
   render() {
     const { modalVisible } = this.state
     const { size, color } = this.props
+    if (!modalVisible) {
+      return null
+    }
     return (
       <Modal
         isVisible={modalVisible}

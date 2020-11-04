@@ -319,59 +319,61 @@ class Alert extends PureComponent {
     const { enableDismiss, containerStyle, titleStyle, messageStyle, multiButtonTitleStyle } = customStyle ? customStyle : this.props
     const { type, confirm, cancel } = option
     let isDismiss = option.enableDismiss !== undefined ? option.enableDismiss : enableDismiss
+    if (!visible) {
+      return null
+    }
+
     return (
-      <View>
-        <Modal
-          isVisible={visible}
-          onBackdropPress={isDismiss ? this.hide : () => null}
-          style={{ justifyContent: 'center', alignItems: 'center' }}
-          animationIn={'fadeIn'}
-          animationOut={'fadeOut'}
-          onBackButtonPress={isDismiss ? this.hide : () => null}
-          animationOutTiming={50}
-        >
-          {type === ALERT_TYPE.customConfirm ? (
-            <Container padded padding={23} style={[{ width: scale.scale(320), borderRadius: 5 }, containerStyle]}>
-              <Title style={[titleStyle, { textAlign: 'left' }]}>{option.title}</Title>
-              {option.message && <Message style={[messageStyle, { textAlign: 'left' }]}>{option.message}</Message>}
-              <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: scale.scale(25) }}>
-                {cancel && (
-                  <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={this.onCancel}
-                    style={{ marginRight: 28 }}
-                  >
-                    <Text
-                      style={[multiButtonTitleStyle && multiButtonTitleStyle.cancel ? multiButtonTitleStyle.cancel : {}]}
-                    >
-                      {cancel.title}
-                    </Text>
-                  </TouchableOpacity>
-                )}
+      <Modal
+        isVisible={visible}
+        onBackdropPress={isDismiss ? this.hide : () => null}
+        style={{ justifyContent: 'center', alignItems: 'center' }}
+        animationIn={'fadeIn'}
+        animationOut={'fadeOut'}
+        onBackButtonPress={isDismiss ? this.hide : () => null}
+        animationOutTiming={0}
+      >
+        {type === ALERT_TYPE.customConfirm ? (
+          <Container padded padding={23} style={[{ width: scale.scale(320), borderRadius: 5 }, containerStyle]}>
+            <Title style={[titleStyle, { textAlign: 'left' }]}>{option.title}</Title>
+            {option.message && <Message style={[messageStyle, { textAlign: 'left' }]}>{option.message}</Message>}
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: scale.scale(25) }}>
+              {cancel && (
                 <TouchableOpacity
                   activeOpacity={0.7}
-                  onPress={this.onConfirm}
+                  onPress={this.onCancel}
+                  style={{ marginRight: 28 }}
                 >
                   <Text
-                    style={[{color: Colors.dark_slate_blue}, multiButtonTitleStyle && multiButtonTitleStyle.confirm ? multiButtonTitleStyle.confirm : {}]}
+                    style={[multiButtonTitleStyle && multiButtonTitleStyle.cancel ? multiButtonTitleStyle.cancel : {}]}
                   >
-                    {confirm.title}
+                    {cancel.title}
                   </Text>
                 </TouchableOpacity>
-              </View>
+              )}
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={this.onConfirm}
+              >
+                <Text
+                  style={[{ color: Colors.dark_slate_blue }, multiButtonTitleStyle && multiButtonTitleStyle.confirm ? multiButtonTitleStyle.confirm : {}]}
+                >
+                  {confirm.title}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Container>
+        ) : (
+            <Container style={[{ width: '85%', borderRadius: 5 }, containerStyle]}>
+              <ImageContainer>
+                {this.renderIcon()}
+              </ImageContainer>
+              <Title style={[titleStyle]}>{option.title}</Title>
+              {option.message && <Message style={[messageStyle]}>{option.message}</Message>}
+              {this.renderButton(option)}
             </Container>
-          ) : (
-              <Container style={[{ width: '85%', borderRadius: 5 }, containerStyle]}>
-                <ImageContainer>
-                  {this.renderIcon()}
-                </ImageContainer>
-                <Title style={[titleStyle]}>{option.title}</Title>
-                {option.message && <Message style={[messageStyle]}>{option.message}</Message>}
-                {this.renderButton(option)}
-              </Container>
-            )}
-        </Modal>
-      </View>
+          )}
+      </Modal>
     )
   }
 }
