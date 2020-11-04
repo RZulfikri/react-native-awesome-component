@@ -188,7 +188,9 @@ class Alert extends PureComponent {
     const { confirm } = this.state.option
     this.hide()
     if (confirm.callback) {
-      confirm.callback()
+      setTimeout(() => {
+        confirm.callback()
+      }, 100)
     }
   }
 
@@ -196,7 +198,9 @@ class Alert extends PureComponent {
     const { cancel } = this.state.option
     this.hide()
     if (cancel.callback) {
-      cancel.callback()
+      setTimeout(() => {
+        confirm.callback()
+      }, 100)
     }
   }
 
@@ -324,6 +328,7 @@ class Alert extends PureComponent {
           animationIn={'fadeIn'}
           animationOut={'fadeOut'}
           onBackButtonPress={isDismiss ? this.hide : () => null}
+          animationOutTiming={50}
         >
           {type === ALERT_TYPE.customConfirm ? (
             <Container padded padding={23} style={[{ width: scale.scale(320), borderRadius: 5 }, containerStyle]}>
