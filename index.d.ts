@@ -408,7 +408,8 @@ interface IHelper {
   getFileNameFromPath: (path: string) => void;
   getFileNameFromURL: (url: string) => void;
   getIconByType: (iconType: IconType) => any;
-  getSimpleCountryList: (useFlag: boolean) => ISimpleCountryResponse | ISimpleCountryFlagResponse
+  getSimpleCountryList: (useFlag: boolean) => ISimpleCountryResponse[] | ISimpleCountryFlagResponse[]
+  getCountryDataByCallingCode: (callingCode: string, flag: boolean) => ISimpleCountryResponse | ISimpleCountryFlagResponse
 }
 
 interface IAlertHandler {

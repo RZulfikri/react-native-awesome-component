@@ -142,3 +142,8 @@ export function getSimpleCountryList(addFlag, addSection = false) {
   }
   return NEW_COUNTRY_CODE
 }
+
+export function getCountryDataByCallingCode(callingCode, flag = true) {
+  const COUNTRIES_CODE = getSimpleCountryList(flag, false)
+  return COUNTRIES_CODE.find(country => country.callingCode === callingCode)
+}
