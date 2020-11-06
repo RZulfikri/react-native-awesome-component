@@ -199,7 +199,7 @@ class Alert extends PureComponent {
     this.hide()
     if (cancel.callback) {
       setTimeout(() => {
-        confirm.callback()
+        cancel.callback()
       }, 100)
     }
   }
