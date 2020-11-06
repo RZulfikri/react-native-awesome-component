@@ -84,7 +84,11 @@ const ModalList = props => {
   const checkIsSelected = (item) => {
     if (multiSelect) {
       if (Array.isArray(value)) {
-        return _.some(value, item)
+        if (typeof item === 'object') {
+          return _.some(value, item)
+        } else {
+          return _.includes(value, item)
+        }
       } else {
         return false
       }
