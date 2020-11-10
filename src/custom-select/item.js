@@ -27,12 +27,33 @@ const Item = props => {
 
   useEffect(() => {
     if (!keyDescription && !isEmptyOrSpaces(keyOther)) {
-      setOtherText(initialValue);
+      if (!multiSelect) {
+        setOtherText(initialValue);
+      } else {
+        // const valueSplit = initialValue.split(' - ')
+        if (item.toLowerCase() === keyOther.toLowerCase()) {
+          const otherData = initialValue.find(value => value.includes(item))
+          if (otherData) {
+            const otherSplitData = otherData.split(" - ")
+            if (otherSplitData.length > 0) {
+              otherSplitData.splice(0, 1)
+              setOtherText(otherSplitData.join(', '))
+            }
+          }
+        }
+      }
     }
   }, []);
 
-  const isOther = !isEmptyOrSpaces(keyOther) && ((!keyDescription && item.toLowerCase().includes(keyOther)) || (keyDescription && item[keyDescription].toLowerCase() === keyOther));
-
+  let isOther = false
+  if (multiSelect) {
+    if (!isEmptyOrSpaces(keyOther)) {
+      isOther = item.toLowerCase() === keyOther.toLowerCase();
+    }
+  } else {
+    isOther = !isEmptyOrSpaces(keyOther) && ((!keyDescription && item.toLowerCase().includes(keyOther)) || (keyDescription && item[keyDescription].toLowerCase() === keyOther));
+  }
+  
   const iconType = GlobalConst.getValue().CUSTOM_SELECT_ICON_TYPE
   const iconSelectName = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_NAME : GlobalConst.getValue().CUSTOM_SELECT_ITEM_SELECT_ICON_NAME
   const iconSelectSize = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_SIZE : GlobalConst.getValue().CUSTOM_SELECT_ITEM_SELECT_ICON_SIZE
@@ -55,7 +76,7 @@ const Item = props => {
       if (keyDescription) {
         temp = { ...item, [keyValue]: otherText };
       } else {
-        temp = `${keyOther}-${text ? text : otherText}`;
+        temp = `${keyOther} - ${typeof text === 'string' ? text : otherText}`;
       }
     }
     onPressItem(temp);

@@ -35,12 +35,16 @@ const ModalList = props => {
   useEffect(() => {
     if (data) {
       if (!keyDescription && !isEmptyOrSpaces(keyOther)) {
-        if (!isEmptyOrSpaces(initialValue)) {
-          setValue(
-            data.findIndex(item => stringEquals(item, initialValue)) === -1
-              ? `${keyOther}-${initialValue}`
-              : initialValue,
-          );
+        if (multiSelect) {
+          setValue(initialValue);
+        } else {
+          if (!isEmptyOrSpaces(initialValue)) {
+            setValue(
+              data.findIndex(item => stringEquals(item, initialValue)) === -1
+                ? `${keyOther}-${initialValue}`
+                : initialValue,
+            );
+          }
         }
       } else {
         setValue(initialValue);
@@ -55,8 +59,10 @@ const ModalList = props => {
 
   const rightAction = () => {
     let tempValue = value;
-    if (!isEmptyOrSpaces(keyOther) && !keyDescription && tempValue.toLowerCase().includes(keyOther.toLowerCase())) {
-      tempValue = value.substr(keyOther.length + 1);
+    if (!multiSelect) {
+      if (!isEmptyOrSpaces(keyOther) && !keyDescription && tempValue.toLowerCase().includes(keyOther.toLowerCase())) {
+        tempValue = value.substr(keyOther.length + 1);
+      }
     }
     onSubmit(tempValue);
     closeModal();
@@ -66,11 +72,20 @@ const ModalList = props => {
     if (multiSelect) {
       if (Array.isArray(value)) {
         const newValue = [...value]
-        const index = newValue.findIndex(item => _.isEqual(item, data))
-        if (index >= 0) {
-          newValue.splice(index, 1)
+        if (keyOther && typeof data === 'string' && data.includes(keyOther)) {
+          const index = newValue.findIndex(item => _.includes(item, keyOther))
+          if (index >= 0) {
+            newValue.splice(index, 1, data)
+          } else {
+            newValue.push(data)
+          }
         } else {
-          newValue.push(data)
+          const index = newValue.findIndex(item => _.isEqual(item, data))
+          if (index >= 0) {
+            newValue.splice(index, 1)
+          } else {
+            newValue.push(data)
+          }
         }
         setValue(newValue)
       } else {
@@ -83,11 +98,16 @@ const ModalList = props => {
 
   const checkIsSelected = (item) => {
     if (multiSelect) {
-      if (Array.isArray(value)) {
+      if (Array.isArray(value) && value.length > 0) {
         if (typeof item === 'object') {
           return _.some(value, item)
         } else {
-          return _.includes(value, item)
+          if (keyOther && keyOther.toLowerCase() === item.toLowerCase()) {
+            const otherValue = value.find(val => val.toLowerCase().includes(keyOther.toLowerCase()))
+            return otherValue ? true : false
+          } else {
+            return _.includes(value, item)
+          }
         }
       } else {
         return false

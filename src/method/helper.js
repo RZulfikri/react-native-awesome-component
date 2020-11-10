@@ -89,8 +89,9 @@ export function stringEquals(str1, str2) {
 }
 
 export function isEmptyOrSpaces(str) {
-  if (str) {
-    return str.match(/^ *$/) !== null;
+  if (typeof str === 'string') {
+    const res = str.match(/^ *$/) !== null
+    return res
   }
   return true;
 }
