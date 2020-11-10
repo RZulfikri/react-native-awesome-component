@@ -61,7 +61,11 @@ const ModalList = props => {
     let tempValue = value;
     if (!multiSelect) {
       if (!isEmptyOrSpaces(keyOther) && !keyDescription && tempValue.toLowerCase().includes(keyOther.toLowerCase())) {
-        tempValue = value.substr(keyOther.length + 1);
+        const valueSplit = value.split(" - ")
+        if (valueSplit.length > 1) {
+          valueSplit.splice(0, 1)
+          tempValue = valueSplit.join(', ')
+        }
       }
     }
     onSubmit(tempValue);

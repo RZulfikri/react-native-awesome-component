@@ -45,15 +45,8 @@ const Item = props => {
     }
   }, []);
 
-  let isOther = false
-  if (multiSelect) {
-    if (!isEmptyOrSpaces(keyOther)) {
-      isOther = item.toLowerCase() === keyOther.toLowerCase();
-    }
-  } else {
-    isOther = !isEmptyOrSpaces(keyOther) && ((!keyDescription && item.toLowerCase().includes(keyOther)) || (keyDescription && item[keyDescription].toLowerCase() === keyOther));
-  }
-  
+  const isOther = !isEmptyOrSpaces(keyOther) && ((!keyDescription && item.toLowerCase().includes(keyOther.toLowerCase())) || (keyDescription && item[keyDescription].toLowerCase() === keyOther.toLowerCase()));
+
   const iconType = GlobalConst.getValue().CUSTOM_SELECT_ICON_TYPE
   const iconSelectName = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_NAME : GlobalConst.getValue().CUSTOM_SELECT_ITEM_SELECT_ICON_NAME
   const iconSelectSize = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_SIZE : GlobalConst.getValue().CUSTOM_SELECT_ITEM_SELECT_ICON_SIZE
@@ -83,7 +76,7 @@ const Item = props => {
   }
 
   return (
-    <View style={{ backgroundColor: 'white'}}>
+    <View style={{ backgroundColor: 'white' }}>
       <ItemContainer
         activeOpacity={0.8}
         style={[itemStyle]}
@@ -100,7 +93,7 @@ const Item = props => {
         <CustomInput
           placeholder={''}
           label={undefined}
-          containerStyle={{marginHorizontal: 10}}
+          containerStyle={{ marginHorizontal: 10 }}
           labelType={undefined}
           underlineWidth={1}
           defaultValue={otherText}
