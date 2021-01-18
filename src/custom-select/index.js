@@ -38,7 +38,9 @@ const CustomSelect = props => {
     disabled,
     keyOther,
     onChangeValidation,
-    renderRightAction
+    renderRightAction,
+    renderLeftAction,
+    hideError
   } = props;
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -114,7 +116,8 @@ const CustomSelect = props => {
           // }
         }}
         forceErrorMessage={errorMessage}
-        hideError
+        hideError={hideError}
+        renderLeftAction={renderLeftAction}
       />
       {modalVisible ? <ModalList
         data={data}
