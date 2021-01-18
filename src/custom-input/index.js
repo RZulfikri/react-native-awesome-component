@@ -107,9 +107,6 @@ class CustomInput extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      showCountryList: false,
-    }
     this.setRef = this.setRef.bind(this)
     this.getContainerByType = this.getContainerByType.bind(this)
     this.getLabelStyleByType = this.getLabelStyleByType.bind(this)
@@ -118,10 +115,8 @@ class CustomInput extends Component {
     this.renderLabel = this.renderLabel.bind(this)
     this.renderInput = this.renderInput.bind(this)
     this.renderModalSelectCountry = this.renderModalSelectCountry.bind(this)
-    this.setCountryListVisible = this.setCountryListVisible.bind(this)
   }
 
-  value = ''
   errorValue
   isFocus
   textInput
@@ -142,19 +137,19 @@ class CustomInput extends Component {
     // this condition to ignore custom select that using custom input
     if (nextProps.onPress === undefined) {
       // this condition to prevent re render for common input
-      if ((
-        (nextProps.inputType === INPUT_TYPE.text) ||
-        (nextProps.inputType === INPUT_TYPE.email) ||
-        (nextProps.inputType === INPUT_TYPE.password) ||
-        (nextProps.inputType === INPUT_TYPE.phone) ||
-        (nextProps.inputType === INPUT_TYPE.number) ||
-        (nextProps.inputType === INPUT_TYPE.textArea)
-      )
-        && ((nextProps.value !== thisProps.value)
-          || (nextProps.defaultValue !== thisProps.defaultValue))
-      ) {
-        shouldUpdate = true
-      }
+      // if ((
+      //   (nextProps.inputType === INPUT_TYPE.text) ||
+      //   (nextProps.inputType === INPUT_TYPE.email) ||
+      //   (nextProps.inputType === INPUT_TYPE.password) ||
+      //   (nextProps.inputType === INPUT_TYPE.phone) ||
+      //   (nextProps.inputType === INPUT_TYPE.number) ||
+      //   (nextProps.inputType === INPUT_TYPE.textArea)
+      // )
+      //   && ((nextProps.value !== thisProps.value)
+      //     || (nextProps.defaultValue !== thisProps.defaultValue))
+      // ) {
+      //   shouldUpdate = true
+      // }
 
       // this condition to prevent re render for phone-country input
       if (nextProps.inputType === INPUT_TYPE.phoneCountry) {
@@ -163,10 +158,6 @@ class CustomInput extends Component {
         }
 
         if (((nextProps.value !== thisProps.value) || (nextProps.defaultValue !== thisProps.defaultValue))) {
-          shouldUpdate = true
-        }
-
-        if (thisState.showCountryList !== nextState.showCountryList) {
           shouldUpdate = true
         }
       }
@@ -179,9 +170,9 @@ class CustomInput extends Component {
 
     } else {
       // this condition to prevent re render for custom input, that used in custom select
-      if (thisProps.defaultValue !== nextProps.defaultValue) {
-        shouldUpdate = true
-      }
+      // if (thisProps.defaultValue !== nextProps.defaultValue) {
+      //   shouldUpdate = true
+      // }
     }
 
     // condition to check other props, that makes app need to re render but value is equal
@@ -392,14 +383,8 @@ class CustomInput extends Component {
     )
   }
 
-  setCountryListVisible(isVisible) {
-    this.setState({ showCountryList: isVisible })
-  }
-
   renderModalSelectCountry(formikProps) {
-    const { showCountryList } = this.state
     const { style, valueCountry, onSelectCountry, countryPlaceholder, countrySelectionLabel, countryValueLabel, renderCountry, renderCountryHeader, containerStyle, countryLabelStyle, selectBehavior } = this.props
-    const countriesCode = getSimpleCountryList(true, true)
     const renderItem = renderCountry ? renderCountry : GlobalConst.getValue().CUSTOM_SELECT_ITEM_RENDER
     const renderHeader = renderCountryHeader ? renderCountryHeader : GlobalConst.getValue().CUSTOM_SELECT_HEADER_RENDER
 
@@ -467,20 +452,27 @@ class CustomInput extends Component {
     return (
       <Container style={[{ backgroundColor: 'transparent', paddingLeft: 10, paddingRight: 10 }, borderStyle]}>
         <TouchableContainer
-          onPress={() => this.setCountryListVisible(true)}
+          onPress={() => {
+            if (this.countryListRef) {
+              this.countryListRef.show()
+            }
+          }}
           style={{ backgroundColor: 'transparent', flexDirection: 'row', alignItems: 'center' }}
         >
           <Text style={[placeholderStyle, textInputStyle, lCountryLabelStyle, { marginRight: 10 }]}>{value}</Text>
           <Icons name='ios-arrow-down' size={15} color={`rgba(0,0,0,0.5)`} />
         </TouchableContainer>
         <CountryListModal
-          data={countriesCode}
-          modalVisible={showCountryList}
+          ref={r => this.countryListRef = r}
           closeModal={() => {
-            this.setCountryListVisible(false)
+            if (this.countryListRef) {
+              this.countryListRef.hide()
+            }
           }}
           onSubmit={selectValue => {
-            this.setCountryListVisible(false)
+            if (this.countryListRef) {
+              this.countryListRef.hide()
+            }
             onSelectCountry(selectValue);
           }}
           value={valueCountry}
@@ -544,24 +536,6 @@ class CustomInput extends Component {
         {fErrorMessage}
       </ErrorLabel>
     )
-
-    if (!_.isEqual(fErrorMessage, this.errorValue) && onChangeValidation) {
-      this.errorValue = fErrorMessage
-      if (isRequired) {
-        let isError = formikProps.values.value.length > 0
-        onChangeValidation(fErrorMessage !== '' ? true : !isError)
-      } else {
-        onChangeValidation(fErrorMessage !== '' ? true : false)
-      }
-    }
-
-    // HANDLE ONCHANGE TEXT
-    if (this.props.onChangeText) {
-      if (this.value !== formikProps.values.value) {
-        this.props.onChangeText(formikProps.values.value)
-        this.value = formikProps.values.value
-      }
-    }
 
     // CHECK FOCUS
     if (this.isFocus !== touched.value) {
@@ -628,6 +602,7 @@ class CustomInput extends Component {
     // delete activeProps.onFocus
     // delete activeProps.onBlur
     delete activeProps.keyboardType
+
     return (
       <View contentContainerStyle={{ flexGrow: 1 }} >
         <Container style={[lContainerStyle]}>
@@ -635,7 +610,7 @@ class CustomInput extends Component {
             <TouchableOpacity activeOpacity={0.8} onPress={onPress} disabled={!editable} style={[styledTextInputContainerStyle]}>
               {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle, formikProps.values.value)}
               {labelType === LABEL_TYPE.left && label && this.renderLabel(labelType, labelStyle)}
-              <View style={(labelType === LABEL_TYPE.left || labelType === LABEL_TYPE.right) && {flex: 1}}>
+              <View style={(labelType === LABEL_TYPE.left || labelType === LABEL_TYPE.right) && { flex: 1 }}>
                 <StyledTextInputContainer>
                   {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
                   <StyledTextInput
@@ -646,8 +621,24 @@ class CustomInput extends Component {
                     underlineColorAndroid={'transparent'}
                     style={textInputStyle}
                     defaultValue={formikProps.initialValues.value}
-                    onChangeText={formikProps.handleChange('value')}
-                    value={formikProps.values.value}
+                    onChangeText={async (ret) => {
+                      // HANDLE ONCHANGE TEXT
+                      if (this.props.onChangeText) {
+                        this.props.onChangeText(ret)
+                      }
+
+                      const newValue = { value: ret }
+
+                      formikProps.setValues(newValue)
+
+                      try {
+                        const schema = this.getValidationSchema(inputType)
+                        await schema.validateSync(newValue, { abortEarly: true })
+                        onChangeValidation(false, "")
+                      } catch (error) {
+                        onChangeValidation(true, error.message)
+                      }
+                    }}
                     onSubmitEditing={formikProps.submitForm}
                     onFocus={() => {
                       formikProps.setFieldTouched('value');
@@ -673,7 +664,7 @@ class CustomInput extends Component {
               <View style={[styledTextInputContainerStyle]}>
                 {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle, formikProps.values.value)}
                 {labelType === LABEL_TYPE.left && label && this.renderLabel(labelType, labelStyle)}
-                <StyledTextInputContainer style={(labelType === LABEL_TYPE.left || labelType === LABEL_TYPE.right) && {flex: 1}}>
+                <StyledTextInputContainer style={(labelType === LABEL_TYPE.left || labelType === LABEL_TYPE.right) && { flex: 1 }}>
                   {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
                   {inputType === INPUT_TYPE.phoneCountry && this.renderModalSelectCountry(formikProps)}
                   <StyledTextInput
@@ -683,8 +674,24 @@ class CustomInput extends Component {
                     underlineColorAndroid={'transparent'}
                     style={[textInputStyle]}
                     defaultValue={formikProps.initialValues.value}
-                    onChangeText={formikProps.handleChange('value')}
-                    value={formikProps.values.value}
+                    onChangeText={async (ret) => {
+                      // HANDLE ONCHANGE TEXT
+                      if (this.props.onChangeText) {
+                        this.props.onChangeText(ret)
+                      }
+
+                      const newValue = { value: ret }
+
+                      formikProps.setValues(newValue)
+
+                      try {
+                        const schema = this.getValidationSchema(inputType)
+                        await schema.validateSync(newValue, { abortEarly: true })
+                        onChangeValidation(false, "")
+                      } catch (error) {
+                        onChangeValidation(true, error.message)
+                      }
+                    }}
                     onSubmitEditing={formikProps.submitForm}
                     onFocus={() => {
                       formikProps.setFieldTouched('value');
@@ -724,7 +731,8 @@ class CustomInput extends Component {
           initialValues={initialValues}
           validationSchema={validationSchema}
           validateOnChange={lValidateOnChange}
-          validateOnBlur={true}
+          validateOnMount={defaultValue !== undefined && defaultValue !== "" && defaultValue !== null}
+          validateOnBlur={false}
           onSubmit={lOnSubmit}
           enableReinitialize
         >

@@ -4,7 +4,7 @@ import { View, Text, FlatList, StyleSheet, SectionList, TouchableOpacity, TextIn
 import Modal from 'react-native-modal';
 import * as Scale from '../method/scale'
 import { GlobalConst, CustomHeader, Method } from '../..';
-import { getIconByType } from '../method/helper';
+import { getIconByType, getSimpleCountryList } from '../method/helper';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import IonIcons from 'react-native-vector-icons/Ionicons'
 
@@ -75,11 +75,17 @@ const styles = StyleSheet.create({
 })
 
 class CountryListModal extends PureComponent {
+  countryList = []
+  currentCountrylist = []
+  currentIndex = 0
+
   constructor(props) {
     super(props)
     this.state = {
+      isVisible: false,
       selectedValue: props.value,
       search: '',
+      currentCountrylist: []
     }
     this.onPressDone = this.onPressDone.bind(this)
     this.onPressClose = this.onPressClose.bind(this)
@@ -88,6 +94,30 @@ class CountryListModal extends PureComponent {
     this._renderSectionItem = this._renderSectionItem.bind(this)
     this._renderSearchBar = this._renderSearchBar.bind(this)
     this._getFilterData = this._getFilterData.bind(this)
+    this.onLoadMore = this.onLoadMore.bind(this)
+    this.show = this.show.bind(this)
+    this.hide = this.hide.bind(this)
+  }
+
+  componentDidMount() {
+    this.countryList = getSimpleCountryList(true, true)
+    const initialCountryList = this.countryList.slice(0, 2)
+    this.currentIndex = 2
+    this.setState({
+      currentCountrylist: initialCountryList
+    })
+  }
+
+  show() {
+    this.setState({
+      isVisible: true
+    })
+  }
+
+  hide() {
+    this.setState({
+      isVisible: false
+    })
   }
 
   onPressDone() {
@@ -128,7 +158,7 @@ class CountryListModal extends PureComponent {
     const { selectedValue } = this.state
     const { name, flag, callingCode, id } = item.item
     return (
-      <TouchableOpacity style={styles.itemContainer} activeOpacity={0.8} onPress={() => this.onSelectItem(item.item)}>
+      <TouchableOpacity key={id} style={styles.itemContainer} activeOpacity={0.8} onPress={() => this.onSelectItem(item.item)}>
         <Text style={styles.textItemFlag}>{flag}</Text>
         <Text style={{ flex: 1 }}>
           <Text style={styles.textItem}>{name}</Text>
@@ -159,9 +189,8 @@ class CountryListModal extends PureComponent {
   }
 
   _getFilterData() {
-    const { data } = this.props
     const topCountry = GlobalConst.getValue().CUSTOM_INPUT_PHONE_TOP_COUNTRY
-    const { search } = this.state
+    const { search, currentCountrylist } = this.state
     let newData = []
     if (topCountry.length > 0 && search.length === 0) {
       newData.push({
@@ -170,23 +199,36 @@ class CountryListModal extends PureComponent {
       })
     }
     if (search.length > 0) {
-      for (let i = 0; i < data.length; i++) {
-        const arrFilterData = data[i].data.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+      for (let i = 0; i < this.countryList.length; i++) {
+        const arrFilterData = this.countryList[i].data.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
         if (arrFilterData.length > 0) {
           newData.push({
-            ...data[i],
+            ...this.countryList[i],
             data: arrFilterData
           })
         }
       }
     } else {
-      newData.push(...data)
+      newData.push(...currentCountrylist)
     }
     return newData
   }
 
+  onLoadMore() {
+    const {currentCountrylist} = this.state
+    let newIndex = this.currentIndex + 2
+    if (newIndex <= this.countryList.length) {
+      const newDatas = this.countryList.slice(this.currentIndex, newIndex)
+      this.setState({
+        currentCountrylist: [...currentCountrylist, ...newDatas]
+      })
+      this.currentIndex = newIndex
+    }
+  }
+
   render() {
-    const { modalVisible, selectBehavior } = this.props
+    const { selectBehavior } = this.props
+    const {isVisible} = this.state
 
     const iconType = GlobalConst.getValue().CUSTOM_SELECT_ICON_TYPE
     const backgroundColor = GlobalConst.getValue().CUSTOM_SELECT_HEADER_BACKGROUND_COLOR
@@ -209,8 +251,12 @@ class CountryListModal extends PureComponent {
 
     return (
       <Modal
-        isVisible={modalVisible}
-        style={styles.modalContainer}>
+        isVisible={isVisible}
+        style={styles.modalContainer}
+        onBackButtonPress={this.onPressClose}
+        animationInTiming={300}
+        animationOutTiming={300}
+        >
         <View style={styles.contentContainer}>
           <CustomHeader
             isCard={false}
@@ -246,6 +292,9 @@ class CountryListModal extends PureComponent {
             renderSectionHeader={this._renderSectionTitle}
             ItemSeparatorComponent={() => <View style={styles.border} />}
             contentContainerStyle={{ paddingBottom: getBottomSpace() }}
+            initialNumToRender={20}
+            onEndReached={this.onLoadMore}
+            onEndReachedThreshold={0.5}
           />
         </View>
       </Modal>
@@ -254,19 +303,15 @@ class CountryListModal extends PureComponent {
 }
 
 CountryListModal.propTypes = {
-  modalVisible: PropTypes.bool,
   closeModal: PropTypes.func,
   onSubmit: PropTypes.func,
-  data: PropTypes.array,
   value: PropTypes.object,
   selectBehavior: PropTypes.oneOf(['on-done', 'on-select'])
 }
 
 CountryListModal.defaultProps = {
-  modalVisible: false,
   closeModal: () => { },
   onSubmit: () => { },
-  data: [],
   value: {
     id: 101,
     name: 'Indonesia',

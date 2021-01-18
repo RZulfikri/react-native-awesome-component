@@ -1,6 +1,6 @@
 {
   "name": "react-native-awesome-component",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "React Native Awesome Component",
   "main": "index.js",
   "typings": "./index.d.ts",
@@ -24,7 +24,7 @@
   "scripts": {},
   "author": "Rahmat Zulfikri",
   "dependencies": {
-    "formik": "^1.5.8",
+    "formik": "^2.2.6",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
     "rn-placeholder": "3.0.3",
@@ -37,7 +37,8 @@
     "react-native-dropdownalert": "^4.2.0",
     "react-native-modal": "^11.4.0",
     "world-countries": "^2.1.0",
-    "yup": "^0.27.0"
+    "url": "0.11.0",
+    "yup": "^0.32.8"
   },
   "devDependencies": {},
   "license": "Apache-2.0",
