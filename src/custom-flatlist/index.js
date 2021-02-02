@@ -9,6 +9,9 @@ import * as Obj from '../method/object'
 import * as GlobalConst from '../global-const'
 import _ from 'lodash'
 import Colors from '../colors';
+import EmptyContainer from './empty-container'
+import ErrorContainer from './error-container'
+import NoConnectionContainer from './no-connection-container'
 
 class CustomFlatList extends Component {
   static propTypes = {
@@ -113,7 +116,7 @@ class CustomFlatList extends Component {
       if (renderNoConnection) {
         return renderNoConnection({ onRefresh: this.onRefresh })
       } else {
-        let GlobalNoConnection = GlobalConst.getValue().FLATLIST_NO_CONNECTION_CONTAINER
+        let GlobalNoConnection = GlobalConst.getValue().FLATLIST_NO_CONNECTION_CONTAINER || <NoConnectionContainer />
         GlobalNoConnection = Obj.appendPropsToView(GlobalNoConnection, 'onRefresh', this.onRefresh)
         return GlobalNoConnection
       }
@@ -123,7 +126,7 @@ class CustomFlatList extends Component {
       if (renderError) {
         return renderError({ onRefresh: this.onRefresh })
       } else {
-        let GlobalErrorContainer = GlobalConst.getValue().FLATLIST_ERROR_CONTAINER
+        let GlobalErrorContainer = GlobalConst.getValue().FLATLIST_ERROR_CONTAINER || <ErrorContainer />
         GlobalErrorContainer = Obj.appendPropsToView(GlobalErrorContainer, 'onRefresh', this.onRefresh)
         return GlobalErrorContainer
       }
@@ -133,7 +136,7 @@ class CustomFlatList extends Component {
       if (renderEmpty) {
         return renderEmpty({ onRefresh: this.onRefresh })
       } else {
-        let GlobalEmptyContainer = GlobalConst.getValue().FLATLIST_EMPTY_CONTAINER
+        let GlobalEmptyContainer = GlobalConst.getValue().FLATLIST_EMPTY_CONTAINER || <EmptyContainer />
         GlobalEmptyContainer = Obj.appendPropsToView(GlobalEmptyContainer, 'onRefresh', this.onRefresh)
         return GlobalEmptyContainer
       }

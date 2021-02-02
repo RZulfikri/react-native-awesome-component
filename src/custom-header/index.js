@@ -106,11 +106,17 @@ class CustomHeader extends PureComponent {
       iconType = GlobalConst.getValue().HEADER_ICON_TYPE
     }
 
-    containerStyle = Obj.appendObject(containerStyle, 'height', height + headerPaddingTop)
+    let newHeight = Platform.select({ios: containerStyle.height + headerPaddingTop, android: containerStyle.height})
+
+    if (height) {
+      newHeight = height + headerPaddingTop
+    }
+    
+    containerStyle = Obj.appendObject(containerStyle, 'height', newHeight)
     containerStyle = Obj.appendObject(containerStyle, 'backgroundColor', backgroundColor)
 
-    leftContainerStyle = Obj.appendObject(leftContainerStyle, 'height', height)
-    rightContainerStyle = Obj.appendObject(rightContainerStyle, 'height', height)
+    leftContainerStyle = Obj.appendObject(leftContainerStyle, 'height', newHeight)
+    rightContainerStyle = Obj.appendObject(rightContainerStyle, 'height', newHeight)
 
     const enableLeftAction = iconLeft || titleLeft
     const enableRightAction = iconRight || titleRight

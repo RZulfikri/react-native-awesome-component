@@ -9,7 +9,6 @@ import * as Yup from 'yup'
 import _ from 'lodash'
 import { getSimpleCountryList } from '../method/helper'
 import { Container, TouchableContainer } from '../styled/share.styled'
-import ModalList from '../custom-select/Modal'
 import Icons from 'react-native-vector-icons/Ionicons'
 import CountryListModal from '../custom-input/country-list.modal';
 

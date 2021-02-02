@@ -5,11 +5,6 @@ import Colors from "./colors";
 import { scale } from "./method/scale";
 import * as Object from './method/object'
 
-import EmptyContainer from './custom-flatlist/empty-container'
-import ErrorContainer from './custom-flatlist/error-container'
-import NoConnectionContainer from './custom-flatlist/no-connection-container'
-import CustomButton from './custom-button';
-
 const DEFAULT_GLOBAL_CONST = {
   PADDING: metrics.padding,
   SAFE_AREA_BACKGROUND_COLOR: Colors.white,
@@ -107,9 +102,9 @@ const DEFAULT_GLOBAL_CONST = {
   NO_CONNECTION_CONTAINER_BUTTON: undefined, // value must be view instance such as <CustomButton />
 
   // CUSTOM FLAT LIST
-  FLATLIST_EMPTY_CONTAINER: <EmptyContainer />, // make sure you have onRefresh props to pass refresh function
-  FLATLIST_ERROR_CONTAINER: <ErrorContainer />, // make sure you have onRefresh props to pass refresh function
-  FLATLIST_NO_CONNECTION_CONTAINER: <NoConnectionContainer />, // make sure you have onRefresh props to pass refresh function
+  FLATLIST_EMPTY_CONTAINER: undefined, // make sure you have onRefresh props to pass refresh function
+  FLATLIST_ERROR_CONTAINER: undefined, // make sure you have onRefresh props to pass refresh function
+  FLATLIST_NO_CONNECTION_CONTAINER: undefined, // make sure you have onRefresh props to pass refresh function
 
   // CUSTOM SELECT
   CUSTOM_SELECT_BACKGROUND_COLOR: Colors.very_light_pink_two,
